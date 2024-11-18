@@ -1,0 +1,164 @@
+[gd_scene load_steps=7 format=3 uid="uid://c0bwr3euhbf77"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_hqr4l"]
+[ext_resource type="Script" path="res://scripts/game_pad.gd" id="2_f58ci"]
+[ext_resource type="Script" path="res://scripts/slate.gd" id="2_hsurl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gniph"]
+bg_color = Color(1, 1, 1, 0.501961)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rcarr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_se1jn"]
+
+[node name="Game" type="CanvasLayer" node_paths=PackedStringArray("background", "continuation_container", "score_label", "slate", "game_pad", "clue_button", "extras_container")]
+script = ExtResource("1_hqr4l")
+background = NodePath("Background")
+continuation_container = NodePath("Controls/Continuation Container")
+score_label = NodePath("Score Label")
+slate = NodePath("Slate")
+game_pad = NodePath("Controls/Game Pad")
+clue_button = NodePath("Controls/Extras Container/Clue Button")
+extras_container = NodePath("Controls/Extras Container")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.357191, 0.357191, 0.357191, 1)
+
+[node name="Score Label" type="Label" parent="."]
+anchors_preset = -1
+anchor_right = 0.5
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 1.0
+offset_bottom = 67.0
+theme_override_font_sizes/font_size = 48
+text = "SCORE"
+
+[node name="Slate" type="VBoxContainer" parent="." node_paths=PackedStringArray("word_label", "synonyms_label")]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+alignment = 1
+script = ExtResource("2_hsurl")
+word_label = NodePath("Word Label")
+synonyms_label = NodePath("Synonyms Label")
+
+[node name="Word Label" type="Label" parent="Slate"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 96
+text = "Slate"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="Synonyms Label" type="Label" parent="Slate"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 40
+text = "Slate"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="Controls" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 32
+
+[node name="Game Pad" type="VBoxContainer" parent="Controls" node_paths=PackedStringArray("letter_container", "delete_button")]
+layout_mode = 2
+theme_override_constants/separation = 24
+script = ExtResource("2_f58ci")
+letter_container = NodePath("Letter Container")
+delete_button = NodePath("Other Controls Container/Delete Button")
+
+[node name="Letter Container" type="HFlowContainer" parent="Controls/Game Pad"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+alignment = 1
+
+[node name="Other Controls Container" type="HBoxContainer" parent="Controls/Game Pad"]
+layout_mode = 2
+alignment = 1
+
+[node name="Delete Button" type="Button" parent="Controls/Game Pad/Other Controls Container"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_gniph")
+text = "⌫"
+
+[node name="Continuation Container" type="HBoxContainer" parent="Controls"]
+layout_mode = 2
+theme_override_constants/separation = 48
+alignment = 1
+
+[node name="Define Button" type="Button" parent="Controls/Continuation Container"]
+custom_minimum_size = Vector2(144, 144)
+layout_mode = 2
+theme_override_font_sizes/font_size = 104
+theme_override_styles/normal = SubResource("StyleBoxFlat_rcarr")
+text = "📖"
+icon_alignment = 1
+
+[node name="Continue Button" type="Button" parent="Controls/Continuation Container"]
+custom_minimum_size = Vector2(144, 144)
+layout_mode = 2
+theme_override_font_sizes/font_size = 104
+theme_override_styles/normal = SubResource("StyleBoxTexture_se1jn")
+text = "▶️"
+icon_alignment = 1
+
+[node name="Container" type="BoxContainer" parent="Controls"]
+layout_mode = 2
+size_flags_vertical = 3
+vertical = true
+
+[node name="Extras Container" type="HBoxContainer" parent="Controls"]
+layout_mode = 2
+
+[node name="Clue Button" type="Button" parent="Controls/Extras Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "💡× 1"
+icon_alignment = 1
+
+[node name="Container" type="BoxContainer" parent="Controls/Extras Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Skip Button" type="Button" parent="Controls/Extras Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "⏭"
+icon_alignment = 1
+
+[connection signal="delete" from="Controls/Game Pad" to="." method="_on_game_pad_delete"]
+[connection signal="input" from="Controls/Game Pad" to="." method="_on_game_pad_input"]
+[connection signal="keyboard_input" from="Controls/Game Pad" to="." method="_on_game_pad_keyboard_input"]
+[connection signal="pressed" from="Controls/Game Pad/Other Controls Container/Delete Button" to="Controls/Game Pad" method="_on_delete_button_pressed"]
+[connection signal="pressed" from="Controls/Continuation Container/Define Button" to="." method="_on_define_button_pressed"]
+[connection signal="pressed" from="Controls/Continuation Container/Continue Button" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="Controls/Extras Container/Clue Button" to="." method="_on_clue_button_pressed"]
+[connection signal="pressed" from="Controls/Extras Container/Skip Button" to="." method="_on_skip_button_pressed"]

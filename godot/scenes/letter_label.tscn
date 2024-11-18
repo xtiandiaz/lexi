@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bpadjfqn60ubv"]
+
+[node name="Letter Label" type="Label"]
+theme_override_font_sizes/font_size = 48
+text = "A"
