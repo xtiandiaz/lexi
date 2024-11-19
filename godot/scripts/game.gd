@@ -21,7 +21,7 @@ var _input: String:
 var _clue_count_available: int:
 	set(value):
 		_clue_count_available = value
-		clue_button.text = "💡 × {0}".format([value])
+		clue_button.text = "× {0}".format([value])
 		clue_button.disabled = value <= 0
 var _clue_count_used_in_current_word: int
 var _score: int:

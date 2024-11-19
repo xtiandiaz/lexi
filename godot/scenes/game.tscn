@@ -1,8 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0bwr3euhbf77"]
+[gd_scene load_steps=14 format=3 uid="uid://c0bwr3euhbf77"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_hqr4l"]
 [ext_resource type="Script" path="res://scripts/game_pad.gd" id="2_f58ci"]
 [ext_resource type="Script" path="res://scripts/slate.gd" id="2_hsurl"]
+[ext_resource type="Texture2D" uid="uid://cts1ylwj80e2" path="res://icons/dictionary.png" id="4_02mvi"]
+[ext_resource type="Texture2D" uid="uid://b6fhjiqcbpowk" path="res://icons/lightbulb.png" id="4_5i0fh"]
+[ext_resource type="Texture2D" uid="uid://dl7n3rjds6dp3" path="res://icons/erase.png" id="4_flc4k"]
+[ext_resource type="Texture2D" uid="uid://lgssoy3i610u" path="res://icons/continue.png" id="5_lmmp5"]
+[ext_resource type="Texture2D" uid="uid://br2eha0hjrdgc" path="res://icons/skip.png" id="7_ugchg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gniph"]
 bg_color = Color(1, 1, 1, 0.501961)
@@ -11,6 +16,12 @@ bg_color = Color(1, 1, 1, 0.501961)
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_se1jn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlo6q"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gtdr5"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="Game" type="CanvasLayer" node_paths=PackedStringArray("background", "continuation_container", "score_label", "slate", "game_pad", "clue_button", "extras_container")]
 script = ExtResource("1_hqr4l")
@@ -37,7 +48,7 @@ offset_left = 24.0
 offset_top = 24.0
 offset_right = 1.0
 offset_bottom = 67.0
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 56
 text = "SCORE"
 
 [node name="Slate" type="VBoxContainer" parent="." node_paths=PackedStringArray("word_label", "synonyms_label")]
@@ -107,7 +118,8 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_gniph")
-text = "⌫"
+icon = ExtResource("4_flc4k")
+icon_alignment = 1
 
 [node name="Continuation Container" type="HBoxContainer" parent="Controls"]
 layout_mode = 2
@@ -115,20 +127,26 @@ theme_override_constants/separation = 48
 alignment = 1
 
 [node name="Define Button" type="Button" parent="Controls/Continuation Container"]
-custom_minimum_size = Vector2(144, 144)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_font_sizes/font_size = 104
 theme_override_styles/normal = SubResource("StyleBoxFlat_rcarr")
-text = "📖"
+icon = ExtResource("4_02mvi")
 icon_alignment = 1
+expand_icon = true
 
 [node name="Continue Button" type="Button" parent="Controls/Continuation Container"]
-custom_minimum_size = Vector2(144, 144)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_font_sizes/font_size = 104
 theme_override_styles/normal = SubResource("StyleBoxTexture_se1jn")
-text = "▶️"
+icon = ExtResource("5_lmmp5")
 icon_alignment = 1
+expand_icon = true
 
 [node name="Container" type="BoxContainer" parent="Controls"]
 layout_mode = 2
@@ -139,20 +157,32 @@ vertical = true
 layout_mode = 2
 
 [node name="Clue Button" type="Button" parent="Controls/Extras Container"]
+custom_minimum_size = Vector2(144, 80)
+layout_direction = 2
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_font_sizes/font_size = 48
-text = "💡× 1"
-icon_alignment = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_rlo6q")
+text = "× 1"
+icon = ExtResource("4_5i0fh")
+alignment = 2
+expand_icon = true
 
 [node name="Container" type="BoxContainer" parent="Controls/Extras Container"]
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Skip Button" type="Button" parent="Controls/Extras Container"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme_override_font_sizes/font_size = 48
-text = "⏭"
+theme_override_styles/normal = SubResource("StyleBoxFlat_gtdr5")
+icon = ExtResource("7_ugchg")
 icon_alignment = 1
+expand_icon = true
 
 [connection signal="delete" from="Controls/Game Pad" to="." method="_on_game_pad_delete"]
 [connection signal="input" from="Controls/Game Pad" to="." method="_on_game_pad_input"]
