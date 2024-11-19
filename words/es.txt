@@ -1,3 +1,17 @@
+dornajo, batea
+batea
+artesa
+arriate
+acotado
+acotar
+espuela
+somier
+diván
+desván
+buhardilla
+claraboya
+tragaluz
+travesaño
 abarrotado
 abatido
 abatir
@@ -12,7 +26,7 @@ abúlico
 abyecto
 acaecer, acontecer
 acequia
-acezar, jadear, resoplar
+acezar, jadear, resoplar, resollar
 aciago
 acoplar
 acople, acoplamiento, acopladura
@@ -21,6 +35,7 @@ ademán
 adormidera
 adormilar
 adosado
+adosar
 adusto
 aeródromo
 afable
@@ -69,7 +84,7 @@ analgésico
 anémona, anemone
 anestésico
 anodino
-antisemitismo
+antisemita
 antología
 añublo
 apaciguar, amansar, aplacar, aquietar, sosegar
@@ -278,7 +293,7 @@ continencia
 contrapunto
 convulsión
 coracero
-cornuscopia
+cornucopia
 corpulencia
 corpulento, corpudo
 corrillo
@@ -625,7 +640,7 @@ mella
 mellar
 mendrugo
 menoscabar
-ménsula
+ménsula, repisa, estante
 metalurgia
 mezquindad
 mezquino
@@ -703,7 +718,7 @@ pavoroso
 pelandusca, pelandrusca
 penacho
 percance
-percutor
+percutor, percusor
 pérfido
 periférico
 periplo
@@ -772,7 +787,7 @@ rebatir
 recatado
 recaudo
 regata
-regatear
+regatear, recatear, baratear
 regateo
 rehuir
 remilgo
