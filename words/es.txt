@@ -1,3 +1,11 @@
+espuela
+somier
+diván
+desván
+buhardilla
+claraboya
+tragaluz
+travesaño
 abarrotado
 abatido
 abatir
@@ -12,7 +20,7 @@ abúlico
 abyecto
 acaecer, acontecer
 acequia
-acezar, jadear, resoplar
+acezar, jadear, resoplar, resollar
 aciago
 acoplar
 acople, acoplamiento, acopladura
@@ -21,6 +29,7 @@ ademán
 adormidera
 adormilar
 adosado
+adosar
 adusto
 aeródromo
 afable
@@ -69,7 +78,7 @@ analgésico
 anémona, anemone
 anestésico
 anodino
-antisemitismo
+antisemita
 antología
 añublo
 apaciguar, amansar, aplacar, aquietar, sosegar
@@ -624,7 +633,7 @@ mella
 mellar
 mendrugo
 menoscabar
-ménsula
+ménsula, repisa, estante
 metalurgia
 mezquindad
 mezquino
@@ -702,7 +711,7 @@ pavoroso
 pelandusca, pelandrusca
 penacho
 percance
-percutor
+percutor, percusor
 pérfido
 periférico
 periplo
