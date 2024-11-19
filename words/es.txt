@@ -786,7 +786,7 @@ rebatir
 recatado
 recaudo
 regata
-regatear
+regatear, recatear, baratear
 regateo
 rehuir
 remilgo
