@@ -1,17 +1,3 @@
-dornajo, batea
-batea
-artesa
-arriate
-acotado
-acotar
-espuela
-somier
-diván
-desván
-buhardilla
-claraboya
-tragaluz
-travesaño
 abarrotado
 abatido
 abatir
@@ -30,6 +16,8 @@ acezar, jadear, resoplar, resollar
 aciago
 acoplar
 acople, acoplamiento, acopladura
+acotado
+acotar
 adecentar
 ademán
 adormidera
@@ -111,8 +99,10 @@ arracimado, enracimarse, racimarse
 arrebato, arranque
 arrecife
 arremangar
+arriate
 arrobar, embelesar, extasiar
 arrumar, amontonar, apilar, aglomerar
+artesa
 artilugio
 artimaña
 ascetismo
@@ -153,6 +143,7 @@ baladí
 balido
 ballesta
 bamboleante, oscilante, basculante, tambaleante
+baratear
 barbecho
 barbitúrico
 barraca
@@ -161,6 +152,7 @@ barricada
 barrote
 basilisco
 bastidor
+batea
 bazo
 bazofia
 bellaco
@@ -185,6 +177,7 @@ botín
 brida
 bruma
 buche, buchada
+buhardilla
 bujía
 burlón
 butifarra
@@ -265,6 +258,7 @@ civeta
 cizalla
 clamor
 claqué
+claraboya
 clavija
 coacción, constreñimiento
 cobertizo
@@ -331,6 +325,7 @@ desperdigado
 desplantar, desarraigar
 desuncir
 desvaído
+desván
 desvencijado
 detrimento
 diafragma
@@ -352,7 +347,9 @@ disparatar
 disparate
 displicencia
 disturbio
+diván
 doliente
+dornajo, batea
 dossier, dosier
 druida
 dubitativo
@@ -370,6 +367,7 @@ embastecer
 embelesado
 embelesar
 embelesarse, arrobarse, extasiarse
+embellecer
 embotar
 embrollo
 empalmar
@@ -423,6 +421,7 @@ espectro
 espiga
 espigado
 espolear
+espuela
 espurio, espúreo
 esquilmar
 esquirla
@@ -733,6 +732,7 @@ piastra
 pigmento
 pilote
 pira
+pitón
 pitorro
 plañidera
 plausible
@@ -783,6 +783,7 @@ rastrojo, rastrojal
 ratificar
 reaccionario
 reacio
+rebajar
 rebatir
 recatado
 recaudo
@@ -841,6 +842,7 @@ sobredimensionar
 sobresalto
 socavón
 soliloquio
+somier
 sonambulismo
 sórdido
 sosiego
@@ -881,9 +883,11 @@ tornasolado
 tórrido
 torva
 trabar
+tragaluz
 trance
 transponer, trasponer
 trastienda
+travesaño
 trémulo
 trienal
 trinar

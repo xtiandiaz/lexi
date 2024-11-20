@@ -1,4 +1,4 @@
-class_name GamePad extends Container
+class_name Keypad extends Container
 
 signal input(letter: String)
 signal keyboard_input(letter: String)

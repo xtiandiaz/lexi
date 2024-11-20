@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg84q2jxnii7y"]
+
+[ext_resource type="Theme" uid="uid://djtoa1kcsmph4" path="res://themes/general.tres" id="1_1myoq"]
+[ext_resource type="Texture2D" uid="uid://bfd50kqc88pfm" path="res://icons/gear.png" id="2_s3h41"]
+
+[node name="Icon Button" type="Button"]
+custom_minimum_size = Vector2(96, 96)
+offset_right = 80.0
+offset_bottom = 80.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_1myoq")
+icon = ExtResource("2_s3h41")
+flat = true
+expand_icon = true

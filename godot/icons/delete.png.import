@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6fhjiqcbpowk"
-path="res://.godot/imported/lightbulb.png-592087089c354ed18fdb2f908d430982.ctex"
+uid="uid://xqldw3lrxruo"
+path="res://.godot/imported/delete.png-48500a9e66ed6e102e89aa5542feee73.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icons/lightbulb.png"
-dest_files=["res://.godot/imported/lightbulb.png-592087089c354ed18fdb2f908d430982.ctex"]
+source_file="res://icons/delete.png"
+dest_files=["res://.godot/imported/delete.png-48500a9e66ed6e102e89aa5542feee73.ctex"]
 
 [params]
 
