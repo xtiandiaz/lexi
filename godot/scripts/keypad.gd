@@ -32,7 +32,7 @@ func restore_letter_button(letter: String) -> void:
 	var presses = _pressed_buttons
 	var button_index = _find_first_button_index(letter, presses)
 	if button_index >= 0:
-		_set_button_enabled(presses[button_index], true)
+		Utils.set_button_enabled(presses[button_index], true)
 		presses.remove_at(button_index)
 		
 	_reset_delete_button()
@@ -42,13 +42,13 @@ func simulate_press(letter: String) -> void:
 	var unpressed_btns = _unpressed_buttons
 	var button_index = _find_first_button_index(letter, unpressed_btns)
 	if button_index >= 0:
-		_set_button_enabled(unpressed_btns[button_index], false)
+		Utils.set_button_enabled(unpressed_btns[button_index], false)
 	
 	_reset_delete_button()
 
 
 func _reset_delete_button() -> void:
-	_set_button_enabled(delete_button, _pressed_buttons.size() > 0)
+	delete_button.visible = _pressed_buttons.size() > 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -96,10 +96,6 @@ func _find_first_button_index(
 			return i
 	
 	return -1
-
-	
-func _set_button_enabled(button: Button, flag: bool) -> void:
-	button.disabled = !flag
 	
 
 ## SIGNALS
@@ -109,7 +105,7 @@ func _on_letter_button_pressed(button: LetterButton) -> void:
 	if _pressed_buttons.has(button):
 		return
 	
-	_set_button_enabled(button, false)
+	Utils.set_button_enabled(button, false)
 	_reset_delete_button()
 	
 	input.emit(button.letter)

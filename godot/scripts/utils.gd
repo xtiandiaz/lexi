@@ -55,3 +55,8 @@ static func array_to_string(array: Array, separator: String = "") -> String:
 	for i in array_size:
 		string += String(array[i]) + (separator if i < array_size - 1 else "")
 	return string
+
+
+static func set_button_enabled(button: Button, flag: bool) -> void:
+	button.disabled = !flag
+	button.focus_mode = Control.FOCUS_ALL if flag else Control.FOCUS_NONE

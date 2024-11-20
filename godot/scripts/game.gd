@@ -34,7 +34,7 @@ var _clue_count_available: int:
 	set(value):
 		_clue_count_available = value
 		clue_button.text = "×{0}".format([value])
-		clue_button.disabled = value <= 0
+		Utils.set_button_enabled(clue_button, value > 0)
 var _clue_count_used_in_current_word: int
 var _can_give_clue: bool:
 	get: return _clue_count_available > 0
@@ -82,7 +82,8 @@ func _reset_word() -> void:
 	
 	_input = ""
 	slate.bonus = []
-	clue_button.disabled = !_can_give_clue
+	
+	Utils.set_button_enabled(clue_button, _can_give_clue)
 
 
 func _give_clue() -> void:

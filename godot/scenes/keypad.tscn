@@ -29,3 +29,5 @@ alignment = 1
 layout_mode = 2
 icon = ExtResource("2_7ctu2")
 flat = false
+
+[connection signal="pressed" from="Other Controls Container/Delete Button" to="." method="_on_delete_button_pressed"]
