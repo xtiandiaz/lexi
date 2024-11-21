@@ -1,3 +1,8 @@
+follaje
+forraje
+manopla
+plasmar
+mitón
 abarrotado
 abatido
 abatir
@@ -389,7 +394,6 @@ diván
 doliente
 dornajo, batea
 dossier, dosier
-druida
 dubitativo
 dulzor
 eclosionar
@@ -405,6 +409,7 @@ emancipar
 emanciparse
 embastecer
 embelesado
+panocha
 embelesar
 embelesarse, arrobarse, extasiarse
 embellecer
@@ -841,7 +846,7 @@ profilaxis
 proletario
 promiscuidad
 prontuario
-prorratear
+prorratear, distribuir, repartir, cuotear
 prosaico
 proscrito, proscripto
 prostituir
