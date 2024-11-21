@@ -1,11 +1,12 @@
-class_name Game extends CanvasLayer
+class_name Lexicon extends CanvasLayer
 
 
-signal word_completed(word: String, clues: int)
-signal word_skipped(word: String)
+signal word_started(start_chunk: String)
+signal word_input(input: String)
+signal word_completed(word: String, clue_count: int, synonyms: PackedStringArray)
+signal word_skipped(word: String, synonyms: PackedStringArray)
 
 
-@export var slate: Slate
 @export var keypad: Keypad
 @export var background: ColorRect
 @export var continuation_container: Container
@@ -28,7 +29,7 @@ var _inputable_letters: Array[String]
 var _input: String:
 	set(value): 
 		_input = value
-		slate.state = _start_hint + _input
+		word_input.emit(value)
 
 var _clue_count_available: int:
 	set(value):
@@ -80,8 +81,9 @@ func _reset_word() -> void:
 	keypad_letters.shuffle()
 	keypad.reset(keypad_letters)
 	
+	word_started.emit(_start_hint)
+	
 	_input = ""
-	slate.bonus = []
 	
 	Utils.set_button_enabled(clue_button, _can_give_clue)
 
@@ -113,8 +115,8 @@ func _show_success() -> void:
 	
 	word_completed.emit(
 		_current_word, 
-		_current_word_synonyms, 
-		_clue_count_used_in_current_word
+		_clue_count_used_in_current_word,
+		_current_word_synonyms
 	)
 	
 	_clue_count_available += 1 if _clue_count_used_in_current_word == 0 else 0
@@ -125,15 +127,12 @@ func _show_success() -> void:
 func _show_solution() -> void:
 	background.color = Cosmetics.ORANGE_COLOR
 	
-	slate.state = _current_word
 	word_skipped.emit(_current_word, _current_word_synonyms)
 	
 	_on_result_shown()
 
 
-func _on_result_shown() -> void:
-	slate.bonus = _current_word_synonyms
-	
+func _on_result_shown() -> void:	
 	continuation_container.visible = true
 	keypad.visible = false
 	footer.visible = false

@@ -1,19 +1,18 @@
 [gd_scene load_steps=11 format=3 uid="uid://c0bwr3euhbf77"]
 
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_hqr4l"]
-[ext_resource type="PackedScene" uid="uid://bg84q2jxnii7y" path="res://scenes/components/icon_button.tscn" id="2_85n01"]
-[ext_resource type="PackedScene" uid="uid://byfi7acfc7c6n" path="res://scenes/score_display.tscn" id="2_r08qr"]
-[ext_resource type="Texture2D" uid="uid://dsj6wkvy5j3sl" path="res://icons/clueless.png" id="2_rx70u"]
-[ext_resource type="PackedScene" uid="uid://ctat1cvxprv24" path="res://scenes/slate.tscn" id="3_fnrcb"]
-[ext_resource type="Texture2D" uid="uid://cts1ylwj80e2" path="res://icons/dictionary.png" id="4_02mvi"]
-[ext_resource type="Texture2D" uid="uid://lgssoy3i610u" path="res://icons/continue.png" id="5_lmmp5"]
-[ext_resource type="PackedScene" uid="uid://cbr85bksxb8dj" path="res://scenes/keypad.tscn" id="6_73htb"]
-[ext_resource type="Texture2D" uid="uid://doikt78umjkuk" path="res://icons/clue.png" id="9_gcnt2"]
-[ext_resource type="PackedScene" uid="uid://blt3oh5nnyt58" path="res://scenes/components/iconized_button.tscn" id="10_3x6kn"]
+[ext_resource type="Script" path="res://scripts/lexicon.gd" id="1_v4rpg"]
+[ext_resource type="PackedScene" uid="uid://bg84q2jxnii7y" path="res://scenes/components/icon_button.tscn" id="2_yjf5n"]
+[ext_resource type="PackedScene" uid="uid://byfi7acfc7c6n" path="res://scenes/score_display.tscn" id="3_2bsh0"]
+[ext_resource type="PackedScene" uid="uid://ctat1cvxprv24" path="res://scenes/slate.tscn" id="4_rinb0"]
+[ext_resource type="PackedScene" uid="uid://cbr85bksxb8dj" path="res://scenes/keypad.tscn" id="5_dfqin"]
+[ext_resource type="Texture2D" uid="uid://cts1ylwj80e2" path="res://icons/dictionary.png" id="6_it5hb"]
+[ext_resource type="Texture2D" uid="uid://lgssoy3i610u" path="res://icons/continue.png" id="7_3ln38"]
+[ext_resource type="PackedScene" uid="uid://blt3oh5nnyt58" path="res://scenes/components/iconized_button.tscn" id="8_hk583"]
+[ext_resource type="Texture2D" uid="uid://doikt78umjkuk" path="res://icons/clue.png" id="9_ikf7y"]
+[ext_resource type="Texture2D" uid="uid://dsj6wkvy5j3sl" path="res://icons/clueless.png" id="10_a0c5l"]
 
-[node name="Game" type="CanvasLayer" node_paths=PackedStringArray("slate", "keypad", "background", "continuation_container", "footer", "clue_button", "continue_button")]
-script = ExtResource("1_hqr4l")
-slate = NodePath("Upper Half Container/Slate")
+[node name="Lexicon" type="CanvasLayer" node_paths=PackedStringArray("keypad", "background", "continuation_container", "footer", "clue_button", "continue_button")]
+script = ExtResource("1_v4rpg")
 keypad = NodePath("Bottom Half Container/Keypad")
 background = NodePath("Background")
 continuation_container = NodePath("Bottom Half Container/Continuation Container")
@@ -43,7 +42,7 @@ grow_horizontal = 2
 layout_mode = 2
 alignment = 1
 
-[node name="Settings Button" parent="Upper Half Container/Header" instance=ExtResource("2_85n01")]
+[node name="Settings Button" parent="Upper Half Container/Header" instance=ExtResource("2_yjf5n")]
 layout_mode = 2
 flat = false
 
@@ -53,7 +52,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 vertical = true
 
-[node name="Score Display" parent="Upper Half Container/Header" instance=ExtResource("2_r08qr")]
+[node name="Score Display" parent="Upper Half Container/Header" instance=ExtResource("3_2bsh0")]
 layout_mode = 2
 
 [node name="Filler2" type="BoxContainer" parent="Upper Half Container/Header"]
@@ -69,7 +68,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 vertical = true
 
-[node name="Slate" parent="Upper Half Container" instance=ExtResource("3_fnrcb")]
+[node name="Slate" parent="Upper Half Container" instance=ExtResource("4_rinb0")]
 layout_mode = 2
 
 [node name="Filler2" type="BoxContainer" parent="Upper Half Container"]
@@ -89,7 +88,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 32
 
-[node name="Keypad" parent="Bottom Half Container" instance=ExtResource("6_73htb")]
+[node name="Keypad" parent="Bottom Half Container" instance=ExtResource("5_dfqin")]
 layout_mode = 2
 
 [node name="Continuation Container" type="HBoxContainer" parent="Bottom Half Container"]
@@ -97,16 +96,16 @@ layout_mode = 2
 theme_override_constants/separation = 48
 alignment = 1
 
-[node name="Define Button" parent="Bottom Half Container/Continuation Container" instance=ExtResource("2_85n01")]
+[node name="Define Button" parent="Bottom Half Container/Continuation Container" instance=ExtResource("2_yjf5n")]
 custom_minimum_size = Vector2(144, 144)
 layout_mode = 2
-icon = ExtResource("4_02mvi")
+icon = ExtResource("6_it5hb")
 flat = false
 
-[node name="Continue Button" parent="Bottom Half Container/Continuation Container" instance=ExtResource("2_85n01")]
+[node name="Continue Button" parent="Bottom Half Container/Continuation Container" instance=ExtResource("2_yjf5n")]
 custom_minimum_size = Vector2(144, 144)
 layout_mode = 2
-icon = ExtResource("5_lmmp5")
+icon = ExtResource("7_3ln38")
 flat = false
 
 [node name="Filler" type="BoxContainer" parent="Bottom Half Container"]
@@ -119,17 +118,21 @@ layout_mode = 2
 theme_override_constants/separation = 48
 alignment = 1
 
-[node name="Clue Button" parent="Bottom Half Container/Footer" instance=ExtResource("10_3x6kn")]
+[node name="Clue Button" parent="Bottom Half Container/Footer" instance=ExtResource("8_hk583")]
 layout_mode = 2
-icon = ExtResource("9_gcnt2")
+icon = ExtResource("9_ikf7y")
 
-[node name="Clueless Button" parent="Bottom Half Container/Footer" instance=ExtResource("2_85n01")]
+[node name="Clueless Button" parent="Bottom Half Container/Footer" instance=ExtResource("2_yjf5n")]
 layout_mode = 2
-icon = ExtResource("2_rx70u")
+icon = ExtResource("10_a0c5l")
 flat = false
 
-[connection signal="word_completed" from="." to="Upper Half Container/Header/Score Display" method="_on_game_word_completed"]
-[connection signal="word_skipped" from="." to="Upper Half Container/Header/Score Display" method="_on_game_word_skipped"]
+[connection signal="word_completed" from="." to="Upper Half Container/Header/Score Display" method="_on_lexicon_word_completed"]
+[connection signal="word_completed" from="." to="Upper Half Container/Slate" method="_on_lexicon_word_completed"]
+[connection signal="word_input" from="." to="Upper Half Container/Slate" method="_on_lexicon_word_input"]
+[connection signal="word_skipped" from="." to="Upper Half Container/Header/Score Display" method="_on_lexicon_word_skipped"]
+[connection signal="word_skipped" from="." to="Upper Half Container/Slate" method="_on_lexicon_word_skipped"]
+[connection signal="word_started" from="." to="Upper Half Container/Slate" method="_on_lexicon_word_started"]
 [connection signal="delete" from="Bottom Half Container/Keypad" to="." method="_on_keypad_delete"]
 [connection signal="input" from="Bottom Half Container/Keypad" to="." method="_on_keypad_input"]
 [connection signal="keyboard_input" from="Bottom Half Container/Keypad" to="." method="_on_keypad_keyboard_input"]

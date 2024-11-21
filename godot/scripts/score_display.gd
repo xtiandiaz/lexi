@@ -31,15 +31,16 @@ var _total_medals: int:
 ## SIGNALS
 
 
-func _on_game_word_completed(word: String, clues: int) -> void:
-	var no_clues = clues == 0
-	_score += maxi(0, word.length() - clues) * 10 + (50 if no_clues else 0)
+func _on_lexicon_word_completed(word: String, clue_count: int, synonyms: PackedStringArray) -> void:
+	var no_clues = clue_count == 0
+	_score += maxi(0, word.length() - clue_count) * 10 + (50 if no_clues else 0)
 	
 	_total_medals += 1
 	if no_clues:
 		_earned_medal_count += 1
 
 
-func _on_game_word_skipped(word: String) -> void:
+
+func _on_lexicon_word_skipped(word: String, synonyms: PackedStringArray) -> void:
 	_score -= word.length() * 10
 	_total_medals += 1

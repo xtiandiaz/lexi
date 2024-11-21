@@ -630,6 +630,7 @@ infame
 infamia
 inflexión
 infligir
+infumable
 ingente
 ininteligible
 iniquidad
@@ -1032,6 +1033,9 @@ visera
 visillo
 vítor
 vitorear
+vituperable
+vituperar
+vituperio
 vociferar
 voltaico
 yelmo, celada
