@@ -88,6 +88,7 @@ apatía
 apercibir
 ápice
 aplomo
+apogeo
 aprensión
 aprensivo
 aquiescencia
@@ -148,6 +149,7 @@ ayuntamiento, cabildo, concejo
 azabache
 azaroso
 azuzado
+azuzar
 bacilo
 bagatela, baratija, nimiedad
 baladí
@@ -161,6 +163,7 @@ barraca
 barreño, balde, cubo
 barricada
 barrote
+barullo, barahúnda
 basilisco
 bastidor
 batea
@@ -283,6 +286,8 @@ clamor
 claqué
 claraboya
 clavija
+clérigo, eclesiástico
+clero, clerecía
 coacción, constreñimiento
 cobertizo
 cochambroso
@@ -332,6 +337,7 @@ cuncuna
 cundir
 curubito
 decimonónico
+decrépito
 deductivo
 degüello, degollamiento
 delator
@@ -425,6 +431,7 @@ entereza
 enternecedor
 enternecer
 entropía
+enzarzar
 erguir
 erial, baldío
 erigir
@@ -484,6 +491,7 @@ estropicio
 estuario
 estupefacto, atónito
 estupor
+evanescente
 evasiva
 excentricidad
 exiguo
@@ -493,6 +501,7 @@ explayarse
 exprimir
 extirpar
 extravagante
+extrínseco
 fajo, haz, atado
 falible
 fastuoso
@@ -582,6 +591,7 @@ hincar
 hipocondría
 hogaza
 holgado
+homeóstasis, homeostasis, homeostasia
 homilía
 homogeneizar
 horda
@@ -634,6 +644,7 @@ insurgencia, alzamiento, insurrección
 intempestivo
 interpelación
 interventoría
+intrínseco
 inusitado
 iracundia
 irisar
@@ -848,6 +859,7 @@ puritanismo
 purulento
 quejica
 quejumbroso
+querubín
 quiste
 quórum, cuórum
 rabillo
@@ -907,6 +919,7 @@ segar
 semblante
 semblanza
 sepelio
+serafín
 serendipia
 serrín, aserrín, serraduras
 sesudo
@@ -935,9 +948,11 @@ sublimado
 sublime
 sublunar
 subsanar
+suburbio
 súcubo
 sujeción
 superlativo
+superponer, sobreponer
 supurar
 suscitar
 suspicaz
