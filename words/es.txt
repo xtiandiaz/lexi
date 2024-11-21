@@ -1,4 +1,3 @@
-
 abarrotado
 abatido
 abatir
@@ -247,6 +246,7 @@ cenefa
 ceñir
 cénit, cenit, zenit
 centropunto
+cepa
 cerner, cernir
 cerro
 cetrino
@@ -387,6 +387,7 @@ druida
 dubitativo
 dulzor
 eclosionar
+edema
 edrina
 efigie
 efusión, efusividad
