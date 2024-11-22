@@ -67,7 +67,7 @@ func _process(delta: float) -> void:
 
 
 func _reset() -> void:
-	background.color = Cosmetics.DARK_GRAY_COLOR
+	background.color = Color.RED
 	continuation_container.visible = false
 	_clue_count_used_in_current_word = 0
 	

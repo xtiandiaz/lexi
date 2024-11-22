@@ -7,6 +7,7 @@ barrister
 bolster
 bunion
 capricious
+caveat
 cherish
 cockeyed
 coercion
@@ -36,6 +37,7 @@ off-putting
 opulent
 pebble
 peddle
+proviso
 rehash
 reskill
 revile
