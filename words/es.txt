@@ -970,7 +970,7 @@ sobredimensionar
 sobresalto
 socavón
 solemne
-soliloquio
+soliloquio, monólogo
 somier
 sonambulismo
 sonsonete, soniquete, retintín
@@ -1083,7 +1083,6 @@ yesca
 yugo
 yunta
 zalamería, lisonja
-zalamero
 zalamero
 zancadilla
 zape
