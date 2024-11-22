@@ -1,11 +1,11 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://djtoa1kcsmph4"]
 
-[ext_resource type="StyleBox" uid="uid://blyltt7gv4v3m" path="res://styles/button_disabled_state.tres" id="1_jyatl"]
+[ext_resource type="StyleBox" uid="uid://balbvqa25ah4q" path="res://styles/button_disabled_state.tres" id="1_jyatl"]
 [ext_resource type="FontFile" uid="uid://2b687wj3c7j5" path="res://fonts/Inter-Medium.otf" id="1_pqgxk"]
-[ext_resource type="StyleBox" uid="uid://dxo4l4tn58tdc" path="res://styles/button_focused_state.tres" id="2_ke0lb"]
-[ext_resource type="StyleBox" uid="uid://db6xvekstybar" path="res://styles/button_hovered_state.tres" id="3_0po28"]
-[ext_resource type="StyleBox" uid="uid://x0ujeo56ka0e" path="res://styles/button_normal_state.tres" id="4_5c2w4"]
-[ext_resource type="StyleBox" uid="uid://c3we8uybxicj0" path="res://styles/button_pressed_state.tres" id="5_5kqmf"]
+[ext_resource type="StyleBox" uid="uid://ch32o7jigg81y" path="res://styles/button_focus_state.tres" id="2_gos6b"]
+[ext_resource type="StyleBox" uid="uid://b34eoalvxfkd1" path="res://styles/button_hover_state.tres" id="3_3kkrx"]
+[ext_resource type="StyleBox" uid="uid://bn2c2t8p6u3v8" path="res://styles/button_normal_state.tres" id="4_5c2w4"]
+[ext_resource type="StyleBox" uid="uid://cyuxw1b7vae21" path="res://styles/button_pressed_state.tres" id="5_5kqmf"]
 
 [resource]
 default_font = ExtResource("1_pqgxk")
@@ -18,7 +18,8 @@ Button/constants/h_separation = 0
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
 Button/styles/disabled = ExtResource("1_jyatl")
-Button/styles/focus = ExtResource("2_ke0lb")
-Button/styles/hover = ExtResource("3_0po28")
+Button/styles/focus = ExtResource("2_gos6b")
+Button/styles/hover = ExtResource("3_3kkrx")
 Button/styles/normal = ExtResource("4_5c2w4")
 Button/styles/pressed = ExtResource("5_5kqmf")
+Label/colors/font_color = Color(0.921569, 0.937255, 0.968627, 1)

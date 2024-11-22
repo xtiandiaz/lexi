@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bg84q2jxnii7y"]
+[gd_scene load_steps=8 format=3 uid="uid://bg84q2jxnii7y"]
 
 [ext_resource type="Theme" uid="uid://djtoa1kcsmph4" path="res://themes/general.tres" id="1_1myoq"]
+[ext_resource type="StyleBox" uid="uid://dxo4l4tn58tdc" path="res://styles/icon_button_focus_state.tres" id="2_mix22"]
 [ext_resource type="Texture2D" uid="uid://bfd50kqc88pfm" path="res://icons/gear.png" id="2_s3h41"]
+[ext_resource type="StyleBox" uid="uid://blyltt7gv4v3m" path="res://styles/icon_button_disabled_state.tres" id="3_g8srq"]
+[ext_resource type="StyleBox" uid="uid://db6xvekstybar" path="res://styles/icon_button_hover_state.tres" id="4_52qen"]
+[ext_resource type="StyleBox" uid="uid://c3we8uybxicj0" path="res://styles/icon_button_pressed_state.tres" id="5_45f7y"]
+[ext_resource type="StyleBox" uid="uid://x0ujeo56ka0e" path="res://styles/icon_button_normal_state.tres" id="6_1040x"]
 
 [node name="Icon Button" type="Button"]
 custom_minimum_size = Vector2(96, 96)
@@ -10,6 +15,11 @@ offset_bottom = 80.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("1_1myoq")
+theme_override_styles/focus = ExtResource("2_mix22")
+theme_override_styles/disabled = ExtResource("3_g8srq")
+theme_override_styles/hover = ExtResource("4_52qen")
+theme_override_styles/pressed = ExtResource("5_45f7y")
+theme_override_styles/normal = ExtResource("6_1040x")
 icon = ExtResource("2_s3h41")
-flat = true
+icon_alignment = 1
 expand_icon = true

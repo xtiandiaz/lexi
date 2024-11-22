@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://k3twt6612mum"]
+
+[ext_resource type="Theme" uid="uid://djtoa1kcsmph4" path="res://themes/general.tres" id="1_y51ty"]
+[ext_resource type="StyleBox" uid="uid://cjhjycgoddysu" path="res://styles/toggle_button_pressed_state.tres" id="2_ofwyg"]
+[ext_resource type="Script" path="res://scripts/controls/language_button.gd" id="3_skkat"]
+
+[node name="Language Button" type="Button"]
+custom_minimum_size = Vector2(96, 96)
+offset_top = 1.0
+offset_right = 96.0
+offset_bottom = 97.0
+theme = ExtResource("1_y51ty")
+theme_override_styles/hover_pressed = ExtResource("2_ofwyg")
+theme_override_styles/pressed = ExtResource("2_ofwyg")
+toggle_mode = true
+text = "ES"
+script = ExtResource("3_skkat")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

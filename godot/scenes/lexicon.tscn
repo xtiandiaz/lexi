@@ -1,14 +1,14 @@
 [gd_scene load_steps=12 format=3 uid="uid://c0bwr3euhbf77"]
 
 [ext_resource type="Script" path="res://scripts/lexicon.gd" id="1_v4rpg"]
-[ext_resource type="PackedScene" uid="uid://c7krtjsewabrh" path="res://scenes/background.tscn" id="2_ob0ql"]
+[ext_resource type="PackedScene" uid="uid://c7krtjsewabrh" path="res://scenes/controls/background.tscn" id="2_ob0ql"]
 [ext_resource type="PackedScene" uid="uid://bg84q2jxnii7y" path="res://scenes/components/icon_button.tscn" id="2_yjf5n"]
 [ext_resource type="PackedScene" uid="uid://byfi7acfc7c6n" path="res://scenes/score_display.tscn" id="3_2bsh0"]
 [ext_resource type="PackedScene" uid="uid://ctat1cvxprv24" path="res://scenes/slate.tscn" id="4_rinb0"]
-[ext_resource type="PackedScene" uid="uid://cbr85bksxb8dj" path="res://scenes/keypad.tscn" id="5_dfqin"]
+[ext_resource type="PackedScene" uid="uid://cbr85bksxb8dj" path="res://scenes/controls/keypad.tscn" id="5_dfqin"]
 [ext_resource type="Texture2D" uid="uid://cts1ylwj80e2" path="res://icons/dictionary.png" id="6_it5hb"]
 [ext_resource type="Texture2D" uid="uid://lgssoy3i610u" path="res://icons/continue.png" id="7_3ln38"]
-[ext_resource type="PackedScene" uid="uid://blt3oh5nnyt58" path="res://scenes/components/iconized_button.tscn" id="8_hk583"]
+[ext_resource type="PackedScene" uid="uid://blt3oh5nnyt58" path="res://scenes/components/button.tscn" id="8_hk583"]
 [ext_resource type="Texture2D" uid="uid://doikt78umjkuk" path="res://icons/clue.png" id="9_ikf7y"]
 [ext_resource type="Texture2D" uid="uid://dsj6wkvy5j3sl" path="res://icons/clueless.png" id="10_a0c5l"]
 
@@ -38,7 +38,6 @@ alignment = 1
 
 [node name="Settings Button" parent="Upper Half Container/Header" instance=ExtResource("2_yjf5n")]
 layout_mode = 2
-flat = false
 
 [node name="Filler" type="BoxContainer" parent="Upper Half Container/Header"]
 layout_mode = 2
@@ -94,13 +93,11 @@ alignment = 1
 custom_minimum_size = Vector2(144, 144)
 layout_mode = 2
 icon = ExtResource("6_it5hb")
-flat = false
 
 [node name="Continue Button" parent="Bottom Half Container/Continuation Container" instance=ExtResource("2_yjf5n")]
 custom_minimum_size = Vector2(144, 144)
 layout_mode = 2
 icon = ExtResource("7_3ln38")
-flat = false
 
 [node name="Filler" type="BoxContainer" parent="Bottom Half Container"]
 layout_mode = 2
@@ -119,7 +116,6 @@ icon = ExtResource("9_ikf7y")
 [node name="Clueless Button" parent="Bottom Half Container/Footer" instance=ExtResource("2_yjf5n")]
 layout_mode = 2
 icon = ExtResource("10_a0c5l")
-flat = false
 
 [connection signal="word_completed" from="." to="Upper Half Container/Header/Score Display" method="_on_lexicon_word_completed"]
 [connection signal="word_completed" from="." to="Upper Half Container/Slate" method="_on_lexicon_word_completed"]

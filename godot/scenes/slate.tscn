@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/slate.gd" id="1_wo7jd"]
 [ext_resource type="FontFile" uid="uid://2b687wj3c7j5" path="res://fonts/Inter-Medium.otf" id="2_6pf0b"]
 
-[node name="Slate" type="VBoxContainer" node_paths=PackedStringArray("word_label", "synonyms_label")]
+[node name="Slate" type="VBoxContainer" node_paths=PackedStringArray("word_label", "notes_label")]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 402.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 theme_override_constants/separation = 12
 script = ExtResource("1_wo7jd")
 word_label = NodePath("Word Label")
-synonyms_label = NodePath("Synonyms Label")
+notes_label = NodePath("Notes Label")
 
 [node name="Word Label" type="Label" parent="."]
 custom_minimum_size = Vector2(100, 0)
@@ -24,13 +24,13 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 1
 
-[node name="Synonyms Label" type="Label" parent="."]
+[node name="Notes Label" type="Label" parent="."]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("2_6pf0b")
 theme_override_font_sizes/font_size = 40
-text = "Synonyms"
+text = "Notes"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 1

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cbr85bksxb8dj"]
 
 [ext_resource type="PackedScene" uid="uid://bg84q2jxnii7y" path="res://scenes/components/icon_button.tscn" id="1_0k0jt"]
-[ext_resource type="Script" path="res://scripts/keypad.gd" id="1_b45n8"]
+[ext_resource type="Script" path="res://scripts/controls/keypad.gd" id="1_b45n8"]
 [ext_resource type="Texture2D" uid="uid://xqldw3lrxruo" path="res://icons/delete.png" id="2_7ctu2"]
 
 [node name="Keypad" type="VBoxContainer" node_paths=PackedStringArray("letter_container", "delete_button")]

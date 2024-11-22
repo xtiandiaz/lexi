@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c7krtjsewabrh"]
 
-[ext_resource type="Script" path="res://scripts/background.gd" id="1_ojog1"]
+[ext_resource type="Script" path="res://scripts/controls/background.gd" id="1_ojog1"]
 
 [node name="Background" type="Control" node_paths=PackedStringArray("colorground")]
 layout_mode = 3

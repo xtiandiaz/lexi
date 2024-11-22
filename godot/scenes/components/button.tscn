@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://djtoa1kcsmph4" path="res://themes/general.tres" id="1_h5vh0"]
 [ext_resource type="Texture2D" uid="uid://bfd50kqc88pfm" path="res://icons/gear.png" id="2_wpg5i"]
 
-[node name="Iconized Button" type="Button"]
+[node name="Button" type="Button"]
 custom_minimum_size = Vector2(96, 96)
 offset_right = 96.0
 offset_bottom = 96.0

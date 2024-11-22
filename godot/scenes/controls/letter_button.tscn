@@ -1,16 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://b83iaxhdfiabq"]
 
-[ext_resource type="Theme" uid="uid://djtoa1kcsmph4" path="res://themes/general.tres" id="1_1n04a"]
-[ext_resource type="Script" path="res://scripts/letter_button.gd" id="1_7xleh"]
+[ext_resource type="Theme" uid="uid://djtoa1kcsmph4" path="res://themes/general.tres" id="1_qo5fa"]
+[ext_resource type="Script" path="res://scripts/controls/letter_button.gd" id="2_3u78y"]
 
 [node name="Letter Button" type="Button"]
 custom_minimum_size = Vector2(96, 96)
 offset_top = 1.0
 offset_right = 96.0
 offset_bottom = 97.0
-theme = ExtResource("1_1n04a")
+theme = ExtResource("1_qo5fa")
 theme_override_font_sizes/font_size = 64
 text = "A"
-script = ExtResource("1_7xleh")
+script = ExtResource("2_3u78y")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -234,7 +234,7 @@ func _on_keypad_delete() -> void:
 
 
 func _on_settings_button_pressed() -> void:
-	var settings_menu = load("res://scenes/settings_menu.tscn").instantiate()
+	var settings_menu = load("res://scenes/menus/settings_menu.tscn").instantiate()
 	settings_menu.closed.connect(_on_settings_menu_closed)
 	add_child(settings_menu)
 

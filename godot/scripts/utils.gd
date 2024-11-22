@@ -31,6 +31,13 @@ static func _normalized_char(char: String) -> String:
 		_: return char
 
 
+static func language_name(code: String) -> String:
+	match code:
+		"es": return "Español"
+		"en": return "English"
+		_: return ""
+
+
 static func first_char_index_in_string(char: String, string: String) -> int:
 	for i in string.length():
 		if char == string[i]:
