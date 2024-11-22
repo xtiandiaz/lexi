@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://c0bwr3euhbf77"]
+[gd_scene load_steps=12 format=3 uid="uid://c0bwr3euhbf77"]
 
 [ext_resource type="Script" path="res://scripts/lexicon.gd" id="1_v4rpg"]
+[ext_resource type="PackedScene" uid="uid://c7krtjsewabrh" path="res://scenes/background.tscn" id="2_ob0ql"]
 [ext_resource type="PackedScene" uid="uid://bg84q2jxnii7y" path="res://scenes/components/icon_button.tscn" id="2_yjf5n"]
 [ext_resource type="PackedScene" uid="uid://byfi7acfc7c6n" path="res://scenes/score_display.tscn" id="3_2bsh0"]
 [ext_resource type="PackedScene" uid="uid://ctat1cvxprv24" path="res://scenes/slate.tscn" id="4_rinb0"]
@@ -20,14 +21,7 @@ footer = NodePath("Bottom Half Container/Footer")
 clue_button = NodePath("Bottom Half Container/Footer/Clue Button")
 continue_button = NodePath("Bottom Half Container/Continuation Container/Continue Button")
 
-[node name="Background" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0.627451)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.131379, 0.131379, 0.131379, 1)
+[node name="Background" parent="." instance=ExtResource("2_ob0ql")]
 
 [node name="Upper Half Container" type="VBoxContainer" parent="."]
 anchors_preset = -1
@@ -133,6 +127,7 @@ flat = false
 [connection signal="word_skipped" from="." to="Upper Half Container/Header/Score Display" method="_on_lexicon_word_skipped"]
 [connection signal="word_skipped" from="." to="Upper Half Container/Slate" method="_on_lexicon_word_skipped"]
 [connection signal="word_started" from="." to="Upper Half Container/Slate" method="_on_lexicon_word_started"]
+[connection signal="pressed" from="Upper Half Container/Header/Settings Button" to="." method="_on_settings_button_pressed"]
 [connection signal="delete" from="Bottom Half Container/Keypad" to="." method="_on_keypad_delete"]
 [connection signal="input" from="Bottom Half Container/Keypad" to="." method="_on_keypad_input"]
 [connection signal="keyboard_input" from="Bottom Half Container/Keypad" to="." method="_on_keypad_keyboard_input"]

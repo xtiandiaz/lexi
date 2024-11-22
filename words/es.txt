@@ -1,8 +1,3 @@
-follaje
-forraje
-manopla
-plasmar
-mitón
 abarrotado
 abatido
 abatir
@@ -198,6 +193,7 @@ botín
 brida
 brizna, brinza
 bruma
+bruñido, reluciente
 buche, buchada
 buhardilla
 bujía
@@ -258,7 +254,7 @@ cepa
 cerner, cernir
 cerro
 cetrino
-chabola
+chabola, cabaña, barraca, choza
 chafarrinada, chafarrinón
 chanchullo
 chantaje
@@ -409,7 +405,6 @@ emancipar
 emanciparse
 embastecer
 embelesado
-panocha
 embelesar
 embelesarse, arrobarse, extasiarse
 embellecer
@@ -529,7 +524,9 @@ flanquear
 floreo
 focalizar
 fofo, bofo
+follaje
 folletín, folletón
+forraje
 forzudo
 frailecillo
 fraternal
@@ -612,6 +609,7 @@ impasible, insensible, indiferente, imperturbable
 impavidez
 impersonal
 impertérrito, impávido, inconmovible
+ímpetu
 impostura
 imprecar
 impronta
@@ -635,7 +633,6 @@ infame
 infamia
 inflexión
 infligir
-infumable
 ingente
 ininteligible
 iniquidad
@@ -704,6 +701,7 @@ mancillado
 mandrágora
 mangostino
 manida
+manopla
 mansarda
 marañón
 marisma
@@ -727,6 +725,7 @@ mezquino
 mielina
 mies
 minuta
+mitón
 monigote
 monocorde
 monserga
@@ -776,6 +775,7 @@ palpable
 pampa
 pamplina
 pancarta
+panocha
 panteón
 papanatas, papamoscas, paparote
 parapetar
@@ -795,6 +795,7 @@ paspartú
 pastoso
 patalear
 patente
+pátina
 patógeno
 pavonear
 pavoroso
@@ -820,6 +821,7 @@ pira
 pitón
 pitorro
 plañidera
+plasmar
 plausible
 plebeyo
 plomo
@@ -888,6 +890,7 @@ regata
 regatear, recatear, baratear
 regateo
 rehuir
+reivindicar
 remilgo
 renegar
 renquear, renguear, cojear
@@ -1020,6 +1023,8 @@ vasallo
 vasija
 vástago
 váter, inodoro, retrete, urinario
+vehemencia
+vehemente
 veleidoso
 veleta
 vendimia

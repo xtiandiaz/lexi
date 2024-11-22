@@ -8,13 +8,14 @@ signal word_skipped(word: String, synonyms: PackedStringArray)
 
 
 @export var keypad: Keypad
-@export var background: ColorRect
+@export var background: Background
 @export var continuation_container: Container
 @export var footer: Container
 @export var clue_button: Button
 @export var continue_button: Button
 
 
+var _current_language: String
 var _words: PackedStringArray
 var _current_word_index: int
 var _current_word: String
@@ -43,11 +44,20 @@ var _can_give_clue: bool:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var file = FileAccess.open("res://words/es.txt", FileAccess.READ)
+	_load_language_and_reset(Settings.language_selected)
+
+
+func _load_language_and_reset(language: String) -> void:
+	var file = FileAccess.open(
+		"res://words/{0}.txt".format([language]), 
+		FileAccess.READ
+	)
 	var content = file.get_as_text()
-	_words = content.split("\n")
 	
+	_current_language = language
+	_words = content.split("\n")
 	_clue_count_available = 1
+	
 	_reset()
 
 
@@ -124,7 +134,7 @@ func _show_success() -> void:
 	_on_result_shown()
 	
 
-func _show_solution() -> void:
+func _reveal_solution() -> void:
 	background.color = Cosmetics.ORANGE_COLOR
 	
 	word_skipped.emit(_current_word, _current_word_synonyms)
@@ -138,10 +148,6 @@ func _on_result_shown() -> void:
 	footer.visible = false
 	
 	continue_button.grab_focus()
-
-
-func _launch_definition() -> void:
-	OS.shell_open("https://dle.rae.es/{0}".format([_current_word.to_lower()]))
 
 
 func _letter_indices(letter: String, string: String) -> Array[int]:
@@ -173,8 +179,8 @@ func _remaining_letters() -> Array[String]:
 
 
 func _on_clueless_button_pressed() -> void:
-	word_skipped.emit(_current_word)
-	_show_solution()
+	word_skipped.emit(_current_word, _current_word_synonyms)
+	_reveal_solution()
 
 
 func _on_continue_button_pressed() -> void:
@@ -182,8 +188,8 @@ func _on_continue_button_pressed() -> void:
 
 
 func _on_define_button_pressed() -> void:
-	print("define ", _current_word)
-	_launch_definition()
+	print("Define: ", _current_word)
+	OS.shell_open("{0}/{1}".format([Settings.dictionary_url, _current_word.to_lower()]))
 	
 
 func _on_clue_button_pressed() -> void:
@@ -225,3 +231,16 @@ func _on_keypad_delete() -> void:
 	var letter_to_restore = _input[last_index]
 	_input = _input.substr(0, last_index)
 	keypad.restore_letter_button(letter_to_restore.to_lower())
+
+
+func _on_settings_button_pressed() -> void:
+	var settings_menu = load("res://scenes/settings_menu.tscn").instantiate()
+	settings_menu.closed.connect(_on_settings_menu_closed)
+	add_child(settings_menu)
+
+
+func _on_settings_menu_closed() -> void:
+	if Settings.language_selected == _current_language:
+		return
+	
+	_load_language_and_reset(Settings.language_selected)

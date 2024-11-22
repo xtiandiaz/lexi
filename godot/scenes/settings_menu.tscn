@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://ywavkevvd73y"]
+
+[ext_resource type="Script" path="res://scripts/settings_menu.gd" id="1_lkjbx"]
+[ext_resource type="PackedScene" uid="uid://c7krtjsewabrh" path="res://scenes/background.tscn" id="2_v5sh2"]
+[ext_resource type="Theme" uid="uid://djtoa1kcsmph4" path="res://themes/general.tres" id="3_u88t4"]
+[ext_resource type="PackedScene" uid="uid://bg84q2jxnii7y" path="res://scenes/components/icon_button.tscn" id="4_20uir"]
+[ext_resource type="Texture2D" uid="uid://drwa6b3g3eh3d" path="res://icons/close.png" id="5_85bqu"]
+
+[node name="Settings Menu" type="CanvasLayer" node_paths=PackedStringArray("language_button_container")]
+script = ExtResource("1_lkjbx")
+language_button_container = NodePath("Main Container/Body/Language Selection/Language Button Container")
+
+[node name="Background" parent="." instance=ExtResource("2_v5sh2")]
+
+[node name="Main Container" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_u88t4")
+theme_override_constants/separation = 32
+
+[node name="Header" type="HBoxContainer" parent="Main Container"]
+layout_mode = 2
+alignment = 2
+
+[node name="Close Button" parent="Main Container/Header" instance=ExtResource("4_20uir")]
+layout_mode = 2
+icon = ExtResource("5_85bqu")
+
+[node name="Body" type="VBoxContainer" parent="Main Container"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Language Selection" type="VBoxContainer" parent="Main Container/Body"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Title" type="Label" parent="Main Container/Body/Language Selection"]
+layout_mode = 2
+text = "Language"
+
+[node name="Language Button Container" type="HBoxContainer" parent="Main Container/Body/Language Selection"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[connection signal="pressed" from="Main Container/Header/Close Button" to="." method="_on_close_button_pressed"]
