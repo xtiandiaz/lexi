@@ -24,7 +24,7 @@ acotar
 adecentar
 ademán
 adormidera
-adormilar
+adormecerse, adormitarse, amodorrarse
 adosado
 adosar
 adusto
@@ -79,7 +79,7 @@ anestésico
 anodino
 antisemita
 antología
-añublo
+añublo, anublo
 apaciguar, amansar, aplacar, aquietar, sosegar
 apañar
 aparador
@@ -99,7 +99,8 @@ argamasa
 argucia
 armatoste, mamotreto
 armiño
-armisticio
+armisticio, tregua, pacto
+beligerante
 árnica
 arracimado, enracimarse, racimarse
 arrebato, arranque
@@ -394,7 +395,6 @@ dubitativo
 dulzor
 eclosionar
 edema
-edrina
 efigie
 efusión, efusividad
 elocución
