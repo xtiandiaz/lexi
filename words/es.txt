@@ -1,11 +1,13 @@
-abarrotado
+abarrotar
+abalorio
 abatido
 abatir
 abigarrado
 abnegación
 abocar
 abrumar
-abstraído
+abstraído, ensimismado, absorto
+canto
 abstruso
 abucheo, bronca
 abulia
@@ -404,7 +406,7 @@ disturbio
 diván
 doliente
 dornajo, batea
-dossier, dosier
+dosier
 dubitativo
 dulzor
 eclosionar
@@ -432,7 +434,7 @@ encabritar
 encabritarse
 encomendar
 encomiable
-encomiar
+encomiar, elogiar, alabar, loar, aplaudir, celebrar, ensalzar, enaltecer
 encomio
 encrucijada
 enema
@@ -887,7 +889,6 @@ punible
 purga
 puritanismo
 purulento
-quejica
 quejumbroso
 querubín
 quiste
