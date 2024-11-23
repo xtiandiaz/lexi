@@ -1,11 +1,15 @@
-abarrotado
+crédulo
+termistor
+abarrotar
+abalorio
 abatido
 abatir
 abigarrado
 abnegación
 abocar
 abrumar
-abstraído
+abstraído, ensimismado, absorto
+canto
 abstruso
 abucheo, bronca
 abulia
@@ -92,7 +96,7 @@ apercibir
 aplomo
 apogeo
 aprensión
-aprensivo
+aprensivo, receloso, desconfiado
 aquiescencia
 aquilino
 arcén
@@ -103,7 +107,7 @@ armatoste, mamotreto
 armiño
 armisticio, tregua, pacto
 árnica
-arracimado, enracimarse, racimarse
+arracimado, racimado, apiñado
 arrebato, arranque
 arrecife
 arremangar
@@ -404,7 +408,7 @@ disturbio
 diván
 doliente
 dornajo, batea
-dossier, dosier
+dosier
 dubitativo
 dulzor
 eclosionar
@@ -432,7 +436,7 @@ encabritar
 encabritarse
 encomendar
 encomiable
-encomiar
+encomiar, elogiar, alabar, loar, aplaudir, celebrar, ensalzar, enaltecer
 encomio
 encrucijada
 enema
@@ -620,11 +624,20 @@ huidizo
 hurtadillas
 iconoclasta
 idoneidad
+idóneo
+averno
 ignominia
 ilación
 imbatible
 impasible, insensible, indiferente, imperturbable
-impavidez
+impavidez, impasibilidad, serenidad, denuedo
+denuedo
+brío
+estoico
+ecuánime
+ecuanimidad
+imparcialidad
+pasible
 impersonal
 impertérrito, impávido, inconmovible
 ímpetu
@@ -887,7 +900,6 @@ punible
 purga
 puritanismo
 purulento
-quejica
 quejumbroso
 querubín
 quiste
@@ -917,7 +929,7 @@ reivindicar
 remilgo
 renegar
 renquear, renguear, cojear
-renuevo
+renuevo, vástago, brote, yema, retoño
 resabiado
 resabio
 resalto, resalte
