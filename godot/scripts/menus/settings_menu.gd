@@ -43,4 +43,6 @@ func _on_language_button_pressed(language_code: String) -> void:
 func _on_close_button_pressed() -> void:
 	Settings.language_selected = _state.language_code
 	
+	Settings.save()
+	
 	queue_free()
