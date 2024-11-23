@@ -15,7 +15,6 @@ signal word_skipped(word: String, synonyms: PackedStringArray)
 @export var continue_button: Button
 
 
-var _current_language: String
 var _words: PackedStringArray
 var _current_word_index: int
 var _current_word: String
@@ -44,17 +43,17 @@ var _can_give_clue: bool:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Settings.language_change.connect(_on_language_changed)
 	_load_language_and_reset(Settings.language_selected)
 
 
-func _load_language_and_reset(language: String) -> void:
+func _load_language_and_reset(language_code: String) -> void:
 	var file = FileAccess.open(
-		"res://words/{0}.txt".format([language]), 
+		"res://words/{0}.txt".format([language_code]), 
 		FileAccess.READ
 	)
 	var content = file.get_as_text()
 	
-	_current_language = language
 	_words = content.split("\n")
 	_clue_count_available = 1
 	
@@ -178,6 +177,10 @@ func _remaining_letters() -> Array[String]:
 ## SIGNALS
 
 
+func _on_language_changed(code: String) -> void:
+	_load_language_and_reset(code)
+
+
 func _on_clueless_button_pressed() -> void:
 	word_skipped.emit(_current_word, _current_word_synonyms)
 	_reveal_solution()
@@ -235,12 +238,4 @@ func _on_keypad_delete() -> void:
 
 func _on_settings_button_pressed() -> void:
 	var settings_menu = load("res://scenes/menus/settings_menu.tscn").instantiate()
-	settings_menu.closed.connect(_on_settings_menu_closed)
 	add_child(settings_menu)
-
-
-func _on_settings_menu_closed() -> void:
-	if Settings.language_selected == _current_language:
-		return
-	
-	_load_language_and_reset(Settings.language_selected)

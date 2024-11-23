@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://c0bwr3euhbf77"]
+[gd_scene load_steps=14 format=3 uid="uid://c0bwr3euhbf77"]
 
 [ext_resource type="Script" path="res://scripts/lexicon.gd" id="1_v4rpg"]
 [ext_resource type="PackedScene" uid="uid://c7krtjsewabrh" path="res://scenes/controls/background.tscn" id="2_ob0ql"]
 [ext_resource type="PackedScene" uid="uid://bg84q2jxnii7y" path="res://scenes/components/icon_button.tscn" id="2_yjf5n"]
 [ext_resource type="PackedScene" uid="uid://byfi7acfc7c6n" path="res://scenes/score_display.tscn" id="3_2bsh0"]
+[ext_resource type="Theme" uid="uid://djtoa1kcsmph4" path="res://themes/general.tres" id="3_vg76v"]
 [ext_resource type="PackedScene" uid="uid://ctat1cvxprv24" path="res://scenes/slate.tscn" id="4_rinb0"]
+[ext_resource type="Script" path="res://scripts/language_display.gd" id="5_1p53y"]
 [ext_resource type="PackedScene" uid="uid://cbr85bksxb8dj" path="res://scenes/controls/keypad.tscn" id="5_dfqin"]
 [ext_resource type="Texture2D" uid="uid://cts1ylwj80e2" path="res://icons/dictionary.png" id="6_it5hb"]
 [ext_resource type="Texture2D" uid="uid://lgssoy3i610u" path="res://icons/continue.png" id="7_3ln38"]
@@ -31,29 +33,36 @@ offset_left = 24.0
 offset_top = 24.0
 offset_right = -24.0
 grow_horizontal = 2
+theme = ExtResource("3_vg76v")
 
 [node name="Header" type="HBoxContainer" parent="Upper Half Container"]
 layout_mode = 2
+theme_override_constants/separation = 12
 alignment = 1
 
-[node name="Settings Button" parent="Upper Half Container/Header" instance=ExtResource("2_yjf5n")]
+[node name="Settings Access Container" type="HBoxContainer" parent="Upper Half Container/Header"]
 layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 12
+
+[node name="Settings Button" parent="Upper Half Container/Header/Settings Access Container" instance=ExtResource("2_yjf5n")]
+layout_mode = 2
+
+[node name="Language Display" type="Label" parent="Upper Half Container/Header/Settings Access Container" node_paths=PackedStringArray("language_label")]
+modulate = Color(1, 1, 1, 0.25098)
+layout_mode = 2
+text = "ES"
+script = ExtResource("5_1p53y")
+language_label = NodePath(".")
 
 [node name="Filler" type="BoxContainer" parent="Upper Half Container/Header"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-vertical = true
+alignment = 1
 
 [node name="Score Display" parent="Upper Half Container/Header" instance=ExtResource("3_2bsh0")]
 layout_mode = 2
-
-[node name="Filler2" type="BoxContainer" parent="Upper Half Container/Header"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-vertical = true
 
 [node name="Filler" type="BoxContainer" parent="Upper Half Container"]
 layout_mode = 2
@@ -79,6 +88,7 @@ offset_right = -24.0
 offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("3_vg76v")
 theme_override_constants/separation = 32
 
 [node name="Keypad" parent="Bottom Half Container" instance=ExtResource("5_dfqin")]
@@ -123,7 +133,7 @@ icon = ExtResource("10_a0c5l")
 [connection signal="word_skipped" from="." to="Upper Half Container/Header/Score Display" method="_on_lexicon_word_skipped"]
 [connection signal="word_skipped" from="." to="Upper Half Container/Slate" method="_on_lexicon_word_skipped"]
 [connection signal="word_started" from="." to="Upper Half Container/Slate" method="_on_lexicon_word_started"]
-[connection signal="pressed" from="Upper Half Container/Header/Settings Button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Upper Half Container/Header/Settings Access Container/Settings Button" to="." method="_on_settings_button_pressed"]
 [connection signal="delete" from="Bottom Half Container/Keypad" to="." method="_on_keypad_delete"]
 [connection signal="input" from="Bottom Half Container/Keypad" to="." method="_on_keypad_input"]
 [connection signal="keyboard_input" from="Bottom Half Container/Keypad" to="." method="_on_keypad_keyboard_input"]

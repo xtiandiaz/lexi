@@ -1,12 +1,17 @@
 class_name SettingsMenu extends CanvasLayer
 
 
-signal closed()
+class State:
+	var language_code: String
+	
+	func _init(language_code: String) -> void:
+		self.language_code = language_code
 
 
 @export var language_button_container: Container
 
 
+var _state: State = State.new(Settings.language_selected)
 var _language_buttons: Array[LanguageButton] = []
 
 
@@ -32,9 +37,10 @@ func _on_language_button_pressed(language_code: String) -> void:
 	for button in _language_buttons:
 		button.button_pressed = button.language_code == language_code
 	
-	Settings.language_selected = language_code
+	_state.language_code = language_code
 
 
 func _on_close_button_pressed() -> void:
-	closed.emit()
+	Settings.language_selected = _state.language_code
+	
 	queue_free()
