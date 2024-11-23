@@ -1,5 +1,7 @@
-abalorio
+crédulo
+termistor
 abarrotar
+abalorio
 abatido
 abatir
 abigarrado
@@ -7,6 +9,7 @@ abnegación
 abocar
 abrumar
 abstraído, ensimismado, absorto
+canto
 abstruso
 abucheo, bronca
 abulia
@@ -54,13 +57,13 @@ albedrío
 albergue, cobijo
 albornoz
 aldaba, aldabón, picaporte
+alebosía
 alebrije
 alero
 alerón
 aletargado
 aletargamiento, letargo
 aletargar
-alevosía
 alfajor
 alforja
 algarabía, algazara
@@ -109,6 +112,8 @@ arrebato, arranque
 arrecife
 arremangar
 arriate
+prestigio
+propaganda
 arrobar, embelesar, extasiar
 arrollar
 arroyuelo
@@ -144,7 +149,6 @@ avasallar
 avefría
 avejentado
 avejentar, aviejar, envejecer
-averno
 aviario
 avidez
 avistar
@@ -197,7 +201,6 @@ borbotón, borbollón
 borrasca
 botín
 brida
-brío
 brizna, brinza
 bruma
 bruñido, reluciente
@@ -226,7 +229,6 @@ campanilla
 camuflaje
 canalla
 canon
-canto
 canturrear, canturriar
 canturreo
 cánula
@@ -339,7 +341,6 @@ corrillo
 corro
 corroído
 craso
-crédulo
 crencha
 crescendo
 cripta
@@ -356,7 +357,6 @@ decrépito
 deductivo
 degüello, degollamiento
 delator
-denuedo
 derroche, despilfarro, dispendio
 derrotero
 desafuero
@@ -414,8 +414,6 @@ dosier
 dubitativo
 dulzor
 eclosionar
-ecuánime
-ecuanimidad
 edema
 efigie
 efusión, efusividad
@@ -502,7 +500,6 @@ estigma
 estigmatizar
 estío, verano
 estival
-estoico
 estomatología
 estornino
 estrafalario
@@ -630,12 +627,19 @@ hurtadillas
 iconoclasta
 idoneidad
 idóneo
+averno
 ignominia
 ilación
 imbatible
-imparcialidad
 impasible, insensible, indiferente, imperturbable
 impavidez, impasibilidad, serenidad, denuedo
+denuedo
+brío
+estoico
+ecuánime
+ecuanimidad
+imparcialidad
+pasible
 impersonal
 impertérrito, impávido, inconmovible
 ímpetu
@@ -694,6 +698,8 @@ lacayo
 lacre
 lacrimoso, lacrimógeno, lagrimoso
 lama
+correlimos
+terrera
 lavabo
 laxitud
 leonino
@@ -820,7 +826,6 @@ paroxismo
 parsimonia
 pasante
 pasantía
-pasible
 pasmado
 paspartú
 pastoso
@@ -1014,8 +1019,8 @@ tasar
 tebeo
 tejar
 tejón
+
 telar
-termistor
 terraplén
 terrina, tarrina
 timorato, pacato
