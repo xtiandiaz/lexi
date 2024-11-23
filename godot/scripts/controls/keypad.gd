@@ -1,11 +1,14 @@
 class_name Keypad extends Container
 
+
 signal input(letter: String)
 signal keyboard_input(letter: String)
 signal delete()
 
+
 @export var letter_container: Container
 @export var delete_button: Button
+
 
 var _letter_buttons: Array[LetterButton] = []
 var _pressed_buttons: Array[LetterButton]:
@@ -30,6 +33,8 @@ func reset(letters: Array[String]) -> void:
 
 func restore_letter_button(letter: String) -> void:
 	var presses = _pressed_buttons
+	presses.reverse()
+	
 	var button_index = _find_first_button_index(letter, presses)
 	if button_index >= 0:
 		Utils.set_button_enabled(presses[button_index], true)

@@ -100,8 +100,9 @@ func _reset_word() -> void:
 func _give_clue() -> void:
 	var matching_input = ""
 	for li in _input.length():
-		if _input[li] == _inputable[li]:
-			matching_input += _inputable[li]
+		if _input[li] != _inputable[li]:
+			break
+		matching_input += _inputable[li]
 			
 	print("Matching input: ", matching_input)
 	
@@ -112,7 +113,7 @@ func _give_clue() -> void:
 		_input += clue
 		keypad.simulate_press(clue)
 	else:
-		var input_to_restore = _input.substr(maxi(0, matching_input.length() - 1))
+		var input_to_restore = _input.substr(maxi(0, matching_input.length()))
 		print("Input to restore: ", input_to_restore)
 		_input = _inputable.substr(0, matching_input.length())
 		for l in input_to_restore:
