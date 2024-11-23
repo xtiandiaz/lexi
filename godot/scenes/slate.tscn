@@ -33,4 +33,4 @@ theme_override_font_sizes/font_size = 40
 text = "Notes"
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 1
+autowrap_mode = 2
