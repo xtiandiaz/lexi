@@ -1,5 +1,11 @@
-abalorio
+mitomanía
+misoginia
+lupanar
+meretriz
+crédulo
+termistor
 abarrotar
+abalorio
 abatido
 abatir
 abigarrado
@@ -7,6 +13,7 @@ abnegación
 abocar
 abrumar
 abstraído, ensimismado, absorto
+canto
 abstruso
 abucheo, bronca
 abulia
@@ -54,13 +61,13 @@ albedrío
 albergue, cobijo
 albornoz
 aldaba, aldabón, picaporte
+alebosía
 alebrije
 alero
 alerón
 aletargado
 aletargamiento, letargo
 aletargar
-alevosía
 alfajor
 alforja
 algarabía, algazara
@@ -77,6 +84,8 @@ ampolleta
 amuleto
 analgésico
 anatematizar
+anatema
+merengue
 anémona, anemone
 anestésico
 anodino
@@ -109,6 +118,8 @@ arrebato, arranque
 arrecife
 arremangar
 arriate
+prestigio
+propaganda
 arrobar, embelesar, extasiar
 arrollar
 arroyuelo
@@ -144,7 +155,6 @@ avasallar
 avefría
 avejentado
 avejentar, aviejar, envejecer
-averno
 aviario
 avidez
 avistar
@@ -197,7 +207,6 @@ borbotón, borbollón
 borrasca
 botín
 brida
-brío
 brizna, brinza
 bruma
 bruñido, reluciente
@@ -226,7 +235,6 @@ campanilla
 camuflaje
 canalla
 canon
-canto
 canturrear, canturriar
 canturreo
 cánula
@@ -339,7 +347,6 @@ corrillo
 corro
 corroído
 craso
-crédulo
 crencha
 crescendo
 cripta
@@ -356,7 +363,6 @@ decrépito
 deductivo
 degüello, degollamiento
 delator
-denuedo
 derroche, despilfarro, dispendio
 derrotero
 desafuero
@@ -414,8 +420,6 @@ dosier
 dubitativo
 dulzor
 eclosionar
-ecuánime
-ecuanimidad
 edema
 efigie
 efusión, efusividad
@@ -502,7 +506,6 @@ estigma
 estigmatizar
 estío, verano
 estival
-estoico
 estomatología
 estornino
 estrafalario
@@ -552,7 +555,10 @@ fofo, bofo
 follaje
 folletín, folletón
 forraje
-forúnculo
+forúnculo, furúnculo
+disensión, disenso
+disenso, disentimiento
+disentir
 forzudo
 frailecillo
 fraternal
@@ -580,6 +586,7 @@ gladiolo
 glaucoma
 golondrina
 gorgoteo
+gorgotear, borbotear
 gorjear
 gorrión
 gozada
@@ -630,12 +637,19 @@ hurtadillas
 iconoclasta
 idoneidad
 idóneo
+averno
 ignominia
 ilación
 imbatible
-imparcialidad
 impasible, insensible, indiferente, imperturbable
 impavidez, impasibilidad, serenidad, denuedo
+denuedo
+brío
+estoico
+ecuánime
+ecuanimidad
+imparcialidad
+pasible
 impersonal
 impertérrito, impávido, inconmovible
 ímpetu
@@ -694,6 +708,10 @@ lacayo
 lacre
 lacrimoso, lacrimógeno, lagrimoso
 lama
+diapasón
+corroer
+correlimos
+terrera
 lavabo
 laxitud
 leonino
@@ -820,7 +838,6 @@ paroxismo
 parsimonia
 pasante
 pasantía
-pasible
 pasmado
 paspartú
 pastoso
@@ -1015,8 +1032,8 @@ tasar
 tebeo
 tejar
 tejón
+
 telar
-termistor
 terraplén
 terrina, tarrina
 timorato, pacato
@@ -1073,6 +1090,8 @@ verbena
 verborrea, verborragia, verbosidad
 verdín
 verja, rejado
+vestigio
+partida
 vestíbulo
 vicario
 vicisitud
