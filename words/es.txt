@@ -1,3 +1,7 @@
+mitomanía
+misoginia
+lupanar
+meretriz
 crédulo
 termistor
 abarrotar
@@ -80,6 +84,8 @@ ampolleta
 amuleto
 analgésico
 anatematizar
+anatema
+merengue
 anémona, anemone
 anestésico
 anodino
@@ -549,7 +555,10 @@ fofo, bofo
 follaje
 folletín, folletón
 forraje
-forúnculo
+forúnculo, furúnculo
+disensión, disenso
+disenso, disentimiento
+disentir
 forzudo
 frailecillo
 fraternal
@@ -577,6 +586,7 @@ gladiolo
 glaucoma
 golondrina
 gorgoteo
+gorgotear, borbotear
 gorjear
 gorrión
 gozada
@@ -698,6 +708,8 @@ lacayo
 lacre
 lacrimoso, lacrimógeno, lagrimoso
 lama
+diapasón
+corroer
 correlimos
 terrera
 lavabo
@@ -1077,6 +1089,8 @@ verbena
 verborrea, verborragia, verbosidad
 verdín
 verja, rejado
+vestigio
+partida
 vestíbulo
 vicario
 vicisitud
