@@ -94,7 +94,7 @@ apercibir
 aplomo
 apogeo
 aprensión
-aprensivo
+aprensivo, receloso, desconfiado
 aquiescencia
 aquilino
 arcén
@@ -105,7 +105,7 @@ armatoste, mamotreto
 armiño
 armisticio, tregua, pacto
 árnica
-arracimado, enracimarse, racimarse
+arracimado, racimado, apiñado
 arrebato, arranque
 arrecife
 arremangar
@@ -622,11 +622,20 @@ huidizo
 hurtadillas
 iconoclasta
 idoneidad
+idóneo
+averno
 ignominia
 ilación
 imbatible
 impasible, insensible, indiferente, imperturbable
-impavidez
+impavidez, impasibilidad, serenidad, denuedo
+denuedo
+brío
+estoico
+ecuánime
+ecuanimidad
+imparcialidad
+pasible
 impersonal
 impertérrito, impávido, inconmovible
 ímpetu
@@ -918,7 +927,7 @@ reivindicar
 remilgo
 renegar
 renquear, renguear, cojear
-renuevo
+renuevo, vástago, brote, yema, retoño
 resabiado
 resabio
 resalto, resalte
