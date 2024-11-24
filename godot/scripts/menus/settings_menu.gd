@@ -9,6 +9,7 @@ class State:
 
 
 @export var language_button_container: Container
+@export var version_label: Label
 
 
 var _state: State = State.new(Settings.language_selected)
@@ -17,6 +18,8 @@ var _language_buttons: Array[LanguageButton] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	version_label.text = "v{0}".format([ProjectSettings.get_setting("application/config/version")])
+	
 	for lang in Settings.LANGUAGES:
 		var button = LanguageButton.instantiate(lang)
 		button.button_pressed = lang == Settings.language_selected

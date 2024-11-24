@@ -109,7 +109,7 @@ func _give_clue() -> void:
 	if matching_input == _input:
 		var clue_letter_index = _input.length()
 		var clue = _inputable[clue_letter_index]
-		print("clue: ", clue)
+		print("Clue: ", clue)
 		_input += clue
 		keypad.simulate_press(clue)
 	else:
@@ -118,16 +118,13 @@ func _give_clue() -> void:
 		_input = _inputable.substr(0, matching_input.length())
 		for l in input_to_restore:
 			keypad.restore_letter_button(l)
+			
+	_clue_count_used_in_current_word += 1
+	_clue_count_available -= 1
 
 
 func _show_success() -> void:
 	background.color = Cosmetics.MINT_COLOR
-	
-	word_completed.emit(
-		_current_word, 
-		_clue_count_used_in_current_word,
-		_current_word_synonyms
-	)
 	
 	_clue_count_available += 1 if _clue_count_used_in_current_word == 0 else 0
 	
@@ -175,6 +172,19 @@ func _remaining_letters() -> Array[String]:
 	return remaining
 	
 
+func _check_word_completion() -> void:
+	if (_start_hint + _input) != _current_word:
+		return
+	
+	word_completed.emit(
+		_current_word, 
+		_clue_count_used_in_current_word,
+		_current_word_synonyms
+	)
+	
+	_show_success()
+	
+
 ## SIGNALS
 
 
@@ -201,15 +211,13 @@ func _on_clue_button_pressed() -> void:
 		return
 	
 	_give_clue()
-	_clue_count_used_in_current_word += 1
-	_clue_count_available -= 1
+	_check_word_completion()
 
 
 func _on_keypad_input(letter: String) -> void:
 	_input += letter
 	
-	if (_start_hint + _input) == _current_word:
-		_show_success()
+	_check_word_completion()
 
 
 func _on_keypad_keyboard_input(letter: String) -> void:

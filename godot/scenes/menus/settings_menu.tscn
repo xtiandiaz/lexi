@@ -6,38 +6,47 @@
 [ext_resource type="PackedScene" uid="uid://bg84q2jxnii7y" path="res://scenes/components/icon_button.tscn" id="4_fqubx"]
 [ext_resource type="Texture2D" uid="uid://drwa6b3g3eh3d" path="res://icons/close.png" id="5_kcpa4"]
 
-[node name="Settings Menu" type="CanvasLayer" node_paths=PackedStringArray("language_button_container")]
+[node name="Settings Menu" type="CanvasLayer" node_paths=PackedStringArray("language_button_container", "version_label")]
 script = ExtResource("1_hon3h")
 language_button_container = NodePath("Main Container/Body/Language Selection/Language Button Container")
+version_label = NodePath("Version Label")
 
 [node name="Background" parent="." instance=ExtResource("2_olp2o")]
 
+[node name="Close Button" parent="." instance=ExtResource("4_fqubx")]
+custom_minimum_size = Vector2(80, 80)
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 0.0
+grow_horizontal = 0
+icon = ExtResource("5_kcpa4")
+flat = true
+
 [node name="Main Container" type="VBoxContainer" parent="."]
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 24.0
-offset_top = 24.0
+offset_top = 112.0
 offset_right = -24.0
-offset_bottom = -24.0
+offset_bottom = -96.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_eihry")
 theme_override_constants/separation = 48
 
 [node name="Header" type="HBoxContainer" parent="Main Container"]
+visible = false
 layout_mode = 2
 alignment = 2
 
-[node name="Close Button" parent="Main Container/Header" instance=ExtResource("4_fqubx")]
-custom_minimum_size = Vector2(80, 80)
+[node name="Body" type="ScrollContainer" parent="Main Container"]
 layout_mode = 2
-icon = ExtResource("5_kcpa4")
-flat = true
-
-[node name="Body" type="VBoxContainer" parent="Main Container"]
-layout_mode = 2
-theme_override_constants/separation = 32
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
 [node name="Language Selection" type="VBoxContainer" parent="Main Container/Body"]
 layout_mode = 2
@@ -51,4 +60,17 @@ text = "Language"
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[connection signal="pressed" from="Main Container/Header/Close Button" to="." method="_on_close_button_pressed"]
+[node name="Version Label" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0.501961)
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("3_eihry")
+text = "v1.0"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Close Button" to="." method="_on_close_button_pressed"]
