@@ -1,5 +1,9 @@
 alcornoque
 chorlito
+acuñar
+mohín
+repertorio
+líquene
 abalorio
 abarrotar
 abatido
@@ -679,7 +683,7 @@ idóneo
 ignominia
 ilación
 imbatible
-imparcialidad
+imparcialidad, ecuanimidad
 impasible, insensible, indiferente, imperturbable
 impavidez, impasibilidad, serenidad, denuedo
 impersonal
@@ -709,6 +713,7 @@ infamia
 inflexión
 infligir
 ingente
+inteligible
 ininteligible
 iniquidad
 inmolar
@@ -919,7 +924,6 @@ polémica, controversia
 polemista
 polemizar
 policroma
-polvoriento
 popa
 porfiado
 portillo
@@ -1045,7 +1049,6 @@ símil, análogo
 sisear
 sístole
 sobrecoger
-sobrecogido
 sobredimensionar
 sobresalto
 socavar
@@ -1120,6 +1123,19 @@ truhan
 tumulto
 tungsteno, wolframio, volframio
 turbar
+altivo
+altanería
+altivez
+petulancia
+petulante
+soberbia
+arribista
+arribismo
+negligencia
+negligente
+desidioso
+desidia
+turba
 úlcera
 ulular, aullar
 umbrío, umbroso
