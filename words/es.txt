@@ -68,6 +68,18 @@ socavar
 tergiversar
 
 
+
+pateta
+refunfuñar
+afrecho, salvado
+zafio
+tosco
+acaparar
+buche
+parecer
+altercado
+anquilosar
+
 abalorio
 abarrotar
 abatido
@@ -1184,7 +1196,6 @@ remilgo
 remisión
 remitir
 renegar
-renqueante
 renquear, renguear, cojear
 renuevo, vástago, brote, yema, retoño
 repertorio
