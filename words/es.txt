@@ -156,6 +156,7 @@ astracán, astrakán
 astringente
 astucia
 atalaya
+atarván, atarbán
 atestar, abarrotar
 atisbar
 atosigar
@@ -196,6 +197,7 @@ bamboleante, oscilante, basculante, tambaleante
 baratear
 barbecho
 barbitúrico
+barniz
 barraca
 barreño, balde, cubo
 barricada
@@ -211,6 +213,7 @@ beligerante
 bellaco
 besugo
 bicéfalo
+bidón
 bienal
 bies
 birlar
@@ -351,6 +354,7 @@ cochambroso
 coercer
 coerción
 coetáneo, contemporáneo
+cofia
 cohesión
 colación
 colectivismo
@@ -1153,6 +1157,7 @@ sepelio
 serafín
 serendipia
 serendípico
+serigrafía
 serrín, aserrín, serraduras
 sesgar
 sesgo
@@ -1170,6 +1175,8 @@ sobredimensionar
 sobresalto
 socavar
 socavón
+solapado
+solapar
 solemne
 soliloquio, monólogo
 somier
@@ -1200,6 +1207,7 @@ tablón
 taburete
 taimado
 talismán, fetiche
+tampografía
 tapia
 tararear, tatarear, canturrear
 tasación
