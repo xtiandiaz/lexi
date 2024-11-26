@@ -30,6 +30,7 @@ acotar
 acuñar
 adecentar
 ademán
+aditamento
 adormecerse, adormitarse, amodorrarse
 adormidera
 adosado
@@ -44,7 +45,7 @@ afelpado
 áfido, afídido
 afiebrado
 aforar
-aforo
+aforo, afuero
 afrenta
 afrodisíaco
 agasajar
@@ -84,6 +85,7 @@ altanería
 altivez
 altivo
 aluvión
+alveolo, alvéolo
 ambiguo
 ambivalente
 amilanar, amedrentar
@@ -140,6 +142,7 @@ arrollar
 arroyuelo
 arrullo
 arrumar, amontonar, apilar, aglomerar
+artefacto
 artesa
 artilugio
 artimaña
@@ -149,7 +152,7 @@ aserrar, serrar
 asir
 asordar
 astil
-astracán
+astracán, astrakán
 astringente
 astucia
 atalaya
@@ -176,6 +179,7 @@ aviario
 avidez
 avistar
 axioma
+axón
 ayuntamiento, cabildo, concejo
 azabache
 azaroso
@@ -212,6 +216,7 @@ bies
 birlar
 birlar
 bisutería
+bizcocho
 bluf, bluff
 bobalicón
 bobina
@@ -262,7 +267,7 @@ canalla
 canon
 canto
 canturrear, canturriar
-canturreo
+canturreo, tarareo
 cánula
 caoba
 capcioso
@@ -301,7 +306,7 @@ cepa
 cerner, cernir
 cerro
 cetrino
-chabola, cabaña, barraca, choza
+chabola, chavola, cabaña, barraca, choza
 chafarrinada, chafarrinón
 chanchullo
 chantaje
@@ -310,6 +315,7 @@ chaveta, pasador, clavija
 chelín
 chinchar
 chinche
+chingar
 chirriante
 chirriar
 chirrido
@@ -351,6 +357,7 @@ colectivismo
 coleto
 colindante
 coloide
+colza
 comedido
 comedimiento
 cómoda
@@ -395,6 +402,7 @@ crédulo
 crencha
 crescendo
 cripta
+crisol
 cristaloide
 cuajar
 cubata
@@ -414,7 +422,6 @@ denuedo
 derroche, despilfarro, dispendio
 derrotero
 desafuero
-desasido
 desasir
 desazón
 desbandada
@@ -482,6 +489,8 @@ diván
 doliente
 domiciliación
 dornajo, batea
+dorsal
+dorso
 dosier
 dubitativo
 dulzor
@@ -519,6 +528,7 @@ enema
 engatillar
 engendrar
 enjambre
+enmelar, endulzar
 enormidad
 enseres
 ensueño, ensoñación
@@ -570,6 +580,7 @@ espetar
 espiga
 espigado
 espolear
+espray, spray
 espuela
 espurio, espúreo
 esquilmar
@@ -648,6 +659,7 @@ forajido
 forraje
 forúnculo, furúnculo
 forzudo
+fraguar
 frailecillo
 fraternal
 frenesí
@@ -730,6 +742,7 @@ homeóstasis, homeostasis, homeostasia
 homilía
 homogeneizar
 horda
+horma
 horquilla
 huidizo
 hurtadillas
@@ -801,6 +814,7 @@ jersey
 jirón
 juanete
 junquillo
+labrar
 lacayo
 lacre
 lacrimoso, lacrimógeno, lagrimoso
@@ -808,12 +822,14 @@ lama
 lavabo
 laxitud
 leonino
+lesivo
 letargo, aletargamiento
 leudado
 leudar
 leva
 liar
 libelo
+ligamento
 lignificar
 linde, confín, lindero
 linotipia
@@ -821,6 +837,7 @@ líquene
 lisonja, adulación, zalamería
 lisonjear, adular
 lisonjero, adulador, zalamero
+lisura
 litera
 lobotomía
 lóbrego
@@ -877,6 +894,7 @@ mezquindad
 mezquino
 mielina
 mies
+mimetizarse
 minuta
 misoginia
 mitin, mitín
@@ -1075,6 +1093,7 @@ reaccionario
 reacio
 reata
 rebajar
+rebasar
 rebatir
 recatado
 recaudo
@@ -1102,7 +1121,7 @@ resollar
 respingo
 resquebrajar, agrietar, cuartear
 reticencia
-retintín
+retintín, tintineo
 retráctil
 reverberación
 reverberar
@@ -1182,6 +1201,7 @@ taburete
 taimado
 talismán, fetiche
 tapia
+tararear, tatarear, canturrear
 tasación
 tasar
 tebeo
@@ -1198,6 +1218,8 @@ timo
 timorato, pacato
 tímpano
 tiña
+tintín
+tintinar, tintinear, chingar
 tintineo, tintín
 tirachinas, tiragomas, tirador
 tiro
@@ -1257,6 +1279,7 @@ veleidoso
 veleta
 vendimia
 ventisca
+ventral
 verbena
 verborrea, verborragia, verbosidad
 verdín
@@ -1270,6 +1293,7 @@ veteado, vetado
 veto
 vicario
 vicisitud
+vientre, barriga
 vigilia
 vilo
 viñeta
