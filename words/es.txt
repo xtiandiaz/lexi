@@ -1,3 +1,7 @@
+mástil
+coyuntura
+tramoya
+huraño
 abalorio
 abarrotar
 abatido
@@ -267,7 +271,6 @@ buche
 buche, buchada
 buhardilla
 bujía
-burlón
 buró
 butifarra
 caballete
@@ -366,6 +369,8 @@ cincel
 cinismo
 circadiano
 circunspecto
+circunspección
+decoro
 civeta
 cizalla
 cizaña
@@ -1220,7 +1225,7 @@ reverberación
 reverberar
 revolotear
 rezumar
-rictus
+rictus, gesto, mueca
 rigidez
 risco
 rivalidad
@@ -1363,7 +1368,6 @@ travesaño
 trémulo
 trienal
 trinar
-trinquete
 trocar
 troncho
 troquel
