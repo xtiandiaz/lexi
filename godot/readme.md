@@ -19,15 +19,15 @@ The game will simply read your vocabulary lists, shuffle the resulting array, an
 
 1. Arrange the word by tapping on the keypad or typing the word. The background will turn mint-colored on success.
 Optionally: 
-      * Take a clue <img src="commonalities/icons/clue.png" height="24" /> (if available) to either delete all the unmatching letters or add the next correct one as a hint.
-      * Pick the "Clueless" <img src="commonalities/icons/clueless.png" height="24" /> to reveal the word.
+      * Take a clue <img src="http://mirloom.github.io/lexicon/godot/commonalities/icons/clue.png" height="24" /> (if available) to either delete all the unmatching letters or add the next correct one as a hint.
+      * Pick the "Clueless" <img src="http://mirloom.github.io/lexicon/godot/commonalities/icons/clueless.png" height="24" /> to reveal the word.
 2. At the result state, the game will reveal the synomyns (or notes) collected in the vocabulary files (separated by commas right after the main term).
-3. Tap on the book/dictionary <img src="commonalities/icons/dictionary.png" height="24" /> button to open the definition on the browser and at the website stated in code (for instance, [RAE](https://dle.rae.es) for Español and [Cambridge Dictionary](https://dictionary.cambridge.org/dictionary/english) for English).
-4. Tap on the continue <img src="commonalities/icons/continue.png" height="24" /> button to guess the next word.
+3. Tap on the book/dictionary <img src="http://mirloom.github.io/lexicon/godot/commonalities/icons/dictionary.png" height="24" /> button to open the definition on the browser and at the website stated in code (for instance, [RAE](https://dle.rae.es) for Español and [Cambridge Dictionary](https://dictionary.cambridge.org/dictionary/english) for English).
+4. Tap on the continue <img src="http://mirloom.github.io/lexicon/godot/commonalities/icons/continue.png" height="24" /> button to guess the next word.
 
-The game keeps track of the count of words played in terms of medals <img src="commonalities/icons/medal.png" height="24"> which are earned by completing the words without a clue. And, calculates and marks a score based on the fully, partially and "skipped" words. 
+The game keeps track of the count of words played in terms of medals <img src="http://mirloom.github.io/lexicon/godot/commonalities/icons/medal.png" height="24"> which are earned by completing the words without a clue. And, calculates and marks a score based on the fully, partially and "skipped" words. 
 
-5. Go to the settings <img src="commonalities/icons/gear.png" height="24" /> to switch languages.
+5. Go to the settings <img src="http://mirloom.github.io/lexicon/godot/commonalities/icons/gear.png" height="24" /> to switch languages.
 
 
 ## License
