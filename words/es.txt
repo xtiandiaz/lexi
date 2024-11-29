@@ -1,3 +1,10 @@
+trasegar
+trasvasar, transvasar
+insignia
+mástil
+coyuntura
+tramoya
+huraño
 abalorio
 abarrotar
 abatido
@@ -389,6 +396,8 @@ cincel
 cinismo
 circadiano
 circunspecto
+circunspección
+decoro
 civeta
 cizalla
 cizaña
@@ -1349,7 +1358,7 @@ reverberación
 reverberar
 revolotear
 rezumar
-rictus
+rictus, gesto, mueca
 rigidez
 risco
 rivalidad
