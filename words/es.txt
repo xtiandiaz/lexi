@@ -183,6 +183,7 @@ atañer, concernir
 atarván, atarbán
 atenazar
 atestar, abarrotar
+atípico
 atisbar
 atontamiento
 atosigar
@@ -282,7 +283,7 @@ bruma
 bruñido, reluciente
 buche
 buche, buchada
-buhardilla
+buhardilla, boardilla, buharda, mansarda
 bujía
 bullicio
 burlón
@@ -320,7 +321,6 @@ cánula
 caoba
 capcioso
 capitular
-caponata
 carambola
 carcamal
 carcasa
@@ -405,7 +405,7 @@ clero, clerecía
 coacción, constreñimiento
 cobertizo
 cochambroso
-cockney
+codicia
 coercer
 coerción
 coetáneo, contemporáneo
@@ -547,6 +547,7 @@ desvencijado
 detentar
 detrimento
 devanar
+devengar
 diafragma
 diametral, diamétrico
 diana
@@ -776,6 +777,7 @@ fluctuación
 focalizar
 fofo, bofo
 fogonazo
+fogosidad
 follaje
 folletín, folletón
 fonógrafo
@@ -1387,6 +1389,8 @@ sedicioso
 segar
 semblante
 semblanza
+senil
+senilidad
 sepelio
 septentrión
 septentrional
@@ -1411,6 +1415,7 @@ síndico
 sisear
 sistemático
 sístole
+sobaquina
 soberbia
 sobrecoger
 sobredimensionar
