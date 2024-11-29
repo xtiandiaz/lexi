@@ -1,10 +1,3 @@
-trasegar
-trasvasar, transvasar
-insignia
-mástil
-coyuntura
-tramoya
-huraño
 abalorio
 abarrotar
 abatido
@@ -395,9 +388,8 @@ cimiento, cimentación, fundamento
 cincel
 cinismo
 circadiano
-circunspecto
 circunspección
-decoro
+circunspecto
 civeta
 cizalla
 cizaña
@@ -477,6 +469,7 @@ corro
 corroer
 corroído
 cotorreo
+coyuntura
 craso
 crédulo
 crencha
@@ -494,6 +487,7 @@ cuncuna
 cundir
 curubito
 decimonónico
+decoro
 decrépito
 decrepitud
 deductivo
@@ -887,6 +881,7 @@ horda
 horma
 horquilla
 huidizo
+huraño
 hurtadillas
 iconoclasta
 idoneidad
@@ -947,6 +942,7 @@ inquirir
 inquisidor
 insensato
 insidia, asechanza
+insignia
 insólito
 insoslayable
 insurgencia, alzamiento, insurrección
@@ -1046,6 +1042,7 @@ marisma
 marmota
 marquesina
 marroquinería
+mástil
 mastodonte
 matarratas, raticida
 matiz
@@ -1511,14 +1508,17 @@ trabazón
 tragaluz
 tralla
 trallazo, latigazo
+tramoya
 trance
 transigir
 transmutar
 transponer, trasponer
+trasegar
 traslúcido
 traspasar
 traspié, traspiés
 trastienda
+trasvasar, transvasar
 travesaño
 trémulo
 trienal
