@@ -1,8 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://k3twt6612mum"]
+[gd_scene load_steps=5 format=3 uid="uid://k3twt6612mum"]
 
-[ext_resource type="Theme" uid="uid://djtoa1kcsmph4" path="res://themes/general.tres" id="1_y51ty"]
-[ext_resource type="StyleBox" uid="uid://cjhjycgoddysu" path="res://styles/toggle_button_pressed_state.tres" id="2_ofwyg"]
+[ext_resource type="Theme" uid="uid://djtoa1kcsmph4" path="res://commonalities/themes/general.tres" id="1_y51ty"]
+[ext_resource type="StyleBox" uid="uid://cjhjycgoddysu" path="res://commonalities/styles/toggle_button_pressed_state.tres" id="2_wospe"]
 [ext_resource type="Script" path="res://scripts/controls/language_button.gd" id="3_skkat"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32b48"]
+content_margin_left = 24.0
+content_margin_top = 8.0
+content_margin_right = 24.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0.698039, 0.584314, 0.501961)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
 
 [node name="Language Button" type="Button"]
 custom_minimum_size = Vector2(96, 96)
@@ -10,8 +21,8 @@ offset_top = 1.0
 offset_right = 96.0
 offset_bottom = 97.0
 theme = ExtResource("1_y51ty")
-theme_override_styles/hover_pressed = ExtResource("2_ofwyg")
-theme_override_styles/pressed = ExtResource("2_ofwyg")
+theme_override_styles/hover_pressed = ExtResource("2_wospe")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_32b48")
 toggle_mode = true
 text = "ES"
 script = ExtResource("3_skkat")
