@@ -1,14 +1,25 @@
 abalorio
+abanicar
 abarrotar
+abasto
 abatido
 abatir
+abdicar
 abigarrado
+abismo, precipicio
 abnegación
+abnegado
 abocar
 abolir
 abrasar
+abrasión
+abrasivo
 abrazadera
+abrigar
 abrumar
+abrupto
+absorto, abstraído
+abstener
 abstraído, ensimismado, absorto
 abstruso
 abuchear
@@ -16,42 +27,60 @@ abucheo, bronca
 abulia
 abúlico
 abyecto
+acaballado
+acaballar
 acaecer, acontecer
 acaparar
+acarrear
+acechar
 acequia
 acerado
 acezar, jadear, resoplar, resollar
 achaparrado
+achaque
 achicharrante
 achicharrar
+achicoria, chicoria
 achinado
 aciago
 acopio
+acoplado, remolque
 acoplar
 acople, acoplamiento, acopladura
+acorde
 acotado
 acotar
+acrofobia
+acucioso
+acuclillarse, encuclillarse, apucuyarse
+acunar
 acuñar
+acurrucarse
 adecentar
+adefesio
 ademán
 adepto
 aditamento
+adobe
+adoctrinar, aleccionar, doctrinar
 adormecerse, adormitarse, amodorrarse
 adormidera
 adosado
 adosar
-adusto
 aeródromo
 afable
+afamado
 afasia
-afectación
+afectaón
 afelpado
 afelpado
 afianza
 áfido, afídido
 afiebrado
+aflicción
 aforar
 aforo, afuero
+afrancesado
 afrecho, salvado
 afrenta
 afrodisíaco
@@ -296,6 +325,7 @@ cabezada
 cabriola
 cacerola
 cachivache
+cal
 calamidad
 calar
 calar
@@ -662,6 +692,7 @@ escaparate
 escaramuza
 escarcela
 escarnio
+escarpado
 escéptico
 escindir
 esclerosis
@@ -989,6 +1020,8 @@ leudar
 leva
 liar
 libelo
+licitación
+licitar
 ligamento
 lignificar
 linde, confín, lindero
@@ -1284,6 +1317,7 @@ psíquico
 pudor
 pueril
 pugna
+puja
 pulimentar
 pulular
 punible
@@ -1291,6 +1325,7 @@ purga
 puritanismo
 purulento
 quejumbroso
+quemarropa
 querubín
 quicio
 quilla
@@ -1307,6 +1342,7 @@ rapé
 rapto
 raquídeo
 raquis
+rastra
 rastrojera
 rastrojo, rastrojal
 ratificar
@@ -1337,6 +1373,8 @@ remilgo
 remisible
 remisión
 remitir
+remolcar
+remolque
 renegar
 renquear, renguear, cojear
 renuevo, vástago, brote, yema, retoño
@@ -1437,6 +1475,8 @@ sonsonete, soniquete, retintín
 sórdido
 sosiego
 soslayar
+subasta
+subastar
 súbdito
 súbito, repentino
 sublevación, alzamiento, insurgencia, insurreción
@@ -1541,6 +1581,7 @@ tungsteno, wolframio, volframio
 turba
 turbar
 úlcera
+ultranza
 ulular, aullar
 umbral
 umbrío, umbroso
