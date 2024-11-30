@@ -1,3 +1,5 @@
+tupido
+ardid
 abalorio
 abarrotar
 abatido
@@ -47,7 +49,7 @@ afasia
 afectación
 afelpado
 afelpado
-afianza
+afianzar
 áfido, afídido
 afiebrado
 aforar
@@ -1146,7 +1148,6 @@ pajarilla
 palimpsesto
 palmario,	palpable
 palmo
-palomar
 palpable
 pampa
 pamplina
@@ -1346,6 +1347,7 @@ resalto, resalte
 resolana
 resollar
 respingo
+respingar
 resquebrajar, agrietar, cuartear
 retaguardia
 reticencia
