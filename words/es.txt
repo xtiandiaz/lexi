@@ -181,6 +181,7 @@ arbitrario
 arcada
 arcaico
 arcén
+ardid
 arduo
 argamasa
 argucia
@@ -1393,8 +1394,8 @@ resabio
 resalto, resalte
 resolana
 resollar
-respingo
 respingar
+respingo
 resquebrajar, agrietar, cuartear
 retaguardia
 reticencia
@@ -1587,6 +1588,7 @@ truhan
 tumbo
 tumulto
 tungsteno, wolframio, volframio
+tupido
 turba
 turbar
 úlcera
