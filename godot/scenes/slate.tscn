@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ctat1cvxprv24"]
 
 [ext_resource type="Script" path="res://scripts/slate.gd" id="1_wo7jd"]
-[ext_resource type="FontFile" uid="uid://2b687wj3c7j5" path="res://fonts/Inter-Medium.otf" id="2_6pf0b"]
+[ext_resource type="FontFile" uid="uid://2b687wj3c7j5" path="res://commonalities/fonts/Inter-Medium.otf" id="2_6pf0b"]
 
 [node name="Slate" type="VBoxContainer" node_paths=PackedStringArray("word_label", "notes_label")]
 anchors_preset = 10

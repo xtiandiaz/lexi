@@ -4,7 +4,7 @@ class_name SettingsMenu extends CanvasLayer
 class State:
 	var language_code: String
 	
-	func _init(language_code: String) -> void:
+	func _inelements_normalized(language_code: String) -> void:
 		self.language_code = language_code
 
 

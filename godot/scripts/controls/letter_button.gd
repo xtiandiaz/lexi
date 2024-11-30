@@ -1,18 +1,19 @@
 class_name LetterButton extends Button
 
+
 var letter: String:
 	get: return text
+
 
 static func instantiate(letter: String) -> LetterButton:
 	var instance = load("res://scenes/controls/letter_button.tscn").instantiate()
 	instance.text = letter
 	return instance
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
-	pass # Replace with function body.
+	pass # Replace welements_normalizedh function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

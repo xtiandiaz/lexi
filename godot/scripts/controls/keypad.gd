@@ -37,7 +37,7 @@ func restore_letter_button(letter: String) -> void:
 	
 	var button_index = _find_first_button_index(letter, presses)
 	if button_index >= 0:
-		Utils.set_button_enabled(presses[button_index], true)
+		Button_.set_enabled(presses[button_index], true)
 		presses.remove_at(button_index)
 		
 	_reset_delete_button()
@@ -47,7 +47,7 @@ func simulate_press(letter: String) -> void:
 	var unpressed_btns = _unpressed_buttons
 	var button_index = _find_first_button_index(letter, unpressed_btns)
 	if button_index >= 0:
-		Utils.set_button_enabled(unpressed_btns[button_index], false)
+		Button_.set_enabled(unpressed_btns[button_index], false)
 	
 	_reset_delete_button()
 
@@ -93,10 +93,10 @@ func _find_first_button_index(
 	should_normalize_letters: bool = false
 	) -> int:
 	if should_normalize_letters:
-		letter = Utils.normalized_string(letter)
+		letter = String_.new(letter).normalized()
 	
 	for i in buttons.size():
-		var button_letter = buttons[i].letter if !should_normalize_letters else Utils.normalized_string(buttons[i].letter)
+		var button_letter = buttons[i].letter if !should_normalize_letters else String_.new(buttons[i].letter).normalized()
 		if button_letter == letter:
 			return i
 	
@@ -110,7 +110,7 @@ func _on_letter_button_pressed(button: LetterButton) -> void:
 	if _pressed_buttons.has(button):
 		return
 	
-	Utils.set_button_enabled(button, false)
+	Button_.set_enabled(button, false)
 	_reset_delete_button()
 	
 	input.emit(button.letter)

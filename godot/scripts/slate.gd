@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 
 func _show_result(word: String, synonyms: PackedStringArray) -> void:
 	word_label.text = word
-	notes_label.text = Utils.array_to_string(synonyms, ", ")
+	notes_label.text = StringArray_.from_packed_array(synonyms).stringified(", ")
 
 ## Signals
 

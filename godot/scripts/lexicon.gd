@@ -35,7 +35,7 @@ var _clue_count_available: int:
 	set(value):
 		_clue_count_available = value
 		clue_button.text = "×{0}".format([value])
-		Utils.set_button_enabled(clue_button, value > 0)
+		Button_.set_enabled(clue_button, value > 0)
 var _clue_count_used_in_current_word: int
 var _can_give_clue: bool:
 	get: return _clue_count_available > 0
@@ -60,7 +60,6 @@ func _load_language_and_reset(language_code: String) -> void:
 	_reset()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
@@ -84,7 +83,7 @@ func _reset_word() -> void:
 	
 	_start_hint = _current_word.substr(0, _current_word.length() / 4)
 	_inputable = _current_word.substr(_start_hint.length())
-	_inputable_letters = Utils.string_to_char_array(_inputable)
+	_inputable_letters = StringArray_.from_string_into_chars(_inputable).value
 	
 	var keypad_letters = _inputable_letters
 	keypad_letters.shuffle()
@@ -94,7 +93,7 @@ func _reset_word() -> void:
 	
 	_input = ""
 	
-	Utils.set_button_enabled(clue_button, _can_give_clue)
+	Button_.set_enabled(clue_button, _can_give_clue)
 
 
 func _give_clue() -> void:
@@ -156,7 +155,7 @@ func _letter_indices(letter: String, string: String) -> Array[int]:
 	
 	
 func _remaining_letters() -> Array[String]:
-	var input = Utils.string_to_char_array(_input)
+	var input = StringArray_.from_string_into_chars(_input).value
 	if input.size() == 0:
 		return []
 	
@@ -221,11 +220,13 @@ func _on_keypad_input(letter: String) -> void:
 
 
 func _on_keypad_keyboard_input(letter: String) -> void:
-	var possible_letters = _letter_indices(letter, Utils.normalized_string(_inputable)).map(func(li): return _inputable[li])
+	var possible_letters = _letter_indices(
+		letter, 
+		String_.new(_inputable).normalized()).map(func(li): return _inputable[li])
 	var remaining_letters = _remaining_letters()
 	#print("remaining letters: ", remaining_letters)
 	
-	var target_letter_index = Utils.normalized_array(remaining_letters).find(letter)
+	var target_letter_index = StringArray_.new(remaining_letters).normalized_elements().find(letter)
 	if target_letter_index < 0:
 		return
 	
