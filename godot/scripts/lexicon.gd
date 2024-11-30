@@ -65,7 +65,7 @@ func _process(delta: float) -> void:
 
 
 func _reset() -> void:
-	background.color = Cosmetics.DARK_GRAY_COLOR
+	background.color = Color_.DARK_GRAY_COLOR
 	continuation_container.visible = false
 	_clue_count_used_in_current_word = 0
 	
@@ -123,7 +123,7 @@ func _give_clue() -> void:
 
 
 func _show_success() -> void:
-	background.color = Cosmetics.MINT_COLOR
+	background.color = Color_.MINT_COLOR
 	
 	_clue_count_available += 1 if _clue_count_used_in_current_word == 0 else 0
 	
@@ -131,7 +131,7 @@ func _show_success() -> void:
 	
 
 func _reveal_solution() -> void:
-	background.color = Cosmetics.ORANGE_COLOR
+	background.color = Color_.ORANGE_COLOR
 	
 	word_skipped.emit(_current_word, _current_word_synonyms)
 	

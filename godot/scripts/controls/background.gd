@@ -10,7 +10,7 @@ var color: Color:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	color = Cosmetics.DARK_GRAY_COLOR
+	color = Color_.DARK_GRAY_COLOR
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
