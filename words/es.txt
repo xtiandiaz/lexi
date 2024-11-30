@@ -1,3 +1,10 @@
+inalienable
+menudo
+anturio
+azaleia
+dádiva
+través
+transversal
 tupido
 ardid
 abalorio
@@ -218,7 +225,7 @@ atípico
 atisbar
 atontamiento
 atosigar
-atril
+atril, facistol
 atronador
 atronar
 atusar
@@ -1448,7 +1455,7 @@ sien
 sigilo
 sílex, pedernal
 simiesco
-símil, análogo
+símil
 sindical
 sindicato
 síndico
@@ -1507,7 +1514,7 @@ tabique
 tablón
 taburete
 taimado
-talismán, fetiche
+talismán, amuleto, fetiche
 tampografía
 tapadera
 tapia
