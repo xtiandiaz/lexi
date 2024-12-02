@@ -11,6 +11,8 @@ ciénaga
 animosidad
 coartada
 coartar
+tapiz
+damasco
 abalorio
 abanicar
 abarrotar
@@ -107,7 +109,7 @@ agobio
 agorafobia
 agraciado
 agriar
-agutí, ñequeo
+agutí, ñeque
 aguzar
 ahínco
 alambicar, destilar
