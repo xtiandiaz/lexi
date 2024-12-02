@@ -1,7 +1,18 @@
+sofisma
+estalactita
+estalagmita
+carámbano
+fango
+ciénaga
+animosidad
+coartada
+coartar
 abalorio
 abanicar
 abarrotar
+caroteno
 abasto
+pigmento
 abatido
 abatir
 abdicar
@@ -413,7 +424,8 @@ chisporroteo
 chollo, ganga
 chorlito
 chubasco
-ciático, ciática
+ciático
+ciática
 ciclotimia
 cifrar
 cimarrón
