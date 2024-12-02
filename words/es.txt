@@ -1,24 +1,7 @@
-desmenuzar
-chapulín
-póstumo
-sofisma
-sodomía
-estalactita
-estalagmita
-carámbano
-fango
-ciénaga
-animosidad
-coartada
-coartar
-tapiz
-damasco
 abalorio
 abanicar
 abarrotar
-caroteno
 abasto
-pigmento
 abatido
 abatir
 abdicar
@@ -164,6 +147,7 @@ anca
 andrajo
 anémona, anemone
 anestésico
+animosidad
 anodino
 anómalo
 anquilosar
@@ -374,6 +358,7 @@ cánula
 caoba
 capcioso
 capitular
+carámbano
 carambola
 carcamal
 carcasa
@@ -382,6 +367,7 @@ cardamomo
 carillón, carrillón
 carmesí
 carmín
+caroteno
 carrete
 carroña
 carroñero
@@ -417,6 +403,7 @@ chafarrinada, chafarrinón
 chanchullo
 chantaje
 chaparro, achaparrado, rechoncho
+chapulín
 chasquido
 chaveta, pasador, clavija
 chelín
@@ -430,9 +417,10 @@ chisporroteo
 chollo, ganga
 chorlito
 chubasco
-ciático
 ciática
+ciático
 ciclotimia
+ciénaga
 cifrar
 cimarrón
 cimbra
@@ -457,6 +445,8 @@ clavija
 clérigo, eclesiástico
 clero, clerecía
 coacción, constreñimiento
+coartada
+coartar
 cobertizo
 cochambroso
 codicia
@@ -543,6 +533,7 @@ cuncuna
 cundir
 curubito
 dádiva
+damasco
 decimonónico
 decoro
 decrépito
@@ -584,6 +575,7 @@ designio
 desliar
 deslocalizar
 desmañado
+desmenuzar
 desmesura
 desolado
 desorbitado
@@ -759,6 +751,8 @@ espurio, espúreo
 esquilmar
 esquirla
 estaca
+estalactita
+estalagmita
 estancia
 estandarte
 estatuario
@@ -807,6 +801,7 @@ facticio
 facultad
 fajo, haz, atado
 falible
+fango
 fastuoso
 feble
 fécula
@@ -1280,6 +1275,7 @@ petulante
 piar
 piastra
 pigmento
+pigmento
 pilote
 pira
 pitón
@@ -1306,6 +1302,7 @@ portillo
 postigo
 postizo
 postular
+póstumo
 preámbulo
 precepto
 preliminar
@@ -1497,6 +1494,8 @@ sobredimensionar
 sobresalto
 socavar
 socavón
+sodomía
+sofisma
 solapado
 solapar
 solaz
@@ -1546,6 +1545,7 @@ talismán, amuleto, fetiche
 tampografía
 tapadera
 tapia
+tapiz
 tararear, tatarear, canturrear
 tasación
 tasar
