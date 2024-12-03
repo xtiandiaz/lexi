@@ -91,24 +91,41 @@ afrenta
 afrodisíaco
 agasajar
 ágata
+agazapado
+agazapar
 aglomeración
+aglomerar
+agnóstico
 agobiar
 agobio
+agolpar
+agonía
 agorafobia
 agraciado
+agravio
+agreste
 agriar
+agüero
+aguerrido
+agujerear
 agutí, ñequeo
 aguzar
 ahínco
 ahondar
+ajuar
 alambicar, destilar
 alambique, alcatara, alquitara, destilador, destiladera
 alarde
+alardear
 alarido
+alba
 albedrío
-albergar
+albergar, alojar, hospedar
 albergue, cobijo
+albo
 albornoz
+alborozo
+alcahuete, alcahueta
 álcali
 alcalino
 alcornoque
@@ -116,6 +133,7 @@ aldaba, aldabón, picaporte
 aleatorio
 alebosía
 alebrije
+alelado, lelo
 alero
 alerón
 aletargado
@@ -125,6 +143,7 @@ alfajor
 alforja
 algarabía, algazara
 alginato
+alharaca, aspaviento, exageración
 alienado
 alimaña
 alistonado
@@ -226,6 +245,7 @@ asediar, cercar, sitiar
 aserrar, serrar
 asir
 asordar
+aspaviento
 astil
 astracán, astrakán
 astringente
@@ -505,6 +525,7 @@ concupiscencia
 confinar
 confite
 confrontar
+conglomerar
 congoja
 congruente
 conjetura
@@ -717,6 +738,7 @@ encomiable
 encomiar
 encomio
 encrucijada
+encubrir
 endémico
 enema
 engatillar
@@ -802,6 +824,7 @@ estandarte
 estatuario
 estepa
 estera
+esterilla
 estertor
 estetoscopio
 estigma
