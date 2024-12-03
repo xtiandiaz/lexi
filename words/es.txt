@@ -19,6 +19,7 @@ ciénaga
 animosidad
 coartada
 coartar
+pericia
 abalorio
 abanicar
 abarrotar
@@ -1464,7 +1465,9 @@ sarmiento
 sarta
 saturar
 secundar
-secundar
+secuaz
+adscribir
+suscribir, subscribir
 sedición, sublevación
 sedicioso
 segar
