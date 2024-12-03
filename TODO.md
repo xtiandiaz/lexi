@@ -1,0 +1,4 @@
+- [ ] Daily goal
+- [ ] Hard mode
+- [ ] Game session
+- [ ] Retain missed (and flagged) words for listing, re-review and/or deuce-match upon ending a session

@@ -143,6 +143,7 @@ alfajor
 alforja
 algarabía, algazara
 alginato
+alhaja
 alharaca, aspaviento, exageración
 alienado
 alimaña
@@ -537,6 +538,7 @@ conmoción
 connotar
 consanguinidad, cosanguinidad, consanguineidad
 consigna
+consonante
 conspicuo
 constipación
 continencia
@@ -681,6 +683,8 @@ disipar
 dislocación, dislocadura
 dislocar
 disociar
+disonante
+disonar
 disparatado
 disparatar
 disparate
@@ -896,6 +900,7 @@ filiación
 filiar
 filigrana
 flagrante
+flagrar
 flanquear
 flojedad, flojera
 floreo
@@ -1189,7 +1194,7 @@ manida
 maniobra
 maniqueísmo
 manopla
-mansarda
+mansarda, buhardilla
 maquinaria
 maquinismo
 marañón
@@ -1409,6 +1414,7 @@ portillo
 posponer
 postigo
 postizo
+postor, licitador, licitante, pujador
 postular
 póstumo
 preámbulo
@@ -1617,6 +1623,7 @@ sobresalto
 socavar
 socavón
 sodomía
+soez
 sofisma
 solapado
 solapar
@@ -1806,7 +1813,7 @@ violáceo
 virar
 viscoso
 visera
-visillo
+visillo, velo, cortinilla
 vítor
 vitorear
 vitriolo
@@ -1817,7 +1824,7 @@ vociferar
 volátil
 voltaico
 yacer
-yelmo, celada
+yelmo
 yema
 yermo
 yerno
