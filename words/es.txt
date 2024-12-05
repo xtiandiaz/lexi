@@ -1,7 +1,8 @@
+hidropónico
+erigir
+diurético
 abalorio
 abanicar
-abarcador
-abarcar
 abarrotar
 abasto
 abatido
@@ -32,7 +33,6 @@ abyecto
 acaballado
 acaballar
 acaecer, acontecer
-acallar
 acaparar
 acarrear
 acechante
@@ -162,12 +162,10 @@ aludir
 alusión
 aluvión
 alveolo, alvéolo
-alzar
 amainar
 amalgama
 ambiguo
 ambivalente
-ameritar
 amilanar, amedrentar
 aminorar
 amnistía
@@ -187,7 +185,6 @@ animosidad
 anodino
 anómalo
 anquilosar
-antagonista
 anteponer
 antesala
 antisemita
@@ -267,7 +264,6 @@ atípico
 atisbar
 atontamiento
 atosigar
-atosigar
 atril, facistol
 atrofia
 atronador
@@ -341,11 +337,9 @@ bicéfalo
 bidón
 bienal
 bienestar
-bienintencionado
 bies
 bifurcar
 bioma
-biorritmo
 biosfera
 birlar
 birlar
@@ -364,7 +358,6 @@ bonanza
 bondiola
 borbotón, borbollón
 borrasca
-botana
 botín
 bramante
 brida
@@ -447,7 +440,6 @@ cazuela
 cebar
 cecina
 celada
-celíaco, celiaco
 celo
 cencerro
 cenefa
@@ -515,7 +507,6 @@ coerción
 coetáneo, contemporáneo
 cofia
 cohesión
-cohibir
 colación
 colectivismo
 colectivizar
@@ -529,8 +520,6 @@ colza
 comedido
 comedimiento
 cómoda
-compartimentar
-compartimento
 compinche
 compostura
 compungido
@@ -541,14 +530,9 @@ conciliar
 concordia
 concreción
 concupiscencia
-condicionamiento
-condicionar
-confinar
 confinar
 confite
-confort
 confrontar
-congeniar
 conglomerar
 congoja
 congruente
@@ -580,8 +564,6 @@ cordel
 cordura
 corégono
 cornucopia
-corporativizar
-corpóreo
 corpulencia
 corpulento, corpudo
 correlimos
@@ -589,14 +571,12 @@ corrillo
 corro
 corroer
 corroído
-cotejar, comparar, confrontar
 cotorreo
 coyuntura
 craso
 crédulo
 crencha
 crescendo
-criado
 cripta
 crisol
 cristaloide
@@ -671,8 +651,6 @@ despilfarro, dispendio, derroche
 desplantar, desarraigar
 déspota, tirano
 despotismo, tiranía
-desprofecionalizar
-desprovisto
 desquiciar
 destello
 destituir
@@ -725,7 +703,6 @@ distopía
 disturbio
 disuadir
 diván
-divertículo
 doliente
 domiciliación
 dornajo, batea
@@ -770,7 +747,6 @@ encabritar
 encabritarse
 encarnizamiento
 encarnizar
-encauzar
 encomendar
 encomiable
 encomiar
@@ -778,14 +754,12 @@ encomio
 encrucijada
 encubrir
 endémico
-endosar
 enema
 engatillar
 engendrar
 engranado
 engranaje
 enjambre
-enjuiciar
 enmarañar
 enmelar, endulzar
 enormidad
@@ -799,11 +773,7 @@ enternecer
 entorpecer
 entrever
 entropía
-enviudar
 enzarzar
-enzima
-epidemia
-epinefrina, adrenalina
 equinoccio
 equívoco
 erguir
@@ -837,7 +807,6 @@ escorzo, escorzado
 escozor, escocimiento
 escrúpulo
 escrutinio
-escudero
 esgrima
 esguince
 eslabonado
@@ -913,7 +882,6 @@ extirpar
 extrañeza
 extravagante
 extrínseco
-factible, hacedero
 facticio
 facultad
 fajo, haz, atado
@@ -980,7 +948,6 @@ fugaz
 fulgor
 furcia
 furtivo
-futilidad
 galimatías
 galopante
 gamuza
@@ -998,7 +965,6 @@ glaciar
 gladiolo
 glaucoma
 glaucoma
-gluten
 golfo
 golondrina
 gorgotear, borbotear
@@ -1029,7 +995,6 @@ guasca
 guatila
 guijarro
 guineo
-gurú
 hacha
 hacienda
 halagüeño, lisonjero
@@ -1084,8 +1049,6 @@ idóneo
 ignominia
 ilación
 imbatible
-imbuir
-impalpable
 imparcialidad, ecuanimidad
 impasible, insensible, indiferente, imperturbable
 impavidez, impasibilidad, serenidad, denuedo
@@ -1094,7 +1057,6 @@ impersonal
 impertérrito, impávido, inconmovible
 ímpetu
 impío
-implicar
 impostura
 imprecar, maldecir, blasfemar, anatematizar
 impronta
@@ -1111,7 +1073,6 @@ inconciliable
 inconexo
 inconmensurable
 incontinencia
-incorpóreo
 increpar
 incubación
 íncubo
@@ -1135,9 +1096,7 @@ infamia
 inflexión
 infligir
 infortunio
-infructuoso
 ingente
-inhibir
 inhóspito
 ininteligible
 iniquidad
@@ -1147,13 +1106,11 @@ inocular
 inocuo
 inquirir
 inquisidor
-inquisitivo, inquisitorio
 insensato
 insidia, asechanza
 insignia
 insólito
 insoslayable
-insulina
 insurgencia, alzamiento, insurrección
 inteligible
 intempestivo
@@ -1192,7 +1149,6 @@ laxitud
 lecho
 leonino
 lesivo
-letanía
 letargo, aletargamiento
 leucocito
 leudado
@@ -1229,7 +1185,6 @@ lozano
 lucio
 lugareño
 lujuria
-luminaria
 lupanar
 lupus
 luxación
@@ -1243,7 +1198,6 @@ magulladura, contusión, magullamiento
 majadero
 malabar
 maleable
-malintencionado
 maltrecho
 malva
 mameluco, mono
@@ -1343,9 +1297,6 @@ nimiedad
 nimio
 ninfomanía
 nívea
-noquear
-normalizado
-normalizar
 obcecación
 oblicuo
 oblongo
@@ -1357,7 +1308,6 @@ olisquear
 olleta
 olmo
 omiso
-oncología, cancerología
 onírico
 opio
 opioide, opiáceo
@@ -1420,14 +1370,12 @@ pátina
 patógeno
 paulatino
 pavonear
-pavor
 pavoroso
 pecíolo, rabillo, cabillo, pezón
 pelandusca, pelandrusca
 pelele
 penacho
 penuria
-péptido
 percance
 percha, colgador
 percutor, percusor
@@ -1442,7 +1390,6 @@ perlita
 perno
 perorata
 perpetuar
-perplejo
 pertinaz
 pestillo
 petimetre, lechuguino, presumido
@@ -1492,7 +1439,6 @@ póstumo
 preámbulo
 precepto
 precesión
-preconcebir
 predisponer
 predisposición
 preliminar
@@ -1511,7 +1457,6 @@ presuntuoso
 presuponer
 pretensión
 pretérito
-pretexto
 pretina
 prevalencia
 prevaler
@@ -1542,7 +1487,6 @@ provisorio, provisional
 psicosis
 psique, psiquis
 psíquico
-psoriasis, soriasis
 pterigio, pterigión
 pudor
 pueril
@@ -1592,7 +1536,6 @@ recatado
 recaudo
 recesión
 rechinar
-recluir, confinar
 recóndito
 recriminar
 redoble
@@ -1623,7 +1566,6 @@ resabiado
 resabio
 resalto, resalte
 resignar
-resiliente
 resolana
 resollar
 respingar
@@ -1631,13 +1573,10 @@ respingo
 resquebrajar, agrietar, cuartear
 retaguardia
 reticencia
-reticente
 retintín, tintineo
 retráctil
 retraer
 retraimiento
-retribuir
-retrógrado
 reverberación
 reverberar
 revolotear
@@ -1656,14 +1595,12 @@ ruinoso
 rumiante
 sabotaje
 sacarina
-saciedad
 sacro
 saeta
 salva
 salvaguardar
 sándalo
 sanguíneo
-santiamén
 sardónice, sardónica
 sarmentoso
 sarmiento
@@ -1699,7 +1636,6 @@ sílex, pedernal
 simiesco
 símil
 simpático
-sinapsis
 sindical
 sindicato
 síndico
@@ -1732,7 +1668,6 @@ somera
 somier
 sonambulismo
 sonsonete, soniquete, retintín
-sopesar
 sórdido
 sosiego
 soslayar
@@ -1747,8 +1682,6 @@ sublimado
 sublime
 sublunar
 subsanar
-subsecuente, subsiguiente
-subseguir
 subsidiario
 suburbio
 subyacente
@@ -1861,7 +1794,6 @@ umbral
 umbrío, umbroso
 uncir
 urbanita
-usurpar
 vacilante
 vacilar
 vago
@@ -1898,7 +1830,6 @@ vetar
 veteado
 veteado, vetado
 veto
-viable
 vicario
 vicisitud
 vientre, barriga
