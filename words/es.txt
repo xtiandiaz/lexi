@@ -1,27 +1,12 @@
-abatible
-abatir
-auricular
-ópalo
-bateta
-opalina
-jade
-nácar
-acebo
-muerdago
-ámbar
-poso
-sobrehilado
-sobrehilar
-refrigerio
-decantar
-decantador
 abalorio
 abanicar
 abarcador
 abarcar
 abarrotar
 abasto
+abatible
 abatido
+abatir
 abatir
 abdicar
 abigarrado
@@ -52,6 +37,7 @@ acaecer, acontecer
 acallar
 acaparar
 acarrear
+acebo, agrifolio, aquifolio
 acechante
 acechar
 acequia
@@ -182,6 +168,7 @@ alveolo, alvéolo
 alzar
 amainar
 amalgama
+ámbar
 ambiguo
 ambivalente
 ameritar
@@ -291,6 +278,7 @@ atronador
 atronar
 atusar
 audacia
+auricular
 auscultar
 austeridad
 austero
@@ -334,6 +322,7 @@ baratear
 bárbaro
 barbecho
 barbitúrico
+bareta
 barniz
 barrabás
 barraca
@@ -628,6 +617,8 @@ cundir
 cupé
 curubito
 dádiva
+decantador
+decantar
 decimonónico
 decoro
 decrépito
@@ -1191,6 +1182,7 @@ irrisorio
 irrumpir
 jactancia, presunción, presuntuosidad
 jactancioso
+jade
 jaleo
 jamba
 jerarquía
@@ -1340,6 +1332,7 @@ mortífero, letal
 mosaico
 moteado
 motín
+muérdago, almuérdago, liga
 mugir
 mujerona
 mujeruca
@@ -1349,6 +1342,7 @@ muselina
 mustio
 mutabilidad
 mutilar
+nácar
 nampla
 navaja
 negentropía
@@ -1379,6 +1373,8 @@ olmo
 omiso
 oncología, cancerología
 onírico
+opalina
+ópalo
 opio
 opioide, opiáceo
 oprobio
@@ -1503,6 +1499,7 @@ porquería
 porra
 porrazo, porrada, garrotazo
 portillo
+poso
 posponer
 postigo
 postizo
@@ -1616,6 +1613,7 @@ recluir, confinar
 recóndito
 recriminar
 redoble
+refrigerio
 refunfuñar, gruñir, rezongar
 regata
 regatear, recatear, baratear
@@ -1730,6 +1728,8 @@ sobaquina
 soberbia
 sobrecoger
 sobredimensionar
+sobrehilado
+sobrehilar
 sobresalto
 socavar
 socavón
