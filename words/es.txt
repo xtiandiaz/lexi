@@ -1,3 +1,16 @@
+refacción
+manco
+rehogar, sofreír, saltear
+guisar
+mesura
+maquiavélicoo
+intersticio
+embestir
+benévolo, benevolente
+encarecer
+galopar
+fulminante
+fulminar
 abalorio
 abanicar
 abarcador
@@ -6,7 +19,6 @@ abarrotar
 abasto
 abatible
 abatido
-abatir
 abatir
 abdicar
 abigarrado
@@ -240,7 +252,7 @@ arrecife
 arrellanarase, repantigarse, repanchicharse, apoltronarse
 arremangar
 arriate
-arribismo
+arribismo, tiburoneo
 arribista
 arrobar, embelesar, extasiar
 arrollar
@@ -292,7 +304,6 @@ aval
 avante
 avasallar
 avefría
-avejentado
 avejentar, aviejar, envejecer
 averno
 aviario
@@ -339,7 +350,10 @@ beatífico
 bélico
 beligerante
 bellaco
+verraco
 benevolencia
+indulto
+indultar
 bergantín
 bermejo
 besugo
@@ -472,7 +486,6 @@ chaparro, achaparrado, rechoncho
 chapulín
 chasquido
 chaveta, pasador, clavija
-chelín
 chinchar
 chinche
 chingar
@@ -607,7 +620,7 @@ cripta
 crisol
 cristaloide
 cuajar
-cubata
+cubata, cubalibre
 cubilete
 cuclillas
 cucurucho
@@ -922,6 +935,7 @@ expropiar
 extirpar
 extrañeza
 extravagante
+extravagancia
 extrínseco
 factible, hacedero
 facticio
@@ -1034,7 +1048,8 @@ grillete
 guacal, huacal
 guadaña, dalla, dalle
 guama
-guarnecer, guarnecerse
+guarnecer
+guarnición
 guasca
 guatila
 guijarro
@@ -1053,7 +1068,7 @@ hedonismo
 hemorragia
 hemorroide
 hendidura, hendedura
-hendir, hender
+hender, hendir
 herejía
 hermandad, confraternidad
 herrumbre
@@ -1085,7 +1100,7 @@ horquilla
 huésped
 huidizo
 humos
-huraño
+huraño, huidizo, esquivo
 hurtadillas
 iconoclasta
 idílico
@@ -1643,6 +1658,7 @@ resalto, resalte
 resignar
 resiliente
 resolana
+resol
 resollar
 respingar
 respingo
@@ -1880,7 +1896,7 @@ ulular, aullar
 umbral
 umbrío, umbroso
 uncir
-urbanita
+urbanita, urbanícola
 usurpar
 vacilante
 vacilar
