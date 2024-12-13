@@ -1,3 +1,236 @@
+plétora
+encarar
+pletórico
+rebosar
+rebosado
+desbordado
+desbordar
+bagaje
+estanque
+alberca
+sibilante, silbante
+protocolario
+contrapropuesta, contraproposición
+regir
+profecía
+consenso
+amasijo
+lisozima
+sortear
+alimaña
+macrófago
+fagocitar
+fagocitosis
+escurridizo
+anticuerpo
+sincronía
+inacción, inactividad
+acompasar, compasar
+devoto
+aventar
+ceder
+elusivo
+artificio
+facsimilar
+facsímil
+zanjar
+entendimiento
+resguardar
+paradoja
+conllevar
+sobrellevar, conllevar
+boyante
+elusión
+eludir
+ínsula
+enmendar
+junco
+racha
+ráfaga
+atrincherar
+empeño
+genoma
+epigenoma
+autismo
+desmantelar
+inacabado
+inmunidad
+batuta
+probiótico
+prebiótico
+cártamo, alazor
+gama
+gen, gene
+bocanada
+alérgeno
+emulsión
+auge
+elixir, elíxir
+bagazo
+celulosa
+panacea
+chícharo, legumbre
+vaina
+soluble, disoluble, licuable
+insoluble
+chabacano
+crucífero
+intuitivo
+intuición
+chusma
+radical
+antioxidante
+rancio
+rancidez
+enranciar, arranciar
+pastoreo
+hostil
+silo
+pinche
+traslapar, solapar
+alentador
+desalentador
+aprisa, deprisa
+parodia
+mantra
+connotación
+intrusismo
+recostar, reclinar
+retiro
+charola, bandeja, batea, charol
+charol
+errático
+errar
+lúdico
+varita
+revoltoso
+victimizar
+victimización
+suspenso
+asertividad
+asertivo
+anticipar
+deliberar
+instigar
+reincidir
+testarudez
+subestimar
+grial, cáliz
+cáliz
+biomarcador
+capilar
+jubilar
+padecer
+injuria, agravio
+acompasado
+contencioso
+litigio
+pleito
+zahorí
+senectud
+senescente, senesciente
+polifacético
+ayurvédico
+ayurveda
+creces
+torrente
+impetuoso
+brecha
+holgazán, haragán
+incidental
+enraizar, arraigar
+arraigar
+recaer
+finiquito
+finiquitar
+aberrante
+tabú
+desanudar
+formativo
+trascendente, transcendente
+trascender, transcender
+intrascendente, intranscendente
+amorfo
+cerrazón
+sinfín, sinnúmero, infinidad
+ofensiva
+defensiva
+valía
+concesión
+atestiguar
+jaloneo
+jalonear
+inserto
+secular, seglar, laico, lego
+lego
+reliquia
+acérrimo
+transpirar, traspirar
+embonar
+tripartita
+marsopa, marsopla
+manatí
+capibara, carpincho, capiguara, chigüire
+hurón
+visón
+gregario
+unicidad
+metamorfosear
+trompicón, tropezón, tropiezo
+consternar
+consternación
+hipnosis
+sugestión
+sugestionable
+sugestionar
+rendición
+matriz
+entramar
+entramado
+vándalo
+célebre
+déficit
+superávit
+aledaño
+maraña
+cerillo, cerilla, fósforo
+diseccionar
+mortandad
+antígeno
+metástasis
+inmediatez
+pivote
+cojinete
+cúmulo
+permisivo
+acólito
+lealtad
+constricción
+constreñir
+prensar
+esquema
+altruista
+altruismo, filantropía
+prefabricar
+recado
+agravar
+agravado
+tintar, teñir, colorear, pigmentar
+tintado
+ofuscado
+ofuscar, obcecar, obnubilar
+ofuscación
+optar
+desapego, despego, despegamiento, desinterés, frialdad
+trastorno
+catalizador
+catalizar
+catálisis
+nexo
+escalfar
+escalfado
+taciturno
+excluyente
 galería
 veranda
 prospecto
@@ -400,7 +633,7 @@ buche, buchada
 buhardilla, boardilla, buharda, mansarda
 bujía
 bullicio
-burleteu
+burlete
 burlón
 buró
 butifarra
@@ -1236,6 +1469,7 @@ licitación
 licitar
 ligamento
 lignificar
+lignina
 linde, confín, lindero
 linfa
 linfocito
@@ -1574,7 +1808,7 @@ prostituir
 proverbio, adagio, refrán
 provincia
 provisorio, provisional
-psicosis
+psicosis, sicosis
 psique, psiquis
 psíquico
 psoriasis, soriasis
