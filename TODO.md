@@ -2,3 +2,5 @@
 - [ ] Hard mode
 - [ ] Game session
 - [ ] Retain missed (and flagged) words for listing, re-review and/or deuce-match upon ending a session
+- [ ] Offer option to re-shuffle pending letters
+- [ ] Keep track of "missed" words to ask again and highlight at the summary of session
