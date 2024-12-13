@@ -1,3 +1,25 @@
+bucólico
+impremeditado
+premeditado
+premeditación
+perenne
+tenaza
+fenecer
+tanino
+astringente, astrictivo
+astringir
+desecación
+desecar
+lucro
+etéreo
+éter
+cordón
+fleco
+divulgar
+atavío
+esquizofrenia
+ataviar
+pecuniario, monetario
 galería
 veranda
 prospecto
@@ -459,6 +481,7 @@ casta
 castañetear, castañear, dentellar
 catarata
 catatónico
+catatonia, catatonía
 catecismo
 catre
 cáustico
@@ -649,6 +672,7 @@ delictivo
 delocalización
 denegar
 dentellar, castañetear
+dentellear
 denuedo
 derogar
 derroche, despilfarro, dispendio
@@ -738,6 +762,7 @@ disipar
 dislocación, dislocadura
 dislocar
 disociar
+disociación
 disonante
 disonar
 disparatado
@@ -960,7 +985,7 @@ fetiche, talismán
 fetichismo
 feúcho
 fianza
-fiarse
+fiar
 figuración
 figurar
 figurarse
@@ -1086,7 +1111,7 @@ hilaridad
 hincar
 hipocondría
 hipocondriaco
-hipodérmico
+hipodérmico, subcutáneo
 hiriente
 histeria, histerismo
 hogaza
@@ -1140,7 +1165,7 @@ inconciliable
 inconexo
 inconmensurable
 incontinencia
-incorpóreo
+incorpóreo, inmaterial, intangible, impalpable, etéreo
 increpar
 incubación
 íncubo
@@ -1426,7 +1451,6 @@ panocha
 panteón
 papanatas, papamoscas, paparote
 parapetar
-parapetearse
 parapeto
 parasimpático
 pardusco
