@@ -202,7 +202,7 @@ func _on_continue_button_pressed() -> void:
 
 func _on_define_button_pressed() -> void:
 	print("Define: ", _current_word)
-	OS.shell_open("{0}/{1}".format([Settings.dictionary_url, _current_word.to_lower()]))
+	OS.shell_open("{0}/{1}".format([Settings.language_selected.dictionary_url, _current_word.to_lower()]))
 	
 
 func _on_clue_button_pressed() -> void:
