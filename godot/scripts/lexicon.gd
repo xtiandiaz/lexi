@@ -47,9 +47,9 @@ func _ready() -> void:
 	_load_language_and_reset(Settings.language_selected)
 
 
-func _load_language_and_reset(language_code: String) -> void:
+func _load_language_and_reset(language: Settings.Language) -> void:
 	var file = FileAccess.open(
-		"res://words/{0}.txt".format([language_code]), 
+		"res://words/{0}.txt".format([language.code.to_lower()]), 
 		FileAccess.READ
 	)
 	var content = file.get_as_text()
@@ -187,8 +187,8 @@ func _check_word_completion() -> void:
 ## SIGNALS
 
 
-func _on_language_changed(code: String) -> void:
-	_load_language_and_reset(code)
+func _on_language_changed(language: Settings.Language) -> void:
+	_load_language_and_reset(language)
 
 
 func _on_clueless_button_pressed() -> void:

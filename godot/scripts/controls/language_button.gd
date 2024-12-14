@@ -1,15 +1,16 @@
 class_name LanguageButton extends Button
 
 
-var language_code: String:
+var _language: Settings.Language:
 	set(value):
-		language_code = value
-		text = Utils.language_name(language_code)
-	get: return language_code
+		text = value.name
+		_language = value
+	get: 
+		return _language
 
 
-static func instantiate(language_code: String) -> LanguageButton:
+static func instantiate(language: Settings.Language) -> LanguageButton:
 	var instance = load("res://scenes/controls/language_button.tscn").instantiate()
-	instance.language_code = language_code
+	instance._language = language
 	return instance
 	

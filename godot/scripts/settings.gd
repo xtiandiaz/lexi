@@ -1,23 +1,41 @@
 extends Node
 
 
-signal language_change(code: String)
-
-
-const LANGUAGES: Array[String] = ["es", "en"]
-
-
-var dictionary_url: String:
-	get: 
-		match language_selected:
-			"es": return "https://dle.rae.es"
-			"en": return "https://dictionary.cambridge.org/dictionary/english"
-			_: return ""
+class Language:
+	
+	var code: String
+	
+	var name: String:
+		get:
+			match code:
+				"es": return "Español"
+				"en": return "English"
+				_: return code
+				
+	var dictionary_url: String:
+		get:
+			match code:
+				"es": return "https://dle.rae.es"
+				"en": return "https://dictionary.cambridge.org/dictionary/english"
+				_: return "dict://"
 			
+	
+	func _init(code: String): 
+		self.code = code
+
+
+signal language_change(language: Language)
+
+
+var languages: Array[Language] = [
+	Language.new("es"), 
+	Language.new("en")
+]
+
 var _save_file_path = "user://settings.save"
 
 
-@onready var language_selected: String = LANGUAGES[0]:
+@onready var language_selected: Language = languages[0]:
 	set(value):
 		if language_selected != value:
 			language_change.emit(value)
@@ -41,12 +59,12 @@ func _ready() -> void:
 	var save_data = json_parser.data
 	print("save data: ", save_data)
 	
-	language_selected = save_data["language"]
+	language_selected = Language.new(save_data["language"])
 
 
 func save() -> void:
 	var save_data = {
-		"language": language_selected
+		"language": language_selected.code
 	}
 	var save_file = FileAccess.open(_save_file_path, FileAccess.WRITE)
 	var json_data = JSON.stringify(save_data)

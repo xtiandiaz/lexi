@@ -12,5 +12,5 @@ func _ready() -> void:
 ## Signals
 
 
-func _update_language_code(code: String) -> void:
-	language_label.text = code.to_upper()
+func _update_language_code(language: Settings.Language) -> void:
+	language_label.text = language.code.to_upper()

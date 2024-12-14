@@ -2,10 +2,11 @@ class_name SettingsMenu extends CanvasLayer
 
 
 class State:
-	var language_code: String
 	
-	func _inelements_normalized(language_code: String) -> void:
-		self.language_code = language_code
+	var language: Settings.Language
+	
+	func _init(language: Settings.Language):
+		self.language = language
 
 
 @export var language_button_container: Container
@@ -20,9 +21,9 @@ var _language_buttons: Array[LanguageButton] = []
 func _ready() -> void:
 	version_label.text = "v{0}".format([ProjectSettings.get_setting("application/config/version")])
 	
-	for lang in Settings.LANGUAGES:
+	for lang in Settings.languages:
 		var button = LanguageButton.instantiate(lang)
-		button.button_pressed = lang == Settings.language_selected
+		button.button_pressed = lang.code == Settings.language_selected.code
 		button.pressed.connect(_on_language_button_pressed.bind(lang))
 		language_button_container.add_child(button)
 		_language_buttons.append(button)
@@ -36,15 +37,15 @@ func _process(delta: float) -> void:
 ## Signals
 
 
-func _on_language_button_pressed(language_code: String) -> void:
+func _on_language_button_pressed(language: Settings.Language) -> void:
 	for button in _language_buttons:
-		button.button_pressed = button.language_code == language_code
+		button.button_pressed = button._language.code == language.code
 	
-	_state.language_code = language_code
+	_state.language = language
 
 
 func _on_close_button_pressed() -> void:
-	Settings.language_selected = _state.language_code
+	Settings.language_selected = _state.language
 	
 	Settings.save()
 	

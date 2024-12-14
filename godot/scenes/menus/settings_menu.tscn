@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/menus/settings_menu.gd" id="1_hon3h"]
 [ext_resource type="PackedScene" uid="uid://c7krtjsewabrh" path="res://scenes/controls/background.tscn" id="2_olp2o"]
-[ext_resource type="Theme" uid="uid://djtoa1kcsmph4" path="res://themes/general.tres" id="3_eihry"]
-[ext_resource type="PackedScene" uid="uid://bg84q2jxnii7y" path="res://scenes/components/icon_button.tscn" id="4_fqubx"]
-[ext_resource type="Texture2D" uid="uid://drwa6b3g3eh3d" path="res://icons/close.png" id="5_kcpa4"]
+[ext_resource type="Theme" uid="uid://djtoa1kcsmph4" path="res://commonalities/themes/general.tres" id="3_eihry"]
+[ext_resource type="PackedScene" uid="uid://bg84q2jxnii7y" path="res://commonalities/components/icon_button.tscn" id="4_fqubx"]
+[ext_resource type="Texture2D" uid="uid://drwa6b3g3eh3d" path="res://commonalities/icons/close.png" id="5_kcpa4"]
 
 [node name="Settings Menu" type="CanvasLayer" node_paths=PackedStringArray("language_button_container", "version_label")]
 script = ExtResource("1_hon3h")
@@ -15,7 +15,7 @@ version_label = NodePath("Version Label")
 
 [node name="Close Button" parent="." instance=ExtResource("4_fqubx")]
 custom_minimum_size = Vector2(80, 80)
-anchors_preset = -1
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_top = 16.0
@@ -26,7 +26,7 @@ icon = ExtResource("5_kcpa4")
 flat = true
 
 [node name="Main Container" type="VBoxContainer" parent="."]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 24.0
@@ -62,7 +62,7 @@ theme_override_constants/separation = 16
 
 [node name="Version Label" type="Label" parent="."]
 self_modulate = Color(1, 1, 1, 0.501961)
-anchors_preset = -1
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
