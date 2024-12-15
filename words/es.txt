@@ -1,12 +1,3 @@
-retoño
-emboquillar
-emboquillado
-revestimiento
-revestir
-aguzado, puntiagudo
-relucir
-trepador, rampante
-rampante
 abalorio
 abanicar
 abarcador
@@ -131,6 +122,7 @@ agüero
 aguerrido
 agujerear
 agutí, ñequeo
+aguzado, puntiagudo
 aguzar
 ahínco
 ahondar
@@ -146,6 +138,7 @@ alberca
 albergar, alojar, hospedar
 albergue, cobijo
 albo
+alborada
 albornoz
 alborozo
 alcahuete, alcahueta
@@ -824,7 +817,7 @@ disociación
 disociar
 disonante
 disonar
-disparatado
+disparatado, disparato
 disparatar
 disparate
 dispendio, derroche, despilfarro
@@ -873,6 +866,8 @@ embestir
 embolia
 émbolo
 embonar
+emboquillado
+emboquillar
 embotar
 embrollo
 emotivo
@@ -1370,6 +1365,7 @@ júbilo
 jubiloso
 junco
 junquillo
+kamikaze, camicace
 labrar
 lacayo
 lacre
@@ -1714,6 +1710,7 @@ polio
 pompa
 popa
 porfiado
+pormenor
 porquería
 porra
 porrazo, porrada, garrotazo
@@ -1729,7 +1726,7 @@ preámbulo
 prebiótico
 precepto
 precesión
-preconcebir
+preconcebir, premeditar
 predisponer
 predisposición
 prefabricar
@@ -1817,6 +1814,7 @@ ráfaga
 ralentizar, enlentecer, lentificar
 ramequín
 ramillete
+rampante
 rancidez
 rancio
 rape
@@ -1866,6 +1864,7 @@ reincidir
 reivindicar
 relegar
 reliquia
+relucir
 remilgo
 remisible
 remisión
@@ -1898,6 +1897,7 @@ reticencia
 reticente
 retintín, tintineo
 retiro
+retoño
 retráctil
 retraer
 retraimiento
@@ -1905,6 +1905,8 @@ retribuir
 retrógrado
 reverberación
 reverberar
+revestimiento
+revestir
 revolotear
 revoltoso
 rezumar
@@ -1999,7 +2001,7 @@ solazar
 solemne
 soliloquio, monólogo
 solipsismo
-sollozar
+sollozar, gimotear
 sollozo
 solsticio
 soluble, disoluble, licuable
@@ -2022,7 +2024,7 @@ subestimar
 súbito, repentino
 sublevación, alzamiento, insurgencia, insurreción
 sublimación
-sublimado
+sublimar
 sublime
 sublunar
 subsanar
@@ -2061,6 +2063,7 @@ tampografía
 tanino
 tapadera
 tapia
+tapial
 tararear, tatarear, canturrear
 tasación
 tasar
@@ -2133,6 +2136,7 @@ trasvasar, transvasar
 través
 travesaño
 trémulo
+trepador, rampante
 trienal
 trinar
 trinquete
@@ -2154,6 +2158,7 @@ turbar
 ufanarse
 ufano
 úlcera
+ultraje
 ultranza
 ulular, aullar
 umbral
@@ -2229,6 +2234,8 @@ vituperar
 vituperio
 vociferar
 volátil
+volátil
+volatilizar
 voltaico
 yacer
 yelmo
