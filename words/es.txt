@@ -1,3 +1,6 @@
+kamikaze, camicace
+pormenor
+alborada
 abalorio
 abanicar
 abarcador
@@ -815,7 +818,7 @@ disociación
 disociar
 disonante
 disonar
-disparatado
+disparatado, disparato
 disparatar
 disparate
 dispendio, derroche, despilfarro
@@ -1720,7 +1723,7 @@ preámbulo
 prebiótico
 precepto
 precesión
-preconcebir
+preconcebir, premeditar
 predisponer
 predisposición
 prefabricar
@@ -1990,7 +1993,7 @@ solazar
 solemne
 soliloquio, monólogo
 solipsismo
-sollozar
+sollozar, gimotear
 sollozo
 solsticio
 soluble, disoluble, licuable
@@ -2013,7 +2016,9 @@ subestimar
 súbito, repentino
 sublevación, alzamiento, insurgencia, insurreción
 sublimación
-sublimado
+sublimar
+volatilizar
+volátil
 sublime
 sublunar
 subsanar
@@ -2052,6 +2057,7 @@ tampografía
 tanino
 tapadera
 tapia
+tapial
 tararear, tatarear, canturrear
 tasación
 tasar
@@ -2146,6 +2152,7 @@ ufanarse
 ufano
 úlcera
 ultranza
+ultraje
 ulular, aullar
 umbral
 umbrío, umbroso
