@@ -1,5 +1,3 @@
-corredero
-aprovisionar
 abalorio
 abanicar
 abarcador
@@ -55,6 +53,7 @@ achicoria, chicoria
 achinado
 aciago
 acólito
+acometida
 acompasado
 acompasar, compasar
 acopio
@@ -81,7 +80,7 @@ adobe
 adoctrinar, aleccionar, doctrinar
 adormecerse, adormitarse, amodorrarse
 adormidera
-adosado
+adosado, anexo, adyacente, contiguo, junto
 adosar
 adrede, aposta
 adscribir
@@ -145,6 +144,7 @@ alberca
 albergar, alojar, hospedar
 albergue, cobijo
 albo
+alborada
 alborada
 albornoz
 alborozo
@@ -214,6 +214,7 @@ andrajoso
 anegar
 anémona, anemone
 anestésico
+aneurisma
 anfitrión
 angina
 anguloso
@@ -254,6 +255,7 @@ apremiante
 aprensión
 aprensivo, receloso, desconfiado
 aprisa, deprisa
+aprovisionar
 aquiescencia
 aquilino
 arbitrario
@@ -327,6 +329,7 @@ atosigar
 atril, facistol
 atrincherar
 atrofia
+atrofia
 atronador
 atronar
 aturullado, aturrullado
@@ -351,6 +354,7 @@ avasallar
 avefría
 avejentar, aviejar, envejecer
 aventar
+aventón
 averno
 aviario
 avidez
@@ -431,7 +435,6 @@ bobalicón
 bobina
 bocanada
 bodrio
-bodrio
 bofe
 bofia
 boina
@@ -466,6 +469,7 @@ cabestrillo
 cabestro
 cabezada
 cabezonería
+cabo
 cabriola
 cacerola
 cachivache
@@ -500,6 +504,7 @@ capilar
 capitular
 carámbano
 carambola
+caraota, judía, frijol
 carcamal
 carcasa
 carda
@@ -582,6 +587,7 @@ ciático
 ciclotimia
 ciénaga
 cifrar
+cigarra
 cimarrón
 cimbra
 cimbrar, cimbrear
@@ -689,6 +695,8 @@ contorsionista
 contraataque, contraofensiva, contragolpe
 contrapropuesta, contraproposición
 contrapunto
+contravenir
+contraventor
 controversia
 convenir
 convoy
@@ -705,6 +713,7 @@ corporativizar
 corpóreo
 corpulencia
 corpulento, corpudo
+corredero
 correlimos
 corrillo
 corro
@@ -735,6 +744,7 @@ cuclillas
 cucurucho
 cuita
 cúmulo
+cuñado
 cuncuna
 cundir
 cupé
@@ -892,6 +902,8 @@ dornajo, batea
 dorsal
 dorso
 dosier
+draga
+dragar
 dubitativo
 dulzor
 ebonita, vulcanita
@@ -1205,8 +1217,13 @@ galopar
 gama
 gamuza
 gánster
+garata
+gareta
+garita
+garito
 garrapatear, garabatear
 garrapato, garabato
+gatera
 gavilán
 geco
 géiser
@@ -1243,6 +1260,7 @@ grandilocuencia
 grandilocuente
 granulado, granuloso, granular
 graznido
+greca
 gregario
 greña
 gres
@@ -1452,12 +1470,14 @@ junco
 junquillo
 jura
 kamikaze, camicace
+kamikaze, camicace
 labrar
 lacayo
 lacre
 lacrimoso, lacrimógeno, lagrimoso
 lama
 lamprea
+lancero
 languidecer
 larguirucho
 lavabo
@@ -1477,6 +1497,7 @@ leudante, levadura
 leudar
 leudar
 leva
+liana
 liar
 libelo
 licitación
@@ -1572,6 +1593,8 @@ melao
 melaza
 mella
 mellar
+melodrama
+melodramático
 menaje
 mendrugo
 menoscabar
@@ -1653,6 +1676,7 @@ noquear
 normalizado
 normalizar
 novicio
+nuera
 obcecación
 oblicuo
 oblongo
@@ -1784,6 +1808,7 @@ piar
 piastra
 pigmento
 pigmento
+pileta
 pilote
 pinche
 piñón
@@ -1815,6 +1840,7 @@ polio
 pompa
 popa
 porfiado
+pormenor
 pormenor
 porquería
 porra
@@ -1872,6 +1898,7 @@ procrear
 pródigamente
 pródigo
 proeza
+profanar
 profecía
 profilaxis
 proletario
@@ -1998,6 +2025,7 @@ repertorio
 represalia
 resabiado
 resabio
+resaca
 resalto, resalte
 resguardar
 resignar
@@ -2005,6 +2033,7 @@ resiliente
 resol
 resolana
 resollar
+resoluto
 respingar
 respingo
 resquebrajar, agrietar, cuartear
@@ -2066,6 +2095,7 @@ sedición, sublevación
 sedicioso
 segar
 semblante
+semblanza
 semblanza
 senda
 senectud
@@ -2160,6 +2190,7 @@ suburbio
 subvertir
 subyacente
 subyacer
+sucinto
 súcubo
 sucumbir
 sufragio
@@ -2226,6 +2257,7 @@ tintar, teñir, colorear, pigmentar
 tintín
 tintinar, tintinear, chingar
 tintineo, tintín
+tipi
 tirachinas, tiragomas, tirador
 tiro
 tisis, tuberculosis
@@ -2273,6 +2305,7 @@ través
 travesaño
 trémulo
 trepador, rampante
+tribu
 trienal
 trinar
 trino
