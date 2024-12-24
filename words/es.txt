@@ -1,3 +1,37 @@
+pacato
+peculado
+engullir
+pasador
+buje
+zambullir
+convulso
+tertulia
+enganche
+junta
+conectador
+turpial
+compaginar
+perturbar
+coagulante
+psicoactivo, sicoactivo
+psicodélico, sicodélico
+perturbador
+emboscada
+treta
+embuste
+embustero
+panetón, panetone
+tipificar
+médula
+ectomorfo
+mesomorfo
+desfalcar
+cofradía
+escardar
+zarcillo
+almibarado
+diáfano
+pomposo
 abalorio
 abanicar
 abarcador
@@ -45,6 +79,7 @@ acequia
 acerado
 acérrimo
 acezar, jadear, resoplar, resollar
+jadeante
 achaparrado
 achaque
 achicharrante
@@ -279,7 +314,7 @@ arrebato, arranque
 arrebol
 arrebolado
 arrecife
-arrellanarase, repantigarse, repanchicharse, apoltronarse
+arrellanarse, repantigarse, repanchicharse, apoltronarse
 arremangar
 arriate
 arribismo, tiburoneo
@@ -615,6 +650,7 @@ coartada
 coartar
 cobertizo
 cochambroso
+cochambre
 codicia
 coercer
 coerción
@@ -935,6 +971,7 @@ embellecer
 embestir
 embolia
 émbolo
+pistón
 embonar
 emboquillado
 emboquillar
@@ -968,7 +1005,7 @@ endosar
 enema
 engatillar
 engendrar
-engranado
+engranar
 engranaje
 enjambre
 enjuiciar
@@ -1315,6 +1352,8 @@ hojalata, lata
 holgado
 holgazán, haragán
 holístico
+holismo
+propugnar
 hollín, tizne
 homeóstasis, homeostasis, homeostasia
 homilía
@@ -1673,7 +1712,6 @@ nimio
 ninfomanía
 nívea
 noquear
-normalizado
 normalizar
 novicio
 nuera
@@ -1691,7 +1729,7 @@ ofuscar, obcecar, obnubilar
 oligarquía
 olisquear
 olleta
-olmo
+olmo, negrillo
 omiso
 omnipotencia
 oncología, cancerología
@@ -1805,8 +1843,6 @@ pétreo
 petulancia
 petulante
 piar
-piastra
-pigmento
 pigmento
 pileta
 pilote
@@ -2082,7 +2118,6 @@ sándalo
 sanguíneo
 santiamén
 sardónice, sardónica
-sarmentoso
 sarmiento
 sarta
 satirizar
@@ -2249,7 +2284,7 @@ tétrico
 tibieza
 timar
 timo
-timorato, pacato
+timorato
 tímpano
 tiña
 tintado
