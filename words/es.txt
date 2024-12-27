@@ -1,57 +1,3 @@
-escabel, reposapiés, banqueta, taburete, alzapié
-colonia
-recatar
-decúbito
-deshora
-motilidad
-estribar
-clavícula
-cervical
-cerviz
-cadencia
-exhortar
-remembrar
-falange
-tópico
-rememorar
-yacón
-gulupa
-gruta
-campiña
-pacato
-peculado
-engullir
-pasador
-buje
-zambullir
-convulso
-tertulia
-enganche
-junta
-conectador
-turpial
-compaginar
-perturbar
-coagulante
-psicoactivo, sicoactivo
-psicodélico, sicodélico
-perturbador
-emboscada
-treta
-embuste
-embustero
-panetón, panetone
-tipificar
-médula
-ectomorfo
-mesomorfo
-desfalcar
-cofradía
-escardar
-zarcillo
-almibarado
-diáfano
-pomposo
 abalorio
 abanicar
 abarcador
@@ -99,7 +45,6 @@ acequia
 acerado
 acérrimo
 acezar, jadear, resoplar, resollar
-jadeante
 achaparrado
 achaque
 achicharrante
@@ -233,6 +178,7 @@ alimaña
 alimaña
 alistonado
 aljibe
+almibarado
 alondra
 altanería
 altercado
@@ -513,6 +459,7 @@ buche
 buche, buchada
 bucólico
 buhardilla, boardilla, buharda, mansarda
+buje
 bujía
 bullicio
 burlete
@@ -528,6 +475,7 @@ cabo
 cabriola
 cacerola
 cachivache
+cadencia
 cal
 calamidad
 calar
@@ -545,6 +493,7 @@ camastro
 cambiazo
 campanario
 campanilla
+campiña
 camuflaje
 canalla
 canon
@@ -613,6 +562,8 @@ cerillo, cerilla, fósforo
 cerner, cernir
 cerrazón
 cerro
+cervical
+cerviz
 cetrino
 chabacano
 chabola, chavola, cabaña, barraca, choza
@@ -662,20 +613,23 @@ clandestino
 claqué
 claraboya
 claveteado
+clavícula
 clavija
 clérigo, eclesiástico
 clero, clerecía
 coacción, constreñimiento
+coagulante
 coartada
 coartar
 cobertizo
-cochambroso
 cochambre
+cochambroso
 codicia
 coercer
 coerción
 coetáneo, contemporáneo
 cofia
+cofradía
 cohesión
 cohibir
 cojinete
@@ -688,12 +642,14 @@ colicero
 colindante
 colindar
 coloide
+colonia
 colosal
 coloso
 colza
 comedido
 comedimiento
 cómoda
+compaginar
 compartimentar
 compartimento
 compinche
@@ -712,6 +668,7 @@ concreción
 concupiscencia
 condicionamiento
 condicionar
+conectador
 confinar
 confinar
 confite
@@ -758,6 +715,7 @@ convenir
 convoy
 convulsión
 convulsivo
+convulso
 coracero
 coraza
 cordel
@@ -813,6 +771,7 @@ decimonónico
 decoro
 decrépito
 decrepitud
+decúbito
 deductivo
 defensiva
 déficit
@@ -866,9 +825,11 @@ desdichado
 desecación
 desecar
 desenmarañar, desmarañar
+desfalcar
 desgarbado
 desgarbado
 desgarrón, rasgón, desgarradura
+deshora
 desidia
 desidioso
 designio
@@ -907,6 +868,7 @@ detrimento
 devanar
 devengar
 devoto
+diáfano
 diafragma
 diametral, diamétrico
 diana
@@ -965,6 +927,7 @@ dulzor
 ebonita, vulcanita
 eccema, eczema
 eclosionar
+ectomorfo
 ecuánime
 ecuanimidad
 edema
@@ -991,12 +954,14 @@ embellecer
 embestir
 embolia
 émbolo
-pistón
 embonar
 emboquillado
 emboquillar
+emboscada
 embotar
 embrollo
+embuste
+embustero
 emotivo
 empalmar
 empalme
@@ -1023,10 +988,12 @@ encubrir
 endémico
 endosar
 enema
+enganche
 engatillar
 engendrar
-engranar
 engranaje
+engranar
+engullir
 enjambre
 enjuiciar
 enmarañar
@@ -1069,6 +1036,7 @@ errático
 erudición
 erudito
 esbozar
+escabel, reposapiés, banqueta, taburete, alzapié
 escabroso
 escabullirse
 escalfado
@@ -1079,6 +1047,7 @@ escandalizar
 escaparate
 escaramuza
 escarcela
+escardar
 escarnio
 escarpado
 escéptico
@@ -1156,6 +1125,7 @@ estremecer
 estremecimiento
 estrépito
 estría
+estribar
 estribillo
 estribo
 estridente
@@ -1175,6 +1145,7 @@ evocador, evocativo
 exaltación
 excentricidad
 excluyente
+exhortar
 exiguo
 expiar
 explayar
@@ -1194,6 +1165,7 @@ facultad
 fagocitar
 fagocitosis
 fajo, haz, atado
+falange
 falible
 fango
 fastuoso
@@ -1323,6 +1295,7 @@ greña
 gres
 grial, cáliz
 grillete
+gruta
 guacal, huacal
 guadaña, dalla, dalle
 guama
@@ -1333,6 +1306,7 @@ guatila
 guijarro
 guineo
 guisar
+gulupa
 gurú
 hacha
 hacienda
@@ -1371,9 +1345,8 @@ hogaza
 hojalata, lata
 holgado
 holgazán, haragán
-holístico
 holismo
-propugnar
+holístico
 hollín, tizne
 homeóstasis, homeostasis, homeostasia
 homilía
@@ -1514,6 +1487,7 @@ irrupción
 jactancia, presunción, presuntuosidad
 jactancioso
 jade
+jadeante
 jaleo
 jalonear
 jaloneo
@@ -1527,6 +1501,7 @@ júbilo
 jubiloso
 junco
 junquillo
+junta
 jura
 kamikaze, camicace
 kamikaze, camicace
@@ -1647,6 +1622,7 @@ máxime
 mazo
 mediación
 medrar
+médula
 megalito
 melao
 melaza
@@ -1667,6 +1643,7 @@ merengue
 meretriz
 meridión
 meridional
+mesomorfo
 mesura
 metabolismo
 metafísica
@@ -1703,6 +1680,7 @@ mortecino
 mortífero, letal
 mosaico
 moteado
+motilidad
 motín
 muchedumbre, multitud, aglomeración, gentío
 muérdago, almuérdago, liga
@@ -1776,6 +1754,7 @@ otomana, otomano
 ovación
 ovacionar
 ovillo
+pacato
 padecer
 pajarilla
 palimpsesto
@@ -1788,6 +1767,7 @@ pamplina
 panacea
 pancarta
 panegírico
+panetón, panetone
 panocha
 panteón
 papanatas, papamoscas, paparote
@@ -1811,6 +1791,7 @@ parsimonia
 particularizar
 partida
 pasadizo
+pasador
 pasante
 pasantía
 pasible
@@ -1828,6 +1809,7 @@ pavonear
 pavor
 pavoroso
 pecíolo, rabillo, cabillo, pezón
+peculado
 pecuniario, monetario
 pelandusca, pelandrusca
 pelele
@@ -1856,6 +1838,8 @@ perplejidad
 perplejo
 pertinacia
 pertinaz
+perturbador
+perturbar
 pestillo
 petimetre, lechuguino, presumido
 petirrojo
@@ -1869,6 +1853,7 @@ pilote
 pinche
 piñón
 pira
+pistón
 pitón
 pivote
 pizarra
@@ -1894,6 +1879,7 @@ poliestireno
 polifacético
 polio
 pompa
+pomposo
 popa
 porfiado
 pormenor
@@ -1961,6 +1947,7 @@ proletario
 promiscuidad
 prontuario
 propaganda
+propugnar
 prorratear, distribuir, repartir, cuotear
 prosaico
 proscrito, proscripto
@@ -1972,6 +1959,8 @@ proveer
 proverbio, adagio, refrán
 provincia
 provisorio, provisional
+psicoactivo, sicoactivo
+psicodélico, sicodélico
 psicosis, sicosis
 psique, psiquis
 psíquico
@@ -2035,6 +2024,7 @@ recado
 recaer
 recambio
 recatado
+recatar
 recaudo
 recesión
 rechinar
@@ -2062,6 +2052,8 @@ relato
 relegar
 reliquia
 relucir
+remembrar
+rememorar
 remilgo
 remisible
 remisión
@@ -2299,6 +2291,7 @@ termistor
 terraplén
 terrera
 terrina, tarrina
+tertulia
 testarudez
 tétrico
 tibieza
@@ -2313,6 +2306,7 @@ tintín
 tintinar, tintinear, chingar
 tintineo, tintín
 tipi
+tipificar
 tirachinas, tiragomas, tirador
 tiro
 tisis, tuberculosis
@@ -2324,6 +2318,7 @@ toldado
 toldo
 tomografía
 tontina
+tópico
 tornasolado
 torrente
 tórrido
@@ -2360,6 +2355,7 @@ través
 travesaño
 trémulo
 trepador, rampante
+treta
 tribu
 trienal
 trinar
@@ -2381,6 +2377,7 @@ tupido
 tupido
 turba
 turbar
+turpial
 turulato
 ufanarse
 ufano
@@ -2466,6 +2463,7 @@ volátil
 volatilizar
 voltaico
 yacer
+yacón
 yelmo
 yema
 yermo
@@ -2479,11 +2477,13 @@ zafio
 zahorí
 zalamería, lisonja
 zalamero
+zambullir
 zancadilla
 zanja
 zanjar
 zapallo, ahuyama, auyama, calabaza
 zape
+zarcillo
 zarpa, garra
 zarpazo
 zarzo
