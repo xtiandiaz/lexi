@@ -399,6 +399,7 @@ barrabás
 barraca
 barreño, balde, cubo
 barricada
+barrido
 barrote
 barullo, barahúnda
 basilisco
@@ -967,6 +968,7 @@ efigie
 efusión, efusividad
 efusividad
 efusivo
+eje
 electorado
 elixir, elíxir
 elocución
@@ -1399,7 +1401,7 @@ huésped
 huidizo
 humos
 huraño, huidizo, esquivo
-hurón
+hurón; @animal @mamífero
 hurtadillas
 iconoclasta
 idílico
@@ -1458,6 +1460,7 @@ indescifrable
 índice
 individualizar, individuar
 indolente
+inducido
 inducir
 inductivo
 indulgencia
@@ -2331,7 +2334,7 @@ tasar
 tebeo
 tejar
 tejemaneje
-tejón
+tejón; @animal @mamífero
 telar
 temperamental
 temperamento
@@ -2506,7 +2509,7 @@ virar
 viscoso
 visera
 visillo, velo, cortinilla
-visón
+visón; @animal @mamífero
 vitalicio
 vítor
 vitorear
