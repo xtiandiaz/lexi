@@ -1,3 +1,8 @@
+promisorio
+dramaturgo
+dramático
+tódido, barrancolí; @animal @ave
+blíster
 abalorio
 abanicar
 abarcador
@@ -93,7 +98,7 @@ afelpado
 afelpado
 aferente
 afianzar
-áfido, afídido
+áfido, afídido; @insecto
 afiebrado
 afín
 afincar
@@ -501,20 +506,20 @@ canto
 canturrear, canturriar
 canturreo, tarareo
 cánula
-caoba
+caoba; @planta
 capcioso
-capibara, carpincho, capiguara, chigüire
+capibara, carpincho, capiguara, chigüire; @animal @mamífero
 capilar
 capitular
 carámbano
 carambola
-caraota, judía, frijol
+caraota, judía, frijol, fríjol
 carcamal
 carcasa
 carda
 cardamomo
 cardiopatía
-carillón, carrillón
+carillón, carrillón; @instrumento
 carmesí
 carmín
 caroteno
@@ -522,7 +527,7 @@ carótida
 carrete
 carroña
 carroñero
-cártamo, alazor
+cártamo, alazor; @planta
 cartesiano
 casco
 casquete
