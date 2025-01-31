@@ -1,3 +1,6 @@
 [submodule "godot/commonalities"]
 	path = godot/commonalities
 	url = git@github.com:mirloom/godot-commonalities
+[submodule "vue/submodules/design-tokens"]
+	path = vue/submodules/design-tokens
+	url = git@github.com:xtiandiaz/design-tokens.git

@@ -1,6 +1,6 @@
-# Lexicon
+# Lexi
 
-A simple, gamified app to exercise and expand your vocabulary. 
+A simple, gamified app to exercise and expand your vocabulary.
 
 Additionally, this project is being developed as a learning task with 2 open-source frameworks:
 1. [Godot](./godot/) (technically a game engine, of course), and 
