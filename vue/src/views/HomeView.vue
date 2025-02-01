@@ -32,7 +32,8 @@ load()
 
 <template>
   <!-- <main>     -->
-    <h1 id="slate" v-if="(words?.length ?? 0) != 0">{{ activeWord }}</h1>
+    <h1 id="slate" class="serif" v-if="(words?.length ?? 0) != 0">{{ activeWord }}</h1>
     <button class="emoji" v-on:click="resetActiveWord">🦄</button>
+    <span class="caption all-caps">©2025 XD</span>
   <!-- </main> -->
 </template>
