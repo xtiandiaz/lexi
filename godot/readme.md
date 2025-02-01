@@ -2,7 +2,7 @@
 
 Implemented with: **Godot 4.3**
 
-Playable at: [xtiandiaz.github.io](https://xtiandiaz.github.io/lexicon/godot/builds/web)
+Playable at: [xtiandiaz.github.io](https://xtiandiaz.github.io/lexi/godot/builds/web)
 
 ## Languages
 

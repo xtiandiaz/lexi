@@ -16,7 +16,7 @@ function resetActiveWord() {
 
 async function load() {
   try {
-    const response = await fetch("./words/es.txt")
+    const response = await fetch(`https://raw.githubusercontent.com/xtiandiaz/lexicon/refs/heads/main/words/es.txt?salt=${Math.random()}`)
     console.log(response)
     const wordListing = await response.text()
     console.log(wordListing)
