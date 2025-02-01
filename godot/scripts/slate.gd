@@ -25,19 +25,19 @@ func _show_result(word: String, synonyms: PackedStringArray) -> void:
 ## Signals
 
 
-func _on_lexicon_word_started(start_chunk: String) -> void:
+func _on_lexi_word_started(start_chunk: String) -> void:
 	_input_prefix = start_chunk
 	word_label.text = _input_prefix
 	notes_label.text = ""
 	
 
-func _on_lexicon_word_input(input: String) -> void:
+func _on_lexi_word_input(input: String) -> void:
 	word_label.text = _input_prefix + input
 	
 
-func _on_lexicon_word_completed(word: String, clue_count: int, synonyms: PackedStringArray) -> void:	
+func _on_lexi_word_completed(word: String, clue_count: int, synonyms: PackedStringArray) -> void:
 	_show_result(word, synonyms)
 
 
-func _on_lexicon_word_skipped(word: String, synonyms: PackedStringArray) -> void:
+func _on_lexi_word_skipped(word: String, synonyms: PackedStringArray) -> void:
 	_show_result(word, synonyms)

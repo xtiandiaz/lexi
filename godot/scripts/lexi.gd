@@ -1,4 +1,4 @@
-class_name Lexicon extends CanvasLayer
+class_name Lexi extends CanvasLayer
 
 
 signal word_started(start_chunk: String)
