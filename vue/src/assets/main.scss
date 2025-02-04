@@ -1,14 +1,18 @@
-@import './design-tokens/mixins';
-@import './design-tokens/typography';
+@use './design-tokens/mixins';
+@use './design-tokens/typography';
 
 html {
-  @include colorAttribute('background-color', 'secondary-background');
+  @include mixins.color-attributes((
+    'background-color': 'secondary-background'
+  ));
 }
 
 html, body {
   height: 100%;
   margin: 0;
-  @include colorAttribute('color', 'body')
+  @include mixins.color-attributes((
+    'color': 'body'
+  ));
 }
 
 #app {
@@ -34,8 +38,10 @@ button {
   border: 1px solid;
   border-radius: 4em;
   padding: 0.25em 0.5em;
-  @include colorAttribute('border-color', 'accessory');
-  @include colorAttribute('background-color', 'background')
+  @include mixins.color-attributes((
+    'border-color': 'accessory',
+    'background-color': 'background'
+  ));
 }
 
 button.emoji {
@@ -43,7 +49,9 @@ button.emoji {
 }
 
 button:hover {
-  @include colorAttribute('background-color', 'tertiary-background')
+  @include mixins.color-attributes((
+    'background-color': 'tertiary-background'
+  ));
 }
 
 /*
