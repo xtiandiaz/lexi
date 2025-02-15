@@ -81,6 +81,24 @@ button:hover {
   @include iconography.colored-icon-content-attribute('gear', 'secondary-body');
 }
 
+@keyframes spin {
+  100% { rotate: 180deg; }
+}
+
+#spinner {
+  @include iconography.colored-icon-content-attribute('spinner', 'accessory');
+  animation: spin 1s linear 0s infinite;
+  display: block;
+  width: 3em;
+  height: 3em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+
 /*
 
 a,

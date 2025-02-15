@@ -55,10 +55,18 @@ function runWordAction(action: WordAction, word: string | undefined): void {
   
   window.open(url, '_blank')
 }
+
+// const emits = defineEmits<{isLoading?: boolean}>()
+
+// export default {
+//   emits: emits
+// }
+
 </script>
 
 <template>
   <!-- <main> -->
+    <span id="spinner" v-show="!isLoaded"></span>
     <h1 id="slate" class="serif" v-if="(words?.length ?? 0) != 0">{{ activeWord }}</h1>
     <div class="button-bar" v-show="isLoaded">
       <button class="iconized" v-on:click="runWordAction(WordAction.Define, activeWord)">
@@ -74,6 +82,6 @@ function runWordAction(action: WordAction, word: string | undefined): void {
         <span class="icon reset"></span>
       </button>
     </div>
-    <span class="caption all-caps">©2025 XD</span>
+    <!-- <span class="caption all-caps">©2025 XD</span> -->
   <!-- </main> -->
 </template>
