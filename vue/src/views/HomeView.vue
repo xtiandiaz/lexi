@@ -11,6 +11,7 @@ enum WordAction {
 
 const words = ref<string[]>()
 const activeWord = ref<string>()
+const isLoaded = ref<boolean>(false)
 
 function resetActiveWord() {
   if (words.value === null || words.value!.length === 0) {
@@ -27,6 +28,8 @@ async function load() {
     const wordListing = await response.text()
     // console.log(wordListing)
     words.value = wordListing.split('\n')
+    isLoaded.value = true
+    
     resetActiveWord()
   } catch (error) {
     console.log(error)
@@ -57,7 +60,7 @@ function runWordAction(action: WordAction, word: string | undefined): void {
 <template>
   <!-- <main> -->
     <h1 id="slate" class="serif" v-if="(words?.length ?? 0) != 0">{{ activeWord }}</h1>
-    <div class="button-bar">
+    <div class="button-bar" v-show="isLoaded">
       <button class="iconized" v-on:click="runWordAction(WordAction.Define, activeWord)">
         <span class="icon define"></span>
       </button>
@@ -67,10 +70,10 @@ function runWordAction(action: WordAction, word: string | undefined): void {
       <button class="iconized" v-on:click="runWordAction(WordAction.SearchForImages, activeWord)">
         <span class="icon search-images"></span>
       </button>
+      <button class="iconized" v-on:click="resetActiveWord">
+        <span class="icon reset"></span>
+      </button>
     </div>
-    <button class="iconized" v-on:click="resetActiveWord">
-      <span class="icon reset"></span>
-    </button>
     <span class="caption all-caps">©2025 XD</span>
   <!-- </main> -->
 </template>
