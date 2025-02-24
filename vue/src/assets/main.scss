@@ -33,6 +33,14 @@ html, body {
   text-align: center;
   display: block;
   margin: 0;
+  
+  h1 {
+    margin-bottom: 0.5em;
+  }
+  h6 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
 }
 
 div.button-bar {
@@ -79,6 +87,8 @@ button:hover {
 
 .icon.reset {
   @include iconography.colored-icon-content-attribute('gear', 'secondary-body');
+  width: 1em;
+  height: 1em;
 }
 
 @keyframes spin {
