@@ -43,38 +43,16 @@ button {
     'border-color': 'accessory',
     'background-color': 'background'
   ));
-}
-
-button.iconized {
-  font-size: 1.5em;
-}
-
-button.iconized.medium {
-  font-size: 2em;
-}
-
-button:hover {
-  @include palette.color-attributes((
-    'background-color': 'tertiary-background'
-  ));
-}
-
-.icon.define {
-  @include iconography.colored-icon-content-attribute('dictionary', 'blue');
-}
-
-.icon.search {
-  @include iconography.colored-icon-content-attribute('globe', 'indigo');
-}
-
-.icon.search-images {
-  @include iconography.colored-icon-content-attribute('image', 'purple');
-}
-
-.icon.reset {
-  @include iconography.colored-icon-content-attribute('gear', 'secondary-body');
-  width: 1em;
-  height: 1em;
+  
+  &:hover {
+    @include palette.color-attributes((
+      'background-color': 'tertiary-background'
+    ));
+  }
+  
+  &.iconized {
+    font-size: 1.5em;
+  }
 }
 
 @keyframes spin {

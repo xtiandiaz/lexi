@@ -1,21 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { settingsStore } from '../stores/settings'
 import WordSlate from '@/components/WordSlate.vue'
-// import TheWelcome from '../components/TheWelcome.vue'
-// import wordListing from '../words/es.txt?raw'
-
-enum WordAction {
-  Define, 
-  Search,
-  SearchForImages
-}
+import WordActionBar from '@/components/WordActionBar.vue'
+import FooterActionsBar from '@/components/FooterActionsBar.vue'
 
 const words = ref<string[]>()
 const activeWord = ref<string>()
 const activeWordSynonyms = ref<string[]>()
 const isLoaded = ref<boolean>(false)
-const settings = settingsStore()
 
 function resetActiveWord() {
   if (words.value === null || words.value!.length === 0) {
@@ -43,53 +35,13 @@ async function load() {
 }
 load()
 
-function runWordAction(action: WordAction, word: string | undefined): void {
-  if (word === undefined) {
-    return
-  }
-  
-  const url = (() => {
-    switch (action) {
-      case WordAction.Define:
-        return `https://dle.rae.es/${word}`
-      case WordAction.Search:
-        return `https://duckduckgo.com/?t=ffab&q=${activeWord.value}`
-      case WordAction.SearchForImages:
-        return `https://duckduckgo.com/?t=ffab&q=${activeWord.value}&iax=images&ia=images`
-    }
-  })()
-  
-  window.open(url, '_blank')
-}
-
-// const emits = defineEmits<{isLoading?: boolean}>()
-
-// export default {
-//   emits: emits
-// }
-
 </script>
 
 <template>
   <!-- <main> -->
-    <span id="spinner" v-show="!isLoaded"></span>
+    <span id="spinner" v-show="(words?.length ?? 0) === 0"></span>
     <WordSlate :word="activeWord" :synonyms="activeWordSynonyms ?? []" />
-    <div class="button-bar" v-show="isLoaded">
-      <button class="iconized" v-on:click="runWordAction(WordAction.Define, activeWord)">
-        <span class="icon define"></span>
-      </button>
-      <button class="iconized" v-on:click="runWordAction(WordAction.Search, activeWord)">
-        <span class="icon search"></span>
-      </button>
-      <button class="iconized" v-on:click="runWordAction(WordAction.SearchForImages, activeWord)">
-        <span class="icon search-images"></span>
-      </button>
-    </div>
-    <div class="button-bar" v-show="isLoaded">
-      <button class="iconized" v-on:click="resetActiveWord">
-        <span class="icon reset"></span>
-      </button>
-    </div>
-    <span class="caption all-caps">Mode: {{ settings.$state.mode }}</span>
+    <WordActionBar :word="activeWord" />
+    <FooterActionsBar @reset-active-word="resetActiveWord" />
   <!-- </main> -->
 </template>
