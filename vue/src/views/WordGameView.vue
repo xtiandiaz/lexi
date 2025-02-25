@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { settingsStore } from '../stores/settings'
+import WordSlate from '@/components/WordSlate.vue'
 // import TheWelcome from '../components/TheWelcome.vue'
 // import wordListing from '../words/es.txt?raw'
 
@@ -12,7 +13,7 @@ enum WordAction {
 
 const words = ref<string[]>()
 const activeWord = ref<string>()
-const synonyms = ref<string>()
+const activeWordSynonyms = ref<string[]>()
 const isLoaded = ref<boolean>(false)
 const settings = settingsStore()
 
@@ -23,12 +24,7 @@ function resetActiveWord() {
   const term = words.value![Math.floor(Math.random() * words.value!.length)]
   const linkedWords = term.split(',')
   activeWord.value = linkedWords[0]
-  
-  if (linkedWords.length > 1) {
-    synonyms.value = linkedWords.splice(1).join(', ')
-  } else {
-    synonyms.value = ""
-  }
+  activeWordSynonyms.value = linkedWords.splice(1)
 }
 
 async function load() {
@@ -77,10 +73,7 @@ function runWordAction(action: WordAction, word: string | undefined): void {
 <template>
   <!-- <main> -->
     <span id="spinner" v-show="!isLoaded"></span>
-    <div id="slate" v-if="(words?.length ?? 0) != 0">
-      <h1 class="serif">{{ activeWord }}</h1>
-      <h6 class="serif" v-if="(synonyms?.length ?? 0) != 0">{{ synonyms }}</h6>
-    </div>
+    <WordSlate :word="activeWord" :synonyms="activeWordSynonyms ?? []" />
     <div class="button-bar" v-show="isLoaded">
       <button class="iconized" v-on:click="runWordAction(WordAction.Define, activeWord)">
         <span class="icon define"></span>
@@ -92,7 +85,7 @@ function runWordAction(action: WordAction, word: string | undefined): void {
         <span class="icon search-images"></span>
       </button>
     </div>
-    <div class="button-bar">
+    <div class="button-bar" v-show="isLoaded">
       <button class="iconized" v-on:click="resetActiveWord">
         <span class="icon reset"></span>
       </button>
