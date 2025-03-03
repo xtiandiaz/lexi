@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import WordSlate from '@/components/WordSlate.vue'
-import WordActionBar from '@/components/WordActionBar.vue'
-import FooterActionsBar from '@/components/FooterActionsBar.vue'
+import { ref, computed } from 'vue'
+import WordScreen from '@/components/WordScreen.vue'
+import WordGamepad from '@/components/WordGamepad.vue'
 
 const words = ref<string[]>()
 const activeWord = ref<string>()
 const activeWordSynonyms = ref<string[]>()
-const isLoaded = ref<boolean>(false)
 
 function resetActiveWord() {
   if (words.value === null || words.value!.length === 0) {
@@ -26,7 +24,6 @@ async function load() {
     const wordListing = await response.text()
     // console.log(wordListing)
     words.value = wordListing.split('\n')
-    isLoaded.value = true
     
     resetActiveWord()
   } catch (error) {
@@ -35,13 +32,15 @@ async function load() {
 }
 load()
 
+const emits = defineEmits<{
+  launchMeaning: [sourceURL: string]
+}>()
 </script>
 
 <template>
-  <!-- <main> -->
-    <span id="spinner" v-show="(words?.length ?? 0) === 0"></span>
-    <WordSlate :word="activeWord" :synonyms="activeWordSynonyms ?? []" />
-    <WordActionBar :word="activeWord" />
-    <FooterActionsBar @reset-active-word="resetActiveWord" />
-  <!-- </main> -->
+  <span id="spinner" v-if="activeWord === undefined"></span>
+  <main v-if="activeWord !== undefined">
+    <WordScreen :word="activeWord" :synonyms="activeWordSynonyms ?? []" />
+    <WordGamepad :word="activeWord" @reset-active-word="resetActiveWord" @launch-meaning="(sourceURL) => emits('launchMeaning', sourceURL)" />
+  </main>
 </template>

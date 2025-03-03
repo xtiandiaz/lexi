@@ -2,22 +2,28 @@
 import { settingsStore } from '../stores/settings'
 
 const settings = settingsStore()
+
+const emits = defineEmits<{
+  resetActiveWord: [void: void]
+}>()
 </script>
 
 <template>
   <div class="button-bar">
-    <button class="iconized small" @click="$emit('resetActiveWord')">
+    <button class="iconized small" @click="emits('resetActiveWord')">
       <span class="icon reset"></span>
     </button>
-    <button class="iconized small">
+    <!-- <button class="iconized small">
       <span class="icon settings"></span>
-    </button>
+    </button> -->
   </div>
-  <span class="caption all-caps">Mode: {{ settings.$state.mode }}</span>
+  <span class="settings-summary">Lang: {{ settings.$state.language }} • Mode: {{ settings.$state.mode }}</span>
 </template>
 
 <style scoped lang="scss">
+@use './../assets/design-tokens/typography';
 @use './../assets/design-tokens/iconography';
+@use './../assets/design-tokens/palette';
 
 button {
   &.iconized {
@@ -27,10 +33,16 @@ button {
 
 .icon {
   &.reset {
-    @include iconography.colored-icon-content-attribute('arrow-reload', 'secondary-body');
+    @include iconography.colored-icon-content-attribute('arrow-reset', 'secondary-body');
   }
   &.settings {
     @include iconography.colored-icon-content-attribute('gear', 'secondary-body');
   }
+}
+
+.settings-summary {
+  @extend .caption, .all-caps;
+  @include palette.color-attribute('color', 'tertiary-body');
+  
 }
 </style>

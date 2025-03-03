@@ -3,6 +3,10 @@ defineProps<{
   word?: string
 }>()
 
+const emits = defineEmits<{
+  launchMeaning: [sourceURL: string]
+}>()
+
 enum WordAction {
   Define, 
   Search,
@@ -25,19 +29,20 @@ function runWordAction(action: WordAction, word: string | undefined): void {
     }
   })()
   
-  window.open(url, '_blank')
+  emits('launchMeaning', url)
+  
 }
 </script>
 
 <template>
   <div class="button-bar" v-show="word !== undefined">
-    <button class="iconized" v-on:click="runWordAction(WordAction.Define, word)">
+    <button class="iconized" @click="runWordAction(WordAction.Define, word)">
       <span class="icon define"></span>
     </button>
-    <button class="iconized" v-on:click="runWordAction(WordAction.Search, word)">
+    <button class="iconized" @click="runWordAction(WordAction.Search, word)">
       <span class="icon search"></span>
     </button>
-    <button class="iconized" v-on:click="runWordAction(WordAction.SearchForImages, word)">
+    <button class="iconized" @click="runWordAction(WordAction.SearchForImages, word)">
       <span class="icon search-images"></span>
     </button>
   </div>

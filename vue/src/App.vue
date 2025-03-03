@@ -1,6 +1,19 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-// import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue'
+import MeaningCinema from './components/MeaningCinema.vue'
+
+// const meaningSource = ref<string | undefined>()
+
+function launchMeaning(sourceURL: string) {
+  console.log(sourceURL)
+  // meaningSource.value = source
+  window.open(sourceURL, '_blank')
+}
+
+// function closeCinema() {
+//   meaningSource.value = undefined
+// }
 </script>
 
 <template>
@@ -17,7 +30,9 @@ import { RouterLink, RouterView } from 'vue-router'
     <!-- </div> -->
   <!-- </header> -->
 
-  <RouterView />
+  <RouterView @launch-meaning="launchMeaning" />
+  
+  <!-- <MeaningCinema v-if="meaningSource !== undefined" source="meaningSource" @close="closeCinema" /> -->
 </template>
 
 <style scoped>

@@ -1,17 +1,10 @@
 import { defineStore } from 'pinia'
-
-export enum GameMode {
-  Words = 'Words',
-  Excerpts = 'Excerpts'
-}
-
-export interface ISettings {
-  mode: GameMode
-}
+import { Language, GameMode, type ISettings } from '../models/settings'
 
 export const settingsStore = defineStore('settings', {
   state: (): ISettings => {
     return {
+      language: Language.Español,
       mode: GameMode.Words
     }
   }
