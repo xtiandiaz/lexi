@@ -3,6 +3,10 @@ import { ref, computed } from 'vue'
 import WordScreen from '@/components/WordScreen.vue'
 import WordGamepad from '@/components/WordGamepad.vue'
 
+const emits = defineEmits<{
+  launchMeaning: [sourceURL: string]
+}>()
+
 const words = ref<string[]>()
 const activeWord = ref<string>()
 const activeWordSynonyms = ref<string[]>()
@@ -31,10 +35,6 @@ async function load() {
   }
 }
 load()
-
-const emits = defineEmits<{
-  launchMeaning: [sourceURL: string]
-}>()
 </script>
 
 <template>

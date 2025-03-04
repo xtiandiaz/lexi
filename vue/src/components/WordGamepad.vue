@@ -9,6 +9,11 @@ const { word } = defineProps<{
   word: string
 }>()
 
+const emits = defineEmits<{
+  resetActiveWord: [void],
+  launchMeaning: [sourceURL: string]
+}>()
+
 const ingameLetters = ref<string[]>(shuffle(word.split('')))
 
 watch(() => word, (newValue) => {
@@ -19,15 +24,14 @@ function onLetterKeyPressed(index: number) {
   console.log(ingameLetters.value[index], `@ ${index}`)
 }
 
-const emits = defineEmits<{
-  resetActiveWord: void,
-  launchMeaning: [sourceURL: string]
-}>()
+function onDeleteKeyPressed() {
+  console.log('delete pressed')
+}
 </script>
 
 <template>
   <div id="gamepad" class="panel">
-    <WordKeypad :letters="ingameLetters" @key-pressed="onLetterKeyPressed" />
+    <WordKeypad :letters="ingameLetters" @key-pressed="onLetterKeyPressed" @delete-pressed="onDeleteKeyPressed" />
     <WordActionBar :word="word" @launch-meaning="(sourceURL) => emits('launchMeaning', sourceURL)" />
     <FooterActionsBar @reset-active-word="emits('resetActiveWord')" />
   </div>
