@@ -1,15 +1,16 @@
 <script setup lang="ts">
 defineProps<{
-  word?: string,
-  synonyms: string[]
+  input: string,
+  synonyms: string[],
+  isWordCompleted: boolean
 }>()
 </script>
 
 <template>
-  <div id="slate" class="panel" v-if="word !== undefined">
+  <div id="slate" class="panel">
     <div class="fill"></div>
-    <h1 class="serif">{{ word }}</h1>
-    <h6 class="serif" v-if="(synonyms.length ?? 0) != 0">{{ synonyms.join(', ') }}</h6>
+    <h1 class="serif">{{ input }}</h1>
+    <h6 class="serif" v-if="isWordCompleted && synonyms.length > 0">{{ synonyms.join(', ') }}</h6>
   </div>
 </template>
 

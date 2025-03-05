@@ -1,20 +1,35 @@
 <script setup lang="ts">
 defineProps<{
-  letters: string[]
+  word: string,
+  inputableLetterIndices: number[],
+  inputLetterIndices: number[],
 }>()
 
 const emits = defineEmits<{
-  keyPressed: [index: number],
-  deletePressed: [void]
+  inputLetter: [index: number],
+  delete: [void]
 }>()
+
+// defineExpose<{
+//   disableKey: [index: number]
+// }>()
 </script>
 
 <template>
 <div id="keypad">
-  <button :disabled='Math.random() > 0.5' class='letter' v-for='(letter, index) of letters' :key='index' @click="emits('keyPressed', index)">
-    <h5>{{ letter.toLowerCase() }}</h5>
+  <button 
+    class="letter" v-for="(letterIndex, keyIndex) of inputableLetterIndices" 
+    :key="keyIndex"
+    :disabled="inputLetterIndices.contains(letterIndex)"
+    @click="emits('inputLetter', letterIndex)"
+  >
+    <h5>{{ word[letterIndex].toLowerCase() }}</h5>
   </button>
-  <button class='letter delete' @click="emits('deletePressed')">
+  <button 
+    class='letter delete' 
+    :disabled="inputLetterIndices.length === 0"
+    @click="emits('delete')"
+  >
     <span class='icon'></span>
   </button>
 </div>
@@ -58,7 +73,7 @@ $letter-count-row: 8;
       }
     }
     
-    &:hover {
+    &:hover:enabled {
       // @include palette.color-attribute('color', 'mint');
       
       h5, .icon {
