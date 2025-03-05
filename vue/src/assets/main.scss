@@ -50,7 +50,7 @@ div.panel {
     flex: auto;
   }
   
-  &#slate {
+  &#screen {
     top: 0;
     bottom: 50%;
     gap: 0;
@@ -83,6 +83,7 @@ button {
   padding: 0.25em 0.5em;
   border-radius: 4em;
   @include palette.color-attributes((
+    'color': 'body',
     'border-color': 'accessory',
     'background-color': 'background'
   ));

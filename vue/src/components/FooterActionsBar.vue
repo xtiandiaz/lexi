@@ -17,7 +17,8 @@ const emits = defineEmits<{
       <span class="icon settings"></span>
     </button> -->
   </div>
-  <span class="settings-summary">Lang: {{ settings.$state.language }} • Mode: {{ settings.$state.mode }}</span>
+  <span class="settings-summary">Lang: {{ settings.$state.language }}</span>
+  <!-- • Mode: {{ settings.$state.mode }} -->
 </template>
 
 <style scoped lang="scss">
