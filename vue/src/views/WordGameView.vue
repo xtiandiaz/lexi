@@ -29,7 +29,7 @@ function resetActiveWord() {
   activeWord.value = linkedWords[0]
   activeWordSynonyms.value = linkedWords.splice(1)
   
-  const INPUTABLE_START_INDEX = clamp(Math.floor(activeWord.value.length * 0.2), 0, Math.floor(activeWord.value.length / 2))
+  const INPUTABLE_START_INDEX = clamp(Math.floor(activeWord.value.length * 0.25), 0, Math.floor(activeWord.value.length / 2))
   hintPrefix.value = activeWord.value.substring(0, INPUTABLE_START_INDEX)
   inputableLetterIndices.value = shuffle(Array.range(INPUTABLE_START_INDEX, activeWord.value.length, 1))
   
