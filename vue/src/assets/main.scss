@@ -3,6 +3,8 @@
 @use './design-tokens/iconography';
 
 html, body {
+  font-size: 16px;
+  
   @include palette.color-attributes((
     'color': 'body',
     'background-color': 'secondary-background'
@@ -12,6 +14,8 @@ html, body {
 body, main {
   height: 100%;
   margin: 0;
+  overflow: hidden;
+  touch-action: pan-y;
 }
 
 #app {
