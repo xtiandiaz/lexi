@@ -23,7 +23,7 @@ const emits = defineEmits<{
     :disabled="inputLetterIndices.contains(letterIndex)"
     @click="emits('inputLetter', letterIndex)"
   >
-    <h5>{{ word[letterIndex].toLowerCase() }}</h5>
+    <h4>{{ word[letterIndex].toLowerCase() }}</h4>
   </button>
   <button 
     class='letter delete' 
@@ -52,7 +52,7 @@ $letter-count-row: 8;
   max-width: 32em;
   gap: #{$letter-gap} + 'em';
   
-  h5 {
+  h4 {
     margin: 0;
   }
   
@@ -76,7 +76,7 @@ $letter-count-row: 8;
     &:hover:enabled {
       // @include palette.color-attribute('color', 'mint');
       
-      h5, .icon {
+      h4, .icon {
         transform: scale(110%);
       }
     }
