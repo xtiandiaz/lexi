@@ -69,14 +69,6 @@ $letter-count-row: 8;
       }
     }
     
-    &:hover:enabled {
-      // @include palette.color-attribute('color', 'mint');
-      
-      h3, .icon {
-        transform: scale(110%);
-      }
-    }
-    
     &:disabled {
       background-color: transparent;
       opacity: 25%;

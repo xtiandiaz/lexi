@@ -2,9 +2,7 @@
 @use './design-tokens/typography';
 @use './design-tokens/iconography';
 
-html, body {
-  font-size: 16px;
-  
+html { 
   @include palette.color-attributes((
     'color': 'body',
     'background-color': 'secondary-background'
@@ -107,6 +105,10 @@ button {
   ));
   
   &:hover {
+    &:enabled {
+      cursor: pointer;
+    }
+    
     @include palette.color-attributes((
       'background-color': 'secondary-background'
     ));
@@ -120,10 +122,6 @@ button {
     &.clear {
       border-color: transparent;
       background-color: transparent;
-    }
-    
-    &:hover .icon {
-      transform: scale(110%);
     }
   }
   
