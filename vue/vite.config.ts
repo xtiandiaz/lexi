@@ -15,4 +15,16 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.names && assetInfo.names.find(name => /\.woff2$/.test(name))) {
+            return 'assets/fonts/[name]-[hash].[ext]'
+          }
+          return 'assets/[name]-[hash].[ext]'
+        }
+      }
+    }  
+  }
 })
