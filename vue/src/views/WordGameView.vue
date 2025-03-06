@@ -3,28 +3,28 @@ import '@/assets/tungsten/extensions/array.extensions'
 import { ref, computed, onMounted } from 'vue'
 import WordScreen from '@/components/WordScreen.vue'
 import WordGamepad from '@/components/WordGamepad.vue'
+import { WordTool } from '@/models/tools'
 import { shuffle } from '@/assets/tungsten/randomness'
 import { clamp } from '@/assets/tungsten/math'
+import { openWordToolPage } from '@/services/external-content-launcher'
+import { WordProvider } from '@/services/word-provider'
+import { settingsStore } from '@/stores/settings'
 
-const emits = defineEmits<{
-  launchMeaning: [sourceURL: string]
-}>()
+const settings = settingsStore()
+const wordProvider = new WordProvider(settings.activeLanguage)
 
-const words = ref<string[]>()
 const activeWord = ref<string>()
 const activeWordSynonyms = ref<string[]>()
 const hintPrefix = ref<string>()
 const inputableLetterIndices = ref<number[]>([])
 const activeInput = ref<string>('')
+const activeTools = ref<WordTool[]>([])
 
 const isActiveWordCompleted = computed(() => activeInput.value === activeWord.value)
 
 function resetActiveWord() {
-  if (words.value === null || words.value!.length === 0) {
-    return
-  }
-  const term = words.value![Math.floor(Math.random() * words.value!.length)]
-  const linkedWords = term.split(',')
+  const newWord = wordProvider.getRandomWord()
+  const linkedWords = newWord.split(',')
   
   activeWord.value = linkedWords[0]
   activeWordSynonyms.value = linkedWords.splice(1)
@@ -34,28 +34,40 @@ function resetActiveWord() {
   inputableLetterIndices.value = shuffle(Array.range(INPUTABLE_START_INDEX, activeWord.value.length, 1))
   
   activeInput.value = hintPrefix.value
-}
-
-async function load() {
-  try {
-    const response = await fetch(`https://raw.githubusercontent.com/xtiandiaz/lexicon/refs/heads/main/words/es.txt?salt=${Math.random()}`)
-    // console.log(response)
-    const wordListing = await response.text()
-    // console.log(wordListing)
-    words.value = wordListing.split('\n')
-    
-    resetActiveWord()
-  } catch (error) {
-    console.log(error)
-  }
+  activeTools.value = [WordTool.Hint, WordTool.Skip]
 }
 
 function onInputChanged(letterIndices: number[]) {
   activeInput.value = hintPrefix.value + letterIndices.map(i => activeWord.value![i]).join('')
+  
+  if (isActiveWordCompleted.value) {
+    activeTools.value = [WordTool.Define, WordTool.WebSearch, WordTool.ImageSearch, WordTool.Continue]
+  }
 }
 
-onMounted(() => {
-  load()
+function onToolSelected(tool: WordTool) {
+  
+  if (activeWord.value === undefined)
+  return
+
+switch (tool) {
+  case WordTool.Define:
+  case WordTool.WebSearch:
+  case WordTool.ImageSearch:
+    openWordToolPage(tool, activeWord.value)
+    break
+  case WordTool.Skip:
+  case WordTool.Continue:
+    resetActiveWord()
+    break
+  case WordTool.Hint:
+    break
+  }
+}
+
+onMounted(async () => {
+  await wordProvider.load()
+  resetActiveWord()
 })
 </script>
 
@@ -70,10 +82,10 @@ onMounted(() => {
     <WordGamepad 
       :word="activeWord" 
       :inputable-letter-indices="inputableLetterIndices"
-      :is-word-completed="isActiveWordCompleted"
+      :tools="activeTools"
       @reset-active-word="resetActiveWord" 
-      @launch-meaning="(sourceURL) => emits('launchMeaning', sourceURL)" 
-      @update-input="onInputChanged"
+      @tool-selected="onToolSelected" 
+      @input-changed="onInputChanged"
     />
   </main>
 </template>

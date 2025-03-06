@@ -8,7 +8,18 @@ export enum Language {
   English = 'en'
 }
 
-export interface ISettings {
+export type LanguagesSettings = Map<Language, ILanguageSettings>
+
+export interface ILanguageSettings {
   language: Language,
-  mode: GameMode
+  dictionaryUrl: string,
+  altWebSearchUrl?: string,
+  altImageSearchUrl?: string
+}
+
+export interface ISettings {
+  activeLanguage: Language
+  imageSearchUrl: string
+  webSearchUrl: string
+  languages: LanguagesSettings
 }

@@ -2,20 +2,16 @@
 @use './design-tokens/typography';
 @use './design-tokens/iconography';
 
-html {
-  @include palette.color-attribute('background-color', 'secondary-background');
-}
-
-html, body, main {
-  height: 100%;
-  margin: 0;
+html, body {
   @include palette.color-attributes((
-    'color': 'body'
+    'color': 'body',
+    'background-color': 'secondary-background'
   ));
 }
 
-* {
-  touch-action: manipulation;
+body, main {
+  height: 100%;
+  margin: 0;
 }
 
 #app {
@@ -72,15 +68,28 @@ div.panel {
   &#gamepad {
     top: 50%;
     bottom: 0;
-    gap: 2em;
   }
 }
 
-div.button-bar {
+div.toolbar {
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 2em;
+  // position: absolute;
+  // left: 0;
+  // right: 0;
+  // padding: 2em;
+  
+  // background-color: aqua;
+  
+  &.top {
+    top: 1em;
+  }
+  
+  &.bottom {
+    bottom: 1em;
+  }
 }
 
 button {

@@ -10,14 +10,14 @@ const emits = defineEmits<{
 
 <template>
   <div class="button-bar">
-    <button class="iconized small" @click="emits('resetActiveWord')">
-      <span class="icon reset"></span>
+    <button class="iconized" @click="emits('resetActiveWord')">
+      <span class="icon skip"></span>
     </button>
     <!-- <button class="iconized small">
       <span class="icon settings"></span>
     </button> -->
   </div>
-  <span class="settings-summary">Lang: {{ settings.$state.language }}</span>
+  <!-- <span class="settings-summary">Lang: {{ settings.$state.language }}</span> -->
   <!-- • Mode: {{ settings.$state.mode }} -->
 </template>
 
@@ -28,16 +28,13 @@ const emits = defineEmits<{
 
 button {
   &.iconized {
-    font-size: 1em;
+    font-size: 1.5em;
   }
 }
 
 .icon {
-  &.reset {
-    @include iconography.colored-icon-content-attribute('arrow-reset', 'secondary-body');
-  }
-  &.settings {
-    @include iconography.colored-icon-content-attribute('gear', 'secondary-body');
+  &.skip {
+    @include iconography.colored-icon-content-attribute('skip', 'secondary-body');
   }
 }
 

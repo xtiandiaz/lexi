@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import WordActionBar from '@/components/WordActionBar.vue'
-import FooterActionsBar from '@/components/FooterActionsBar.vue'
+import WordToolbar from '@/components/WordToolbar.vue'
 import WordKeypad from './WordKeypad.vue';
-import { onMounted, ref, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
+import { WordTool } from '@/models/tools';
 
-const { word, inputableLetterIndices } = defineProps<{
+const { word, inputableLetterIndices, tools } = defineProps<{
   word: string,
   inputableLetterIndices: number[],
-  isWordCompleted: boolean
+  tools: WordTool[]
 }>()
 
 const emits = defineEmits<{
-  resetActiveWord: [void],
-  updateInput: [letterIndices: number[]],
-  launchMeaning: [sourceURL: string]
+  inputChanged: [letterIndices: number[]],
+  toolSelected: [tool: WordTool]
 }>()
 
 const inputLetterIndices = ref<number[]>([])
+const isWordSolved = computed(() => tools.contains(WordTool.Continue))
 
 watch(() => word, () => {
   inputLetterIndices.value = []
@@ -27,36 +27,32 @@ function onLetterInput(index: number) {
     return
   }
   inputLetterIndices.value.push(index)
+  
   console.log('Input letter indices:', inputLetterIndices.value.join(','))
-  emits('updateInput', inputLetterIndices.value)
+  emits('inputChanged', inputLetterIndices.value)
 }
 
 function onDeleted() {
   inputLetterIndices.value.pop()
-  emits('updateInput', inputLetterIndices.value)
+  emits('inputChanged', inputLetterIndices.value)
 }
-
-// onMounted(() => {
-//   resetContent(word)
-// })
 </script>
 
 <template>
   <div id="gamepad" class="panel">
     <WordKeypad 
-      v-if="!isWordCompleted"
+      v-if="!isWordSolved"
       ref="keypad" 
       :word="word" 
       :inputable-letter-indices="inputableLetterIndices" 
       :input-letter-indices="inputLetterIndices"
-      @input-letter="onLetterInput" 
-      @delete="onDeleted" 
+      @letter-input="onLetterInput" 
+      @deleted="onDeleted" 
     />
-    <WordActionBar
-      v-if="isWordCompleted"
-      :word="word" 
-      @launch-meaning="(sourceURL) => emits('launchMeaning', sourceURL)" 
+    <div class="fill" v-if="!isWordSolved"></div>
+    <WordToolbar
+      :tools="tools"
+      @tool-selected="(tool) => emits('toolSelected', tool)" 
     />
-    <FooterActionsBar @reset-active-word="emits('resetActiveWord')" />
   </div>
 </template>

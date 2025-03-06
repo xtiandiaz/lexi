@@ -6,13 +6,9 @@ defineProps<{
 }>()
 
 const emits = defineEmits<{
-  inputLetter: [index: number],
-  delete: [void]
+  letterInput: [index: number],
+  deleted: [void]
 }>()
-
-// defineExpose<{
-//   disableKey: [index: number]
-// }>()
 </script>
 
 <template>
@@ -21,14 +17,14 @@ const emits = defineEmits<{
     class="letter" v-for="(letterIndex, keyIndex) of inputableLetterIndices" 
     :key="keyIndex"
     :disabled="inputLetterIndices.contains(letterIndex)"
-    @click="emits('inputLetter', letterIndex)"
+    @click="emits('letterInput', letterIndex)"
   >
-    <h4>{{ word[letterIndex].toLowerCase() }}</h4>
+    <h3>{{ word[letterIndex].toLowerCase() }}</h3>
   </button>
   <button 
     class='letter delete' 
     :disabled="inputLetterIndices.length === 0"
-    @click="emits('delete')"
+    @click="emits('deleted')"
   >
     <span class='icon'></span>
   </button>
@@ -52,7 +48,7 @@ $letter-count-row: 8;
   max-width: 32em;
   gap: #{$letter-gap} + 'em';
   
-  h4 {
+  h3 {
     margin: 0;
   }
   
@@ -76,7 +72,7 @@ $letter-count-row: 8;
     &:hover:enabled {
       // @include palette.color-attribute('color', 'mint');
       
-      h4, .icon {
+      h3, .icon {
         transform: scale(110%);
       }
     }
