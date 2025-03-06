@@ -63,8 +63,14 @@ $letter-count-row: 8;
     @include palette.color-attribute('background-color', 'background');
     
     &.delete {
+      @include palette.color-attribute('background-color', 'body');
+      
       .icon {
         font-size: 1.5em;
+        @include iconography.colored-icon-content-attribute('delete', 'background');
+      }
+      
+      &:disabled .icon {
         @include iconography.colored-icon-content-attribute('delete', 'body');
       }
     }
