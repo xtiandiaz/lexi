@@ -10,6 +10,7 @@ import { openWordToolPage } from '@/services/external-content-launcher'
 import { WordProvider } from '@/services/word-provider'
 import { settingsStore } from '@/stores/settings'
 import { canHint, getHintedChunk } from '@/services/word-analysis'
+import MainMenuBar from '@/components/MainMenuBar.vue'
 
 const settings = settingsStore()
 const wordProvider = new WordProvider(settings.activeLanguage)
@@ -106,6 +107,7 @@ onMounted(async () => {
 
 <template>
   <span id="spinner" v-if="activeWord === undefined"></span>
+  <MainMenuBar />
   <main v-if="activeWord !== undefined">
     <WordScreen 
       :input="hintPrefix + activeInput"

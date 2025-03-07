@@ -6,7 +6,7 @@ export function getHintedChunk(input: string, inputableHunk: string): string | u
   }
   
   if (letterMatchCount < (inputableHunk.length - 1)) {
-    return inputableHunk.substring(0, letterMatchCount + (letterMatchCount === input.length ? 1 : 0))
+    return inputableHunk.substring(0, letterMatchCount + 1)
   }
   
   return undefined

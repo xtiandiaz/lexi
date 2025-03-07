@@ -2,6 +2,10 @@
 @use './design-tokens/typography';
 @use './design-tokens/iconography';
 
+* {
+  touch-action: manipulation;
+}
+
 html { 
   @include palette.color-attributes((
     'color': 'body',
@@ -9,18 +13,17 @@ html {
   ));
 }
 
-body, main {
+html, body {
+  margin: 0;
+}
+
+html, body, main, #app {
   width: 100%;
   height: 100%;
-  margin: 0;
   overflow: hidden;
 }
 
 #app {
-  // max-width: 1280px;
-  width: 100%;
-  height: 100%;
-  // margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,19 +42,15 @@ div.modal {
 }
 
 div.panel {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: 0;
-  padding: 2em;
+  $padding: 2em;
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  
-  .fill {
-    flex: auto;
-  }
+  padding: $padding;
+  width: calc(100% - $padding * 2);
+  height: calc(50% - $padding * 2);
   
   &#screen {
     top: 0;
@@ -73,18 +72,35 @@ div.panel {
   }
 }
 
-div.toolbar {
+.toolbar {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   gap: 1.5em;
+}
 
-  &.top {
-    top: 1em;
-  }
+nav {
+  @extend .toolbar;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5em;
+}
+
+div.spacer {
+  flex: auto;
+}
+
+.annotated {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
   
-  &.bottom {
-    bottom: 1em;
+  span.annotation {
+    @extend .caption, .all-caps;
+    @include palette.color-attribute('color', 'secondary-body');
   }
 }
 

@@ -57,7 +57,7 @@ function replaceInputIndices(indices: number[]) {
       @letter-input="onLetterInput" 
       @deleted="onDeleted" 
     />
-    <div class="fill" v-if="!isWordSolved"></div>
+    <div class="spacer" v-if="!isWordSolved"></div>
     <WordToolbar
       :tools="tools"
       @tool-selected="(tool) => emits('toolSelected', tool)" 
