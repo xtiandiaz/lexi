@@ -4,6 +4,8 @@
 
 * {
   touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html { 
@@ -86,7 +88,7 @@ nav {
   top: 0;
   left: 0;
   right: 0;
-  padding: 0.5em;
+  padding: 0.25em;
 }
 
 div.spacer {
