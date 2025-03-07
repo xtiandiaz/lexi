@@ -4,23 +4,23 @@ import WordKeypad from './WordKeypad.vue';
 import { ref, computed, watch } from 'vue'
 import { WordTool } from '@/models/tools';
 
+const inputLetterIndices = ref<number[]>([])
+
+const isWordSolved = computed(() => Array.from(tools.keys()).contains(WordTool.Continue))
+
 const { word, inputableLetterIndices, tools } = defineProps<{
   word: string,
   inputableLetterIndices: number[],
-  tools: WordTool[]
+  tools: Map<WordTool, boolean>
 }>()
+watch(() => word, () => {
+  inputLetterIndices.value = []
+})
 
 const emits = defineEmits<{
   inputChanged: [letterIndices: number[]],
   toolSelected: [tool: WordTool]
 }>()
-
-const inputLetterIndices = ref<number[]>([])
-const isWordSolved = computed(() => tools.contains(WordTool.Continue))
-
-watch(() => word, () => {
-  inputLetterIndices.value = []
-})
 
 function onLetterInput(index: number) {
   if (!inputableLetterIndices.contains(index) || inputLetterIndices.value.contains(index)) {
@@ -28,13 +28,21 @@ function onLetterInput(index: number) {
   }
   inputLetterIndices.value.push(index)
   
-  console.log('Input letter indices:', inputLetterIndices.value.join(','))
+  // console.log('Input letter indices:', inputLetterIndices.value.join(','))
   emits('inputChanged', inputLetterIndices.value)
 }
 
 function onDeleted() {
   inputLetterIndices.value.pop()
   emits('inputChanged', inputLetterIndices.value)
+}
+
+defineExpose({
+  replaceInputIndices
+})
+
+function replaceInputIndices(indices: number[]) {
+  inputLetterIndices.value = indices
 }
 </script>
 

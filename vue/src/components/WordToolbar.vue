@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { WordTool } from '@/models/tools';
+import { WordTool } from '@/models/tools'
 
 const { tools } = defineProps<{
-  tools: WordTool[],
+  tools: Map<WordTool, boolean>,
 }>()
 
 const emits = defineEmits<{
@@ -23,8 +23,14 @@ function wordToolIconClass(tool: WordTool): string {
 
 <template>
   <div class="toolbar">
-    <button class="iconized" v-for="(tool, index) of tools" :key="index" @click="emits('toolSelected', tool)">
-      <span class="icon" :class="wordToolIconClass(tool)"></span>
+    <button 
+      class="iconized" 
+      v-for="(tool, index) of tools.entries()" 
+      :key="index" 
+      :disabled="!tool[1]"
+      @click="emits('toolSelected', tool[0])"
+    >
+      <span class="icon" :class="wordToolIconClass(tool[0])"></span>
     </button>
   </div>
 </template>

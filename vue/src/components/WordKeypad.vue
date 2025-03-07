@@ -60,10 +60,15 @@ $letter-count-row: 8;
     width: #{$letter-size} + 'em';
     height: #{$letter-size} + 'em';
     border-radius: 0.5em;
-    @include palette.color-attribute('background-color', 'background');
+    
+    &:enabled {
+      @include palette.color-attribute('background-color', 'background');
+    }
     
     &.delete {
-      @include palette.color-attribute('background-color', 'body');
+      &:enabled {
+        @include palette.color-attribute('background-color', 'body');
+      }
       
       .icon {
         font-size: 1.5em;
@@ -73,11 +78,6 @@ $letter-count-row: 8;
       &:disabled .icon {
         @include iconography.colored-icon-content-attribute('delete', 'body');
       }
-    }
-    
-    &:disabled {
-      background-color: transparent;
-      opacity: 25%;
     }
   }
 }
