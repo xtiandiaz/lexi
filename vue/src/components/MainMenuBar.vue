@@ -17,7 +17,7 @@ const history = historyStore()
     <div class="spacer"></div>
     <span class="annotated">
       <span class="annotation">{{ history.words.length }}</span>
-      <button class="iconized" :disabled="true">
+      <button class="iconized" :disabled="history.words.length === 0">
         <span class="icon history"></span>
       </button>
     </span>
