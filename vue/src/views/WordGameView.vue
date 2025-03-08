@@ -5,13 +5,13 @@ import WordScreen from '@/components/WordScreen.vue'
 import WordGamepad from '@/components/WordGamepad.vue'
 import MainMenuBar from '@/components/MainMenuBar.vue'
 import { WordTool } from '@/models/tools'
+import { settingsStore } from '@/stores/settings'
+import { openWordToolPage } from '@/services/external-content-launching'
+import { WordProvider } from '@/services/word-provision'
+import { canHint, getHintedChunk } from '@/services/word-analysis'
+import { addDailyWord, resetDailyHistoryIfNeeded } from '@/services/history-management'
 import { shuffle } from '@/assets/tungsten/randomness'
 import { clamp } from '@/assets/tungsten/math'
-import { openWordToolPage } from '@/services/external-content-launcher'
-import { WordProvider } from '@/services/word-provider'
-import { settingsStore } from '@/stores/settings'
-import { canHint, getHintedChunk } from '@/services/word-analysis'
-import { addDailyWord } from '@/services/history-manager'
 
 const settings = settingsStore()
 const wordProvider = new WordProvider(settings.activeLanguage)
@@ -32,7 +32,6 @@ const inputableActiveWordHunk = computed(() => activeWord.value?.substring(input
 const hintPrefixedActiveInput = computed(() => hintPrefix.value + activeInput.value)
 const isActiveWordCompleted = computed(() => hintPrefixedActiveInput.value === activeWord.value)
 
-
 function resetActiveWord() {
   const newWord = wordProvider.getRandomWord()
   const linkedWords = newWord.split(',')
@@ -46,6 +45,8 @@ function resetActiveWord() {
   
   activeInput.value = ''
   activeTools.value = new Map([WordTool.Hint].map(tool => [tool, true]))
+  
+  resetDailyHistoryIfNeeded()
 }
 
 function onInputChanged(letterIndices: number[]) {
