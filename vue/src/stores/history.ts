@@ -1,10 +1,17 @@
+import '@/assets/tungsten/extensions/date.extensions'
 import { defineStore } from 'pinia'
-import type { IDailyHistory } from '@/models/history'
+import { ref, computed } from 'vue'
 
-export const historyStore = defineStore('history', {
-  state: (): IDailyHistory => {
+export const dailyHistoryStore = defineStore('daily-history', {
+  state: () => {
+    const date = ref<Date>(Date.today())
+    const words = ref<string[]>([])
+    const wordCount = computed(() => words.value.length)
+    
     return {
-      words: []
+      date: date,
+      words: words,
+      wordCount: wordCount
     }
   }
 })

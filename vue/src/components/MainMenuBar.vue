@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { settingsStore } from '@/stores/settings';
-import { historyStore } from '@/stores/history';
+import { dailyHistoryStore } from '@/stores/history';
 
 const settings = settingsStore()
-const history = historyStore()
+const history = dailyHistoryStore()
 </script>
 
 <template>

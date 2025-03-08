@@ -3,6 +3,7 @@ import '@/assets/tungsten/extensions/array.extensions'
 import { ref, computed, onMounted, useTemplateRef } from 'vue'
 import WordScreen from '@/components/WordScreen.vue'
 import WordGamepad from '@/components/WordGamepad.vue'
+import MainMenuBar from '@/components/MainMenuBar.vue'
 import { WordTool } from '@/models/tools'
 import { shuffle } from '@/assets/tungsten/randomness'
 import { clamp } from '@/assets/tungsten/math'
@@ -10,7 +11,7 @@ import { openWordToolPage } from '@/services/external-content-launcher'
 import { WordProvider } from '@/services/word-provider'
 import { settingsStore } from '@/stores/settings'
 import { canHint, getHintedChunk } from '@/services/word-analysis'
-import MainMenuBar from '@/components/MainMenuBar.vue'
+import { addDailyWord } from '@/services/history-manager'
 
 const settings = settingsStore()
 const wordProvider = new WordProvider(settings.activeLanguage)
@@ -51,6 +52,8 @@ function onInputChanged(letterIndices: number[]) {
   activeInput.value = letterIndices.map(i => activeWord.value![i]).join('')
   
   if (isActiveWordCompleted.value) {
+    addDailyWord(activeWord.value!)
+    
     activeTools.value = new Map(
       [WordTool.Define, WordTool.WebSearch, WordTool.ImageSearch, WordTool.Continue].map(tool => [tool, true])
     )
