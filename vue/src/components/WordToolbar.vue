@@ -12,6 +12,7 @@ const emits = defineEmits<{
 function wordToolIconClass(tool: WordTool): string {
   switch (tool) {
     case WordTool.Define: return 'define'
+    case WordTool.WikipediaSearch: return 'wikipedia-search'
     case WordTool.WebSearch: return 'web-search'
     case WordTool.ImageSearch: return 'image-search'
     case WordTool.Hint: return 'hint'
@@ -41,6 +42,9 @@ function wordToolIconClass(tool: WordTool): string {
 .icon {
   &.define {
     @include iconography.colored-icon-content-attribute('dictionary', 'mint');
+  }
+  &.wikipedia-search {
+    @include iconography.colored-icon-content-attribute('wikipedia', 'body');
   }
   &.web-search {
     @include iconography.colored-icon-content-attribute('globe', 'blue');

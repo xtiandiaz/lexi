@@ -79,7 +79,7 @@ div.panel {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 1.5em;
+  gap: 1em;
 }
 
 nav {
@@ -135,14 +135,13 @@ button {
     }
   }
   
-  &:hover {
-    &:enabled {
-      cursor: pointer;
-    }
-    
-    @include palette.color-attributes((
-      'background-color': 'secondary-background'
-    ));
+  &:hover:enabled {
+    cursor: pointer;
+  }
+  
+  &:active:enabled {
+    transform: scale(85%);
+    transition: transform 0.1s;
   }
   
   &:disabled {

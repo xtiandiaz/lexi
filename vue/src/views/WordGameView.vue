@@ -56,7 +56,7 @@ function onInputChanged(letterIndices: number[]) {
     addDailyWord(activeWord.value!)
     
     activeTools.value = new Map(
-      [WordTool.Define, WordTool.WebSearch, WordTool.ImageSearch, WordTool.Continue].map(tool => [tool, true])
+      [WordTool.Define, WordTool.WikipediaSearch, WordTool.WebSearch, WordTool.ImageSearch, WordTool.Continue].map(tool => [tool, true])
     )
   }
   
@@ -69,6 +69,7 @@ function onToolSelected(tool: WordTool) {
 
   switch (tool) {
     case WordTool.Define:
+    case WordTool.WikipediaSearch:
     case WordTool.WebSearch:
     case WordTool.ImageSearch:
       openWordToolPage(tool, activeWord.value)

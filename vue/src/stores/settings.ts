@@ -1,18 +1,22 @@
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-import { Language, type ISettings } from '../models/settings'
+import { Language } from '../models/language'
 
-export const settingsStore = defineStore('settings', {
-  state: (): ISettings => {
+export const settingsStore = defineStore('settings', {  
+  state: () => {
+    const activeLanguage = ref<Language>(Language.Español)
+    const wikipediaSearchUrl = computed(() => `https://${activeLanguage.value}.wikipedia.org/wiki/`)
+    
     return {
-      activeLanguage: Language.Español,
+      activeLanguage: activeLanguage,
       webSearchUrl: 'https://duckduckgo.com/?t=ffab&q=',
       imageSearchUrl: 'https://duckduckgo.com/?t=ffab&iax=images&ia=images&q=',
       languages: new Map([
-        [Language.Español, {
-          language: Language.Español,
-          dictionaryUrl: 'https://dle.rae.es/',
+        [Language.Español, { 
+          dictionaryUrl: 'https://dle.rae.es/' 
         }]
       ]),
+      wikipediaSearchUrl: wikipediaSearchUrl
     }
   }
 })

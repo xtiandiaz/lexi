@@ -1,4 +1,4 @@
-import type { Language } from "@/models/settings"
+import type { Language } from "@/models/language"
 
 export class WordProvider {
   language: Language

@@ -12,6 +12,8 @@ export function openWordToolPage(tool: WordTool, word: string) {
     case WordTool.Define:
       openPage(settings.languages.get(settings.activeLanguage)!.dictionaryUrl + word)
       break
+    case WordTool.WikipediaSearch:
+      openPage(settings.wikipediaSearchUrl + word)
     case WordTool.WebSearch:
       openPage(settings.webSearchUrl + word)
       break
