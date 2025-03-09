@@ -14,6 +14,7 @@ export function openWordToolPage(tool: WordTool, word: string) {
       break
     case WordTool.WikipediaSearch:
       openPage(settings.wikipediaSearchUrl + word)
+      break
     case WordTool.WebSearch:
       openPage(settings.webSearchUrl + word)
       break
