@@ -1,5 +1,6 @@
 import '@/assets/tungsten/extensions/date.extensions'
 import { dailyHistoryStore } from "@/stores/history";
+import { saveDailyHistory } from './persistence';
 
 export function resetDailyHistoryIfNeeded() {
   const dailyHistory = dailyHistoryStore()
@@ -8,8 +9,10 @@ export function resetDailyHistoryIfNeeded() {
   if (dateDifference < 1)
     return
   
-  dailyHistory.words = []
   dailyHistory.date = Date.today()
+  dailyHistory.words = []
+  
+  saveDailyHistory()
 }
 
 export function addDailyWord(word: string) {
@@ -17,4 +20,6 @@ export function addDailyWord(word: string) {
 
   const dailyHistory = dailyHistoryStore()
   dailyHistory.words.push(word)
+  
+  saveDailyHistory()
 }

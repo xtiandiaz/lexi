@@ -30,7 +30,6 @@ html, body, main, #app {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 2em;
 }
 
 div.modal {
@@ -44,15 +43,16 @@ div.modal {
 }
 
 div.panel {
-  $padding: 2em;
+  $h-padding: 1em;
+  $v-padding: 1.5em;
   
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: $padding;
-  width: calc(100% - $padding * 2);
-  height: calc(50% - $padding * 2);
+  padding: $v-padding $h-padding;
+  width: calc(100% - $h-padding * 2);
+  height: calc(50% - $v-padding * 2);
   
   &#screen {
     top: 0;

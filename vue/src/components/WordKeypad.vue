@@ -36,7 +36,7 @@ const emits = defineEmits<{
 @use './../assets/design-tokens/iconography';
 @use './../assets/design-tokens/palette';
 
-$letter-size: 4;
+$letter-size: 4.5; // em
 $letter-gap: 0.5;
 $letter-count-row: 8;
 
@@ -71,7 +71,7 @@ $letter-count-row: 8;
       }
       
       .icon {
-        font-size: 1.5em;
+        font-size: 1.75em;
         @include iconography.colored-icon-content-attribute('delete', 'background');
       }
       
