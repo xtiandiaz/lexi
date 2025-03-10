@@ -36,7 +36,7 @@ html, body, #app {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 0.75em;
+  gap: 0.5em;
   height: $nav-height;
 }
 
@@ -48,7 +48,7 @@ nav {
   left: 0;
   @include palette.color-attribute('background-color', 'secondary-background');
   
-  h6 {
+  .title {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -58,10 +58,6 @@ nav {
 }
 
 main {
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
   width: 100%;
   margin: $nav-height 0 0 0;
   
@@ -122,7 +118,7 @@ button {
     'border-color': 'accessory',
     'background-color': 'background'
   ));
-    
+
   &.iconized {
     border-color: transparent;
     background-color: transparent;

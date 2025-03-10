@@ -56,7 +56,7 @@ function onPathClicked(sectionKey?: SectionKey) {
     </span>
     
     <div class="spacer"></div>
-    <h6 class="serif">{{ map.title }}</h6>
+    <span class="title serif">{{ map.title }}</span>
     <div class="spacer"></div>
     
     <span class="annotated" v-for="(path, index) of map.rightHandPaths" :key="index">
