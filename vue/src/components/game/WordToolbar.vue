@@ -25,7 +25,7 @@ function wordToolIconClass(tool: WordTool): string {
 <template>
   <div class="toolbar">
     <button 
-      class="iconized medium" 
+      class="iconized" 
       v-for="(tool, index) of tools.entries()" 
       :key="index" 
       :disabled="!tool[1]"
@@ -39,27 +39,31 @@ function wordToolIconClass(tool: WordTool): string {
 <style scoped lang="scss">
 @use '../../assets/design-tokens/iconography';
 
-.icon {
-  &.define {
-    @include iconography.colored-icon-content-attribute('dictionary', 'mint');
-  }
-  &.wikipedia-search {
-    @include iconography.colored-icon-content-attribute('wikipedia', 'body');
-  }
-  &.web-search {
-    @include iconography.colored-icon-content-attribute('globe', 'blue');
-  }
-  &.image-search {
-    @include iconography.colored-icon-content-attribute('image', 'indigo');
-  }
-  &.continue {
-    @include iconography.colored-icon-content-attribute('play', 'purple');
-  }
-  &.hint {
-    @include iconography.colored-icon-content-attribute('hint', 'yellow');
-  }
-  &.skip {
-    @include iconography.colored-icon-content-attribute('skip', 'secondary-body');
+button.iconized {
+  .icon {
+    font-size: 1.5em;
+    
+    &.define {
+      @include iconography.colored-icon-content-attribute('dictionary', 'mint');
+    }
+    &.wikipedia-search {
+      @include iconography.colored-icon-content-attribute('wikipedia', 'body');
+    }
+    &.web-search {
+      @include iconography.colored-icon-content-attribute('globe', 'blue');
+    }
+    &.image-search {
+      @include iconography.colored-icon-content-attribute('image', 'indigo');
+    }
+    &.continue {
+      @include iconography.colored-icon-content-attribute('play', 'purple');
+    }
+    &.hint {
+      @include iconography.colored-icon-content-attribute('hint', 'yellow');
+    }
+    &.skip {
+      @include iconography.colored-icon-content-attribute('skip', 'secondary-body');
+    }
   }
 }
 </style>

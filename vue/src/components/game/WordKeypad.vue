@@ -19,14 +19,14 @@ const emits = defineEmits<{
     :disabled="inputLetterIndices.contains(letterIndex)"
     @click="emits('letterInput', letterIndex)"
   >
-    <h3>{{ word[letterIndex].toLowerCase() }}</h3>
+    <h4>{{ word[letterIndex].toLowerCase() }}</h4>
   </button>
   <button 
     class='letter delete' 
     :disabled="inputLetterIndices.length === 0"
     @click="emits('deleted')"
   >
-    <span class='icon'></span>
+    <span class='icon medium'></span>
   </button>
 </div>
 </template>
@@ -36,7 +36,7 @@ const emits = defineEmits<{
 @use '../../assets/design-tokens/palette';
 @use '../../assets/design-tokens/iconography';
 
-$letter-size: 4.5; // em
+$letter-size: 3.5; // em
 $letter-gap: 0.5;
 $letter-count-row: 8;
 
@@ -48,15 +48,11 @@ $letter-count-row: 8;
   max-width: 32em;
   gap: #{$letter-gap} + 'em';
   
-  h3 {
+  h4 {
     margin: 0;
   }
   
-  button.letter {    
-    display: inline-flex;    
-    border-color: transparent;
-    justify-content: center;
-    align-items: center;
+  button.letter {
     width: #{$letter-size} + 'em';
     height: #{$letter-size} + 'em';
     border-radius: 0.5em;
@@ -66,15 +62,15 @@ $letter-count-row: 8;
     }
     
     &.delete {
-      &:enabled {
-        @include palette.color-attribute('background-color', 'body');
-      }
-      
       .icon {
-        font-size: 1.75em;
+        font-size: 1.25em;
+        margin: 0 auto;
         @include iconography.colored-icon-content-attribute('delete', 'background');
       }
       
+      &:enabled {
+        @include palette.color-attribute('background-color', 'body');
+      }
       &:disabled .icon {
         @include iconography.colored-icon-content-attribute('delete', 'body');
       }

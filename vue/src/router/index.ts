@@ -8,7 +8,7 @@ export default createRouter({
   routes: [
     {
       path: '/',
-      name: 'game',
+      name: 'lexi',
       component: GameView,
     },
     {

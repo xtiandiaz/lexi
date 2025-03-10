@@ -36,7 +36,7 @@ html, body, #app {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 0.5em;
+  gap: 0.75em;
   height: $nav-height;
 }
 
@@ -46,6 +46,7 @@ nav {
   top: 0;
   right: 0;
   left: 0;
+  padding: 0 0.25em;
   @include palette.color-attribute('background-color', 'secondary-background');
   
   .title {
@@ -96,50 +97,38 @@ main {
 div.spacer {
   flex: auto;
 }
-
-.annotated {
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
-  
-  span.annotation {
-    @extend .caption, .all-caps;
-    @include palette.color-attribute('color', 'secondary-body');
-  }
-}
   
 button {
-  border: 1px solid;
+  border: none;
+  background: none;
+  background-color: transparent;
   padding: 0.25em 0.5em;
-  border-radius: 4em;
+  font-size: 1em;
   
   @include palette.color-attributes((
-    'color': 'body',
-    'border-color': 'accessory',
-    'background-color': 'background'
+    'color': 'body'
   ));
 
   &.iconized {
-    border-color: transparent;
-    background-color: transparent;
-    font-size: 1.25em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25em;
     
-    &.medium {
-      font-size: 1.75em;
+    .icon {
+      font-size: 1.25em;
     }
+    span.annotation {
+      @extend .caption, .all-caps;
+      @include palette.color-attribute('color', 'secondary-body');
+    }
+    // span.label {
+    // }
   }
       
   &.clear {
     border-color: transparent;
     background-color: transparent;
-  }
-  
-  &.close {
-    @extend .iconized, .clear;
-    
-    .icon {
-      @include iconography.colored-icon-content-attribute('xmark', 'body');
-    }
   }
   
   &:hover:enabled {
@@ -154,6 +143,12 @@ button {
   &:disabled {
     background-color: transparent;
     opacity: 25%;
+  }
+}
+
+.icon {
+  &.back {
+    @include iconography.colored-icon-content-attribute('chevron-left', 'body');
   }
 }
 

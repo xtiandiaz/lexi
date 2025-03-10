@@ -10,7 +10,7 @@ function _localizedString(key: LocalizedStringKey, language: LanguageKey): strin
   }
 }
 
-export function localizedString(key: LocalizedStringKey): string | undefined {
+export function localizedString(key: LocalizedStringKey): string {
   const settings = settingsStore()
-  return _localizedString(key, settings.activeLanguage)
+  return _localizedString(key, settings.activeLanguage) ?? `{LocalizedStringKey: ${key}}`
 }

@@ -11,14 +11,14 @@ const { map } = defineProps<{
 const settings = settingsStore()
 const dailyHistory = dailyHistoryStore()
 
-function pathAnnotation(sectionKey?: SectionKey): string {
+function pathLabel(sectionKey?: SectionKey): string {
   switch (sectionKey) {
     case SectionKey.Settings:
       return settings.activeLanguage.toUpperCase()
     case SectionKey.DailyHistory:
       return `${dailyHistory.wordCount}`
     default:
-      return ''
+      return 'Lexi'
   }
 }
 
@@ -44,31 +44,29 @@ function onPathClicked(sectionKey?: SectionKey) {
 
 <template>
   <nav>
-    <span class="annotated" v-for="(path, index) of map.leftHandPaths" :key="index">
-      <button 
-        class="iconized" 
-        :disabled="!isPathEnabled(path.sectionKey)"
-        @click="onPathClicked(path.sectionKey)"
-      >
-        <span class="icon" :class="path.sectionKey ?? 'back'"></span>
-      </button>
-      <span class="annotation">{{ pathAnnotation(path.sectionKey) }}</span>
-    </span>
+    <button 
+      class="iconized" 
+      v-for="(path, index) of map.leftHandPaths" :key="index"
+      :disabled="!isPathEnabled(path.sectionKey)"
+      @click="onPathClicked(path.sectionKey)"
+    >
+      <span class="icon" :class="[path.sectionKey ?? 'back', path.sectionKey ? '' : 'small']"></span>
+      <span :class="path.sectionKey === undefined ? 'label' : 'annotation'">{{ pathLabel(path.sectionKey) }}</span>
+    </button>
     
     <div class="spacer"></div>
     <span class="title serif">{{ map.title }}</span>
     <div class="spacer"></div>
     
-    <span class="annotated" v-for="(path, index) of map.rightHandPaths" :key="index">
-      <span class="annotation">{{ pathAnnotation(path.sectionKey) }}</span>
-      <button 
-        class="iconized" 
-        :disabled="!isPathEnabled(path.sectionKey)"
-        @click="onPathClicked(path.sectionKey)"
-      >
-        <span class="icon" :class="path.sectionKey ?? 'back'"></span>
-      </button>
-    </span>
+    <button 
+      class="iconized" 
+      v-for="(path, index) of map.rightHandPaths" :key="index"
+      :disabled="!isPathEnabled(path.sectionKey)"
+      @click="onPathClicked(path.sectionKey)"
+    >
+      <span class="annotation all-caps">{{ pathLabel(path.sectionKey) }}</span>
+      <span class="icon" :class="path.sectionKey"></span>
+    </button>
   </nav>
 </template>
 
@@ -81,9 +79,6 @@ function onPathClicked(sectionKey?: SectionKey) {
   }
   &.daily-history {
     @include iconography.colored-icon-content-attribute('history', 'body');
-  }
-  &.back {
-    @include iconography.colored-icon-content-attribute('chevron-left', 'body');
   }
 }
 </style>
