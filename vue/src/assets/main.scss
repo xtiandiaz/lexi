@@ -193,6 +193,9 @@ button {
       &:last-of-type {
         border-radius: 0 0 1em 1em;
       }
+      &:only-of-type {
+        border-radius: 1em;
+      }
     }
   }
 }

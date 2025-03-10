@@ -19,7 +19,7 @@ const emits = defineEmits<{
     :disabled="inputLetterIndices.contains(letterIndex)"
     @click="emits('letterInput', letterIndex)"
   >
-    <h4>{{ word[letterIndex].toLowerCase() }}</h4>
+    <h5>{{ word[letterIndex].toLowerCase() }}</h5>
   </button>
   <button 
     class='letter delete' 
@@ -36,7 +36,7 @@ const emits = defineEmits<{
 @use '../../assets/design-tokens/palette';
 @use '../../assets/design-tokens/iconography';
 
-$letter-size: 3.5; // em
+$letter-size: 3.25; // em
 $letter-gap: 0.5;
 $letter-count-row: 8;
 
@@ -48,7 +48,7 @@ $letter-count-row: 8;
   max-width: 32em;
   gap: #{$letter-gap} + 'em';
   
-  h4 {
+  h5 {
     margin: 0;
   }
   
