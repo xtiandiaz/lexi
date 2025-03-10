@@ -1,4 +1,4 @@
-import { dailyHistoryStore } from "@/stores/history";
+import dailyHistoryStore from "@/stores/history";
 
 export enum LocalStorageKey {
   Day = 'day',

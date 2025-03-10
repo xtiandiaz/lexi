@@ -1,10 +1,10 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-import { Language } from '../models/language'
+import { LanguageKey } from '../models/language'
 
-export const settingsStore = defineStore('settings', {  
+export default defineStore('settings', {  
   state: () => {
-    const activeLanguage = ref<Language>(Language.Español)
+    const activeLanguage = ref<LanguageKey>(LanguageKey.Español)
     const wikipediaSearchUrl = computed(() => `https://${activeLanguage.value}.wikipedia.org/wiki/`)
     
     return {
@@ -12,7 +12,7 @@ export const settingsStore = defineStore('settings', {
       webSearchUrl: 'https://duckduckgo.com/?t=ffab&q=',
       imageSearchUrl: 'https://duckduckgo.com/?t=ffab&iax=images&ia=images&q=',
       languages: new Map([
-        [Language.Español, { 
+        [LanguageKey.Español, { 
           dictionaryUrl: 'https://dle.rae.es/' 
         }]
       ]),

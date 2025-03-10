@@ -37,7 +37,7 @@ function wordToolIconClass(tool: WordTool): string {
 </template>
 
 <style scoped lang="scss">
-@use './../assets/design-tokens/iconography';
+@use '../../assets/design-tokens/iconography';
 
 .icon {
   &.define {

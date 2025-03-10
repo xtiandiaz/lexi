@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { LocalStorageKey, retrieve } from '@/services/persistence'
 
-export const dailyHistoryStore = defineStore('daily-history', {
+export default defineStore('daily-history', {
   state: () => {
     const date = ref<Date>(new Date(retrieve(LocalStorageKey.Day) ?? Date.today().getTime()))
     const words = ref<string[]>(retrieve(LocalStorageKey.DailyWords)?.split(';') ?? [])

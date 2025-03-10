@@ -32,9 +32,9 @@ const emits = defineEmits<{
 </template>
 
 <style scoped lang="scss">
-@use './../assets/design-tokens/typography';
-@use './../assets/design-tokens/iconography';
-@use './../assets/design-tokens/palette';
+@use '../../assets/design-tokens/typography';
+@use '../../assets/design-tokens/palette';
+@use '../../assets/design-tokens/iconography';
 
 $letter-size: 4.5; // em
 $letter-gap: 0.5;

@@ -1,5 +1,5 @@
 import { WordTool } from "@/models/tools";
-import { settingsStore } from "@/stores/settings"
+import settingsStore from "@/stores/settings"
 
 function openPage(url: string) {
   window.open(url, '_blank')

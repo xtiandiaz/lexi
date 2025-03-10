@@ -2,6 +2,8 @@
 @use './design-tokens/typography';
 @use './design-tokens/iconography';
 
+$nav-height: 4em;
+
 * {
   touch-action: manipulation;
   -webkit-touch-callout: none;
@@ -17,61 +19,19 @@ html {
 
 html, body {
   margin: 0;
+  overflow: hidden;
 }
 
-html, body, main, #app {
+html, body, #app {
   width: 100%;
   height: 100%;
-  overflow: hidden;
 }
 
 #app {
   display: flex;
-  align-items: center;
   justify-content: center;
   flex-direction: column;
-}
-
-div.modal {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(black, 0.85);
-  z-index: 100;
-}
-
-div.panel {
-  $h-padding: 1em;
-  $v-padding: 1.5em;
-  
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  padding: $v-padding $h-padding;
-  width: calc(100% - $h-padding * 2);
-  height: calc(50% - $v-padding * 2);
-  
-  &#screen {
-    top: 0;
-    bottom: 50%;
-    gap: 0.25em;
-    
-    h1 {
-      margin-bottom: 0.25em;
-    }
-    
-    h6 {
-      margin: 0;
-    }
-  }
-  
-  &#gamepad {
-    top: 50%;
-    bottom: 0;
-  }
 }
 
 .toolbar {
@@ -80,15 +40,61 @@ div.panel {
   justify-content: center;
   align-items: center;
   gap: 0.75em;
+  height: $nav-height;
 }
 
 nav {
   @extend .toolbar;
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
-  padding: 0.25em;
+  left: 0;
+  @include palette.color-attribute('background-color', 'secondary-background');
+  
+  h6 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+}
+
+main {
+  width: 100%;
+  margin: $nav-height 0 0 0;
+  overflow: auto;
+  
+  &.game {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    
+    section {
+      $h-padding: 1em;
+      $v-padding: 1.5em;
+      
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: $v-padding $h-padding;
+      width: calc(100% - $h-padding * 2);
+      height: calc(50% - $v-padding * 2);
+      
+      &#screen {
+        gap: 0.25em;
+        
+        h1 {
+          margin-bottom: 0.25em;
+        }
+        
+        h6 {
+          margin: 0;
+        }
+      }
+    }
+  }
 }
 
 div.spacer {
@@ -105,26 +111,27 @@ div.spacer {
     @include palette.color-attribute('color', 'secondary-body');
   }
 }
-
+  
 button {
   border: 1px solid;
   padding: 0.25em 0.5em;
   border-radius: 4em;
+  
   @include palette.color-attributes((
     'color': 'body',
     'border-color': 'accessory',
     'background-color': 'background'
   ));
-  
+    
   &.iconized {
     border-color: transparent;
     background-color: transparent;
     font-size: 1.5em;
-    
-    &.clear {
-      border-color: transparent;
-      background-color: transparent;
-    }
+  }
+      
+  &.clear {
+    border-color: transparent;
+    background-color: transparent;
   }
   
   &.close {
@@ -139,14 +146,58 @@ button {
     cursor: pointer;
   }
   
-  &:active:enabled {
-    transform: scale(85%);
-    transition: transform 0.1s;
-  }
+  // &:active:enabled {
+  //   transform: scale(85%);
+  //   transition: transform 0.1s;
+  // }
   
   &:disabled {
     background-color: transparent;
     opacity: 25%;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0 0 1em 0;
+  padding: 1em;
+  
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    @include palette.color-attribute('background-color', 'secondary-background');
+    
+    div.header {
+      margin: 0 1.25em 0.75em 1.25em;
+      span.title {
+        @extend .caption, .all-caps;
+        @include palette.color-attribute('color', 'tertiary-body');
+      }
+    }
+    
+    li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      min-height: 3.5em;
+      vertical-align: middle;
+      margin: 0;
+      padding: 0 1em;
+      @include palette.color-attribute('background-color', 'background');
+      
+      &:first-of-type {
+        border-radius: 1em 1em 0 0;
+      }
+      &:last-of-type {
+        border-radius: 0 0 1em 1em;
+      }
+    }
   }
 }
 
@@ -168,19 +219,29 @@ button {
   @include iconography.colored-icon-content-attribute('spinner', 'accessory');
 }
 
+// div.modal {
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   left: 0;
+//   background-color: rgba(black, 0.85);
+//   z-index: 100;
+// }
+
 /*
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
+    }
+    }
+    
+    @media (min-width: 1024px) {
+      body {
+        display: flex;
+        place-items: center;
+        }
+        
   #app {
     display: grid;
     grid-template-columns: 1fr 1fr;

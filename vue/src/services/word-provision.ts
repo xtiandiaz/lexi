@@ -1,27 +1,22 @@
-import type { Language } from "@/models/language"
+import settingsStore from '@/stores/settings'
+import { inGameStore } from '@/stores/in-game'
 
-export class WordProvider {
-  language: Language
-  
-  private _words: string[] = []
-  
-  constructor(language: Language) {
-    this.language = language
+export async function loadContent() {
+  const inGame = inGameStore()
+  if (inGame.wordListing.length > 0) {
+    return
   }
   
-  async load() {
-    try {
-      const response = await fetch(`https://raw.githubusercontent.com/xtiandiaz/lexicon/refs/heads/main/words/es.txt?salt=${Math.random()}`)
-      // console.log(response)
-      const wordListing = await response.text()
-      // console.log(wordListing)
-      this._words = wordListing.split('\n')
-    } catch (error) {
-      console.error(`Language: ${this.language}`, error)
-    }
-  }
+  const settings = settingsStore()
+  const url = `https://raw.githubusercontent.com/xtiandiaz/lexicon/refs/heads/main/words/${settings.activeLanguage}.txt`
   
-  getRandomWord(): string {
-    return this._words[Math.floor(Math.random() * this._words.length)]
+  try {
+    const response = await fetch(`${url}?salt=${Math.random()}`)
+    // console.log(response)
+    const wordListing = await response.text()
+    // console.log(wordListing)
+    inGame.wordListing = wordListing.split('\n')
+  } catch (error) {
+    console.error(`Language: ${settings.activeLanguage}`, error)
   }
 }
