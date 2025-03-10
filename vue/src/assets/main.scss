@@ -36,7 +36,7 @@ html, body, #app {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 0.75em;
+  gap: 1em;
   height: $nav-height;
 }
 
@@ -68,7 +68,7 @@ main {
     overflow: hidden;
     
     section {
-      $h-padding: 1em;
+      $h-padding: 0.5em;
       $v-padding: 1.5em;
       
       display: flex;
