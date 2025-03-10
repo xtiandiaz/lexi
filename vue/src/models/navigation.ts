@@ -40,7 +40,7 @@ export function navigationMap(origin: SectionKey): INavigationMap {
       break
     case SectionKey.Settings:
     case SectionKey.DailyHistory:
-      rightHandPaths = [{ iconKey: IconKey.Xmark }]
+      leftHandPaths = [{ iconKey: IconKey.ChevronLeft }]
       break
   }
   

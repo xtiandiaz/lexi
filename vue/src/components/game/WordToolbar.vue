@@ -25,7 +25,7 @@ function wordToolIconClass(tool: WordTool): string {
 <template>
   <div class="toolbar">
     <button 
-      class="iconized" 
+      class="iconized medium" 
       v-for="(tool, index) of tools.entries()" 
       :key="index" 
       :disabled="!tool[1]"

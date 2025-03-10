@@ -40,7 +40,6 @@ function onPathClicked(sectionKey?: SectionKey) {
     router.back()
   }
 }
-
 </script>
 
 <template>
@@ -51,7 +50,7 @@ function onPathClicked(sectionKey?: SectionKey) {
         :disabled="!isPathEnabled(path.sectionKey)"
         @click="onPathClicked(path.sectionKey)"
       >
-        <span class="icon" :class="path.sectionKey ?? 'close'"></span>
+        <span class="icon" :class="path.sectionKey ?? 'back'"></span>
       </button>
       <span class="annotation">{{ pathAnnotation(path.sectionKey) }}</span>
     </span>
@@ -67,7 +66,7 @@ function onPathClicked(sectionKey?: SectionKey) {
         :disabled="!isPathEnabled(path.sectionKey)"
         @click="onPathClicked(path.sectionKey)"
       >
-        <span class="icon" :class="path.sectionKey ?? 'close'"></span>
+        <span class="icon" :class="path.sectionKey ?? 'back'"></span>
       </button>
     </span>
   </nav>
@@ -83,8 +82,8 @@ function onPathClicked(sectionKey?: SectionKey) {
   &.daily-history {
     @include iconography.colored-icon-content-attribute('history', 'body');
   }
-  &.close {
-    @include iconography.colored-icon-content-attribute('xmark', 'body');
+  &.back {
+    @include iconography.colored-icon-content-attribute('chevron-left', 'body');
   }
 }
 </style>
