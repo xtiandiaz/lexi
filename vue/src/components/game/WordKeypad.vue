@@ -36,7 +36,7 @@ const emits = defineEmits<{
 @use '../../assets/design-tokens/palette';
 @use '../../assets/design-tokens/iconography';
 
-$letter-size: 3.25; // em
+$letter-size: 3; // em
 $letter-gap: 0.5;
 $letter-count-row: 8;
 
