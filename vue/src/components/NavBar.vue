@@ -13,14 +13,14 @@ const { map } = defineProps<{
 const settings = settingsStore()
 const dailyHistory = dailyHistoryStore()
 
-function pathLabel(sectionKey?: SectionKey): string {
+function pathLabel(sectionKey?: SectionKey): string | undefined {
   switch (sectionKey) {
     case SectionKey.Settings:
       return settings.activeLanguage.toUpperCase()
     case SectionKey.DailyHistory:
       return `${dailyHistory.wordCount}`
     default:
-      return 'Lexi'
+      return undefined
   }
 }
 
@@ -52,6 +52,7 @@ function onPathClicked(sectionKey?: SectionKey) {
       :icon="path.iconKey"
       :color="ColorKey.Body"
       :annotation="pathLabel(path.sectionKey)"
+      :disabled="!isPathEnabled(path.sectionKey)"
       @click="onPathClicked(path.sectionKey)"
     />
     
