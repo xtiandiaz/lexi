@@ -2,21 +2,21 @@
 import WordToolbar from './WordToolbar.vue'
 import WordKeypad from './WordKeypad.vue';
 import { computed } from 'vue'
-import { WordTool } from '@/models/tools'
+import { WordToolKey, type IWordTool } from '@/models/tools'
 
-const isWordSolved = computed(() => Array.from(tools.keys()).contains(WordTool.Continue))
+const isWordSolved = computed(() => tools.map(t => t.key).contains(WordToolKey.Continue))
 
 const { word, inputableLetterIndices, inputLetterIndices, tools } = defineProps<{
   word: string,
   inputableLetterIndices: number[],
   inputLetterIndices: number[],
-  tools: Map<WordTool, boolean>
+  tools: IWordTool[]
 }>()
 
 const emits = defineEmits<{
   input: [index: number],
   deleted: [void],
-  toolSelected: [tool: WordTool]
+  toolSelected: [key: WordToolKey]
 }>()
 
 function onLetterInput(index: number) {

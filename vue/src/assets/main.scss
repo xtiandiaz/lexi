@@ -36,7 +36,7 @@ html, body, #app {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 1em;
+  gap: 1.5em;
   height: $nav-height;
 }
 
@@ -46,6 +46,7 @@ nav {
   top: 0;
   right: 0;
   left: 0;
+  padding: 0.5em;
   @include palette.color-attribute('background-color', 'secondary-background');
   
   .title {
@@ -115,14 +116,18 @@ button {
     gap: 0.25em;
     
     .icon {
-      font-size: 1.25em;
+      font-size: 1.5em;
     }
-    span.annotation {
-      @extend .caption, .all-caps;
-      @include palette.color-attribute('color', 'secondary-body');
+    
+    &.annotated {
+      flex-direction: column;
+      justify-content: center;
+      
+      span.annotation {
+        @extend .caption, .all-caps;
+        @include palette.color-attribute('color', 'secondary-body');
+      }
     }
-    // span.label {
-    // }
   }
       
   &.clear {
@@ -148,6 +153,9 @@ button {
 .icon {
   &.back {
     @include iconography.colored-icon-content-attribute('chevron-left', 'body');
+  }
+  &.settings {
+    @include iconography.colored-icon-content-attribute('gear', 'orange');
   }
 }
 

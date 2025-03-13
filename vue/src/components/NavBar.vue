@@ -3,6 +3,8 @@ import settingsStore from '@/stores/settings'
 import dailyHistoryStore from '@/stores/history'
 import { type INavigationMap, SectionKey } from '@/models/navigation'
 import router from '@/router'
+import IconButton from './vueties/buttons/IconButton.vue'
+import { ColorKey } from '@/assets/design-tokens/palette';
 
 const { map } = defineProps<{
   map: INavigationMap
@@ -44,41 +46,39 @@ function onPathClicked(sectionKey?: SectionKey) {
 
 <template>
   <nav>
-    <button 
-      class="iconized" 
-      v-for="(path, index) of map.leftHandPaths" :key="index"
-      :disabled="!isPathEnabled(path.sectionKey)"
+    <IconButton 
+      v-for="(path, index) of map.leftHandPaths" 
+      :key="index"
+      :icon="path.iconKey"
+      :color="ColorKey.Body"
+      :annotation="pathLabel(path.sectionKey)"
       @click="onPathClicked(path.sectionKey)"
-    >
-      <span class="icon" :class="[path.sectionKey ?? 'back', path.sectionKey ? '' : 'small']"></span>
-      <span :class="path.sectionKey === undefined ? 'label' : 'annotation'">{{ pathLabel(path.sectionKey) }}</span>
-    </button>
+    />
     
     <div class="spacer"></div>
-    <span class="title serif">{{ map.title }}</span>
+    <strong class="title">{{ map.title }}</strong>
     <div class="spacer"></div>
     
-    <button 
-      class="iconized" 
+    <IconButton 
+      v-for="(path, index) of map.rightHandPaths" 
+      :key="index"
+      :icon="path.iconKey"
+      :color="ColorKey.Body"
+      :annotation="pathLabel(path.sectionKey)"
+      @click="onPathClicked(path.sectionKey)"
+    />
+    <!-- <button 
+      class="iconized annotated" 
       v-for="(path, index) of map.rightHandPaths" :key="index"
       :disabled="!isPathEnabled(path.sectionKey)"
       @click="onPathClicked(path.sectionKey)"
     >
-      <span class="annotation all-caps">{{ pathLabel(path.sectionKey) }}</span>
-      <span class="icon" :class="path.sectionKey"></span>
-    </button>
+      <span class="icon" :class="path.iconKey"></span>
+      <span class="annotation">{{ pathLabel(path.sectionKey) }}</span>
+    </button> -->
   </nav>
 </template>
 
 <style scoped lang="scss">
 @use './../assets/design-tokens/iconography';
-
-.icon {
-  &.settings {
-    @include iconography.colored-icon-content-attribute('gear', 'body');
-  }
-  &.daily-history {
-    @include iconography.colored-icon-content-attribute('history', 'body');
-  }
-}
 </style>

@@ -7,3 +7,6 @@
 [submodule "vue/submodules/tungsten"]
 	path = vue/submodules/tungsten
 	url = git@github.com:xtiandiaz/tungsten.git
+[submodule "vue/submodules/vueties"]
+	path = vue/submodules/vueties
+	url = git@github.com:xtiandiaz/vueties.git

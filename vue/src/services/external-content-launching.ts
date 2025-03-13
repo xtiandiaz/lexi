@@ -1,24 +1,24 @@
-import { WordTool } from "@/models/tools";
+import { WordToolKey } from "@/models/tools";
 import settingsStore from "@/stores/settings"
 
 function openPage(url: string) {
   window.open(url, '_blank')
 }
 
-export function openWordToolPage(tool: WordTool, word: string) {
+export function openWordToolPage(tool: WordToolKey, word: string) {
   const settings = settingsStore()
   
   switch (tool) {
-    case WordTool.Define:
+    case WordToolKey.Define:
       openPage(settings.languages.get(settings.activeLanguage)!.dictionaryUrl + word)
       break
-    case WordTool.WikipediaSearch:
+    case WordToolKey.WikipediaSearch:
       openPage(settings.wikipediaSearchUrl + word)
       break
-    case WordTool.WebSearch:
+    case WordToolKey.WebSearch:
       openPage(settings.webSearchUrl + word)
       break
-    case WordTool.ImageSearch:
+    case WordToolKey.ImageSearch:
       openPage(settings.imageSearchUrl + word)
       break
     default:

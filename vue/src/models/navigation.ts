@@ -8,6 +8,21 @@ export enum SectionKey {
   DailyHistory = 'daily-history'
 }
 
+export interface INavigationItem {
+  icon: IconKey
+  destination?: SectionKey
+}
+export const backItem: INavigationItem = {
+  icon: IconKey.ChevronLeft
+}
+
+export interface INavigationBar {
+  origin: SectionKey,
+  leftHandItems: INavigationItem[],
+  rightHandItems: INavigationItem[],
+  title?: string
+}
+
 export interface INavigationPath {
   iconKey: IconKey
   sectionKey?: SectionKey
@@ -39,7 +54,10 @@ export function navigationMap(origin: SectionKey): INavigationMap {
   switch (origin) {
     case SectionKey.Game:
       leftHandPaths = [{ iconKey: IconKey.Gear, sectionKey: SectionKey.Settings }]
-      rightHandPaths = [{ iconKey: IconKey.History, sectionKey: SectionKey.DailyHistory }]
+      rightHandPaths = [
+        // { iconKey: IconKey.Gear, sectionKey: SectionKey.Settings },
+        { iconKey: IconKey.History, sectionKey: SectionKey.DailyHistory },
+      ]
       title = undefined
       break
     case SectionKey.Settings:
