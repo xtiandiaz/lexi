@@ -53,9 +53,9 @@ $letter-count-row: 8;
   }
   
   button.letter {
-    width: #{$letter-size} + 'em';
-    height: #{$letter-size} + 'em';
     border-radius: 0.5em;
+    height: #{$letter-size} + 'em';
+    width: #{$letter-size} + 'em';
     
     &:enabled {
       @include palette.color-attribute('background-color', 'background');
@@ -65,6 +65,7 @@ $letter-count-row: 8;
       .icon {
         font-size: 1.25em;
         margin: 0 auto;
+        vertical-align: middle;
         @include iconography.colored-icon-content-attribute('delete', 'background');
       }
       
