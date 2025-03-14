@@ -1,24 +1,24 @@
-import { ToolKey } from "@/models/tools";
+import { WordToolKey } from "@/models/tools";
 import settingsStore from "@/stores/settings"
 
 function openPage(url: string) {
   window.open(url, '_blank')
 }
 
-export function openWordToolPage(tool: ToolKey, word: string) {
+export function openWordToolPage(tool: WordToolKey, word: string) {
   const settings = settingsStore()
   
   switch (tool) {
-    case ToolKey.Define:
+    case WordToolKey.Define:
       openPage(settings.languages.get(settings.activeLanguage)!.dictionaryUrl + word)
       break
-    case ToolKey.WikipediaSearch:
+    case WordToolKey.WikipediaSearch:
       openPage(settings.wikipediaSearchUrl + word)
       break
-    case ToolKey.WebSearch:
+    case WordToolKey.WebSearch:
       openPage(settings.webSearchUrl + word)
       break
-    case ToolKey.ImageSearch:
+    case WordToolKey.ImageSearch:
       openPage(settings.imageSearchUrl + word)
       break
     default:

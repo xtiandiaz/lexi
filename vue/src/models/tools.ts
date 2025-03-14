@@ -1,7 +1,8 @@
 import { IconKey } from "@/assets/design-tokens/iconography";
 import { ColorKey } from "@/assets/design-tokens/palette";
+import { type ITool } from "@/components/vueties/models";
 
-export enum ToolKey {
+export enum WordToolKey {
   Continue = 'continue',
   Define = 'define', 
   Hint = 'hint',
@@ -10,38 +11,35 @@ export enum ToolKey {
   WikipediaSearch = 'wikipedia-search'
 }
 
-export interface ITool {
-  key: ToolKey,
-  icon: IconKey,
+export interface IWordTool extends ITool<WordToolKey> {
   color: ColorKey
-  isEnabled: boolean
 }
 
-export function wordTool(key: ToolKey, isEnabled: boolean): ITool {
+export function wordTool(key: WordToolKey, isEnabled: boolean): IWordTool {
   let icon: IconKey, color: ColorKey
   
   switch (key) {
-    case ToolKey.Continue:
+    case WordToolKey.Continue:
       icon = IconKey.Play
       color = ColorKey.Purple
       break
-    case ToolKey.Define:
+    case WordToolKey.Define:
       icon = IconKey.Dictionary
       color = ColorKey.Mint
       break
-    case ToolKey.Hint:
+    case WordToolKey.Hint:
       icon = IconKey.Hint
       color = ColorKey.Yellow
       break
-    case ToolKey.ImageSearch:
+    case WordToolKey.ImageSearch:
       icon = IconKey.Image
       color = ColorKey.Indigo
       break
-    case ToolKey.WebSearch:
+    case WordToolKey.WebSearch:
       icon = IconKey.Globe
       color = ColorKey.Blue
       break
-    case ToolKey.WikipediaSearch:
+    case WordToolKey.WikipediaSearch:
       icon = IconKey.Wikipedia
       color = ColorKey.Body
       break
@@ -50,7 +48,7 @@ export function wordTool(key: ToolKey, isEnabled: boolean): ITool {
   return {
     key: key,
     icon: icon,
-    color: color,
-    isEnabled: isEnabled
+    isEnabled: isEnabled,
+    color: color
   }
 }

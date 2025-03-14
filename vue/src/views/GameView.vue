@@ -4,7 +4,7 @@ import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import WordScreen from '@/components/game/WordScreen.vue'
 import WordGamepad from '@/components/game/WordGamepad.vue'
 import NavBar from '@/components/NavBar.vue'
-import { wordTool, ToolKey, type ITool } from '@/models/tools'
+import { wordTool, WordToolKey, type IWordTool } from '@/models/tools'
 import { SectionKey, navigationMap } from '@/models/navigation'
 import { inGameStore, type IActiveWordState } from '@/stores/in-game'
 import { openWordToolPage } from '@/services/external-content-launching'
@@ -16,15 +16,12 @@ import { clamp } from '@/assets/tungsten/math'
 
 const inGame = inGameStore()
 
-// type GamepadType = InstanceType<typeof WordGamepad>
-// const gamepadRef = useTemplateRef<GamepadType>('gamepad');
-
 const activeWord = ref<string>()
 // const activeWordSynonyms = ref<string[]>()
 const activeHintPrefix = ref<string>()
 const activeInputableIndices = ref<number[]>([])
 const activeInputIndices = ref<number[]>([])
-const activeTools = ref<Map<ToolKey, ITool>>(new Map())
+const activeTools = ref<Map<WordToolKey, IWordTool>>(new Map())
 
 const inputableActiveWordHunk = computed(() => activeWord.value?.substring(activeHintPrefix.value!.length))
 const activeInputString = computed(() => activeInputIndices.value.map(i => activeWord.value![i]).join(''))
@@ -51,13 +48,11 @@ function resetActiveWord(activeWordState?: IActiveWordState) {
     activeInputIndices.value = []
   }
   
-  activeTools.value = new Map([ToolKey.Hint].map(key => [key, wordTool(key, true)]))
+  activeTools.value = new Map([WordToolKey.Hint].map(key => [key, wordTool(key, true)]))
   
   resetDailyHistoryIfNeeded()
 }
 
-// function onInputChanged(letterIndices: number[]) {
-//   activeInput.value = letterIndices
 function onInput(index: number) {
   console.log(index)
   
@@ -72,21 +67,21 @@ function onInput(index: number) {
   }
 }
 
-function onToolSelected(tool: ToolKey) {
+function onToolSelected(tool: WordToolKey) {
   if (activeWord.value === undefined)
     return
 
   switch (tool) {
-    case ToolKey.Define:
-    case ToolKey.WikipediaSearch:
-    case ToolKey.WebSearch:
-    case ToolKey.ImageSearch:
+    case WordToolKey.Define:
+    case WordToolKey.WikipediaSearch:
+    case WordToolKey.WebSearch:
+    case WordToolKey.ImageSearch:
       openWordToolPage(tool, activeWord.value)
       break
-    case ToolKey.Continue:
+    case WordToolKey.Continue:
       resetActiveWord()
       break
-    case ToolKey.Hint:
+    case WordToolKey.Hint:
       const hintedChunk = getHintedChunk(activeInputString.value, inputableActiveWordHunk.value!)
       // console.log('hintedChunk', hintedChunk)
       if (hintedChunk !== undefined) {
@@ -95,18 +90,18 @@ function onToolSelected(tool: ToolKey) {
         // gamepadRef.value?.replaceInputIndices(hintedChunkIndices)
         activeInputIndices.value = hintedChunkIndices
       }
-      updateToolState(ToolKey.Hint)
+      updateToolState(WordToolKey.Hint)
       break
   }
 }
 
-function updateToolState(key: ToolKey) {
+function updateToolState(key: WordToolKey) {
   const tool = activeTools.value?.get(key)
   if (tool === undefined)
     return
   
   switch (key) {
-    case ToolKey.Hint:
+    case WordToolKey.Hint:
       tool.isEnabled = canHint(activeInputString.value, inputableActiveWordHunk.value!)
       break
   }
@@ -120,16 +115,16 @@ watch(
     if (isActiveWordCompleted.value) {    
       activeTools.value = new Map(
         [
-          ToolKey.Define, 
-          ToolKey.WikipediaSearch, 
-          ToolKey.WebSearch, 
-          ToolKey.ImageSearch, 
-          ToolKey.Continue
+          WordToolKey.Define, 
+          WordToolKey.WikipediaSearch, 
+          WordToolKey.WebSearch, 
+          WordToolKey.ImageSearch, 
+          WordToolKey.Continue
         ].map(key => [key, wordTool(key, true)])
       )
     }
     
-    updateToolState(ToolKey.Hint)
+    updateToolState(WordToolKey.Hint)
   },
   { deep: true }
 )

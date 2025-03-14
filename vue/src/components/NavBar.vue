@@ -68,18 +68,8 @@ function onPathClicked(sectionKey?: SectionKey) {
       :annotation="pathLabel(path.sectionKey)"
       @click="onPathClicked(path.sectionKey)"
     />
-    <!-- <button 
-      class="iconized annotated" 
-      v-for="(path, index) of map.rightHandPaths" :key="index"
-      :disabled="!isPathEnabled(path.sectionKey)"
-      @click="onPathClicked(path.sectionKey)"
-    >
-      <span class="icon" :class="path.iconKey"></span>
-      <span class="annotation">{{ pathLabel(path.sectionKey) }}</span>
-    </button> -->
   </nav>
 </template>
 
 <style scoped lang="scss">
-@use './../assets/design-tokens/iconography';
 </style>
