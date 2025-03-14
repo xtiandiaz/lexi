@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { WordToolKey, type IWordTool } from '@/models/tools'
+import { ToolKey, type ITool } from '@/models/tools'
 import IconButton from '../vueties/buttons/IconButton.vue'
 
 const { tools } = defineProps<{
-  tools: IWordTool[],
+  tools: ITool[],
 }>()
 
 const emits = defineEmits<{
-  toolSelected: [key: WordToolKey]
+  toolSelected: [key: ToolKey]
 }>()
 </script>
 
@@ -17,12 +17,32 @@ const emits = defineEmits<{
       v-for="(tool, index) of tools" 
       :key="index" 
       :icon="tool.icon"
-      :color="tool.color"
+      :class="tool.key"
       :disabled="!tool.isEnabled"
       @click="emits('toolSelected', tool.key)"
     />
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
+@use '@/assets/design-tokens/palette';
+
+.define {
+  @include palette.color-attribute('color', 'mint');
+}
+.continue {
+  @include palette.color-attribute('color', 'purple');
+}
+.hint {
+  @include palette.color-attribute('color', 'yellow');
+}
+.image-search {
+  @include palette.color-attribute('color', 'indigo');
+}
+.web-search {
+  @include palette.color-attribute('color', 'blue');
+}
+.wikipedia-search {
+  @include palette.color-attribute('color', 'body');
+}
 </style>

@@ -1,18 +1,31 @@
 <script setup lang="ts">
-defineProps<{
+import { computed } from 'vue';
+import SimpleKeypad from '../vueties/pads/SimpleKeypad.vue';
+import type { IKeypadKey } from '../vueties/models';
+import { IconKey } from '@/assets/design-tokens/iconography';
+
+const { word, inputableLetterIndices, inputLetterIndices } = defineProps<{
   word: string,
   inputableLetterIndices: number[],
   inputLetterIndices: number[],
 }>()
 
 const emits = defineEmits<{
-  letterInput: [index: number],
-  deleted: [void]
+  input: [index: number]
 }>()
+
+const keypadKeys = computed<IKeypadKey[]>(() => {
+  const keys: IKeypadKey[] = inputableLetterIndices.map(li => {
+    return { label: word[li].toLowerCase(), value: li, isEnabled: !inputLetterIndices.contains(li) }
+  })
+  keys.push({ label: IconKey.Delete, value: -1, isEnabled: inputLetterIndices.length !== 0 })
+  return keys
+})
 </script>
 
 <template>
-<div id="keypad">
+  <SimpleKeypad :keys="keypadKeys" @input="(value) => emits('input', Number(value))"/>
+<!-- <div id="keypad">
   <button 
     class="letter" v-for="(letterIndex, keyIndex) of inputableLetterIndices" 
     :key="keyIndex"
@@ -28,13 +41,21 @@ const emits = defineEmits<{
   >
     <span class='icon medium'></span>
   </button>
-</div>
+</div> -->
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
+@use '@/assets/theme';
 @use '../../assets/design-tokens/typography';
 @use '../../assets/design-tokens/palette';
 @use '../../assets/design-tokens/iconography';
+@use '../vueties/assets/pads';
+
+.pad {
+  :deep(button:first-of-type) {
+    @include palette.color-attribute('color', 'yellow');
+  }
+}
 
 $letter-size: 3; // em
 $letter-gap: 0.5;

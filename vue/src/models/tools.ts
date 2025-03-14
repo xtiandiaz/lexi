@@ -1,47 +1,47 @@
 import { IconKey } from "@/assets/design-tokens/iconography";
 import { ColorKey } from "@/assets/design-tokens/palette";
 
-export enum WordToolKey {
-  Continue,
-  Define, 
-  Hint,
-  ImageSearch,
-  WebSearch,
-  WikipediaSearch
+export enum ToolKey {
+  Continue = 'continue',
+  Define = 'define', 
+  Hint = 'hint',
+  ImageSearch = 'image-search',
+  WebSearch = 'web-search',
+  WikipediaSearch = 'wikipedia-search'
 }
 
-export interface IWordTool {
-  key: WordToolKey,
+export interface ITool {
+  key: ToolKey,
   icon: IconKey,
   color: ColorKey
   isEnabled: boolean
 }
 
-export function wordTool(key: WordToolKey, isEnabled: boolean): IWordTool {
+export function wordTool(key: ToolKey, isEnabled: boolean): ITool {
   let icon: IconKey, color: ColorKey
   
   switch (key) {
-    case WordToolKey.Continue:
+    case ToolKey.Continue:
       icon = IconKey.Play
       color = ColorKey.Purple
       break
-    case WordToolKey.Define:
+    case ToolKey.Define:
       icon = IconKey.Dictionary
       color = ColorKey.Mint
       break
-    case WordToolKey.Hint:
+    case ToolKey.Hint:
       icon = IconKey.Hint
       color = ColorKey.Yellow
       break
-    case WordToolKey.ImageSearch:
+    case ToolKey.ImageSearch:
       icon = IconKey.Image
       color = ColorKey.Indigo
       break
-    case WordToolKey.WebSearch:
+    case ToolKey.WebSearch:
       icon = IconKey.Globe
       color = ColorKey.Blue
       break
-    case WordToolKey.WikipediaSearch:
+    case ToolKey.WikipediaSearch:
       icon = IconKey.Wikipedia
       color = ColorKey.Body
       break
