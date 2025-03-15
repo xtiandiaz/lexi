@@ -1,8 +1,10 @@
 export function getHintedChunk(input: string, inputableHunk: string): string | undefined {
   let letterMatchCount = 0
   for (let i = 0; i < input.length; i++) {
-    if (input[i] === inputableHunk[i])
-      letterMatchCount++
+    if (input[i] !== inputableHunk[i]) {
+      break
+    }
+    letterMatchCount++
   }
   
   if (letterMatchCount < (inputableHunk.length - 1)) {

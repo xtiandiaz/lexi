@@ -56,7 +56,10 @@ const isWordSolved = computed(() => tools.map(t => t.key).contains(WordToolKey.C
     @include palette.color-attribute('color', 'purple');
   }
   &.hint {
-    @include palette.color-attribute('color', 'yellow');
+    @include palette.color-attributes((
+      'color': 'yellow',
+      'background-color': 'background'
+    ));
   }
   &.image-search {
     @include palette.color-attribute('color', 'indigo');
@@ -69,7 +72,7 @@ const isWordSolved = computed(() => tools.map(t => t.key).contains(WordToolKey.C
   }
 }
 
-:deep(.keypad-button:first-of-type) {
-  @include palette.color-attribute('color', 'yellow');
-}
+// :deep(.keypad-button:first-of-type) {
+//   @include palette.color-attribute('color', 'yellow');
+// }
 </style>
