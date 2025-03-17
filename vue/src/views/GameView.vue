@@ -2,7 +2,7 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import WordScreen from '@/components/game/WordScreen.vue'
 import WordGamepad from '@/components/game/WordGamepad.vue'
-import { wordTool, WordToolKey, type IWordTool } from '@/models/tools'
+import { WordToolKey } from '@/models/tools'
 import { SectionKey, computedNavigationItems } from '@/models/navigation'
 import { inGameStore, type IActiveWordState } from '@/stores/in-game'
 import { openWordToolPage } from '@/services/external-content-launching'
@@ -20,7 +20,6 @@ const activeWord = ref<string>()
 const activeHintPrefix = ref<string>()
 const activeInputableIndices = ref<number[]>([])
 const activeInputIndices = ref<number[]>([])
-const activeTools = ref<Map<WordToolKey, IWordTool>>(new Map())
 
 const activeInputString = computed(() => activeInputIndices.value.map(i => activeWord.value![i]).join(''))
 const hintPrefixedActiveInputString = computed(() => activeHintPrefix.value + activeInputString.value)
@@ -45,8 +44,6 @@ function resetActiveWord(activeWordState?: IActiveWordState) {
     
     activeInputIndices.value = []
   }
-  
-  activeTools.value = new Map([WordToolKey.Hint].map(key => [key, wordTool(key, true)]))
   
   resetDailyHistoryIfNeeded()
 }
