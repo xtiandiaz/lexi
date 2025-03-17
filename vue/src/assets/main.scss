@@ -1,6 +1,7 @@
 @use './design-tokens/palette';
 @use './design-tokens/typography';
 @use './design-tokens/iconography';
+@use '../components/vueties/assets/bars';
 
 $nav-height: 3em;
 
@@ -31,36 +32,13 @@ html, body, #app {
   overflow: auto;
 }
 
-.toolbar {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5em;
-  height: $nav-height;
-}
-
 nav {
-  @extend .toolbar;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  padding: 0.5em;
   @include palette.color-attribute('background-color', 'secondary-background');
-  
-  .title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-  }
 }
 
 main {
   width: 100%;
-  margin: $nav-height 0 0 0;
+  margin: calc(bars.$nav-bar-height + 0.25em) 0 0 0;
   
   &.game {
     margin: 0;
@@ -164,7 +142,7 @@ button {
   flex-direction: column;
   gap: 0;
   margin: 0 0 1em 0;
-  padding: 1em;
+  padding: 0 1em;
   // max-width: 800px;
   
   ul {
@@ -188,7 +166,7 @@ button {
       display: flex;
       flex-direction: row;
       align-items: center;
-      min-height: 3.25em;
+      min-height: 3em;
       vertical-align: middle;
       margin: 0;
       padding: 0 1em;

@@ -11,6 +11,7 @@ export default defineStore('settings', {
       activeLanguage: activeLanguage,
       webSearchUrl: 'https://duckduckgo.com/?t=ffab&q=',
       imageSearchUrl: 'https://duckduckgo.com/?t=ffab&iax=images&ia=images&q=',
+      translatorUrl: 'https://www.wordreference.com/es/en/translation.asp?spen=',
       languages: new Map([
         [LanguageKey.Español, { 
           dictionaryUrl: 'https://dle.rae.es/' 

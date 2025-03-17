@@ -1,23 +1,22 @@
 <script setup lang="ts">
 import dailyHistoryStore from '@/stores/history'
-import { SectionKey, navigationMap } from '@/models/navigation'
+import { SectionKey, sectionTitle, computedNavigationItems } from '@/models/navigation'
 import { capitalCase } from 'change-case'
-import NavBar from '@/components/NavBar.vue'
+import NavigationBar from '@/components/vueties/bars/NavigationBar.vue'
 
+const sectionKey = SectionKey.DailyHistory
 const dailyHistory = dailyHistoryStore()
+const navigationItems = computedNavigationItems(sectionKey)
 </script>
 
 <template>
-  <NavBar :map="navigationMap(SectionKey.DailyHistory)" />
+  <NavigationBar :items="navigationItems" :title="sectionTitle(sectionKey)" />
   <main>
     <section class="form">
       <ul>
-        <!-- <div class="header">
-          <span class="title">{{ dailyHistory.wordCount }} palabras</span>
-        </div> -->
         <li 
           class="info"
-          v-for="(word, index) of dailyHistory.words.sort()"
+          v-for="(word, index) of dailyHistory.words.sort((s1, s2) => s1.localeCompare(s2))"
           :key="index"
         >
         {{ capitalCase(word.split(',')[0]) }}
@@ -27,3 +26,5 @@ const dailyHistory = dailyHistoryStore()
   </main>
 </template>
 
+<style scoped lang="scss">
+</style>

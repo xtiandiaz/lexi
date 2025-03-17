@@ -12,14 +12,17 @@ export function openWordToolPage(tool: WordToolKey, word: string) {
     case WordToolKey.Define:
       openPage(settings.languages.get(settings.activeLanguage)!.dictionaryUrl + word)
       break
+    case WordToolKey.ImageSearch:
+      openPage(settings.imageSearchUrl + word)
+      break
+    case WordToolKey.Translate:
+      openPage(settings.translatorUrl + word)
+      break
     case WordToolKey.WikipediaSearch:
       openPage(settings.wikipediaSearchUrl + word)
       break
     case WordToolKey.WebSearch:
       openPage(settings.webSearchUrl + word)
-      break
-    case WordToolKey.ImageSearch:
-      openPage(settings.imageSearchUrl + word)
       break
     default:
       console.error(`${tool} doesn't have a page`)

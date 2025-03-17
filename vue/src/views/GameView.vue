@@ -1,19 +1,18 @@
 <script setup lang="ts">
-import '@/assets/tungsten/extensions/array.extensions'
-import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import WordScreen from '@/components/game/WordScreen.vue'
 import WordGamepad from '@/components/game/WordGamepad.vue'
-import NavBar from '@/components/NavBar.vue'
 import { wordTool, WordToolKey, type IWordTool } from '@/models/tools'
-import { SectionKey, navigationMap } from '@/models/navigation'
+import { SectionKey, computedNavigationItems } from '@/models/navigation'
 import { inGameStore, type IActiveWordState } from '@/stores/in-game'
 import { openWordToolPage } from '@/services/external-content-launching'
 import { loadContent } from '@/services/word-provision'
-import { canHint, getHintedChunk } from '@/services/word-analysis'
+import { fixOrExtendInput } from '@/services/word-utils'
 import { saveDailyWord, resetDailyHistoryIfNeeded } from '@/services/history-management'
-import { shuffle } from '@/assets/tungsten/randomness'
 import { clamp } from '@/assets/tungsten/math'
+import NavigationBar from '@/components/vueties/bars/NavigationBar.vue'
 
+const navigationItems = computedNavigationItems(SectionKey.Game)
 const inGame = inGameStore()
 
 const activeWord = ref<string>()
@@ -23,10 +22,9 @@ const activeInputableIndices = ref<number[]>([])
 const activeInputIndices = ref<number[]>([])
 const activeTools = ref<Map<WordToolKey, IWordTool>>(new Map())
 
-const inputableActiveWordHunk = computed(() => activeWord.value?.substring(activeHintPrefix.value!.length))
 const activeInputString = computed(() => activeInputIndices.value.map(i => activeWord.value![i]).join(''))
 const hintPrefixedActiveInputString = computed(() => activeHintPrefix.value + activeInputString.value)
-const isActiveWordCompleted = computed(() => hintPrefixedActiveInputString.value === activeWord.value)
+const isActiveWordSolved = computed(() => hintPrefixedActiveInputString.value === activeWord.value)
 
 function resetActiveWord(activeWordState?: IActiveWordState) {
   if (activeWordState !== undefined) {
@@ -43,7 +41,7 @@ function resetActiveWord(activeWordState?: IActiveWordState) {
     
     const inputableStartIndex = clamp(Math.floor(activeWord.value.length * 0.25), 0, Math.floor(activeWord.value.length / 2))
     activeHintPrefix.value = activeWord.value.substring(0, inputableStartIndex)
-    activeInputableIndices.value = shuffle(Array.range(inputableStartIndex, activeWord.value.length, 1))
+    activeInputableIndices.value = ((Array.range(inputableStartIndex, activeWord.value.length, 1)).shuffle())
     
     activeInputIndices.value = []
   }
@@ -53,13 +51,11 @@ function resetActiveWord(activeWordState?: IActiveWordState) {
   resetDailyHistoryIfNeeded()
 }
 
-function onInput(index: number) {
-  console.log(index)
-  
+function onInput(index: number) { 
   if (index >= 0) {
     activeInputIndices.value.push(index)
     
-    if (isActiveWordCompleted.value) {
+    if (isActiveWordSolved.value) {
       saveDailyWord(activeWord.value!)
     }
   } else {
@@ -73,61 +69,23 @@ function onToolSelected(tool: WordToolKey) {
 
   switch (tool) {
     case WordToolKey.Define:
+    case WordToolKey.ImageSearch:
+    case WordToolKey.Translate:
     case WordToolKey.WikipediaSearch:
     case WordToolKey.WebSearch:
-    case WordToolKey.ImageSearch:
       openWordToolPage(tool, activeWord.value)
       break
     case WordToolKey.Continue:
       resetActiveWord()
       break
     case WordToolKey.Hint:
-      const hintedChunk = getHintedChunk(activeInputString.value, inputableActiveWordHunk.value!)
-      // console.log('hintedChunk', hintedChunk)
-      if (hintedChunk !== undefined) {
-        const inputableStartIndex = activeHintPrefix.value!.length
-        const hintedChunkIndices = Array.range(inputableStartIndex, inputableStartIndex + hintedChunk.length, 1)
-        // gamepadRef.value?.replaceInputIndices(hintedChunkIndices)
-        activeInputIndices.value = hintedChunkIndices
+      const fixedOrExtendedInputIndices = fixOrExtendInput(activeWord.value, activeInputIndices.value, activeInputableIndices.value)
+      if (fixedOrExtendedInputIndices) {
+        activeInputIndices.value = fixedOrExtendedInputIndices
       }
-      updateToolState(WordToolKey.Hint)
       break
   }
 }
-
-function updateToolState(key: WordToolKey) {
-  const tool = activeTools.value?.get(key)
-  if (tool === undefined)
-    return
-  
-  switch (key) {
-    case WordToolKey.Hint:
-      tool.isEnabled = canHint(activeInputString.value, inputableActiveWordHunk.value!)
-      break
-  }
-  
-  activeTools.value.set(key, tool)
-}
-
-watch(
-  activeInputIndices, 
-  () => {
-    if (isActiveWordCompleted.value) {    
-      activeTools.value = new Map(
-        [
-          WordToolKey.Define, 
-          WordToolKey.WikipediaSearch, 
-          WordToolKey.WebSearch, 
-          WordToolKey.ImageSearch, 
-          WordToolKey.Continue
-        ].map(key => [key, wordTool(key, true)])
-      )
-    }
-    
-    updateToolState(WordToolKey.Hint)
-  },
-  { deep: true }
-)
 
 onMounted(async () => {
   await loadContent()
@@ -146,19 +104,21 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <span id="spinner" v-if="activeWord === undefined"></span>
-  <NavBar :map="navigationMap(SectionKey.Game)" />
-  <main class="game" v-if="activeWord !== undefined">
+  <span id="spinner" v-if="!activeWord"></span>
+  
+  <NavigationBar :items="navigationItems"/>
+  
+  <main class="game" v-if="activeWord">
     <WordScreen 
       :input="activeHintPrefix + activeInputString"
-      :is-word-completed="isActiveWordCompleted"
+      :is-word-completed="isActiveWordSolved"
     />
     <WordGamepad 
       ref="gamepad"
       :word="activeWord!" 
-      :inputable-letter-indices="activeInputableIndices"
-      :input-letter-indices="activeInputIndices"
-      :tools="Array.from(activeTools.values())"
+      :inputable-indices="activeInputableIndices"
+      :input-indices="activeInputIndices"
+      :is-word-solved="isActiveWordSolved"
       @reset-active-word="resetActiveWord" 
       @tool-selected="onToolSelected" 
       @input="onInput"

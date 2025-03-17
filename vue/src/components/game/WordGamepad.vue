@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { WordToolKey, type IWordTool } from '@/models/tools'
+import { WordToolKey, wordTool } from '@/models/tools'
 import type { IKeypadKey } from '../vueties/models';
 import { IconKey } from '@/assets/design-tokens/iconography'
+import { canHint } from '@/services/word-utils'
 import SimpleKeypad from '../vueties/pads/SimpleKeypad.vue';
 import ToolBar from '../vueties/bars/ToolBar.vue'
 
-const { word, inputableLetterIndices, inputLetterIndices, tools } = defineProps<{
+const { word, inputableIndices, inputIndices, isWordSolved } = defineProps<{
   word: string,
-  inputableLetterIndices: number[],
-  inputLetterIndices: number[],
-  tools: IWordTool[]
+  inputableIndices: number[],
+  inputIndices: number[],
+  isWordSolved: boolean
 }>()
 
 const emits = defineEmits<{
@@ -19,13 +20,27 @@ const emits = defineEmits<{
 }>()
 
 const keypadKeys = computed<IKeypadKey[]>(() => {
-  const keys: IKeypadKey[] = inputableLetterIndices.map(li => {
-    return { label: word[li].toLowerCase(), value: li, isEnabled: !inputLetterIndices.contains(li) }
+  const keys: IKeypadKey[] = inputableIndices.map(li => {
+    return { label: word[li].toLowerCase(), value: li, isEnabled: !inputIndices.includes(li) }
   })
-  keys.push({ label: IconKey.Delete, value: -1, isEnabled: inputLetterIndices.length !== 0 })
+  keys.push({ label: IconKey.Delete, value: -1, isEnabled: inputIndices.length !== 0 })
   return keys
 })
-const isWordSolved = computed(() => tools.map(t => t.key).contains(WordToolKey.Continue))
+const topBarTools = computed(() => [
+  WordToolKey.Define,
+  WordToolKey.ImageSearch,
+  WordToolKey.WikipediaSearch,
+  WordToolKey.WebSearch, 
+  WordToolKey.Translate,
+].map(key => wordTool(key, true))
+)
+const bottomBarTools = computed(() => {
+  if (!isWordSolved) {
+    const isEnabled = canHint(word, inputIndices, inputableIndices)
+    return [wordTool(WordToolKey.Hint, isEnabled)]
+  }
+  return [wordTool(WordToolKey.Continue)]
+})
 </script>
 
 <template>
@@ -36,10 +51,14 @@ const isWordSolved = computed(() => tools.map(t => t.key).contains(WordToolKey.C
       @input="(value) => emits('input', Number(value))" 
     />
     
-    <div class="spacer" v-if="!isWordSolved"></div>
-    
+    <ToolBar
+      v-if="isWordSolved"
+      :tools="topBarTools"
+      @tool-selected="(key) => emits('toolSelected', key)"
+    />
+    <div class="spacer"></div>
     <ToolBar 
-      :tools="tools"
+      :tools="bottomBarTools"
       @tool-selected="(key) => emits('toolSelected', key)"
     />
   </section>
@@ -50,10 +69,12 @@ const isWordSolved = computed(() => tools.map(t => t.key).contains(WordToolKey.C
 
 :deep(.icon-button) {
   &.define {
-    @include palette.color-attribute('color', 'mint');
+    @include palette.color-attribute('color', 'orange');
   }
   &.continue {
-    @include palette.color-attribute('color', 'purple');
+    @include palette.color-attributes((
+      'background-color': 'background'
+    ));
   }
   &.hint {
     @include palette.color-attributes((
@@ -62,17 +83,16 @@ const isWordSolved = computed(() => tools.map(t => t.key).contains(WordToolKey.C
     ));
   }
   &.image-search {
-    @include palette.color-attribute('color', 'indigo');
+    @include palette.color-attribute('color', 'mint');
+  }
+  &.translate {
+    @include palette.color-attribute('color', 'blue')
   }
   &.web-search {
-    @include palette.color-attribute('color', 'blue');
+    @include palette.color-attribute('color', 'purple');
   }
   &.wikipedia-search {
     @include palette.color-attribute('color', 'body');
   }
 }
-
-// :deep(.keypad-button:first-of-type) {
-//   @include palette.color-attribute('color', 'yellow');
-// }
 </style>

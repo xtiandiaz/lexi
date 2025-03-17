@@ -1,6 +1,10 @@
 import { IconKey } from '@/assets/design-tokens/iconography'
 import { localizedString } from '@/services/localization'
 import { LocalizedStringKey } from './language'
+import { BackwardNavigationBarItemKey, type INavigationBarItems, pushedViewNavigationBarItems } from '@/components/vueties/models'
+import { type ComputedRef, computed } from 'vue'
+import settingsStore from '@/stores/settings'
+import dailyHistoryStore from '@/stores/history'
 
 export enum SectionKey {
   Game = 'game',
@@ -8,68 +12,45 @@ export enum SectionKey {
   DailyHistory = 'daily-history'
 }
 
-export interface INavigationItem {
-  icon: IconKey
-  destination?: SectionKey
-}
-export const backItem: INavigationItem = {
-  icon: IconKey.ChevronLeft
-}
-
-export interface INavigationBar {
-  origin: SectionKey,
-  leftHandItems: INavigationItem[],
-  rightHandItems: INavigationItem[],
-  title?: string
-}
-
-export interface INavigationPath {
-  iconKey: IconKey
-  sectionKey?: SectionKey
-}
-
-export interface INavigationMap {
-  origin: SectionKey,
-  leftHandPaths: INavigationPath[],
-  rightHandPaths: INavigationPath[],
-  title?: string
-}
-
-export function sectionTitle(key: SectionKey): string {
+export const sectionTitle = (key: SectionKey): string | undefined => {
   switch (key) {
     case SectionKey.Settings:
       return localizedString(LocalizedStringKey.SettingsSectionTitle)!
     case SectionKey.DailyHistory:
       return localizedString(LocalizedStringKey.DailyHistorySectionTitle)!
-    case SectionKey.Game:
-      return 'Lexi';
+    default:
+      return undefined
   }
 }
 
-export function navigationMap(origin: SectionKey): INavigationMap {
-  let leftHandPaths: INavigationPath[] = []
-  let rightHandPaths: INavigationPath[] = []
-  let title: string | undefined = sectionTitle(origin)
-  
-  switch (origin) {
+export const computedNavigationItems = (section: SectionKey): ComputedRef<INavigationBarItems<SectionKey | BackwardNavigationBarItemKey>> => {
+  switch (section) {
     case SectionKey.Game:
-      leftHandPaths = [{ iconKey: IconKey.Gear, sectionKey: SectionKey.Settings }]
-      rightHandPaths = [
-        // { iconKey: IconKey.Gear, sectionKey: SectionKey.Settings },
-        { iconKey: IconKey.History, sectionKey: SectionKey.DailyHistory },
-      ]
-      title = undefined
-      break
+      return computed(() => {
+        const settings = settingsStore()
+        const dailyHistory = dailyHistoryStore()
+        
+        return {
+          leftBarItems: [
+            { 
+              key: SectionKey.Settings,
+              icon: IconKey.Gear,
+              isEnabled: false,
+              label: settings.activeLanguage.toUpperCase()
+            }
+          ],
+          rightBarItems: [
+            {
+              key: SectionKey.DailyHistory,
+              icon: IconKey.History,
+              isEnabled: dailyHistory.wordCount > 0,
+              label: `${dailyHistory.wordCount}`
+            }
+          ]
+        }
+      })
     case SectionKey.Settings:
     case SectionKey.DailyHistory:
-      leftHandPaths = [{ iconKey: IconKey.ChevronLeft }]
-      break
-  }
-  
-  return {
-    origin: origin,
-    leftHandPaths: leftHandPaths,
-    rightHandPaths: rightHandPaths,
-    title: title
+      return computed(() => pushedViewNavigationBarItems([], sectionTitle(section)))
   }
 }
