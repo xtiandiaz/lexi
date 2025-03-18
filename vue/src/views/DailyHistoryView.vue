@@ -48,6 +48,12 @@ function onWordSelected(index: number) {
 @use '../components/vueties/assets/form';
 
 main {
-  padding: 1em;
+  padding: 0.5em 1em;
+}
+
+:deep(.tool-bar) {
+  flex: auto;
+  justify-content: space-between;
+  max-width: calc(form.$max-width / 2);
 }
 </style>
