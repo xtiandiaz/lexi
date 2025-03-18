@@ -1,23 +1,28 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
-import { LanguageKey } from '../models/language'
+import { Language } from '../models/language'
 
 export default defineStore('settings', {  
   state: () => {
-    const activeLanguage = ref<LanguageKey>(LanguageKey.Español)
-    const wikipediaSearchUrl = computed(() => `https://${activeLanguage.value}.wikipedia.org/wiki/`)
+    const currentLanguage = ref<Language>(Language.Español)
+    const translationLanguage = ref<Language>(Language.English)
+    const wikipediaSearchUrl = computed(() => `https://${currentLanguage.value}.wikipedia.org/wiki/`)
+    const translatorUrl = computed(() => `https://www.wordreference.com/${currentLanguage.value}/${translationLanguage.value}/translation.asp?spen=`)
     
     return {
-      activeLanguage: activeLanguage,
-      webSearchUrl: 'https://duckduckgo.com/?t=ffab&q=',
+      activeLanguage: currentLanguage,
       imageSearchUrl: 'https://duckduckgo.com/?t=ffab&iax=images&ia=images&q=',
-      translatorUrl: 'https://www.wordreference.com/es/en/translation.asp?spen=',
+      webSearchUrl: 'https://duckduckgo.com/?t=ffab&q=',
+      wikipediaSearchUrl: wikipediaSearchUrl,
+      
+      translationLanguage: translationLanguage,
+      translatorUrl: translatorUrl,
+      
       languages: new Map([
-        [LanguageKey.Español, { 
+        [Language.Español, { 
           dictionaryUrl: 'https://dle.rae.es/' 
         }]
       ]),
-      wikipediaSearchUrl: wikipediaSearchUrl
     }
   }
 })

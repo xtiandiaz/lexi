@@ -1,18 +1,20 @@
 <script setup lang="ts">
+import "@/assets/tungsten/extensions/array.extensions"
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import WordScreen from '@/components/game/WordScreen.vue'
-import WordGamepad from '@/components/game/WordGamepad.vue'
-import { WordToolKey } from '@/models/tools'
-import { SectionKey, computedNavigationItems } from '@/models/navigation'
+import { InputState } from '@/models/input'
+import { InputTool } from '@/models/tools'
+import { Section } from '@/models/navigation'
+import { computedNavigationBarVM } from "@/view-models/vm-navigation"
 import { inGameStore, type IActiveWordState } from '@/stores/in-game'
-import { openWordToolPage } from '@/services/external-content-launching'
 import { loadContent } from '@/services/word-provision'
-import { fixOrExtendInput } from '@/services/word-utils'
+import { produceInputWithTool } from '@/services/tool-handler'
 import { saveDailyWord, resetDailyHistoryIfNeeded } from '@/services/history-management'
 import { clamp } from '@/assets/tungsten/math'
 import NavigationBar from '@/components/vueties/bars/NavigationBar.vue'
+import WordScreen from '@/components/game/WordScreen.vue'
+import WordGamepad from '@/components/game/WordGamepad.vue'
 
-const navigationItems = computedNavigationItems(SectionKey.Game)
+const navigationBarVM = computedNavigationBarVM(Section.Game)
 const inGame = inGameStore()
 
 const activeWord = ref<string>()
@@ -60,27 +62,18 @@ function onInput(index: number) {
   }
 }
 
-function onToolSelected(tool: WordToolKey) {
-  if (activeWord.value === undefined)
+function onInputToolSelected(tool: InputTool) {
+  if (activeWord.value === undefined) {
     return
+  }
 
-  switch (tool) {
-    case WordToolKey.Define:
-    case WordToolKey.ImageSearch:
-    case WordToolKey.Translate:
-    case WordToolKey.WikipediaSearch:
-    case WordToolKey.WebSearch:
-      openWordToolPage(tool, activeWord.value)
-      break
-    case WordToolKey.Continue:
-      resetActiveWord()
-      break
-    case WordToolKey.Hint:
-      const fixedOrExtendedInputIndices = fixOrExtendInput(activeWord.value, activeInputIndices.value, activeInputableIndices.value)
-      if (fixedOrExtendedInputIndices) {
-        activeInputIndices.value = fixedOrExtendedInputIndices
-      }
-      break
+  const newInput = produceInputWithTool(tool, new InputState(
+    activeInputIndices.value,
+    activeInputableIndices.value,
+    activeWord.value
+  ))
+  if (newInput) {
+    activeInputIndices.value = newInput
   }
 }
 
@@ -103,7 +96,7 @@ onBeforeUnmount(() => {
 <template>
   <span id="spinner" v-if="!activeWord"></span>
   
-  <NavigationBar :items="navigationItems"/>
+  <NavigationBar :vm="navigationBarVM"/>
   
   <main class="game" v-if="activeWord">
     <WordScreen 
@@ -111,14 +104,13 @@ onBeforeUnmount(() => {
       :is-word-completed="isActiveWordSolved"
     />
     <WordGamepad 
-      ref="gamepad"
       :word="activeWord!" 
       :inputable-indices="activeInputableIndices"
       :input-indices="activeInputIndices"
       :is-word-solved="isActiveWordSolved"
-      @reset-active-word="resetActiveWord" 
-      @tool-selected="onToolSelected" 
       @input="onInput"
+      @input-tool-selected="onInputToolSelected" 
+      @continued="resetActiveWord()" 
     />
   </main>
 </template>

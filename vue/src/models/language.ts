@@ -1,9 +1,9 @@
-export enum LanguageKey {
+export enum Language {
   Español = 'es',
   English = 'en'
 }
 
-export enum LocalizedStringKey {
+export enum LocalizedString {
   SettingsSectionTitle,
   DailyHistorySectionTitle
 }

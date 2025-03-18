@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { WordToolKey, wordTool } from '@/models/tools'
-import type { IKeypadKey } from '../vueties/models';
-import { IconKey } from '@/assets/design-tokens/iconography'
-import { canHint } from '@/services/word-utils'
+import { InputTool } from '@/models/tools'
+import type { IKeypadKeyVM, ToolBarButtonVM } from '../vueties/view-models';
+import { Icon } from '@/assets/design-tokens/iconography'
 import SimpleKeypad from '../vueties/pads/SimpleKeypad.vue';
 import ToolBar from '../vueties/bars/ToolBar.vue'
+import ResearchToolBar from './ResearchToolBar.vue';
+import { launchResearchToolForWord, canUseInputTool } from '@/services/tool-handler';
+import IconButton from '../vueties/buttons/IconButton.vue';
+import { InputState } from '@/models/input';
 
 const { word, inputableIndices, inputIndices, isWordSolved } = defineProps<{
   word: string,
@@ -16,30 +19,30 @@ const { word, inputableIndices, inputIndices, isWordSolved } = defineProps<{
 
 const emits = defineEmits<{
   input: [index: number],
-  toolSelected: [key: WordToolKey]
+  inputToolSelected: [tool: InputTool],
+  continued: [void]
 }>()
 
-const keypadKeys = computed<IKeypadKey[]>(() => {
-  const keys: IKeypadKey[] = inputableIndices.map(li => {
+const keypadKeys = computed<IKeypadKeyVM[]>(() => {
+  const keys: IKeypadKeyVM[] = inputableIndices.map(li => {
     return { label: word[li].toLowerCase(), value: li, isEnabled: !inputIndices.includes(li) }
   })
-  keys.push({ label: IconKey.Delete, value: -1, isEnabled: inputIndices.length !== 0 })
+  keys.push({ label: Icon.Delete, value: -1, isEnabled: inputIndices.length !== 0 })
   return keys
 })
-const topBarTools = computed(() => [
-  WordToolKey.Define,
-  WordToolKey.ImageSearch,
-  WordToolKey.WikipediaSearch,
-  WordToolKey.WebSearch, 
-  WordToolKey.Translate,
-].map(key => wordTool(key, true))
-)
-const bottomBarTools = computed(() => {
-  if (!isWordSolved) {
-    const isEnabled = canHint(word, inputIndices, inputableIndices)
-    return [wordTool(WordToolKey.Hint, isEnabled)]
-  }
-  return [wordTool(WordToolKey.Continue)]
+
+const inputToolVMs = computed<ToolBarButtonVM<InputTool>[]>(() => {
+  return [
+    {
+      tool: InputTool.Hint,
+      icon: Icon.Hint,
+      isEnabled: canUseInputTool(InputTool.Hint, new InputState(
+        inputIndices,
+        inputableIndices,
+        word
+      ))
+    }
+  ]
 })
 </script>
 
@@ -51,15 +54,24 @@ const bottomBarTools = computed(() => {
       @input="(value) => emits('input', Number(value))" 
     />
     
-    <ToolBar
+    <ResearchToolBar
       v-if="isWordSolved"
-      :tools="topBarTools"
-      @tool-selected="(key) => emits('toolSelected', key)"
+      @tool-selected="(tool) => launchResearchToolForWord(tool, word)"
     />
+    
     <div class="spacer"></div>
+    
     <ToolBar 
-      :tools="bottomBarTools"
-      @tool-selected="(key) => emits('toolSelected', key)"
+      v-if="!isWordSolved"
+      :buttonVMs="inputToolVMs"
+      @tool-selected="(tool) => emits('inputToolSelected', tool)"
+    />
+    
+    <IconButton 
+      v-if="isWordSolved"
+      :icon="Icon.ArrowRight" 
+      class="continue"
+      @click="emits('continued')" 
     />
   </section>
 </template>
@@ -68,31 +80,11 @@ const bottomBarTools = computed(() => {
 @use '@/assets/design-tokens/palette';
 
 :deep(.icon-button) {
-  &.define {
-    @include palette.color-attribute('color', 'orange');
-  }
   &.continue {
-    @include palette.color-attributes((
-      'background-color': 'background'
-    ));
+    @include palette.color-attribute('background-color', 'background');
   }
   &.hint {
-    @include palette.color-attributes((
-      'color': 'yellow',
-      'background-color': 'background'
-    ));
-  }
-  &.image-search {
-    @include palette.color-attribute('color', 'mint');
-  }
-  &.translate {
-    @include palette.color-attribute('color', 'blue')
-  }
-  &.web-search {
-    @include palette.color-attribute('color', 'purple');
-  }
-  &.wikipedia-search {
-    @include palette.color-attribute('color', 'body');
+    @include palette.color-attribute('color', 'yellow');
   }
 }
 </style>

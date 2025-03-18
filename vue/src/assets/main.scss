@@ -37,7 +37,7 @@ nav {
 }
 
 main {
-  width: 100%;
+  // width: 100%;
   margin: calc(bars.$nav-bar-height + 0.25em) 0 0 0;
   
   &.game {
@@ -137,53 +137,53 @@ button {
   }
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  margin: 0 0 1em 0;
-  padding: 0 1em;
-  // max-width: 800px;
+// .form {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 0;
+//   margin: 0 0 1em 0;
+//   padding: 0 1em;
+//   // max-width: 800px;
   
-  ul {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    @include palette.color-attribute('background-color', 'secondary-background');
+//   ul {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 1px;
+//     list-style-type: none;
+//     margin: 0;
+//     padding: 0;
+//     @include palette.color-attribute('background-color', 'secondary-background');
     
-    div.header {
-      margin: 0 1.25em 0.75em 1.25em;
-      span.title {
-        @extend .caption, .all-caps;
-        @include palette.color-attribute('color', 'tertiary-body');
-      }
-    }
+//     div.header {
+//       margin: 0 1.25em 0.75em 1.25em;
+//       span.title {
+//         @extend .caption, .all-caps;
+//         @include palette.color-attribute('color', 'tertiary-body');
+//       }
+//     }
     
-    li {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      min-height: 3em;
-      vertical-align: middle;
-      margin: 0;
-      padding: 0 1em;
-      @include palette.color-attribute('background-color', 'background');
+//     li {
+//       display: flex;
+//       flex-direction: row;
+//       align-items: center;
+//       min-height: 3em;
+//       vertical-align: middle;
+//       margin: 0;
+//       padding: 0 1em;
+//       @include palette.color-attribute('background-color', 'background');
       
-      &:first-of-type {
-        border-radius: 1em 1em 0 0;
-      }
-      &:last-of-type {
-        border-radius: 0 0 1em 1em;
-      }
-      &:only-of-type {
-        border-radius: 1em;
-      }
-    }
-  }
-}
+//       &:first-of-type {
+//         border-radius: 1em 1em 0 0;
+//       }
+//       &:last-of-type {
+//         border-radius: 0 0 1em 1em;
+//       }
+//       &:only-of-type {
+//         border-radius: 1em;
+//       }
+//     }
+//   }
+// }
 
 @keyframes spin {
   100% { rotate: 180deg; }

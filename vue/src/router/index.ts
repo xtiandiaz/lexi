@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { SectionKey } from '@/models/navigation'
+import { Section } from '@/models/navigation'
 import GameView from '@/views/GameView.vue'
 import DailyHistoryView from '@/views/DailyHistoryView.vue'
 
@@ -12,8 +12,8 @@ export default createRouter({
       component: GameView,
     },
     {
-      path: `/${SectionKey.DailyHistory}`,
-      name: SectionKey.DailyHistory,
+      path: `/${Section.DailyHistory}`,
+      name: Section.DailyHistory,
       component: DailyHistoryView,
     },
   ],

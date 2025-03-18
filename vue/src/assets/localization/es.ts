@@ -1,6 +1,6 @@
-import { LocalizedStringKey } from "@/models/language";
+import { LocalizedString } from "@/models/language";
 
-export default new Map<LocalizedStringKey, string>([
-  [LocalizedStringKey.SettingsSectionTitle, "Configuración"],
-  [LocalizedStringKey.DailyHistorySectionTitle, "Historial de Hoy"]
+export default new Map<LocalizedString, string>([
+  [LocalizedString.SettingsSectionTitle, "Configuración"],
+  [LocalizedString.DailyHistorySectionTitle, "Historial de Hoy"]
 ])
