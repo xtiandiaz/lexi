@@ -3,8 +3,6 @@
 @use './design-tokens/iconography';
 @use '../components/vueties/assets/bars';
 
-$nav-height: 3em;
-
 * {
   touch-action: manipulation;
   -webkit-touch-callout: none;
@@ -75,115 +73,6 @@ main {
 div.spacer {
   flex: auto;
 }
-  
-button {
-  border: none;
-  background: none;
-  background-color: transparent;
-  padding: 0.25em 0.5em;
-  font-size: 1em;
-  
-  @include palette.color-attributes((
-    'color': 'body'
-  ));
-
-  &.iconized {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.25em;
-    
-    .icon {
-      font-size: 1.5em;
-    }
-    
-    &.annotated {
-      flex-direction: column;
-      justify-content: center;
-      
-      span.annotation {
-        @extend .caption, .all-caps;
-        @include palette.color-attribute('color', 'secondary-body');
-      }
-    }
-  }
-      
-  &.clear {
-    border-color: transparent;
-    background-color: transparent;
-  }
-  
-  &:hover:enabled {
-    cursor: pointer;
-  }
-  
-  // &:active:enabled {
-  //   transform: scale(85%);
-  //   transition: transform 0.1s;
-  // }
-  
-  &:disabled {
-    background-color: transparent;
-    opacity: 25%;
-  }
-}
-
-.icon {
-  &.back {
-    @include iconography.colored-icon-content-attribute('chevron-left', 'body');
-  }
-  &.settings {
-    @include iconography.colored-icon-content-attribute('gear', 'orange');
-  }
-}
-
-// .form {
-//   display: flex;
-//   flex-direction: column;
-//   gap: 0;
-//   margin: 0 0 1em 0;
-//   padding: 0 1em;
-//   // max-width: 800px;
-  
-//   ul {
-//     display: flex;
-//     flex-direction: column;
-//     gap: 1px;
-//     list-style-type: none;
-//     margin: 0;
-//     padding: 0;
-//     @include palette.color-attribute('background-color', 'secondary-background');
-    
-//     div.header {
-//       margin: 0 1.25em 0.75em 1.25em;
-//       span.title {
-//         @extend .caption, .all-caps;
-//         @include palette.color-attribute('color', 'tertiary-body');
-//       }
-//     }
-    
-//     li {
-//       display: flex;
-//       flex-direction: row;
-//       align-items: center;
-//       min-height: 3em;
-//       vertical-align: middle;
-//       margin: 0;
-//       padding: 0 1em;
-//       @include palette.color-attribute('background-color', 'background');
-      
-//       &:first-of-type {
-//         border-radius: 1em 1em 0 0;
-//       }
-//       &:last-of-type {
-//         border-radius: 0 0 1em 1em;
-//       }
-//       &:only-of-type {
-//         border-radius: 1em;
-//       }
-//     }
-//   }
-// }
 
 @keyframes spin {
   100% { rotate: 180deg; }
