@@ -1,29 +1,55 @@
+import '@/assets/tungsten/extensions/array.extensions'
 import { substringFromIndices } from "@/assets/tungsten/stringify"
 
-interface IInputState {
-  indices: number[]
-  inputableIndices: number[]
-  word: string
+export interface InputSource {
+  readonly baseWord: string
+  readonly hintPrefixLength: number
+  readonly linkedWords: string[]
 }
 
-export class InputState implements IInputState {
+export interface InputState {
+  readonly hintCount: number
+  readonly indices: number[]
+  readonly inputableIndices: number[]
+  readonly source: InputSource
+  
+  isComplete: boolean
+  
+  inputString: string
+  inputableString: string
+  prefixedInputString: string
+}
+
+export class UserInput implements InputState {
+  hintCount = 0
   indices: number[]
   inputableIndices: number[]
-  word: string
+  source: InputSource
   
-  constructor(indices: number[], inputableIndices: number[], word: string) {
+  constructor(source: InputSource, indices: number[] = []) {
+    this.source = source
     this.indices = indices
-    this.inputableIndices = inputableIndices
-    this.word = word
+    this.inputableIndices = (Array.range(source.hintPrefixLength, source.baseWord.length, 1)).shuffle()
+  }
+  
+  get isComplete() {
+    return this.prefixedInputString === this.source.baseWord
   }
   
   get sortedInputableIndices() {
     return [...this.inputableIndices].sort((n1, n2) => n1 - n2)
   }
+  
+  get hintPrefixString() {
+    return this.source.baseWord.substring(0, this.source.hintPrefixLength)
+  }
   get inputString() {
-    return substringFromIndices(this.word, this.indices)
+    return substringFromIndices(this.source.baseWord, this.indices)
   }
   get inputableString() {
-    return substringFromIndices(this.word, this.sortedInputableIndices)
+    return substringFromIndices(this.source.baseWord, this.sortedInputableIndices)
+  }
+  get prefixedInputString() {
+    return this.hintPrefixString + this.inputString
   }
 }

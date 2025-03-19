@@ -1,9 +1,9 @@
 import settingsStore from '@/stores/settings'
-import { inGameStore } from '@/stores/in-game'
+import contentStore from '@/stores/content'
 
 export async function loadContent() {
-  const inGame = inGameStore()
-  if (inGame.wordListing.length > 0) {
+  const content = contentStore()
+  if (content.termListing.length > 0) {
     return
   }
   
@@ -13,9 +13,9 @@ export async function loadContent() {
   try {
     const response = await fetch(`${url}?salt=${Math.random()}`)
     // console.log(response)
-    const wordListing = await response.text()
-    // console.log(wordListing)
-    inGame.wordListing = wordListing.split('\n')
+    const termListing = await response.text()
+    // console.log(termListing)
+    content.termListing = termListing.split('\n')
   } catch (error) {
     console.error(`Language: ${settings.activeLanguage}`, error)
   }

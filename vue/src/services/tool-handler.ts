@@ -48,8 +48,8 @@ function fixOrExtendInput(state: InputState): number[] | undefined {
     return undefined
   }
   
-  const inputableStartIndex = state.word.length - state.inputableIndices.length
-  const fixedOrExtendedSubstring = state.word.substring(0, letterMatchCount + 1)
+  const inputableStartIndex = state.source.baseWord.length - state.inputableIndices.length
+  const fixedOrExtendedSubstring = state.source.baseWord.substring(0, letterMatchCount + 1)
   // console.log('fixedOrExtendedInput', fixedOrExtendedSubstring)
   
   return Array.range(inputableStartIndex, inputableStartIndex + fixedOrExtendedSubstring.length, 1)

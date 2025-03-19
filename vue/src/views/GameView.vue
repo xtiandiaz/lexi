@@ -1,116 +1,105 @@
 <script setup lang="ts">
 import "@/assets/tungsten/extensions/array.extensions"
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import { InputState } from '@/models/input'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { type InputSource, type InputState, UserInput } from '@/models/input'
 import { InputTool } from '@/models/tools'
 import { Section } from '@/models/navigation'
-import { computedNavigationBarVM } from "@/view-models/vm-navigation"
-import { inGameStore, type IActiveWordState } from '@/stores/in-game'
+import contentStore from '@/stores/content'
+import sessionStore from '@/stores/session'
 import { loadContent } from '@/services/word-provision'
 import { produceInputWithTool } from '@/services/tool-handler'
-import { saveDailyWord, resetDailyHistoryIfNeeded } from '@/services/history-management'
+import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/history-management'
 import { clamp } from '@/assets/tungsten/math'
+import { computedNavigationBarVM } from "@/view-models/vm-navigation"
 import NavigationBar from '@/components/vueties/bars/NavigationBar.vue'
-import WordScreen from '@/components/game/WordScreen.vue'
-import WordGamepad from '@/components/game/WordGamepad.vue'
+import InputScreen from '@/components/game/InputScreen.vue'
+import InputGamepad from '@/components/game/InputGamepad.vue'
+
+const content = contentStore()
+const session = sessionStore()
+
+const inputSource = ref<InputSource>()
+const userInput = ref<UserInput>()
 
 const navigationBarVM = computedNavigationBarVM(Section.Game)
-const inGame = inGameStore()
 
-const activeWord = ref<string>()
-// const activeWordSynonyms = ref<string[]>()
-const activeHintPrefix = ref<string>()
-const activeInputableIndices = ref<number[]>([])
-const activeInputIndices = ref<number[]>([])
-
-const activeInputString = computed(() => activeInputIndices.value.map(i => activeWord.value![i]).join(''))
-const hintPrefixedActiveInputString = computed(() => activeHintPrefix.value + activeInputString.value)
-const isActiveWordSolved = computed(() => hintPrefixedActiveInputString.value === activeWord.value)
-
-function resetActiveWord(activeWordState?: IActiveWordState) {
-  if (activeWordState !== undefined) {
-    activeWord.value = activeWordState.word
-    activeHintPrefix.value = activeWordState.hintPrefix
-    activeInputIndices.value = activeWordState.input
-    activeInputableIndices.value = activeWordState.inputable
+function resetInputSource(savedInput?: InputState) {
+  if (savedInput) {
+    inputSource.value = savedInput.source
+    userInput.value = new UserInput(savedInput.source, savedInput.indices)
   } else {
-    const newWordItem = inGame.resetActiveWordItem()
-    const linkedWords = newWordItem.split(',')
+    const newTerm = content.randomTerm()
+    const termWords = newTerm.split(',')
+    const baseWord = termWords[0]
+    const linkedWords = termWords.slice(1)
     
-    activeWord.value = linkedWords[0]
-    // activeWordSynonyms.value = linkedWords.splice(1)
-    
-    const inputableStartIndex = clamp(Math.floor(activeWord.value.length * 0.25), 0, Math.floor(activeWord.value.length / 2))
-    activeHintPrefix.value = activeWord.value.substring(0, inputableStartIndex)
-    activeInputableIndices.value = ((Array.range(inputableStartIndex, activeWord.value.length, 1)).shuffle())
-    
-    activeInputIndices.value = []
+    inputSource.value = {
+      baseWord: baseWord,
+      hintPrefixLength: clamp(Math.floor(baseWord.length * 0.25), 0, Math.floor(baseWord.length / 2)),
+      linkedWords
+    }
+    userInput.value = new UserInput(inputSource.value)
   }
   
   resetDailyHistoryIfNeeded()
 }
 
-function onInput(index: number) { 
+function onInput(index: number) {
+  if (!userInput.value) {
+    return
+  }
+  
   if (index >= 0) {
-    activeInputIndices.value.push(index)
+    userInput.value.indices.push(index)
     
-    if (isActiveWordSolved.value) {
-      saveDailyWord(activeWord.value!)
+    if (userInput.value.isComplete) {
+      saveWordInDailyHistory(userInput.value)
     }
   } else {
-    activeInputIndices.value.pop()
+    userInput.value.indices.pop()
   }
 }
 
 function onInputToolSelected(tool: InputTool) {
-  if (activeWord.value === undefined) {
+  if (!userInput.value) {
     return
   }
-
-  const newInput = produceInputWithTool(tool, new InputState(
-    activeInputIndices.value,
-    activeInputableIndices.value,
-    activeWord.value
-  ))
-  if (newInput) {
-    activeInputIndices.value = newInput
+  
+  switch(tool) {
+    case InputTool.Hint:
+      const newInputIndices = produceInputWithTool(tool, userInput.value)
+      if (newInputIndices) {
+        userInput.value.indices = newInputIndices
+        userInput.value.hintCount++
+      }
+      break
   }
 }
 
 onMounted(async () => {
   await loadContent()
   
-  resetActiveWord(inGame.activeWordState)
+  resetInputSource(session.input)
 })
 
 onBeforeUnmount(() => {
-  inGame.activeWordState = {
-    inputable: activeInputableIndices.value,
-    input: activeInputIndices.value,
-    hintPrefix: activeHintPrefix.value!,
-    word: activeWord.value!
-  }
+  session.input = userInput.value
 })
 </script>
 
 <template>
-  <span id="spinner" v-if="!activeWord"></span>
+  <span id="spinner" v-if="!inputSource"></span>
   
   <NavigationBar :vm="navigationBarVM"/>
   
-  <main class="game" v-if="activeWord">
-    <WordScreen 
-      :input="activeHintPrefix + activeInputString"
-      :is-word-completed="isActiveWordSolved"
-    />
-    <WordGamepad 
-      :word="activeWord!" 
-      :inputable-indices="activeInputableIndices"
-      :input-indices="activeInputIndices"
-      :is-word-solved="isActiveWordSolved"
+  <main class="game" v-if="userInput">
+    <InputScreen :state="userInput" />
+    
+    <InputGamepad 
+      :state="userInput"
       @input="onInput"
       @input-tool-selected="onInputToolSelected" 
-      @continued="resetActiveWord()" 
+      @continued="resetInputSource()" 
     />
   </main>
 </template>

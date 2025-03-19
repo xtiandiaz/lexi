@@ -1,23 +1,25 @@
 <script setup lang="ts">
+import { type InputState } from '@/models/input'
+
 defineProps<{
-  input: string,
-  // synonyms: string[],
-  isWordCompleted: boolean
+  state: InputState
 }>()
 </script>
 
 <template>
   <section id="screen">
     <div class="spacer"></div>
-    <h1 class="serif">{{ input }}</h1>
-    <!-- <h6 class="serif" v-if="isWordCompleted && synonyms.length > 0">{{ synonyms.join(', ') }}</h6> -->
+    <h1 class="serif">{{ state.prefixedInputString }}</h1>
+    <h6 class="serif" v-if="state.isComplete && state.source.linkedWords.length > 0">
+      {{ state.source.linkedWords.join(', ') }}
+    </h6>
   </section>
 </template>
 
 <style scoped lang="scss">
 @use "@/assets/design-tokens/palette";
 
-.caption.all-caps {
+h6 {
   @include palette.color-attribute('color', 'tertiary-body');
 }
 </style>

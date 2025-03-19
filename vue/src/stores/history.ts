@@ -1,18 +1,17 @@
 import '@/assets/tungsten/extensions/date.extensions'
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
-import { LocalStorageKey, retrieve } from '@/services/persistence'
+import { ref } from 'vue'
+import type { DailyHistory } from '@/models/history'
+import { retrieveDailyHistory } from '@/services/history-management'
 
-export default defineStore('daily-history', {
-  state: () => {
-    const date = ref<Date>(new Date(retrieve(LocalStorageKey.Day) ?? Date.today().getTime()))
-    const words = ref<string[]>(retrieve(LocalStorageKey.DailyWords)?.split(';') ?? [])
-    const wordCount = computed(() => words.value.length)
-    
-    return {
-      date: date,
-      words: words,
-      wordCount: wordCount
-    }
+export default defineStore('history', () => { 
+  const dailyHistory = ref<DailyHistory>(retrieveDailyHistory() ?? {
+    date: Date.today(),
+    completedTerms: []
+  })
+  
+  return {
+    daily: dailyHistory,
+    dailyCompletedTermsCount: () => dailyHistory.value.completedTerms.length
   }
 })

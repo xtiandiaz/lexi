@@ -1,27 +1,16 @@
-import dailyHistoryStore from "@/stores/history";
-
-export enum LocalStorageKey {
-  Day = 'day',
-  DailyWords = 'daily_words'
+export enum LocalStorageItem {
+  DailyHistory = 'daily-history'
 }
 
-function save(key: string, value: string) {
-  localStorage.setItem(key, value)
+export function save<T>(item: LocalStorageItem, value: T) {
+  localStorage.setItem(item, JSON.stringify(value))
 }
 
-function _retrieve(key: string): string | undefined {
-  const item = localStorage.getItem(key)
+export function retrieve<T>(item: LocalStorageItem): T | undefined {
+  const rawValue = localStorage.getItem(item)
+  if (!rawValue) {
+    return undefined
+  }
   
-  return item !== null ? item : undefined
-}
-
-export function retrieve(key: LocalStorageKey): string | undefined {
-  return _retrieve(key)
-}
-
-export function saveDailyHistory() {
-  const dailyHistory = dailyHistoryStore()
-  
-  save(LocalStorageKey.Day, dailyHistory.date.toString())
-  save(LocalStorageKey.DailyWords, dailyHistory.words.join(';'))
+  return JSON.parse(rawValue) as T
 }

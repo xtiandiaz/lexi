@@ -2,7 +2,7 @@ import { type ComputedRef, computed } from 'vue'
 import { Section, sectionTitle } from '@/models/navigation'
 import { ReturnNavigationTarget, type NavigationBarVM, pushedViewNavigationBarItems } from '@/components/vueties/view-models'
 import settingsStore from '@/stores/settings'
-import dailyHistoryStore from '@/stores/history'
+import historyStore from '@/stores/history'
 import { Icon } from '@/assets/design-tokens/iconography'
 
 export const computedNavigationBarVM = (section: Section): ComputedRef<NavigationBarVM<Section | ReturnNavigationTarget>> => {
@@ -10,7 +10,7 @@ export const computedNavigationBarVM = (section: Section): ComputedRef<Navigatio
     case Section.Game:
       return computed(() => {
         const settings = settingsStore()
-        const dailyHistory = dailyHistoryStore()
+        const history = historyStore()
         
         return {
           leftBarItems: [
@@ -25,8 +25,8 @@ export const computedNavigationBarVM = (section: Section): ComputedRef<Navigatio
             {
               target: Section.DailyHistory,
               icon: Icon.History,
-              isEnabled: dailyHistory.wordCount > 0,
-              label: `${dailyHistory.wordCount}`
+              isEnabled: history.dailyCompletedTermsCount() > 0,
+              label: `${history.daily.completedTerms.length}`
             }
           ]
         }
