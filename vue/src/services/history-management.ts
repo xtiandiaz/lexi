@@ -56,7 +56,7 @@ export function saveWordInDailyHistory(inputState: InputState) {
   history.daily.completedTerms.push({
     baseWord: inputState.source.baseWord,
     linkedWords: inputState.source.linkedWords,
-    hintCount: inputState.hintCount
+    inputMarks: inputState.marks
   })
   
   saveDailyHistory()

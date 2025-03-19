@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import "@/assets/tungsten/extensions/array.extensions"
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { type InputSource, type InputState, UserInput } from '@/models/input'
+import { type InputSource, type InputState, InputMarkKind, UserInput } from '@/models/input'
 import { InputTool } from '@/models/tools'
 import { Section } from '@/models/navigation'
 import contentStore from '@/stores/content'
@@ -70,7 +70,7 @@ function onInputToolSelected(tool: InputTool) {
       const newInputIndices = produceInputWithTool(tool, userInput.value)
       if (newInputIndices) {
         userInput.value.indices = newInputIndices
-        userInput.value.hintCount++
+        userInput.value.addCompletionMark(InputMarkKind.Hints, 1)
       }
       break
   }

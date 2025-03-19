@@ -7,21 +7,33 @@ export interface InputSource {
   readonly linkedWords: string[]
 }
 
+export enum InputMarkKind {
+  Hints = 'hints',
+  Tests = 'tests'
+}
+
+export interface InputMark {
+  readonly kind: InputMarkKind
+  value: number
+}
+
 export interface InputState {
-  readonly hintCount: number
   readonly indices: number[]
   readonly inputableIndices: number[]
+  readonly marks: InputMark[]
   readonly source: InputSource
   
-  isComplete: boolean
+  readonly isComplete: boolean
   
-  inputString: string
-  inputableString: string
-  prefixedInputString: string
+  readonly inputString: string
+  readonly inputableString: string
+  readonly prefixedInputString: string
+  
 }
 
 export class UserInput implements InputState {
-  hintCount = 0
+  readonly marks: InputMark[] = []
+  
   indices: number[]
   inputableIndices: number[]
   source: InputSource
@@ -51,5 +63,14 @@ export class UserInput implements InputState {
   }
   get prefixedInputString() {
     return this.hintPrefixString + this.inputString
+  }
+  
+  addCompletionMark(kind: InputMarkKind, value: number) {
+    const mark = this.marks.find(m => m.kind === kind)
+    if (mark) {
+      mark.value += value
+    } else {
+      this.marks.push({ kind, value })
+    }
   }
 }

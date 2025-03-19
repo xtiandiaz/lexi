@@ -1,7 +1,9 @@
+import { type InputMark } from '@/models/input'
+
 export interface CompletedTerm {
   baseWord: string
   linkedWords: string[]
-  hintCount: number
+  inputMarks: InputMark[]
 }
 
 export interface DailyHistory {

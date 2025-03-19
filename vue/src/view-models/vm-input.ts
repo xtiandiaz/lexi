@@ -1,4 +1,4 @@
-import { type InputState } from '@/models/input'
+import { InputMarkKind, type InputState } from '@/models/input'
 import { InputTool } from '@/models/tools'
 import { type KeypadKeyVM, type ToolBarButtonVM } from '@/components/vueties/view-models'
 import { canUseInputTool } from '@/services/tool-handler'
@@ -31,4 +31,13 @@ export const inputToolBarButtonVMs = (inputState: InputState): ToolBarButtonVM<I
       isEnabled: canUseInputTool(InputTool.Hint, inputState)
     }
   ]
+}
+
+export const inputMarkIcon = (kind: InputMarkKind) => {
+  switch (kind) {
+    case InputMarkKind.Hints:
+      return Icon.Hint
+    case InputMarkKind.Tests:
+      return Icon.Right
+  }
 }

@@ -4,11 +4,11 @@ import { Section } from '@/models/navigation'
 import dailyHistoryStore from '@/stores/history'
 import { launchResearchToolForWord } from '@/services/tool-handler'
 import { computedNavigationBarVM } from '@/view-models/vm-navigation'
+import { inputMarkIcon } from '@/view-models/vm-input'
 import NavigationBar from '@/components/vueties/bars/NavigationBar.vue'
 import FoldableRow from '@/components/vueties/form/FoldableRow.vue'
 import ResearchToolBar from '@/components/game/ResearchToolBar.vue'
 import SvgIcon from '@/components/vueties/assorted/SvgIcon.vue'
-import { Icon } from '@/assets/design-tokens/iconography'
 
 const history = dailyHistoryStore()
 
@@ -38,12 +38,13 @@ function onWordSelected(index: number) {
           @selected="onWordSelected(index)"
         >
         <template v-slot:title-ornament>
-          <div class="marks">
-            <span 
-              v-if="term.hintCount > 0"
-              class="mark hint-count"
+          <div v-if="term.inputMarks && term.inputMarks.length > 0" class="marks">
+            <span
+              v-for="(mark, index) of term.inputMarks.filter(m => m.value > 0)" 
+              :key="index"
+              class="mark" :class="mark.kind"
             >
-              <span>{{ term.hintCount }} ×</span><SvgIcon :icon="Icon.Hint" />
+              <span>{{ mark.value }} ×</span><SvgIcon :icon="inputMarkIcon(mark.kind)" />
             </span>
           </div>
         </template>
@@ -78,8 +79,11 @@ div.marks {
   span.mark {
     @extend .caption;
     
-    &.hint-count {
+    &.hints {
       @include palette.color-attribute('color', 'yellow');
+    }
+    &.tests {
+      @include palette.color-attribute('color', 'green');
     }
     
     > * {
