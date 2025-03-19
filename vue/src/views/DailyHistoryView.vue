@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import { Section } from '@/models/navigation'
 import dailyHistoryStore from '@/stores/history'
 import { launchResearchToolForWord } from '@/services/tool-handler'
-import { capitalCase } from 'change-case'
 import { computedNavigationBarVM } from '@/view-models/vm-navigation'
 import NavigationBar from '@/components/vueties/bars/NavigationBar.vue'
 import FoldableRow from '@/components/vueties/form/FoldableRow.vue'
@@ -33,13 +32,19 @@ function onWordSelected(index: number) {
         <FoldableRow 
           v-for="(term, index) of history.daily.completedTerms.sort((s1, s2) => s1.baseWord.localeCompare(s2.baseWord))"
           :key="index"
-          :title="capitalCase(term.baseWord)"
+          :title="term.baseWord"
+          :subtitle="term.linkedWords.join(', ')"
           :is-unfolded="selectedIndex === index"
           @selected="onWordSelected(index)"
         >
-        <template v-slot:title-ornament v-if="term.hintCount > 0">
-          <div class="hint-count">
-            <span>{{ term.hintCount }}</span> <SvgIcon :icon="Icon.Hint" />
+        <template v-slot:title-ornament>
+          <div class="marks">
+            <span 
+              v-if="term.hintCount > 0"
+              class="mark hint-count"
+            >
+              <span>{{ term.hintCount }} ×</span><SvgIcon :icon="Icon.Hint" />
+            </span>
           </div>
         </template>
         <template v-slot:foldable-content>
@@ -54,8 +59,8 @@ function onWordSelected(index: number) {
 </template>
 
 <style scoped lang="scss">
-@use '@/assets/design-tokens/typography';
 @use '@/assets/design-tokens/palette';
+@use '@/assets/design-tokens/typography';
 @use '../components/vueties/assets/form' with (
   $max-width: 640px
 );
@@ -64,18 +69,28 @@ main {
   padding: 0.5em 1em;
 }
 
-.hint-count {
-  @extend .caption;
-  @include palette.color-attribute('color', 'yellow');
+div.marks {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
   
-  > * {
-    vertical-align: middle;
-  }
-  
-  .svg-icon {
-    height: 1.25em;
-    width: 1.25em;
-  }
+  span.mark {
+    @extend .caption;
+    
+    &.hint-count {
+      @include palette.color-attribute('color', 'yellow');
+    }
+    
+    > * {
+      vertical-align: middle;
+    }
+    
+    .svg-icon {
+      height: 1.25em;
+      width: 1.25em;
+    }
+  }  
 }
 
 :deep(.tool-bar) {
