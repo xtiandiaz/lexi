@@ -81,5 +81,10 @@ main {
 :deep(.tool-bar) {
   flex: auto;
   justify-content: space-between;
+  
+  button.icon-button .svg-icon {
+    height: 1.75em;
+    width: 1.75em;
+  }
 }
 </style>
