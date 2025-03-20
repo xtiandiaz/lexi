@@ -25,14 +25,6 @@ const userInput = ref<UserInput>()
 
 const navigationBarVM = computedNavigationBarVM(Section.Game)
 
-function reset() {
-  if (session.input?.source.language === settings.currentLanguage) {
-    resetInputSource(session.input)
-  } else {
-    resetInputSource()
-  }
-}
-
 function resetInputSource(savedInput?: InputState) {  
   if (savedInput) {
     inputSource.value = savedInput.source
@@ -90,7 +82,11 @@ function onInputToolSelected(tool: InputTool) {
 onMounted(async () => {
   await loadLexicon()
   
-  reset()
+  if (session.input?.source.language === settings.currentLanguage) {
+    resetInputSource(session.input)
+  } else {
+    resetInputSource()
+  }
 })
 
 onBeforeUnmount(() => {
@@ -110,7 +106,7 @@ onBeforeUnmount(() => {
       :state="userInput"
       @input="onInput"
       @input-tool-selected="onInputToolSelected" 
-      @continued="reset()"
+      @continued="resetInputSource()"
     />
   </main>
 </template>

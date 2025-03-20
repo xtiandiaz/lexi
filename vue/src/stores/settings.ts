@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { Language } from '@/models/language'
 import { type LanguageSettings, defaultLanguageSettings } from '@/models/settings'
@@ -14,10 +14,11 @@ export default defineStore('settings', () => {
   })
   
   const languageSettings = (language: Language) => languagesSettings.find(ls => ls.language === language)!
+  const currentLanguageSettings = computed(() => languageSettings(currentLanguage.value))
   
   return {
     currentLanguage,
-    currentLanguageSettings: languageSettings(currentLanguage.value),
+    currentLanguageSettings,
     languagesSettings,
     languageSettings: languageSettings
   }

@@ -64,7 +64,12 @@ export function saveWordInDailyHistory(inputState: InputState) {
   
   const dailyHistory = history.dailyHistory(inputState.source.language)
   if (dailyHistory) {
-    dailyHistory.completedTerms.push(newCompletedTerm)
+    const existingIndex = dailyHistory.completedTerms.findIndex(ct => ct.baseWord === newCompletedTerm.baseWord)
+    if (existingIndex >= 0) {
+       dailyHistory.completedTerms[existingIndex].inputMarks = inputState.marks
+    } else {
+      dailyHistory.completedTerms.push(newCompletedTerm)
+    }
   } else {
     history.dailyHistories.push({
       completedTerms: [newCompletedTerm],

@@ -1,5 +1,6 @@
 import { ResearchTool } from "@/models/tools"
 import { Language } from "@/models/language";
+import type { LanguageSettings } from "@/models/settings";
 import { languageIcon } from '@/view-models/vm-language'
 import { Icon } from "@/assets/design-tokens/iconography";
 import { type ToolBarButtonVM } from "@/components/vueties/view-models";
@@ -20,7 +21,7 @@ const researchToolIconForLanguage = (tool: ResearchTool, language: Language): Ic
 }
 
 export type ResearchToolButtonVM = ToolBarButtonVM<ResearchTool>
-export const researchToolButtonVMs = (translationLanguage: Language): ResearchToolButtonVM[] => {
+export const researchToolButtonVMs = (languageSettings: LanguageSettings): ResearchToolButtonVM[] => {
   return [
     ResearchTool.Define,
     ResearchTool.ImageSearch,
@@ -30,7 +31,7 @@ export const researchToolButtonVMs = (translationLanguage: Language): ResearchTo
   ].map((tool) => {
     return {
       tool,
-      icon: researchToolIconForLanguage(tool, translationLanguage),
+      icon: researchToolIconForLanguage(tool, languageSettings.translationLanguage),
       isEnabled: true
     }
   })

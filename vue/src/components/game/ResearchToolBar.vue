@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { ResearchTool } from '@/models/tools';
 import settingsStore from '@/stores/settings'
 import { researchToolButtonVMs } from '@/view-models/vm-tools'
@@ -9,11 +10,13 @@ const settings = settingsStore()
 const emits = defineEmits<{
   toolSelected: [tool: ResearchTool]
 }>()
+
+const toolButtonVMs = computed(() => researchToolButtonVMs(settings.currentLanguageSettings))
 </script>
 
 <template>
   <ToolBar 
-    :buttonVMs="researchToolButtonVMs(settings.currentLanguageSettings.translationLanguage)"
+    :buttonVMs="toolButtonVMs"
     @tool-selected="(tool) => emits('toolSelected', tool)"
   />
 </template>
