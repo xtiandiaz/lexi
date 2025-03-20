@@ -1,0 +1,27 @@
+import { Language } from "./language";
+
+export interface LanguageSettings {
+  language: Language,
+  translationLanguage: Language
+}
+
+export interface Settings {
+  currentLanguage: Language
+  languagesSettings: LanguageSettings[]
+}
+
+export const translationLanguage = (language: Language) => {
+  switch (language) {
+    case Language.English:
+      return Language.Spanish
+    case Language.Spanish:
+      return Language.English
+  }
+}
+
+export const defaultLanguageSettings = (language: Language): LanguageSettings => {
+  return {
+    language,
+    translationLanguage: translationLanguage(language)
+  }
+}

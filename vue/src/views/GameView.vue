@@ -7,7 +7,7 @@ import { Section } from '@/models/navigation'
 import contentStore from '@/stores/content'
 import sessionStore from '@/stores/session'
 import settingsStore from '@/stores/settings'
-import { loadContent } from '@/services/word-provision'
+import { loadLexicon } from '@/services/content-loading'
 import { produceInputWithTool } from '@/services/tool-handler'
 import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/history-management'
 import { clamp } from '@/assets/tungsten/math'
@@ -25,12 +25,20 @@ const userInput = ref<UserInput>()
 
 const navigationBarVM = computedNavigationBarVM(Section.Game)
 
-function resetInputSource(savedInput?: InputState) {
+function reset() {
+  if (session.input?.source.language === settings.currentLanguage) {
+    resetInputSource(session.input)
+  } else {
+    resetInputSource()
+  }
+}
+
+function resetInputSource(savedInput?: InputState) {  
   if (savedInput) {
     inputSource.value = savedInput.source
     userInput.value = new UserInput(savedInput.source, savedInput.indices)
   } else {
-    const newTerm = content.randomTerm()
+    const newTerm = content.randomTerm()!
     const termWords = newTerm.split(',')
     const baseWord = termWords[0]
     const linkedWords = termWords.slice(1)
@@ -80,13 +88,9 @@ function onInputToolSelected(tool: InputTool) {
 }
 
 onMounted(async () => {
-  await loadContent()
+  await loadLexicon()
   
-  if (session.input?.source.language === settings.currentLanguage) {
-    resetInputSource(session.input)
-  } else {
-    resetInputSource()
-  }
+  reset()
 })
 
 onBeforeUnmount(() => {
@@ -106,7 +110,7 @@ onBeforeUnmount(() => {
       :state="userInput"
       @input="onInput"
       @input-tool-selected="onInputToolSelected" 
-      @continued="resetInputSource()" 
+      @continued="reset()"
     />
   </main>
 </template>

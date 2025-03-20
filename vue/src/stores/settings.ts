@@ -1,38 +1,24 @@
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { Language } from '../models/language'
+import { Language } from '@/models/language'
+import { type LanguageSettings, defaultLanguageSettings } from '@/models/settings'
+import { retrieveSettings } from '@/services/settings-management'
 
-export default defineStore('settings', {  
-  state: () => {
-    const currentLanguage = ref<Language>(Language.Español)
-    const translationLanguage = ref<Language>(Language.English)
-    const wikipediaSearchUrl = computed(() => `https://${currentLanguage.value}.wikipedia.org/wiki/`)
-    const translatorUrl = computed(() => `https://www.wordreference.com/${currentLanguage.value}/${translationLanguage.value}/translation.asp?spen=`)
-    
-    return {
-      currentLanguage,
-      
-      imageSearchUrl: 'https://duckduckgo.com/?t=ffab&iax=images&ia=images&q=',
-      webSearchUrl: 'https://duckduckgo.com/?t=ffab&q=',
-      wikipediaSearchUrl: wikipediaSearchUrl,
-      
-      translationLanguage: translationLanguage,
-      translatorUrl: translatorUrl,
-      
-      languages: new Map([
-        [
-          Language.Español, 
-          { 
-            dictionaryUrl: 'https://dle.rae.es/' 
-          }
-        ],
-        [
-          Language.English,
-          {
-            dictionaryUrl: 'https://www.oxfordlearnersdictionaries.com/definition/english/'
-          }
-        ]
-      ]),
-    }
+export default defineStore('settings', () => {
+  const savedSettings = retrieveSettings()
+  
+  const currentLanguage = ref<Language>(savedSettings?.currentLanguage ?? Language.Spanish)
+  const languagesSettings: LanguageSettings[] = Object.values(Language).map(lang => {
+    const savedLanguageSettings = savedSettings?.languagesSettings.find(ls => ls.language === lang)
+    return savedLanguageSettings ?? defaultLanguageSettings(lang)
+  })
+  
+  const languageSettings = (language: Language) => languagesSettings.find(ls => ls.language === language)!
+  
+  return {
+    currentLanguage,
+    currentLanguageSettings: languageSettings(currentLanguage.value),
+    languagesSettings,
+    languageSettings: languageSettings
   }
 })

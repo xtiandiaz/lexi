@@ -5,7 +5,7 @@ import settingsStore from "@/stores/settings"
 
 export function localizedStringInLanguage(key: LocalizedString, language: Language): string | undefined {
   switch (language) {
-    case Language.Español: return ES.get(key)
+    case Language.Spanish: return ES.get(key)
     case Language.English: return EN.get(key)
   }
 }

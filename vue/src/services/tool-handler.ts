@@ -1,33 +1,52 @@
 import { InputTool, ResearchTool } from "@/models/tools";
 import type { InputState } from "@/models/input"
+import { Language } from "@/models/language";
 import settingsStore from "@/stores/settings"
 
-export function launchResearchToolForWord(tool: ResearchTool, word: string) {
-  function openPage(url: string) {
-    window.open(url, '_blank')
+const dictionaryURLString = (language: Language): string => {
+  switch (language) {
+    case Language.English:
+      return 'https://www.oxfordlearnersdictionaries.com/definition/english/'
+    case Language.Spanish:
+      return 'https://dle.rae.es/'
   }
+}
+
+const translatorURLString = (languages: [string, string]): string | undefined => {
+  console.log(languages) 
   
-  const settings = settingsStore()
-    
+  switch (languages.join('-')) {
+    case 'en-es':
+      return 'https://www.wordreference.com/es/translation.asp?tranword='
+    case 'es-en':
+      return 'https://www.wordreference.com/es/en/translation.asp?spen='
+    default:
+      return undefined
+  }
+}
+
+const researchUrlString = (tool: ResearchTool, language: Language): string => {
   switch (tool) {
     case ResearchTool.Define:
-      openPage(settings.languages.get(settings.currentLanguage)!.dictionaryUrl + word)
-      break
+      return dictionaryURLString(language)
     case ResearchTool.ImageSearch:
-      openPage(settings.imageSearchUrl + word)
-      break
+      return 'https://duckduckgo.com/?t=ffab&iax=images&ia=images&q='
     case ResearchTool.Translate:
-      openPage(settings.translatorUrl + word)
-      break
+      const settings = settingsStore()
+      const languageSettings = settings.languageSettings(language)
+      
+      return translatorURLString([language, languageSettings.translationLanguage])!
     case ResearchTool.WikipediaSearch:
-      openPage(settings.wikipediaSearchUrl + word)
-      break
+      return `https://${language}.wikipedia.org/wiki/`
     case ResearchTool.WebSearch:
-      openPage(settings.webSearchUrl + word)
-      break
-    default:
-      console.error(`${tool} doesn't have a page`)
+      return 'https://duckduckgo.com/?t=ffab&q='
   }
+}
+
+export function launchResearchToolForWord(tool: ResearchTool, word: string) {
+  const settings = settingsStore()
+
+  window.open(researchUrlString(tool, settings.currentLanguage) + word, '_blank')
 }
 
 function fixOrExtendInput(state: InputState): number[] | undefined {

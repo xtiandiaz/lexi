@@ -1,15 +1,16 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
+import { type Lexicon } from '@/models/content'
 
 export default defineStore('content', () => {
-  const termListing = ref<string[]>([])
+  const lexicon = ref<Lexicon>()
   
-  function randomTerm(): string {
-    return termListing.value[Math.floor(Math.random() * termListing.value.length)]
+  function randomTerm(): string | undefined {
+    return lexicon.value?.terms[Math.floor(Math.random() * lexicon.value.terms.length)]
   }
   
   return {
-    termListing,
+    lexicon,
     randomTerm
   }
 })

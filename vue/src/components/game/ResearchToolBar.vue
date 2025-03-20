@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import type { ResearchTool } from '@/models/tools';
+import settingsStore from '@/stores/settings'
 import { researchToolButtonVMs } from '@/view-models/vm-tools'
 import ToolBar from '@/components/vueties/bars/ToolBar.vue'
+
+const settings = settingsStore()
 
 const emits = defineEmits<{
   toolSelected: [tool: ResearchTool]
@@ -10,7 +13,7 @@ const emits = defineEmits<{
 
 <template>
   <ToolBar 
-    :buttonVMs="researchToolButtonVMs"
+    :buttonVMs="researchToolButtonVMs(settings.currentLanguageSettings.translationLanguage)"
     @tool-selected="(tool) => emits('toolSelected', tool)"
   />
 </template>

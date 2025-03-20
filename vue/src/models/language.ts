@@ -1,6 +1,6 @@
 export enum Language {
-  Español = 'es',
-  English = 'en'
+  English = 'en',
+  Spanish = 'es',
 }
 
 export enum LocalizedString {

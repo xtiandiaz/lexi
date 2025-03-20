@@ -1,8 +1,10 @@
 import { ResearchTool } from "@/models/tools"
+import { Language } from "@/models/language";
+import { languageIcon } from '@/view-models/vm-language'
 import { Icon } from "@/assets/design-tokens/iconography";
 import { type ToolBarButtonVM } from "@/components/vueties/view-models";
 
-const researchToolIcon = (tool: ResearchTool): Icon => {
+const researchToolIconForLanguage = (tool: ResearchTool, language: Language): Icon => {
   switch (tool) {
     case ResearchTool.Define:
       return Icon.Dictionary
@@ -13,12 +15,13 @@ const researchToolIcon = (tool: ResearchTool): Icon => {
     case ResearchTool.WikipediaSearch:
       return Icon.Wikipedia
     case ResearchTool.Translate:
-      return Icon.Translation
+      return languageIcon(language)
   }
 }
 
 export type ResearchToolButtonVM = ToolBarButtonVM<ResearchTool>
-export const researchToolButtonVMs: ResearchToolButtonVM[] = [
+export const researchToolButtonVMs = (translationLanguage: Language): ResearchToolButtonVM[] => {
+  return [
     ResearchTool.Define,
     ResearchTool.ImageSearch,
     ResearchTool.WikipediaSearch,
@@ -27,7 +30,8 @@ export const researchToolButtonVMs: ResearchToolButtonVM[] = [
   ].map((tool) => {
     return {
       tool,
-      icon: researchToolIcon(tool),
+      icon: researchToolIconForLanguage(tool, translationLanguage),
       isEnabled: true
     }
   })
+}
