@@ -5,7 +5,6 @@ import settingsStore from '@/stores/settings'
 import { localizedStringInLanguage } from '@/services/localization';
 import { resetCurrentLanguage } from '@/services/settings-management';
 import { computedNavigationBarVM } from '@/view-models/vm-navigation';
-import { languageIcon } from '@/view-models/vm-language'
 import NavigationBar from '@/components/vueties/bars/NavigationBar.vue';
 import OptionRow from '@/components/vueties/form/OptiionRow.vue';
 
@@ -24,8 +23,7 @@ const navigationBarVM = computedNavigationBarVM(Section.Settings)
           :key="lang"
           :vm="{
             title: localizedStringInLanguage(LocalizedString.LanguageName, lang)!,
-            value: lang,
-            icon: languageIcon(lang)
+            value: lang
           }"
           :isSelected="lang === settings.currentLanguage"
           @selected="(lang) => resetCurrentLanguage(lang)"
