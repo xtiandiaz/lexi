@@ -1,9 +1,5 @@
 export enum LocalStorageItem {
-  DailyHistory = 'daily-history'
-}
-
-export function save<T>(item: LocalStorageItem, value: T) {
-  localStorage.setItem(item, JSON.stringify(value))
+  DailyHistories = 'daily-histories'
 }
 
 export function retrieve<T>(item: LocalStorageItem): T | undefined {
@@ -13,4 +9,8 @@ export function retrieve<T>(item: LocalStorageItem): T | undefined {
   }
   
   return JSON.parse(rawValue) as T
+}
+
+export function save<T>(item: LocalStorageItem, value: T) {
+  localStorage.setItem(item, JSON.stringify(value))
 }

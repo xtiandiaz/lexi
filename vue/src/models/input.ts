@@ -1,9 +1,11 @@
+import type { Language } from './language'
 import '@/assets/tungsten/extensions/array.extensions'
 import { substringFromIndices } from "@/assets/tungsten/stringify"
 
 export interface InputSource {
   readonly baseWord: string
   readonly hintPrefixLength: number
+  readonly language: Language
   readonly linkedWords: string[]
 }
 
@@ -39,9 +41,9 @@ export class UserInput implements InputState {
   source: InputSource
   
   constructor(source: InputSource, indices: number[] = []) {
-    this.source = source
     this.indices = indices
     this.inputableIndices = (Array.range(source.hintPrefixLength, source.baseWord.length, 1)).shuffle()
+    this.source = source
   }
   
   get isComplete() {

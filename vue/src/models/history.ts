@@ -1,12 +1,14 @@
-import { type InputMark } from '@/models/input'
+import { type InputMark } from './input'
+import type { Language } from './language'
 
 export interface CompletedTerm {
   baseWord: string
-  linkedWords: string[]
   inputMarks: InputMark[]
+  linkedWords: string[]
 }
 
 export interface DailyHistory {
-  date: Date
   completedTerms: CompletedTerm[]
+  date: Date
+  language: Language
 }

@@ -1,44 +1,52 @@
 import type { DailyHistory, CompletedTerm } from "@/models/history";
 import type { InputState } from "@/models/input";
+import { Language } from "@/models/language";
 import historyStore from "@/stores/history";
 import { LocalStorageItem, retrieve, save } from './persistence';
 import '@/assets/tungsten/extensions/date.extensions'
 
 interface RawDailyHistory {
+  completedTerms: CompletedTerm[],
   date: string,
-  completedTerms: CompletedTerm[]
+  language: Language
 }
 
-export function retrieveDailyHistory(): DailyHistory | undefined {
-  const rawDailyHistory = retrieve<RawDailyHistory>(LocalStorageItem.DailyHistory)
-  if (!rawDailyHistory) {
+export function retrieveDailyHistories(): DailyHistory[] | undefined {
+  const rawDailyHistories = retrieve<RawDailyHistory[]>(LocalStorageItem.DailyHistories)
+  if (!rawDailyHistories) {
     return undefined
   }
   
-  return {
-    date: new Date(rawDailyHistory.date),
-    completedTerms: rawDailyHistory.completedTerms
-  }
+  return rawDailyHistories.map(rdh => {
+    return {
+      completedTerms: rdh.completedTerms,
+      date: new Date(rdh.date),
+      language: rdh.language
+    }
+  })
 }
 
 export function saveDailyHistory() {
   const history = historyStore()
   
-  save(LocalStorageItem.DailyHistory, {
-    date: history.daily.date,
-    completedTerms: history.daily.completedTerms
-  } as DailyHistory)
+  save(
+    LocalStorageItem.DailyHistories, 
+    history.dailyHistories
+  )
 }
 
 export function resetDailyHistoryIfNeeded() {
   const history = historyStore()
-  const dateDifference = (new Date()).getDaysFrom(history.daily.date)
+  if (!history.currentDailyHistory) {
+    return
+  }
   
+  const dateDifference = (new Date()).getDaysFrom(history.currentDailyHistory.date)
   if (dateDifference < 1)
     return
   
-  history.daily.date = Date.today()
-  history.daily.completedTerms = []
+  history.currentDailyHistory.date = Date.today()
+  history.currentDailyHistory.completedTerms = []
   
   saveDailyHistory()
 }
@@ -48,16 +56,22 @@ export function saveWordInDailyHistory(inputState: InputState) {
 
   const history = historyStore()
   
-  // const indexOfWord = history.daily.completedTerms.findIndex(ct => ct.baseWord === inputState.source.baseWord)
-  // if (indexOfWord) {
-  //   history.daily.completedTerms.splice(indexOfWord, 1)
-  // }
-  
-  history.daily.completedTerms.push({
+  const newCompletedTerm: CompletedTerm = {
     baseWord: inputState.source.baseWord,
     linkedWords: inputState.source.linkedWords,
     inputMarks: inputState.marks
-  })
+  }
+  
+  const dailyHistory = history.dailyHistory(inputState.source.language)
+  if (dailyHistory) {
+    dailyHistory.completedTerms.push(newCompletedTerm)
+  } else {
+    history.dailyHistories.push({
+      completedTerms: [newCompletedTerm],
+      date: Date.today(),
+      language: inputState.source.language
+    })
+  }
   
   saveDailyHistory()
 }

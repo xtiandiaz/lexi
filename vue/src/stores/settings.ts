@@ -10,7 +10,8 @@ export default defineStore('settings', {
     const translatorUrl = computed(() => `https://www.wordreference.com/${currentLanguage.value}/${translationLanguage.value}/translation.asp?spen=`)
     
     return {
-      activeLanguage: currentLanguage,
+      currentLanguage,
+      
       imageSearchUrl: 'https://duckduckgo.com/?t=ffab&iax=images&ia=images&q=',
       webSearchUrl: 'https://duckduckgo.com/?t=ffab&q=',
       wikipediaSearchUrl: wikipediaSearchUrl,
@@ -19,9 +20,18 @@ export default defineStore('settings', {
       translatorUrl: translatorUrl,
       
       languages: new Map([
-        [Language.Español, { 
-          dictionaryUrl: 'https://dle.rae.es/' 
-        }]
+        [
+          Language.Español, 
+          { 
+            dictionaryUrl: 'https://dle.rae.es/' 
+          }
+        ],
+        [
+          Language.English,
+          {
+            dictionaryUrl: 'https://www.oxfordlearnersdictionaries.com/definition/english/'
+          }
+        ]
       ]),
     }
   }

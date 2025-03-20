@@ -4,6 +4,7 @@ export enum Language {
 }
 
 export enum LocalizedString {
-  SettingsSectionTitle,
-  DailyHistorySectionTitle
+  DailyHistorySectionTitle,
+  LanguageName,
+  SettingsSectionTitle
 }

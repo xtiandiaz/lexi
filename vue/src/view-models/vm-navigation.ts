@@ -12,21 +12,23 @@ export const computedNavigationBarVM = (section: Section): ComputedRef<Navigatio
         const settings = settingsStore()
         const history = historyStore()
         
+        const dailyCompletedTermCount = computed(() => history.currentDailyHistory?.completedTerms.length ?? 0)
+        
         return {
           leftBarItems: [
             { 
               target: Section.Settings,
               icon: Icon.Gear,
-              isEnabled: false,
-              label: settings.activeLanguage.toUpperCase()
+              isEnabled: true,
+              label: settings.currentLanguage.toUpperCase()
             }
           ],
           rightBarItems: [
             {
               target: Section.DailyHistory,
               icon: Icon.History,
-              isEnabled: history.dailyCompletedTermsCount() > 0,
-              label: `${history.daily.completedTerms.length}`
+              isEnabled: dailyCompletedTermCount.value > 0,
+              label: `${dailyCompletedTermCount.value}`
             }
           ]
         }

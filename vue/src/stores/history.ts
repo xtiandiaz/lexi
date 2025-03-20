@@ -1,17 +1,22 @@
 import '@/assets/tungsten/extensions/date.extensions'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import type { DailyHistory } from '@/models/history'
-import { retrieveDailyHistory } from '@/services/history-management'
+import type { Language } from '@/models/language'
+import settingsStore from './settings'
+import { retrieveDailyHistories } from '@/services/history-management'
 
-export default defineStore('history', () => { 
-  const dailyHistory = ref<DailyHistory>(retrieveDailyHistory() ?? {
-    date: Date.today(),
-    completedTerms: []
+export default defineStore('history', () => {
+  const settings = settingsStore()
+  
+  const dailyHistories = ref<DailyHistory[]>(retrieveDailyHistories() ?? [])
+  const currentDailyHistory = computed<DailyHistory | undefined>(() => {
+    return dailyHistories.value.find(dh => dh.language === settings.currentLanguage)
   })
   
   return {
-    daily: dailyHistory,
-    dailyCompletedTermsCount: () => dailyHistory.value.completedTerms.length
+    dailyHistories,
+    currentDailyHistory,
+    dailyHistory: (language: Language) => dailyHistories.value.find(dh => dh.language === language)
   }
 })

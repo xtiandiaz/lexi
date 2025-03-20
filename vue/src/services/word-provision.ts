@@ -8,7 +8,7 @@ export async function loadContent() {
   }
   
   const settings = settingsStore()
-  const url = `https://raw.githubusercontent.com/xtiandiaz/lexicon/refs/heads/main/words/${settings.activeLanguage}.txt`
+  const url = `https://raw.githubusercontent.com/xtiandiaz/lexicon/refs/heads/main/words/${settings.currentLanguage}.txt`
   
   try {
     const response = await fetch(`${url}?salt=${Math.random()}`)
@@ -17,6 +17,6 @@ export async function loadContent() {
     // console.log(termListing)
     content.termListing = termListing.split('\n')
   } catch (error) {
-    console.error(`Language: ${settings.activeLanguage}`, error)
+    console.error(`Language: ${settings.currentLanguage}`, error)
   }
 }

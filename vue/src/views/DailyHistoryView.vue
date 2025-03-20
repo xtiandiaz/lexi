@@ -25,12 +25,12 @@ function onWordSelected(index: number) {
 </script>
 
 <template>
-  <NavigationBar :vm="navigationBarVM" :title="navigationBarVM.title" />
+  <NavigationBar :vm="navigationBarVM" />
   <main>
-    <section class="form">
+    <section v-if="history.currentDailyHistory" class="form">
       <div class="section">
         <FoldableRow 
-          v-for="(term, index) of history.daily.completedTerms.sort((s1, s2) => s1.baseWord.localeCompare(s2.baseWord))"
+          v-for="(term, index) of history.currentDailyHistory.completedTerms.sort((s1, s2) => s1.baseWord.localeCompare(s2.baseWord))"
           :key="index"
           :title="term.baseWord"
           :subtitle="term.linkedWords.join(', ')"
@@ -65,10 +65,6 @@ function onWordSelected(index: number) {
 @use '../components/vueties/assets/form' with (
   $max-width: 640px
 );
-
-main {
-  padding: 0.5em 1em;
-}
 
 div.marks {
   align-items: center;

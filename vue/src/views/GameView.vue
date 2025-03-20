@@ -6,6 +6,7 @@ import { InputTool } from '@/models/tools'
 import { Section } from '@/models/navigation'
 import contentStore from '@/stores/content'
 import sessionStore from '@/stores/session'
+import settingsStore from '@/stores/settings'
 import { loadContent } from '@/services/word-provision'
 import { produceInputWithTool } from '@/services/tool-handler'
 import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/history-management'
@@ -17,6 +18,7 @@ import InputGamepad from '@/components/game/InputGamepad.vue'
 
 const content = contentStore()
 const session = sessionStore()
+const settings = settingsStore()
 
 const inputSource = ref<InputSource>()
 const userInput = ref<UserInput>()
@@ -36,6 +38,7 @@ function resetInputSource(savedInput?: InputState) {
     inputSource.value = {
       baseWord: baseWord,
       hintPrefixLength: clamp(Math.floor(baseWord.length * 0.25), 0, Math.floor(baseWord.length / 2)),
+      language: settings.currentLanguage,
       linkedWords
     }
     userInput.value = new UserInput(inputSource.value)
@@ -79,7 +82,11 @@ function onInputToolSelected(tool: InputTool) {
 onMounted(async () => {
   await loadContent()
   
-  resetInputSource(session.input)
+  if (session.input?.source.language === settings.currentLanguage) {
+    resetInputSource(session.input)
+  } else {
+    resetInputSource()
+  }
 })
 
 onBeforeUnmount(() => {

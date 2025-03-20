@@ -11,7 +11,7 @@ export function launchResearchToolForWord(tool: ResearchTool, word: string) {
     
   switch (tool) {
     case ResearchTool.Define:
-      openPage(settings.languages.get(settings.activeLanguage)!.dictionaryUrl + word)
+      openPage(settings.languages.get(settings.currentLanguage)!.dictionaryUrl + word)
       break
     case ResearchTool.ImageSearch:
       openPage(settings.imageSearchUrl + word)
