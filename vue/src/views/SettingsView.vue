@@ -1,37 +1,27 @@
 <script setup lang="ts">
-import { Language, LocalizedString } from '@/models/language'
 import { Section } from '@/models/navigation'
 import settingsStore from '@/stores/settings'
-import { localizedStringInLanguage } from '@/services/localization';
 import { resetCurrentLanguage } from '@/services/settings-management';
 import { computedNavigationBarVM } from '@/view-models/vm-navigation';
-import { dictionaryIcon } from '@/view-models/vm-language'
+import { languageChoiceSectionVM } from '@/view-models/vm-settings';
 import NavigationBar from '@/components/vueties/bars/NavigationBar.vue';
-import OptionRow from '@/components/vueties/form/OptiionRow.vue';
+import ChoiceSection from '@/components/vueties/form/ChoiceSection.vue';
+import { computed } from 'vue';
 
 const settings = settingsStore()
 
 const navigationBarVM = computedNavigationBarVM(Section.Settings)
+const choiceSectionVM = computed(() => languageChoiceSectionVM(settings.currentLanguage))
 </script>
 
 <template>
   <NavigationBar :vm="navigationBarVM" />
   <main>
     <section class="form">
-      <div class="section">
-        <OptionRow 
-          v-for="lang of Object.values(Language)"
-          :key="lang"
-          :vm="{
-            title: localizedStringInLanguage(LocalizedString.LanguageName, lang)!,
-            value: lang,
-            icon: dictionaryIcon(lang)
-          }"
-          :isSelected="lang === settings.currentLanguage"
-          @selected="(lang) => resetCurrentLanguage(lang)"
-          class="row info"
-        />
-      </div>
+      <ChoiceSection 
+        :vm="choiceSectionVM" 
+        @selected="(lang) => resetCurrentLanguage(lang)"
+      />
     </section>
   </main>
 </template>
