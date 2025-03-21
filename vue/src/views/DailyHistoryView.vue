@@ -29,31 +29,33 @@ function onWordSelected(index: number) {
   <main>
     <section v-if="history.currentDailyHistory" class="form">
       <div class="section">
-        <FoldableRow 
-          v-for="(term, index) of history.currentDailyHistory.completedTerms.sort((s1, s2) => s1.baseWord.localeCompare(s2.baseWord))"
-          :key="index"
-          :title="term.baseWord"
-          :subtitle="term.linkedWords.join(', ')"
-          :is-unfolded="selectedIndex === index"
-          @selected="onWordSelected(index)"
-        >
-        <template v-slot:title-ornament>
-          <div v-if="term.inputMarks && term.inputMarks.length > 0" class="marks">
-            <span
-              v-for="(mark, index) of term.inputMarks.filter(m => m.value > 0)" 
-              :key="index"
-              class="mark" :class="mark.kind"
-            >
-              <span>{{ mark.value }} ×</span><SvgIcon :icon="inputMarkIcon(mark.kind)" />
-            </span>
-          </div>
-        </template>
-        <template v-slot:foldable-content>
-          <ResearchToolBar
-            @tool-selected="(tool) => launchResearchToolForWord(tool, term.baseWord)"
-          />
-        </template>
-        </FoldableRow>
+        <div class="rows">
+          <FoldableRow 
+            v-for="(term, index) of history.currentDailyHistory.completedTerms.sort((s1, s2) => s1.baseWord.localeCompare(s2.baseWord))"
+            :key="index"
+            :title="term.baseWord"
+            :subtitle="term.linkedWords.join(', ')"
+            :is-unfolded="selectedIndex === index"
+            @selected="onWordSelected(index)"
+          >
+          <template v-slot:title-ornament>
+            <div v-if="term.inputMarks && term.inputMarks.length > 0" class="marks">
+              <span
+                v-for="(mark, index) of term.inputMarks.filter(m => m.value > 0)" 
+                :key="index"
+                class="mark" :class="mark.kind"
+              >
+                <span>{{ mark.value }} ×</span><SvgIcon :icon="inputMarkIcon(mark.kind)" />
+              </span>
+            </div>
+          </template>
+          <template v-slot:foldable-content>
+            <ResearchToolBar
+              @tool-selected="(tool) => launchResearchToolForWord(tool, term.baseWord)"
+            />
+          </template>
+          </FoldableRow>
+        </div>
       </div>
     </section>
   </main>
