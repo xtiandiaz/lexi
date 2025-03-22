@@ -4,10 +4,17 @@ import { type KeypadKeyVM, type ToolBarButtonVM } from '@/components/vueties/vie
 import { canUseInputTool } from '@/services/tool-handler'
 import { Icon } from '@/assets/design-tokens/iconography'
 
+const labelForKey = (key: string): string => {
+  switch (key) {
+    case ' ': return '＿'
+    default: return key
+  }
+}
+
 export const keypadKeyVMs = (inputState: InputState): KeypadKeyVM[] => {
   const keys: KeypadKeyVM[] = inputState.inputableIndices.map(li => {
     return { 
-      label: inputState.source.baseWord[li].toLowerCase(), 
+      label: labelForKey(inputState.source.baseWord[li].toLowerCase()),
       value: li, 
       isEnabled: !inputState.indices.includes(li) 
     }
