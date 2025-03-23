@@ -4,10 +4,11 @@ import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { type InputSource, type InputState, InputMarkKind, UserInput } from '@/models/input'
 import { InputTool } from '@/models/tools'
 import { Section } from '@/models/navigation'
+import { LexiconSource } from "@/models/content"
 import contentStore from '@/stores/content'
 import sessionStore from '@/stores/session'
 import settingsStore from '@/stores/settings'
-import { loadLexicon } from '@/services/content-loading'
+import { loadLexicon } from '@/services/content-management'
 import { produceInputWithTool } from '@/services/tool-handler'
 import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/history-management'
 import { clamp } from '@/assets/tungsten/math'
@@ -80,7 +81,9 @@ function onInputToolSelected(tool: InputTool) {
 }
 
 onMounted(async () => {
-  await loadLexicon()
+  resetDailyHistoryIfNeeded()
+  
+  await loadLexicon(LexiconSource.Repository)
   
   if (session.input?.source.language === settings.currentLanguage) {
     resetInputSource(session.input)

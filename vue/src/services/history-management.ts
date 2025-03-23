@@ -42,8 +42,9 @@ export function resetDailyHistoryIfNeeded() {
   }
   
   const dateDifference = (new Date()).getDaysFrom(history.currentDailyHistory.date)
-  if (dateDifference < 1)
+  if (dateDifference < 1) {
     return
+  }
   
   history.currentDailyHistory.date = Date.today()
   history.currentDailyHistory.completedTerms = []

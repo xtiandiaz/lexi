@@ -15,11 +15,13 @@ export default defineStore('settings', () => {
   
   const languageSettings = (language: Language) => languagesSettings.find(ls => ls.language === language)!
   const currentLanguageSettings = computed(() => languageSettings(currentLanguage.value))
+  const currentDailyGoal = computed(() => currentLanguageSettings.value.dailyGoal)
   
   return {
     currentLanguage,
     currentLanguageSettings,
+    currentDailyGoal,
     languagesSettings,
-    languageSettings: languageSettings
+    languageSettings: languageSettings,
   }
 })

@@ -1,8 +1,13 @@
 import { Language } from "./language";
 
+export interface DailyGoalSettings {
+  termCount: number
+}
+
 export interface LanguageSettings {
   language: Language,
-  translationLanguage: Language
+  translationLanguage: Language,
+  dailyGoal: DailyGoalSettings
 }
 
 export interface Settings {
@@ -19,9 +24,14 @@ export const translationLanguage = (language: Language) => {
   }
 }
 
+export const defaultDailyGoalSettings: DailyGoalSettings = {
+  termCount: 10
+}
+
 export const defaultLanguageSettings = (language: Language): LanguageSettings => {
   return {
     language,
-    translationLanguage: translationLanguage(language)
+    translationLanguage: translationLanguage(language),
+    dailyGoal: defaultDailyGoalSettings
   }
 }

@@ -10,9 +10,9 @@ export enum Section {
 export const sectionTitle = (section: Section): string | undefined => {
   switch (section) {
     case Section.Settings:
-      return localizedString(LocalizedString.SettingsSectionTitle)!
+      return localizedString(LocalizedString.Title_Settings)!
     case Section.DailyHistory:
-      return localizedString(LocalizedString.DailyHistorySectionTitle)!
+      return localizedString(LocalizedString.Title_DailyHistory)!
     default:
       return undefined
   }

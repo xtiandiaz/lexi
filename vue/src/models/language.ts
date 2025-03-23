@@ -4,8 +4,10 @@ export enum Language {
 }
 
 export enum LocalizedString {
-  DailyHistorySectionTitle,
+  Button_Review,
   Language,
   LanguageName,
-  SettingsSectionTitle
+  Text_DailyGoalReached,
+  Title_DailyHistory,
+  Title_Settings,
 }

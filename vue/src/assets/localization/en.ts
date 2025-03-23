@@ -1,8 +1,10 @@
 import { LocalizedString } from "@/models/language";
 
 export default new Map<LocalizedString, string>([
-  [LocalizedString.DailyHistorySectionTitle, "Daily History"],
+  [LocalizedString.Button_Review, "Review"],
   [LocalizedString.Language, "Language"],
   [LocalizedString.LanguageName, "English"],
-  [LocalizedString.SettingsSectionTitle, "Settings"],
+  [LocalizedString.Text_DailyGoalReached, "You've reached your daily goal!"],
+  [LocalizedString.Title_DailyHistory, "Daily History"],
+  [LocalizedString.Title_Settings, "Settings"],
 ])

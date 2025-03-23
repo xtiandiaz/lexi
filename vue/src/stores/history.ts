@@ -10,13 +10,18 @@ export default defineStore('history', () => {
   const settings = settingsStore()
   
   const dailyHistories = ref<DailyHistory[]>(retrieveDailyHistories() ?? [])
+  
   const currentDailyHistory = computed<DailyHistory | undefined>(() => {
     return dailyHistories.value.find(dh => dh.language === settings.currentLanguage)
   })
+  const currentTermCount = computed(() => currentDailyHistory.value?.completedTerms.length ?? 0)
+  const isGoalReached = computed(() => currentTermCount.value >= settings.currentDailyGoal.termCount)
   
   return {
     dailyHistories,
     currentDailyHistory,
-    dailyHistory: (language: Language) => dailyHistories.value.find(dh => dh.language === language)
+    currentTermCount,
+    isGoalReached,
+    dailyHistory: (language: Language) => dailyHistories.value.find(dh => dh.language === language),
   }
 })
