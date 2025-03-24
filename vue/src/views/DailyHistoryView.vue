@@ -22,11 +22,7 @@ const selectedIndex = ref<number>()
 const navigationBarVM = computedNavigationBarVM(Section.DailyHistory)
 
 function onWordSelected(index: number) {
-  if (index !== selectedIndex.value) {
-    selectedIndex.value = index
-  } else {
-    selectedIndex.value = undefined
-  }
+  selectedIndex.value = index !== selectedIndex.value ? index : undefined
 }
 
 function onReviewSelected() {
@@ -101,7 +97,7 @@ div.marks {
     &.hint {
       @include palette.color-attribute('color', 'yellow');
     }
-    &.review {
+    &.test {
       @include palette.color-attribute('color', 'green');
     }
     
