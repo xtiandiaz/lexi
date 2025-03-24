@@ -71,7 +71,7 @@ function onReviewSelected() {
       <div v-if="history.canReview" class="section review">
         <div class="rows">
           <ButtonRow 
-            :label="localizedString(LocalizedString.Button_Review)" 
+            :label="localizedString(LocalizedString.Button_Test)" 
             :icon="Icon.Right"
             @click="onReviewSelected"
           />

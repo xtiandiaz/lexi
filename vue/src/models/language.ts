@@ -4,7 +4,7 @@ export enum Language {
 }
 
 export enum LocalizedString {
-  Button_Review,
+  Button_Test,
   DailyGoal,
   Language,
   LanguageName,

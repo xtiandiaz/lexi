@@ -1,7 +1,7 @@
 import { LocalizedString } from "@/models/language";
 
 export default new Map<LocalizedString, string>([
-  [LocalizedString.Button_Review, "Review"],
+  [LocalizedString.Button_Test, "Test"],
   [LocalizedString.DailyGoal, "Daily Goal"],
   [LocalizedString.Language, "Language"],
   [LocalizedString.LanguageName, "English"],

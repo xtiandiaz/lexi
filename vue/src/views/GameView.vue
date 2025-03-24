@@ -76,7 +76,7 @@ function onInput(index: number) {
     
     if (userInput.value.isComplete) {
       if (session.gameMode === GameMode.Review) {
-        userInput.value.addMark(InputMarkKind.Review, 1)
+        userInput.value.addMark(InputMarkKind.Test, 1)
         userInput.value.resetMark(InputMarkKind.Hint)
       }
       saveWordInDailyHistory(userInput.value)

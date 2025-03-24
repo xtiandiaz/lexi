@@ -10,7 +10,7 @@ export interface InputSource {
 
 export enum InputMarkKind {
   Hint = 'hint',
-  Review = 'review'
+  Test = 'test'
 }
 
 export interface InputMark {

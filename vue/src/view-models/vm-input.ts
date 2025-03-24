@@ -51,14 +51,14 @@ export const inputMarkIcon = (kind: InputMarkKind) => {
   switch (kind) {
     case InputMarkKind.Hint:
       return Icon.Hint
-    case InputMarkKind.Review:
+    case InputMarkKind.Test:
       return Icon.Right
   }
 }
 
 export const shouldShowInputMarkValue = (kind: InputMarkKind) => {
   switch (kind) {
-    case InputMarkKind.Review:
+    case InputMarkKind.Test:
       return false
     case InputMarkKind.Hint:
       return true
