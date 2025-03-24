@@ -32,7 +32,7 @@ const choiceSectionVM = computed(() => languageChoiceSectionVM(settings.currentL
   $max-width: 640px
 );
 
-:deep(.svg-icon.accessory) {
+:deep(.representative-icon) {
   @include palette.color-attribute('color', 'tertiary-body');
 }
 </style>

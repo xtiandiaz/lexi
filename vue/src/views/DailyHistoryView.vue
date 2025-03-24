@@ -1,22 +1,22 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import router from '@/router'
 import { Section } from '@/models/navigation'
 import { LocalizedString } from '@/models/language'
 import historyStore from '@/stores/history'
-import settingsStore from '@/stores/settings'
 import { launchResearchToolForWord } from '@/services/tool-handler'
 import { localizedString } from '@/services/localization'
+import { prepareReview } from '@/services/session-management'
 import { computedNavigationBarVM } from '@/view-models/vm-navigation'
-import { inputMarkIcon } from '@/view-models/vm-input'
+import { inputMarkIcon, shouldShowInputMarkValue } from '@/view-models/vm-input'
 import { Icon } from '@/assets/design-tokens/iconography'
 import NavigationBar from '@/components/vueties/bars/NavigationBar.vue'
 import FoldableRow from '@/components/vueties/form/FoldableRow.vue'
 import ResearchToolBar from '@/components/game/ResearchToolBar.vue'
 import SvgIcon from '@/components/vueties/assorted/SvgIcon.vue'
-import TextButton from '@/components/vueties/buttons/TextButton.vue'
+import ButtonRow from '@/components/vueties/form/ButtonRow.vue'
 
 const history = historyStore()
-const settings = settingsStore()
 
 const selectedIndex = ref<number>()
 const navigationBarVM = computedNavigationBarVM(Section.DailyHistory)
@@ -28,21 +28,17 @@ function onWordSelected(index: number) {
     selectedIndex.value = undefined
   }
 }
+
+function onReviewSelected() {
+  prepareReview()
+  router.back()
+}
 </script>
 
 <template>
   <NavigationBar :vm="navigationBarVM" />
   <main>
     <section v-if="history.currentDailyHistory" class="form">
-      <div v-if="history.isDailyGoalReached" class="section wrapper review">
-        <SvgIcon :icon="Icon.Right" />
-        {{ localizedString(LocalizedString.Text_DailyGoalReached) }}
-        <span>
-          <span class="strong">{{history.currentTermCount}}</span>/{{ settings.currentDailyGoal.termCount }}
-        </span>
-        <div class="spacer"></div>
-        <!-- <TextButton :label="localizedString(LocalizedString.Button_Review)" /> -->
-      </div>
       <div class="section">
         <div class="rows">
           <FoldableRow 
@@ -60,7 +56,7 @@ function onWordSelected(index: number) {
                 :key="index"
                 class="mark" :class="mark.kind"
               >
-                <span>{{ mark.value }} ×</span><SvgIcon :icon="inputMarkIcon(mark.kind)" />
+                <span v-if="shouldShowInputMarkValue(mark.kind)">{{ mark.value }} ×</span><SvgIcon :icon="inputMarkIcon(mark.kind)" />
               </span>
             </div>
           </template>
@@ -70,6 +66,15 @@ function onWordSelected(index: number) {
             />
           </template>
           </FoldableRow>
+        </div>
+      </div>
+      <div v-if="history.canReview" class="section review">
+        <div class="rows">
+          <ButtonRow 
+            :label="localizedString(LocalizedString.Button_Review)" 
+            :icon="Icon.Right"
+            @click="onReviewSelected"
+          />
         </div>
       </div>
     </section>
@@ -93,10 +98,10 @@ div.marks {
   span.mark {
     @extend .caption;
     
-    &.hints {
+    &.hint {
       @include palette.color-attribute('color', 'yellow');
     }
-    &.tests {
+    &.review {
       @include palette.color-attribute('color', 'green');
     }
     
@@ -111,21 +116,8 @@ div.marks {
   }  
 }
 
-.section.review {
-  display: flex;
-  flex-direction: row !important;
-  align-items: center;
+.review .row.button {
   @include palette.color-attribute('color', 'green');
-  
-  button.text-button {
-    @include palette.color-attribute('background-color', 'green');
-  }
-  
-  .svg-icon {
-    flex-shrink: 0; 
-    height: 2em;
-    width: 2em;
-  }
 }
 
 :deep(.tool-bar) {

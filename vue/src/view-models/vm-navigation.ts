@@ -33,7 +33,7 @@ export const computedNavigationBarVM = (section: Section): ComputedRef<Navigatio
               label: `${dailyCompletedTermCount.value}`
             }
           ],
-          title: history.isDailyGoalReached ? localizedString(LocalizedString.Title_DailyGoalReached) : undefined
+          // title: history.isDailyGoalReached ? localizedString(LocalizedString.Title_DailyGoalReached) : undefined
         }
       })
     case Section.Settings:

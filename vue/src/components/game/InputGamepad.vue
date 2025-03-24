@@ -34,7 +34,7 @@ const _inputToolBarButtonVMs = computed(() => inputToolBarButtonVMs(state))
     
     <ResearchToolBar
       v-if="state.isComplete"
-      @tool-selected="(tool) => launchResearchToolForWord(tool, state.source.baseWord)"
+      @tool-selected="(tool) => launchResearchToolForWord(tool, state.source.term.baseWord)"
     />
     
     <div class="spacer"></div>

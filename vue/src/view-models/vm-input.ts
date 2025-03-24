@@ -1,8 +1,10 @@
 import { InputMarkKind, type InputState } from '@/models/input'
 import { InputTool } from '@/models/tools'
-import { type KeypadKeyVM, type ToolBarButtonVM } from '@/components/vueties/view-models'
+import { GameMode } from '@/models/game'
+import sessionStore from '@/stores/session'
 import { canUseInputTool } from '@/services/tool-handler'
 import { Icon } from '@/assets/design-tokens/iconography'
+import { type KeypadKeyVM, type ToolBarButtonVM } from '@/components/vueties/view-models'
 
 const labelForKey = (key: string): string => {
   switch (key) {
@@ -14,7 +16,7 @@ const labelForKey = (key: string): string => {
 export const keypadKeyVMs = (inputState: InputState): KeypadKeyVM[] => {
   const keys: KeypadKeyVM[] = inputState.inputableIndices.map(li => {
     return { 
-      label: labelForKey(inputState.source.baseWord[li].toLowerCase()),
+      label: labelForKey(inputState.source.term.baseWord[li].toLowerCase()),
       value: li, 
       isEnabled: !inputState.indices.includes(li) 
     }
@@ -31,6 +33,11 @@ export const keypadKeyVMs = (inputState: InputState): KeypadKeyVM[] => {
 }
 
 export const inputToolBarButtonVMs = (inputState: InputState): ToolBarButtonVM<InputTool>[] => {
+  const session = sessionStore()
+  if (session.gameMode === GameMode.Review) {
+    return []
+  }
+  
   return [
     {
       tool: InputTool.Hint,
@@ -42,9 +49,18 @@ export const inputToolBarButtonVMs = (inputState: InputState): ToolBarButtonVM<I
 
 export const inputMarkIcon = (kind: InputMarkKind) => {
   switch (kind) {
-    case InputMarkKind.Hints:
+    case InputMarkKind.Hint:
       return Icon.Hint
-    case InputMarkKind.Tests:
+    case InputMarkKind.Review:
       return Icon.Right
+  }
+}
+
+export const shouldShowInputMarkValue = (kind: InputMarkKind) => {
+  switch (kind) {
+    case InputMarkKind.Review:
+      return false
+    case InputMarkKind.Hint:
+      return true
   }
 }

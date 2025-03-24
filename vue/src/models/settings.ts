@@ -5,14 +5,15 @@ export interface DailyGoalSettings {
 }
 
 export interface LanguageSettings {
-  language: Language,
-  translationLanguage: Language,
+  language: Language
+  translationLanguage: Language
   dailyGoal: DailyGoalSettings
 }
 
 export interface Settings {
   currentLanguage: Language
   languagesSettings: LanguageSettings[]
+  minReviewTermCount: number
 }
 
 export const translationLanguage = (language: Language) => {
@@ -32,6 +33,6 @@ export const defaultLanguageSettings = (language: Language): LanguageSettings =>
   return {
     language,
     translationLanguage: translationLanguage(language),
-    dailyGoal: defaultDailyGoalSettings
+    dailyGoal: defaultDailyGoalSettings,
   }
 }

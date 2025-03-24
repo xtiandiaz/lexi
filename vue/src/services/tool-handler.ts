@@ -1,7 +1,9 @@
 import { InputTool, ResearchTool } from "@/models/tools";
 import type { InputState } from "@/models/input"
 import { Language } from "@/models/language";
+import { GameMode } from "@/models/game";
 import settingsStore from "@/stores/settings"
+import sessionStore from '@/stores/session'
 
 const dictionaryURLString = (language: Language): string => {
   switch (language) {
@@ -67,8 +69,8 @@ function fixOrExtendInput(state: InputState): number[] | undefined {
     return undefined
   }
   
-  const inputableStartIndex = state.source.baseWord.length - state.inputableIndices.length
-  const fixedOrExtendedSubstring = state.source.baseWord.substring(0, letterMatchCount + 1)
+  const inputableStartIndex = state.source.term.baseWord.length - state.inputableIndices.length
+  const fixedOrExtendedSubstring = state.source.term.baseWord.substring(0, letterMatchCount + 1)
   // console.log('fixedOrExtendedInput', fixedOrExtendedSubstring)
   
   return Array.range(inputableStartIndex, inputableStartIndex + fixedOrExtendedSubstring.length, 1)

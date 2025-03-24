@@ -58,8 +58,7 @@ export function saveWordInDailyHistory(inputState: InputState) {
   const history = historyStore()
   
   const newCompletedTerm: CompletedTerm = {
-    baseWord: inputState.source.baseWord,
-    linkedWords: inputState.source.linkedWords,
+    ...inputState.source.term,
     inputMarks: inputState.marks
   }
   

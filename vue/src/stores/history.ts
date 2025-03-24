@@ -16,12 +16,15 @@ export default defineStore('history', () => {
   })
   const currentTermCount = computed(() => currentDailyHistory.value?.completedTerms.length ?? 0)
   const isDailyGoalReached = computed(() => currentTermCount.value >= settings.currentDailyGoal.termCount)
+  const canReview = computed(() => currentTermCount.value >= settings.minReviewTermCount)
   
   return {
     dailyHistories,
+    canReview,
     currentDailyHistory,
     currentTermCount,
     isDailyGoalReached,
+    
     dailyHistory: (language: Language) => dailyHistories.value.find(dh => dh.language === language),
   }
 })

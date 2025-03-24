@@ -1,17 +1,16 @@
 import type { Language } from './language'
+import type { Term } from './content'
 import '@/assets/tungsten/extensions/array.extensions'
 import { substringFromIndices } from "@/assets/tungsten/stringify"
 
 export interface InputSource {
-  readonly baseWord: string
-  readonly hintPrefixLength: number
   readonly language: Language
-  readonly linkedWords: string[]
+  readonly term: Term
 }
 
 export enum InputMarkKind {
-  Hints = 'hints',
-  Tests = 'tests'
+  Hint = 'hint',
+  Review = 'review'
 }
 
 export interface InputMark {
@@ -42,12 +41,12 @@ export class UserInput implements InputState {
   
   constructor(source: InputSource, indices: number[] = []) {
     this.indices = indices
-    this.inputableIndices = (Array.range(source.hintPrefixLength, source.baseWord.length, 1)).shuffle()
+    this.inputableIndices = (Array.range(source.term.hintPrefixLength, source.term.baseWord.length, 1)).shuffle()
     this.source = source
   }
   
   get isComplete() {
-    return this.prefixedInputString === this.source.baseWord
+    return this.prefixedInputString === this.source.term.baseWord
   }
   
   get sortedInputableIndices() {
@@ -55,24 +54,31 @@ export class UserInput implements InputState {
   }
   
   get hintPrefixString() {
-    return this.source.baseWord.substring(0, this.source.hintPrefixLength)
+    return this.source.term.baseWord.substring(0, this.source.term.hintPrefixLength)
   }
   get inputString() {
-    return substringFromIndices(this.source.baseWord, this.indices)
+    return substringFromIndices(this.source.term.baseWord, this.indices)
   }
   get inputableString() {
-    return substringFromIndices(this.source.baseWord, this.sortedInputableIndices)
+    return substringFromIndices(this.source.term.baseWord, this.sortedInputableIndices)
   }
   get prefixedInputString() {
     return this.hintPrefixString + this.inputString
   }
   
-  addCompletionMark(kind: InputMarkKind, value: number) {
+  addMark(kind: InputMarkKind, value: number) {
     const mark = this.marks.find(m => m.kind === kind)
     if (mark) {
       mark.value += value
     } else {
       this.marks.push({ kind, value })
+    }
+  }
+  
+  resetMark(kind: InputMarkKind) {
+    const markIndex = this.marks.findIndex(m => m.kind === kind)
+    if (markIndex >= 0) {
+      this.marks.splice(markIndex, 1)
     }
   }
 }

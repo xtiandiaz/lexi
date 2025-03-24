@@ -1,10 +1,9 @@
+import { type Term } from './content'
 import { type InputMark } from './input'
 import type { Language } from './language'
 
-export interface CompletedTerm {
-  baseWord: string
+export interface CompletedTerm extends Term {
   inputMarks: InputMark[]
-  linkedWords: string[]
 }
 
 export interface DailyHistory {

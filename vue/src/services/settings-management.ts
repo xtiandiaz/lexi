@@ -23,7 +23,8 @@ export function saveSettings() {
     LocalStorageItem.Settings, 
     {
       currentLanguage: settings.currentLanguage,
-      languagesSettings: settings.languagesSettings
+      languagesSettings: settings.languagesSettings,
+      minReviewTermCount: settings.minReviewTermCount
     }
   )
 }

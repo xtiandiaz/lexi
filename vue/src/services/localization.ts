@@ -10,7 +10,13 @@ export function localizedStringInLanguage(key: LocalizedString, language: Langua
   }
 }
 
-export function localizedString(key: LocalizedString): string {
+export function localizedString(key: LocalizedString, pluralized: boolean = false): string {
   const settings = settingsStore()
-  return localizedStringInLanguage(key, settings.currentLanguage) ?? `{LocalizedStringKey: ${key}}`
+  
+  const _string =  localizedStringInLanguage(key, settings.currentLanguage)
+  if (_string) {
+    return _string + (pluralized ? 's' : '')
+  }
+  
+  return `{LocalizedStringKey: ${key}}`
 }

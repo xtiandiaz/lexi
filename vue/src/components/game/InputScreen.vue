@@ -19,8 +19,8 @@ watch(async () => state.prefixedInputString, async () => {
   <section id="screen">
     <div class="spacer"></div>
     <h1 ref="input-headline" class="serif">{{ state.prefixedInputString }}</h1>
-    <h6 class="serif" v-if="state.isComplete && state.source.linkedWords.length > 0">
-      {{ state.source.linkedWords.join(', ') }}
+    <h6 class="serif" v-if="state.isComplete && state.source.term.linkedWords.length > 0">
+      {{ state.source.term.linkedWords.join(', ') }}
     </h6>
   </section>
 </template>
