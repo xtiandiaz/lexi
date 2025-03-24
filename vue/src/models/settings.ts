@@ -25,7 +25,7 @@ export const translationLanguage = (language: Language) => {
 }
 
 export const defaultDailyGoalSettings: DailyGoalSettings = {
-  termCount: 10
+  termCount: 3
 }
 
 export const defaultLanguageSettings = (language: Language): LanguageSettings => {

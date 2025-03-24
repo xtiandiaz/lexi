@@ -122,6 +122,7 @@ div.marks {
   }
   
   .svg-icon {
+    flex-shrink: 0; 
     height: 2em;
     width: 2em;
   }
