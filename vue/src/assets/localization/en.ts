@@ -5,6 +5,7 @@ export default new Map<LocalizedString, string>([
   [LocalizedString.Language, "Language"],
   [LocalizedString.LanguageName, "English"],
   [LocalizedString.Text_DailyGoalReached, "You've reached your daily goal!"],
+  [LocalizedString.Title_DailyGoalReached, "Daily Goal Reached!"],
   [LocalizedString.Title_DailyHistory, "Daily History"],
   [LocalizedString.Title_Settings, "Settings"],
 ])

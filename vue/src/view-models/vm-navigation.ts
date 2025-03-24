@@ -1,9 +1,11 @@
 import { type ComputedRef, computed } from 'vue'
 import { Section, sectionTitle } from '@/models/navigation'
-import { ReturnNavigationTarget, type NavigationBarVM, pushedViewNavigationBarItems } from '@/components/vueties/view-models'
+import { LocalizedString } from '@/models/language'
 import settingsStore from '@/stores/settings'
 import historyStore from '@/stores/history'
+import { localizedString } from '@/services/localization'
 import { Icon } from '@/assets/design-tokens/iconography'
+import { ReturnNavigationTarget, type NavigationBarVM, pushedViewNavigationBarItems } from '@/components/vueties/view-models'
 
 export const computedNavigationBarVM = (section: Section): ComputedRef<NavigationBarVM<Section | ReturnNavigationTarget>> => {
   switch (section) {
@@ -30,7 +32,8 @@ export const computedNavigationBarVM = (section: Section): ComputedRef<Navigatio
               isEnabled: dailyCompletedTermCount.value > 0,
               label: `${dailyCompletedTermCount.value}`
             }
-          ]
+          ],
+          title: history.isDailyGoalReached ? localizedString(LocalizedString.Title_DailyGoalReached) : undefined
         }
       })
     case Section.Settings:

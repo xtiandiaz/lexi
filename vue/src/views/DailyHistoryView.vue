@@ -34,7 +34,7 @@ function onWordSelected(index: number) {
   <NavigationBar :vm="navigationBarVM" />
   <main>
     <section v-if="history.currentDailyHistory" class="form">
-      <div v-if="history.isGoalReached" class="section wrapper review">
+      <div v-if="history.isDailyGoalReached" class="section wrapper review">
         <SvgIcon :icon="Icon.Right" />
         {{ localizedString(LocalizedString.Text_DailyGoalReached) }}
         <span>

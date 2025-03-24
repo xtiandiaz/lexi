@@ -8,6 +8,7 @@ import { LexiconSource } from "@/models/content"
 import contentStore from '@/stores/content'
 import sessionStore from '@/stores/session'
 import settingsStore from '@/stores/settings'
+import historyStore from '@/stores/history'
 import { loadLexicon } from '@/services/content-management'
 import { produceInputWithTool } from '@/services/tool-handler'
 import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/history-management'
@@ -20,6 +21,7 @@ import InputGamepad from '@/components/game/InputGamepad.vue'
 const content = contentStore()
 const session = sessionStore()
 const settings = settingsStore()
+const history = historyStore()
 
 const inputSource = ref<InputSource>()
 const userInput = ref<UserInput>()
@@ -100,7 +102,10 @@ onBeforeUnmount(() => {
 <template>
   <span id="spinner" v-if="!inputSource"></span>
   
-  <NavigationBar :vm="navigationBarVM"/>
+  <NavigationBar 
+    :vm="navigationBarVM"
+    :class="{ 'goal-reached': history.isDailyGoalReached }"
+  />
   
   <main class="game" v-if="userInput">
     <InputScreen :state="userInput" />
@@ -113,3 +118,15 @@ onBeforeUnmount(() => {
     />
   </main>
 </template>
+
+<style scoped lang="scss">
+@use '@/assets/design-tokens/palette';
+
+nav {
+  &.goal-reached {
+    :deep(.title), :deep(.daily-history) {
+      @include palette.color-attribute('color', 'green');
+    }
+  }
+}
+</style>
