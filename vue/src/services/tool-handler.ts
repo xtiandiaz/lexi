@@ -1,22 +1,18 @@
 import { InputTool, ResearchTool } from "@/models/tools";
 import type { InputState } from "@/models/input"
 import { Language } from "@/models/language";
-import { GameMode } from "@/models/game";
 import settingsStore from "@/stores/settings"
-import sessionStore from '@/stores/session'
 
 const dictionaryURLString = (language: Language): string => {
   switch (language) {
     case Language.English:
-      return 'https://www.merriam-webster.com/dictionary/'
+      return 'https://www.wordreference.com/definition/'
     case Language.Spanish:
       return 'https://dle.rae.es/'
   }
 }
 
-const translatorURLString = (languages: [string, string]): string | undefined => {
-  console.log(languages) 
-  
+const translatorURLString = (languages: [string, string]): string | undefined => {  
   switch (languages.join('-')) {
     case 'en-es':
       return 'https://www.wordreference.com/es/translation.asp?tranword='
