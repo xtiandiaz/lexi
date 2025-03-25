@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { Section } from '@/models/navigation'
 import settingsStore from '@/stores/settings'
 import { resetCurrentLanguage } from '@/services/settings-management';
 import { computedNavigationBarVM } from '@/view-models/vm-navigation';
 import { languageChoiceSectionVM } from '@/view-models/vm-settings';
-import NavigationBar from '@/components/vueties/bars/NavigationBar.vue';
-import ChoiceSection from '@/components/vueties/form/ChoiceSection.vue';
-import { computed } from 'vue';
+import NavigationBar from '@vueties/bars/NavigationBar.vue';
+import ChoiceSection from '@vueties/form/ChoiceSection.vue';
 
 const settings = settingsStore()
 
@@ -28,7 +28,7 @@ const choiceSectionVM = computed(() => languageChoiceSectionVM(settings.currentL
 
 <style scoped lang="scss">
 @use '@/assets/design-tokens/palette';
-@use '@/components/vueties/assets/form' with (
+@use '@vueties/styles/form' with (
   $max-width: 640px
 );
 

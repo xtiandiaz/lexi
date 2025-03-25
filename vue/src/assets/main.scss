@@ -1,7 +1,7 @@
 @use './design-tokens/palette';
 @use './design-tokens/typography';
 @use './design-tokens/iconography';
-@use '../components/vueties/assets/bars';
+@use '@vueties/styles/bars';
 
 * {
   touch-action: manipulation;

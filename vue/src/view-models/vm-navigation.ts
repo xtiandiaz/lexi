@@ -1,11 +1,9 @@
 import { type ComputedRef, computed } from 'vue'
 import { Section, sectionTitle } from '@/models/navigation'
-import { LocalizedString } from '@/models/language'
 import settingsStore from '@/stores/settings'
 import historyStore from '@/stores/history'
-import { localizedString } from '@/services/localization'
 import { Icon } from '@/assets/design-tokens/iconography'
-import { ReturnNavigationTarget, type NavigationBarVM, pushedViewNavigationBarItems } from '@/components/vueties/view-models'
+import { ReturnNavigationTarget, type NavigationBarVM, pushedViewNavigationBarItems } from '@vueties/view-models'
 
 export const computedNavigationBarVM = (section: Section): ComputedRef<NavigationBarVM<Section | ReturnNavigationTarget>> => {
   switch (section) {

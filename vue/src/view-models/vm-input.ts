@@ -4,7 +4,7 @@ import { GameMode } from '@/models/game'
 import sessionStore from '@/stores/session'
 import { canUseInputTool } from '@/services/tool-handler'
 import { Icon } from '@/assets/design-tokens/iconography'
-import { type KeypadKeyVM, type ToolBarButtonVM } from '@/components/vueties/view-models'
+import { type KeypadKeyVM, type ToolBarButtonVM } from '@vueties/view-models'
 
 const labelForKey = (key: string): string => {
   switch (key) {

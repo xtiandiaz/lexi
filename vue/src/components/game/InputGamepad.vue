@@ -3,12 +3,12 @@ import { computed } from 'vue'
 import { type InputState } from '@/models/input';
 import { InputTool } from '@/models/tools'
 import { launchResearchToolForWord } from '@/services/tool-handler';
-import { Icon } from '@/assets/design-tokens/iconography'
 import { inputToolBarButtonVMs, keypadKeyVMs } from '@/view-models/vm-input';
-import SimpleKeypad from '../vueties/pads/SimpleKeypad.vue';
+import { Icon } from '@/assets/design-tokens/iconography'
 import ResearchToolBar from './ResearchToolBar.vue';
-import ToolBar from '../vueties/bars/ToolBar.vue'
-import IconButton from '../vueties/buttons/IconButton.vue';
+import SimpleKeypad from '@vueties/pads/SimpleKeypad.vue';
+import ToolBar from '@vueties/bars/ToolBar.vue'
+import IconButton from '@vueties/buttons/IconButton.vue';
 
 const { state } = defineProps<{
   state: InputState

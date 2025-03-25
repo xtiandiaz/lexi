@@ -12,9 +12,9 @@ import { produceInputWithTool } from '@/services/tool-handler'
 import { resetSessionIfNeeded } from "@/services/session-management"
 import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/history-management'
 import { computedNavigationBarVM } from "@/view-models/vm-navigation"
-import NavigationBar from '@/components/vueties/bars/NavigationBar.vue'
 import InputScreen from '@/components/game/InputScreen.vue'
 import InputGamepad from '@/components/game/InputGamepad.vue'
+import NavigationBar from '@vueties/bars/NavigationBar.vue'
 
 const session = sessionStore()
 const settings = settingsStore()

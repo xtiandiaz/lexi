@@ -3,7 +3,7 @@ import { Language } from "@/models/language";
 import type { LanguageSettings } from "@/models/settings";
 import { dictionaryIcon, translationIcon } from '@/view-models/vm-language'
 import { Icon } from "@/assets/design-tokens/iconography";
-import { type ToolBarButtonVM } from "@/components/vueties/view-models";
+import { type ToolBarButtonVM } from "@vueties/view-models";
 
 const researchToolIconForLanguage = (
   tool: ResearchTool, 

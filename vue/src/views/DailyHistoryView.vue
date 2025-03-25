@@ -10,11 +10,11 @@ import { prepareReview } from '@/services/session-management'
 import { computedNavigationBarVM } from '@/view-models/vm-navigation'
 import { inputMarkIcon, shouldShowInputMarkValue } from '@/view-models/vm-input'
 import { Icon } from '@/assets/design-tokens/iconography'
-import NavigationBar from '@/components/vueties/bars/NavigationBar.vue'
-import FoldableRow from '@/components/vueties/form/FoldableRow.vue'
 import ResearchToolBar from '@/components/game/ResearchToolBar.vue'
-import SvgIcon from '@/components/vueties/assorted/SvgIcon.vue'
-import ButtonRow from '@/components/vueties/form/ButtonRow.vue'
+import NavigationBar from '@vueties/bars/NavigationBar.vue'
+import FoldableRow from '@vueties/form/FoldableRow.vue'
+import SvgIcon from '@vueties/misc/SvgIcon.vue'
+import ButtonRow from '@vueties/form/ButtonRow.vue'
 
 const history = historyStore()
 
@@ -78,8 +78,8 @@ function onReviewSelected() {
 </template>
 
 <style scoped lang="scss">
-@use '../components/vueties/assets/buttons';
-@use '../components/vueties/assets/form' with (
+@use '@vueties/styles/buttons';
+@use '@vueties/styles/form' with (
   $max-width: 640px
 );
 @use '@/assets/design-tokens/palette';
