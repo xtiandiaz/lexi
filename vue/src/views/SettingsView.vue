@@ -15,7 +15,7 @@ const choiceSectionVM = computed(() => languageChoiceSectionVM(settings.currentL
 </script>
 
 <template>
-  <NavigationBar :vm="navigationBarVM" />
+  <NavigationBar :vm="navigationBarVM" class="filled" />
   <main>
     <section class="form">
       <ChoiceSection 

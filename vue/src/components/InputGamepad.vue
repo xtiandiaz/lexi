@@ -29,7 +29,7 @@ const _inputToolBarButtonVMs = computed(() => inputToolBarButtonVMs(state))
     <SimpleKeypad 
       v-if="!state.isComplete"
       :keyVMs="_keypadKeyVMs"
-      @input="(value) => emits('input', Number(value))" 
+      @input="(value: number) => emits('input', Number(value))" 
     />
     
     <ResearchToolBar
@@ -42,7 +42,7 @@ const _inputToolBarButtonVMs = computed(() => inputToolBarButtonVMs(state))
     <ToolBar
       v-if="!state.isComplete"
       :buttonVMs="_inputToolBarButtonVMs"
-      @tool-selected="(tool) => emits('inputToolSelected', tool)"
+      @tool-selected="(tool: InputTool) => emits('inputToolSelected', tool)"
     />
     
     <IconButton 

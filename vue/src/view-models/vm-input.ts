@@ -1,6 +1,5 @@
 import { InputMarkKind, type InputState } from '@/models/input'
 import { InputTool } from '@/models/tools'
-import { GameMode } from '@/models/game'
 import sessionStore from '@/stores/session'
 import { canUseInputTool } from '@/services/tool-handler'
 import { Icon } from '@/assets/design-tokens/iconography'
@@ -34,7 +33,7 @@ export const keypadKeyVMs = (inputState: InputState): KeypadKeyVM[] => {
 
 export const inputToolBarButtonVMs = (inputState: InputState): ToolBarButtonVM<InputTool>[] => {
   const session = sessionStore()
-  if (session.gameMode === GameMode.Review) {
+  if (session.test) {
     return []
   }
   

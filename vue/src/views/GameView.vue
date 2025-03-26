@@ -1,31 +1,37 @@
 <script setup lang="ts">
 import "@/assets/tungsten/extensions/array.extensions"
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import router from '@/router'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { useRouter } from "vue-router"
 import { type InputSource, InputMarkKind, UserInput } from '@/models/input'
 import { InputTool } from '@/models/tools'
 import { Section } from '@/models/navigation'
-import { GameMode } from '@/models/game'
+import { GameMode, type Test } from '@/models/game'
+import { type Term } from '@/models/content'
 import sessionStore from '@/stores/session'
 import settingsStore from '@/stores/settings'
 import { produceInputWithTool } from '@/services/tool-handler'
 import { resetSessionIfNeeded } from "@/services/session-management"
 import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/history-management'
 import { computedNavigationBarVM } from "@/view-models/vm-navigation"
-import InputScreen from '@/components/game/InputScreen.vue'
-import InputGamepad from '@/components/game/InputGamepad.vue'
+import InputScreen from '@/components/InputScreen.vue'
+import InputGamepad from '@/components/InputGamepad.vue'
+import TestStatusBar from "@/components/TestStatusBar.vue"
 import NavigationBar from '@vueties/bars/NavigationBar.vue'
+
+const router = useRouter()
 
 const session = sessionStore()
 const settings = settingsStore()
 
 const inputSource = ref<InputSource>()
 const userInput = ref<UserInput>()
+const gameMode = ref<GameMode>(GameMode.Exploration)
 
 const navigationBarVM = computedNavigationBarVM(Section.Game)
+const testBackgroundOpacity = computed(() => gameMode.value === GameMode.Test && userInput.value?.isComplete ? 5 : 0)
 
 function restoreInputOrResume() {
-  switch (session.gameMode) {
+  switch (gameMode.value) {
     case GameMode.Exploration:
       if (session.input?.source.language === settings.currentLanguage) {
         inputSource.value = session.input.source
@@ -42,28 +48,40 @@ function restoreInputOrResume() {
 }
 
 function resume() {
-  const nextTerm = session.content?.nextTerm
-  if (!nextTerm) {
-    console.warn(`No more terms available at source: ${session.content?.source}`)
-    
-    if (session.gameMode === GameMode.Review) {
-      finishReview()
-    }
+  const test = session.test
+  if (test) {
+    resumeTest(test)
     return
   }
   
-  inputSource.value = {
-    language: settings.currentLanguage,
-    term: nextTerm
+  const newTerm = session.content?.newTerm()
+  if (!newTerm) {
+    console.error(`No content available!`)
+    return
   }
   
-  userInput.value = new UserInput(inputSource.value)
+  resumeWithTerm(newTerm)
   
   resetDailyHistoryIfNeeded()
 }
 
-function finishReview() {
-  router.push(Section.DailyHistory)
+function resumeTest(test: Test) {
+  const nextTerm = test.nextTerm()
+  if (!nextTerm) {
+    session.test = undefined
+    router.push(Section.DailyHistory)
+    return
+  }
+  
+  resumeWithTerm(nextTerm)
+}
+
+function resumeWithTerm(term: Term) {
+  inputSource.value = {
+    language: settings.currentLanguage,
+    term: term
+  }
+  userInput.value = new UserInput(inputSource.value)
 }
 
 function onInput(index: number) {
@@ -71,18 +89,21 @@ function onInput(index: number) {
     return
   }
   
-  if (index >= 0) {
-    userInput.value.indices.push(index)
-    
-    if (userInput.value.isComplete) {
-      if (session.gameMode === GameMode.Review) {
-        userInput.value.addMark(InputMarkKind.Test, 1)
-        userInput.value.resetMark(InputMarkKind.Hint)
-      }
-      saveWordInDailyHistory(userInput.value)
-    }
-  } else {
+  if (index < 0) {
     userInput.value.indices.pop()
+    return
+  }
+  
+  userInput.value.indices.push(index)
+  
+  if (userInput.value.isComplete) {
+    if (gameMode.value === GameMode.Test) {
+      userInput.value.addMark(InputMarkKind.Test, 1)
+      userInput.value.resetMark(InputMarkKind.Hint)
+      
+      session.test!.makeProgressWithTerm(userInput.value.source.term)
+    }
+    saveWordInDailyHistory(userInput.value)
   }
 }
 
@@ -107,19 +128,25 @@ onMounted(async () => {
   
   await resetSessionIfNeeded()
   
+  gameMode.value = session.test ? GameMode.Test : GameMode.Exploration
+  
   restoreInputOrResume()
 })
 
 onBeforeUnmount(() => {
-  session.input = userInput.value
-  session.gameMode = GameMode.Exploration
+  if (gameMode.value === GameMode.Exploration) {
+    session.input = userInput.value
+  }
 })
 </script>
 
 <template>
+  <div class="test-background" :style="{ opacity: `${testBackgroundOpacity}%` }"></div>
+  
   <span id="spinner" v-if="!inputSource"></span>
   
-  <NavigationBar v-if="session.gameMode === GameMode.Exploration" :vm="navigationBarVM" />
+  <NavigationBar v-if="gameMode === GameMode.Exploration" :vm="navigationBarVM" />
+  <TestStatusBar v-if="gameMode === GameMode.Test" />
   
   <main class="game" v-if="userInput">
     <InputScreen :state="userInput" />
@@ -134,4 +161,13 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped lang="scss">
+@use '@vueties/styles/utils';
+@use '@design-tokens/palette';
+
+.test-background {
+  @extend .background;
+  opacity: 0;
+  transition: opacity 0.5s linear;
+  @include palette.color-attribute('background-color', 'green');
+}
 </style>

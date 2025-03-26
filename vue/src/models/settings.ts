@@ -13,7 +13,7 @@ export interface LanguageSettings {
 export interface Settings {
   currentLanguage: Language
   languagesSettings: LanguageSettings[]
-  minReviewTermCount: number
+  minTermCountForTest: number
 }
 
 export const translationLanguage = (language: Language) => {

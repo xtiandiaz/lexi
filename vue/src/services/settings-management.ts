@@ -24,7 +24,7 @@ export function saveSettings() {
     {
       currentLanguage: settings.currentLanguage,
       languagesSettings: settings.languagesSettings,
-      minReviewTermCount: settings.minReviewTermCount
+      minTermCountForTest: settings.minTermCountForTest
     }
   )
 }

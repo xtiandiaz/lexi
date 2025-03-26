@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { Section } from '@/models/navigation'
 import GameView from '@/views/GameView.vue'
-import DailyHistoryView from '@/views/DailyHistoryView.vue'
+import DailyHistoryView from '@/components/DailyHistoryView.vue'
 import SettingsView from '@/views/SettingsView.vue'
 
 function component(section: Section) {

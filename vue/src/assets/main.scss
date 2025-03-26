@@ -30,12 +30,11 @@ html, body, #app {
   overflow: auto;
 }
 
-nav {
+nav.filled {
   @include palette.color-attribute('background-color', 'secondary-background');
 }
 
 main {
-  // width: 100%;
   margin: calc(bars.$nav-bar-height + 0.25em) 0 0 0;
   
   &.game {

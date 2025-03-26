@@ -6,11 +6,11 @@ import { LocalizedString } from '@/models/language'
 import historyStore from '@/stores/history'
 import { launchResearchToolForWord } from '@/services/tool-handler'
 import { localizedString } from '@/services/localization'
-import { prepareReview } from '@/services/session-management'
+import { prepareTest } from '@/services/session-management'
 import { computedNavigationBarVM } from '@/view-models/vm-navigation'
 import { inputMarkIcon, shouldShowInputMarkValue } from '@/view-models/vm-input'
 import { Icon } from '@/assets/design-tokens/iconography'
-import ResearchToolBar from '@/components/game/ResearchToolBar.vue'
+import ResearchToolBar from '@/components/ResearchToolBar.vue'
 import NavigationBar from '@vueties/bars/NavigationBar.vue'
 import FoldableRow from '@vueties/form/FoldableRow.vue'
 import SvgIcon from '@vueties/misc/SvgIcon.vue'
@@ -25,14 +25,14 @@ function onWordSelected(index: number) {
   selectedIndex.value = index !== selectedIndex.value ? index : undefined
 }
 
-function onReviewSelected() {
-  prepareReview()
+function onTestButtonClicked() {
+  prepareTest()
   router.back()
 }
 </script>
 
 <template>
-  <NavigationBar :vm="navigationBarVM" />
+  <NavigationBar :vm="navigationBarVM" class="filled" />
   <main>
     <section v-if="history.currentDailyHistory" class="form">
       <div class="section">
@@ -69,7 +69,7 @@ function onReviewSelected() {
           <ButtonRow 
             :label="localizedString(LocalizedString.Button_Test)" 
             :icon="Icon.Right"
-            @click="onReviewSelected"
+            @click="onTestButtonClicked"
           />
         </div>
       </div>

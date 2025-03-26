@@ -23,7 +23,7 @@ export default defineStore('settings', () => {
     currentLanguageSettings,
     currentDailyGoal,
     languagesSettings,    
-    minReviewTermCount: savedSettings?.minReviewTermCount ?? 5,
+    minTermCountForTest: savedSettings?.minTermCountForTest ?? 5,
     
     languageSettings,
   }
