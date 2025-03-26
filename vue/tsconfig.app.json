@@ -8,7 +8,9 @@
 
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@design-tokens/*": ["./src/assets/design-tokens/*"],
+      "@vueties/*": ["./src/vueties/*"]
     }
   }
 }

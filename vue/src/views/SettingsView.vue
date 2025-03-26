@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { Section } from '@/models/navigation'
+import type { Language } from '@/models/language';
 import settingsStore from '@/stores/settings'
 import { resetCurrentLanguage } from '@/services/settings-management';
 import { computedNavigationBarVM } from '@/view-models/vm-navigation';
@@ -20,7 +21,7 @@ const choiceSectionVM = computed(() => languageChoiceSectionVM(settings.currentL
     <section class="form">
       <ChoiceSection 
         :vm="choiceSectionVM" 
-        @selected="(lang) => resetCurrentLanguage(lang)"
+        @selected="(lang: Language) => resetCurrentLanguage(lang)"
       />
     </section>
   </main>

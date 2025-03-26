@@ -1,6 +1,6 @@
 import { Language, LocalizedString } from "@/models/language";
 import { localizedString, localizedStringInLanguage } from "@/services/localization";
-import type { FormOptionRowVM, FormSectionVM } from "@/components/vueties/view-models";
+import type { FormOptionRowVM, FormSectionVM } from "@vueties/view-models";
 import { dictionaryIcon } from "./vm-language";
 
 export const languageChoiceSectionVM = (currentLanguage: Language): FormSectionVM<FormOptionRowVM<Language>> => {
