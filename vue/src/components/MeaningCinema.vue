@@ -20,8 +20,8 @@ const emits = defineEmits<{
 </template>
 
 <style scoped lang="scss">
-@use '../assets/design-tokens/palette';
-@use '../assets/design-tokens/iconography';
+@use '@design-tokens/palette';
+@use '@design-tokens/iconography';
 
 #cinema {
   position: absolute;

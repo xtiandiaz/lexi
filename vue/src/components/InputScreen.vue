@@ -26,8 +26,8 @@ watch(async () => state.prefixedInputString, async () => {
 </template>
 
 <style scoped lang="scss">
-@use '@/assets/design-tokens/typography';
-@use "@/assets/design-tokens/palette";
+@use '@design-tokens/typography';
+@use "@design-tokens/palette";
 
 h6 {
   @include palette.color-attribute('color', 'tertiary-body');

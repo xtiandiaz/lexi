@@ -4,19 +4,28 @@ import router from '@/router'
 import { Section } from '@/models/navigation'
 import { LocalizedString } from '@/models/language'
 import historyStore from '@/stores/history'
+import settingsStore from '@/stores/settings'
 import { launchResearchToolForWord } from '@/services/tool-handler'
 import { localizedString } from '@/services/localization'
 import { prepareTest } from '@/services/session-management'
 import { computedNavigationBarVM } from '@/view-models/vm-navigation'
 import { inputMarkIcon, shouldShowInputMarkValue } from '@/view-models/vm-input'
-import { Icon } from '@/assets/design-tokens/iconography'
+import { Icon } from '@design-tokens/iconography'
 import ResearchToolBar from '@/components/ResearchToolBar.vue'
 import NavigationBar from '@vueties/bars/NavigationBar.vue'
 import FoldableRow from '@vueties/form/FoldableRow.vue'
 import SvgIcon from '@vueties/misc/SvgIcon.vue'
 import ButtonRow from '@vueties/form/ButtonRow.vue'
 
+const settings = settingsStore()
+
 const history = historyStore()
+const dailyHistory = history.currentDailyHistory
+const termCount = dailyHistory?.completedTerms.length ?? 0
+const dateLocaleString = (new Date()).toLocaleDateString(settings.currentLanguage, {
+  month: 'long',
+  day: 'numeric'
+})
 
 const selectedIndex = ref<number>()
 const navigationBarVM = computedNavigationBarVM(Section.DailyHistory)
@@ -34,11 +43,16 @@ function onTestButtonClicked() {
 <template>
   <NavigationBar :vm="navigationBarVM" class="filled" />
   <main>
-    <section v-if="history.currentDailyHistory" class="form">
+    <section v-if="dailyHistory" class="form">
       <div class="section">
+        <div class="header inline">
+          <span class="title">{{ dateLocaleString }}</span>
+          •
+          <span class="subtitle">{{ `${termCount} ${localizedString(LocalizedString.Word, termCount > 1)}` }}</span>
+        </div>
         <div class="rows">
           <FoldableRow 
-            v-for="(term, index) of history.currentDailyHistory.completedTerms.sort((s1, s2) => s1.baseWord.localeCompare(s2.baseWord))"
+            v-for="(term, index) of dailyHistory.completedTerms.sort((s1, s2) => s1.baseWord.localeCompare(s2.baseWord))"
             :key="index"
             :title="term.baseWord"
             :subtitle="term.linkedWords.join(', ')"
@@ -82,8 +96,8 @@ function onTestButtonClicked() {
 @use '@vueties/styles/form' with (
   $max-width: 640px
 );
-@use '@/assets/design-tokens/palette';
-@use '@/assets/design-tokens/typography';
+@use '@design-tokens/palette';
+@use '@design-tokens/typography';
 
 div.marks {
   align-items: center;

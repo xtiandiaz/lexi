@@ -55,7 +55,7 @@ const _inputToolBarButtonVMs = computed(() => inputToolBarButtonVMs(state))
 </template>
 
 <style lang="scss" scoped>
-@use '@/assets/design-tokens/palette';
+@use '@design-tokens/palette';
 
 :deep(.icon-button) {
   &.continue {

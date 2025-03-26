@@ -22,7 +22,7 @@ const toolButtonVMs = computed(() => researchToolButtonVMs(settings.currentLangu
 </template>
 
 <style scoped lang="scss">
-@use '@/assets/design-tokens/palette';
+@use '@design-tokens/palette';
 
 :deep(.icon-button) {
   &.define {
