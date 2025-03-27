@@ -159,6 +159,7 @@ onBeforeUnmount(() => {
 
 
 onWindowEvent('blur', onPageUnfocusedOrUnmounted)
+onWindowEvent('beforeunload', onPageUnfocusedOrUnmounted)
 </script>
 
 <template>
