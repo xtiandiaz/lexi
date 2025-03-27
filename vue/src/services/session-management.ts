@@ -11,6 +11,11 @@ import { LocalStorageItem, retrieve, save } from '@/services/persistence'
 export function saveSession(currentInputState?: InputState) {
   const session = sessionStore()
   
+  if (session.test) {
+    console.warn("Session NOT saved during test", session.test)
+    return
+  }
+  
   if (currentInputState) {
     session.setInputState(currentInputState)
   }

@@ -12,6 +12,7 @@ import settingsStore from '@/stores/settings'
 import { produceInputWithTool } from '@/services/tool-handler'
 import { resetSessionIfNeeded, saveSession } from "@/services/session-management"
 import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/history-management'
+import { onWindowEvent } from '@/composables/window-event'
 import { computedNavigationBarVM } from "@/view-models/vm-navigation"
 import InputScreen from '@/components/InputScreen.vue'
 import InputGamepad from '@/components/InputGamepad.vue'
@@ -97,13 +98,7 @@ function onInput(index: number) {
   userInput.value.indices.push(index)
   
   if (userInput.value.isComplete) {
-    if (gameMode.value === GameMode.Test) {
-      userInput.value.addMark(InputMarkKind.Test, 1)
-      userInput.value.resetMark(InputMarkKind.Hint)
-      
-      session.test!.makeProgressWithTerm(userInput.value.source.term)
-    }
-    saveWordInDailyHistory(userInput.value)
+    onInputCompleted()
   }
 }
 
@@ -123,6 +118,31 @@ function onInputToolSelected(tool: InputTool) {
   }
 }
 
+function onInputCompleted() {
+  if (!userInput.value || !userInput.value.isComplete) {
+    return
+  }
+  
+  if (session.test) {
+    userInput.value.addMark(InputMarkKind.Test, 1)
+    userInput.value.resetMark(InputMarkKind.Hint)
+    
+    session.test.makeProgressWithTerm(userInput.value.source.term)
+  } else {
+    saveSession(userInput.value)
+  }
+  
+  saveWordInDailyHistory(userInput.value)
+}
+
+function onPageUnfocusedOrUnmounted() {
+  console.log("Game View unfocused or unmounted...")
+  
+  if (gameMode.value === GameMode.Exploration) {
+    saveSession(userInput.value as InputState)
+  }
+}
+
 onMounted(async () => {  
   resetDailyHistoryIfNeeded()
   
@@ -134,10 +154,11 @@ onMounted(async () => {
 })
 
 onBeforeUnmount(() => {
-  if (gameMode.value === GameMode.Exploration) {
-    saveSession(userInput.value as InputState)
-  }
+  onPageUnfocusedOrUnmounted()
 })
+
+
+onWindowEvent('blur', onPageUnfocusedOrUnmounted)
 </script>
 
 <template>
