@@ -1,6 +1,7 @@
 export enum LocalStorageItem {
   DailyHistories = 'daily-histories',
-  Settings = 'settings'
+  Session = 'session',
+  Settings = 'settings',
 }
 
 export function retrieve<T>(item: LocalStorageItem): T | undefined {

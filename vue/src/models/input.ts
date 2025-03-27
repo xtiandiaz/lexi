@@ -46,7 +46,7 @@ export class UserInput implements InputState {
   }
   
   get isComplete() {
-    return this.prefixedInputString === this.source.term.baseWord
+    return this.prefixedInputString === this.source.term.baseWord.toLowerCase()
   }
   
   get sortedInputableIndices() {

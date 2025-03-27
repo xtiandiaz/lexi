@@ -11,7 +11,7 @@ interface RawDailyHistory {
   language: Language
 }
 
-export function retrieveDailyHistories(): DailyHistory[] | undefined {
+export function retrieveSavedDailyHistories(): DailyHistory[] | undefined {
   const rawDailyHistories = retrieve<RawDailyHistory[]>(LocalStorageItem.DailyHistories)
   if (!rawDailyHistories) {
     return undefined

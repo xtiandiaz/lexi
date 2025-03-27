@@ -3,7 +3,7 @@ import type { Language } from '@/models/language'
 import settingsStore from '@/stores/settings'
 import { LocalStorageItem, retrieve, save } from './persistence'
 
-export function retrieveSettings(): Settings | undefined {
+export function retrieveSavedSettings(): Settings | undefined {
   const savedSettings = retrieve<Settings>(LocalStorageItem.Settings)
   if (savedSettings) {
     for (let i=0; i < savedSettings.languagesSettings.length; i++) {

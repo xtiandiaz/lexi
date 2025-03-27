@@ -2,10 +2,10 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { Language } from '@/models/language'
 import { type LanguageSettings, defaultLanguageSettings } from '@/models/settings'
-import { retrieveSettings } from '@/services/settings-management'
+import { retrieveSavedSettings } from '@/services/settings-management'
 
 export default defineStore('settings', () => {
-  const savedSettings = retrieveSettings()
+  const savedSettings = retrieveSavedSettings()
   
   const languagesSettings: LanguageSettings[] = Object.values(Language).map(lang => {
     const savedLanguageSettings = savedSettings?.languagesSettings.find(ls => ls.language === lang)

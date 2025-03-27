@@ -36,7 +36,8 @@ function onWordSelected(index: number) {
 
 function onTestButtonClicked() {
   prepareTest()
-  router.back()
+  
+  router.replace('/')
 }
 </script>
 

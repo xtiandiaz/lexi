@@ -2,7 +2,7 @@
 import "@/assets/tungsten/extensions/array.extensions"
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from "vue-router"
-import { type InputSource, InputMarkKind, UserInput } from '@/models/input'
+import { type InputSource, type InputState, InputMarkKind, UserInput } from '@/models/input'
 import { InputTool } from '@/models/tools'
 import { Section } from '@/models/navigation'
 import { GameMode, type Test } from '@/models/game'
@@ -10,7 +10,7 @@ import { type Term } from '@/models/content'
 import sessionStore from '@/stores/session'
 import settingsStore from '@/stores/settings'
 import { produceInputWithTool } from '@/services/tool-handler'
-import { resetSessionIfNeeded } from "@/services/session-management"
+import { resetSessionIfNeeded, saveSession } from "@/services/session-management"
 import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/history-management'
 import { computedNavigationBarVM } from "@/view-models/vm-navigation"
 import InputScreen from '@/components/InputScreen.vue'
@@ -28,14 +28,14 @@ const userInput = ref<UserInput>()
 const gameMode = ref<GameMode>(GameMode.Exploration)
 
 const navigationBarVM = computedNavigationBarVM(Section.Game)
-const testBackgroundOpacity = computed(() => gameMode.value === GameMode.Test && userInput.value?.isComplete ? 5 : 0)
+const testBackgroundOpacity = computed(() => gameMode.value === GameMode.Test && userInput.value?.isComplete ? 10 : 0)
 
 function restoreInputOrResume() {
   switch (gameMode.value) {
     case GameMode.Exploration:
-      if (session.input?.source.language === settings.currentLanguage) {
-        inputSource.value = session.input.source
-        userInput.value = new UserInput(session.input.source, session.input.indices)
+      if (session.inputState) {
+        inputSource.value = session.inputState.source
+        userInput.value = new UserInput(session.inputState.source, session.inputState.indices)
         
         resetDailyHistoryIfNeeded()
       } else {
@@ -123,7 +123,7 @@ function onInputToolSelected(tool: InputTool) {
   }
 }
 
-onMounted(async () => {
+onMounted(async () => {  
   resetDailyHistoryIfNeeded()
   
   await resetSessionIfNeeded()
@@ -135,7 +135,7 @@ onMounted(async () => {
 
 onBeforeUnmount(() => {
   if (gameMode.value === GameMode.Exploration) {
-    session.input = userInput.value
+    saveSession(userInput.value as InputState)
   }
 })
 </script>

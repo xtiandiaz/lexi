@@ -4,12 +4,12 @@ import { ref, computed } from 'vue'
 import type { DailyHistory } from '@/models/history'
 import type { Language } from '@/models/language'
 import settingsStore from './settings'
-import { retrieveDailyHistories } from '@/services/history-management'
+import { retrieveSavedDailyHistories } from '@/services/history-management'
 
 export default defineStore('history', () => {
   const settings = settingsStore()
   
-  const dailyHistories = ref<DailyHistory[]>(retrieveDailyHistories() ?? [])
+  const dailyHistories = ref<DailyHistory[]>(retrieveSavedDailyHistories() ?? [])
   
   const currentDailyHistory = computed<DailyHistory | undefined>(() => {
     return dailyHistories.value.find(dh => dh.language === settings.currentLanguage)
