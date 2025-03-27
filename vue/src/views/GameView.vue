@@ -160,6 +160,7 @@ onBeforeUnmount(() => {
 
 onWindowEvent('blur', onPageUnfocusedOrUnmounted)
 onWindowEvent('beforeunload', onPageUnfocusedOrUnmounted)
+onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS Mobile
 </script>
 
 <template>
