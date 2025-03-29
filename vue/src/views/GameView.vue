@@ -26,10 +26,10 @@ const settings = settingsStore()
 
 const inputSource = ref<InputSource>()
 const userInput = ref<UserInput>()
-const gameMode = ref<GameMode>(GameMode.Exploration)
+const gameMode = computed<GameMode>(() => session.test ? GameMode.Test : GameMode.Exploration)
 
 const navigationBarVM = computedNavigationBarVM(Section.Game)
-const testBackgroundOpacity = computed(() => gameMode.value === GameMode.Test && userInput.value?.isComplete ? 10 : 0)
+const testBackgroundOpacity = computed(() => gameMode.value === GameMode.Test && userInput.value?.isComplete ? 5 : 0)
 
 function restoreInputOrResume() {
   switch (gameMode.value) {
@@ -148,8 +148,6 @@ onMounted(async () => {
   
   await resetSessionIfNeeded()
   
-  gameMode.value = session.test ? GameMode.Test : GameMode.Exploration
-  
   restoreInputOrResume()
 })
 
@@ -160,7 +158,7 @@ onBeforeUnmount(() => {
 
 onWindowEvent('blur', onPageUnfocusedOrUnmounted)
 onWindowEvent('beforeunload', onPageUnfocusedOrUnmounted)
-onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS Mobile
+onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
 </script>
 
 <template>
