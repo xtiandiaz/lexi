@@ -55,7 +55,7 @@ function resume() {
     return
   }
   
-  const newTerm = session.content?.newTerm()
+  const newTerm = session.content?.produceNewTerm()
   if (!newTerm) {
     console.error(`No content available!`)
     return

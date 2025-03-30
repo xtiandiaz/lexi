@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { watch, useTemplateRef, nextTick } from 'vue';
 import { type InputState } from '@/models/input'
+import { Content } from '@/models/content'
 import fitText from '@/composables/fit-text'
 
 const { state } = defineProps<{
@@ -20,7 +21,7 @@ watch(async () => state.prefixedInputString, async () => {
     <div class="spacer"></div>
     <h1 ref="input-headline" class="serif">{{ state.prefixedInputString }}</h1>
     <h6 class="serif" v-if="state.isComplete && state.source.term.linkedWords.length > 0">
-      {{ state.source.term.linkedWords.join(', ') }}
+      {{ Content.makeLinkedWordsStringFromTerm(state.source.term) }}
     </h6>
   </section>
 </template>

@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import router from '@/router'
 import { Section } from '@/models/navigation'
 import { LocalizedString } from '@/models/language'
+import { Content } from '@/models/content'
 import historyStore from '@/stores/history'
 import settingsStore from '@/stores/settings'
 import { launchResearchToolForWord } from '@/services/tool-handler'
@@ -56,7 +57,7 @@ function onTestButtonClicked() {
             v-for="(term, index) of dailyHistory.completedTerms.sort((s1, s2) => s1.baseWord.localeCompare(s2.baseWord))"
             :key="index"
             :title="term.baseWord"
-            :subtitle="term.linkedWords.join(', ')"
+            :subtitle="Content.makeLinkedWordsStringFromTerm(term)"
             :is-unfolded="selectedIndex === index"
             @selected="onWordSelected(index)"
           >

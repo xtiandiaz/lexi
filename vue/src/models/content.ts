@@ -4,7 +4,7 @@ import type { Language } from "./language";
 export interface Term {
   readonly baseWord: string
   readonly hintPrefixLength: number
-  readonly linkedWords: string[]
+  readonly linkedWords: string[][]
 }
 
 export class Content {
@@ -21,31 +21,44 @@ export class Content {
     return this._rawTerms.length
   }
   
-  newTerm(): Term {
-    return this._randomTerm()
+  produceNewTerm(): Term {
+    return this._produceRandomTerm()
   }
   
-  term(index: number, hintPrefixRate: number = 0.25): Term {
-    return Content.termFromRaw(this._rawTerms[index], hintPrefixRate)
+  produceTerm(index: number, hintPrefixRate: number = 0.25): Term {
+    return Content.makeTermFromRaw(this._rawTerms[index], hintPrefixRate)
   }
   
-  _randomTerm(): Term {
-    return this.term(Math.floor(Math.random() * this._rawTerms.length))
+  _produceRandomTerm(): Term {
+    return this.produceTerm(Math.floor(Math.random() * this._rawTerms.length))
   }
   
   static fromCompletedTerms(completedTerms: CompletedTerm[], language: Language) {
-    const rawTerms = completedTerms.map(ct => [ct.baseWord].concat(ct.linkedWords).join(','))
+    const rawTerms = completedTerms.map(ct => Content.makeRawFromCompletedTerm(ct))
     
     return new Content(language, rawTerms.shuffle())
   }
   
-  static termFromRaw(rawTerm: string, hintPrefixRate: number): Term {
-    const parts = rawTerm.split(',')
+  static makeTermFromRaw(rawTerm: string, hintPrefixRate: number): Term {
+    const isComposite = rawTerm.includes(';')
+    const parts = rawTerm.split(isComposite ? ';' : ',')
     
     return { 
       baseWord: parts[0], 
       hintPrefixLength: Math.floor(parts[0].length * hintPrefixRate), 
-      linkedWords: parts.slice(1) 
+      linkedWords: isComposite ? parts.slice(1).map(ls => ls.split(',')) : [parts.slice(1)]
     }
+  }
+  
+  static makeRawFromCompletedTerm(completedTerm: CompletedTerm): string {
+    const isComposite = completedTerm.linkedWords.length > 1
+    
+    return [completedTerm.baseWord].concat(
+      completedTerm.linkedWords.map(lw => lw.join(','))
+    ).join(isComposite ? ';' : ',')
+  }
+  
+  static makeLinkedWordsStringFromTerm(term: Term): string {
+    return term.linkedWords.map(ls => ls.join(', ')).join(' | ')
   }
 }
