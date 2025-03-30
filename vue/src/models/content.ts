@@ -4,7 +4,7 @@ import type { Language } from "./language";
 export interface Term {
   readonly baseWord: string
   readonly hintPrefixLength: number
-  readonly linkedWords: string[][]
+  readonly linkedWords?: string[][]
 }
 
 export class Content {
@@ -43,14 +43,23 @@ export class Content {
     const isComposite = rawTerm.includes(';')
     const parts = rawTerm.split(isComposite ? ';' : ',')
     
-    return { 
+    return {
       baseWord: parts[0], 
       hintPrefixLength: Math.floor(parts[0].length * hintPrefixRate), 
-      linkedWords: isComposite ? parts.slice(1).map(ls => ls.split(',')) : [parts.slice(1)]
+      linkedWords: (() => {
+        if (parts.length <= 1) {
+          return undefined
+        }
+        return isComposite ? parts.slice(1).map(ls => ls.split(',')) : [parts.slice(1)]
+      })()
     }
   }
   
   static makeRawFromCompletedTerm(completedTerm: CompletedTerm): string {
+    if (!completedTerm.linkedWords) {
+      return completedTerm.baseWord
+    }
+    
     const isComposite = completedTerm.linkedWords.length > 1
     
     return [completedTerm.baseWord].concat(
@@ -58,7 +67,7 @@ export class Content {
     ).join(isComposite ? ';' : ',')
   }
   
-  static makeLinkedWordsStringFromTerm(term: Term): string {
-    return term.linkedWords.map(ls => ls.join(', ')).join(' | ')
+  static makeLinkedWordsStringFromTerm(term: Term): string | undefined {
+    return term.linkedWords?.map(ls => ls.join(', ')).join(' | ')
   }
 }
