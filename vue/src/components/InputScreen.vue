@@ -10,8 +10,6 @@ const { state } = defineProps<{
 
 const inputHeadlineRef = useTemplateRef('input-headline')
 
-console.log(state.source.term.linkedWords)
-
 watch(async () => state.prefixedInputString, async () => {
   await nextTick()
   fitText(inputHeadlineRef.value!, 3)
