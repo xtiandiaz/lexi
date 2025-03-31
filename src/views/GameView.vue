@@ -159,10 +159,9 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
   
   <span id="spinner" v-if="!inputSource"></span>
   
-  <!-- <NavigationBar v-if="session.gameMode === GameMode.Exploration" :vm="navigationBarVM" /> -->
-  <NavigationBar :vm="navigationBarVM" />
+  <NavigationBar v-if="session.gameMode === GameMode.Exploration" :vm="navigationBarVM" />
   
-  <!-- <TestStatusBar v-if="session.gameMode === GameMode.Test" /> -->
+  <TestStatusBar v-if="session.gameMode === GameMode.Test" />
   
   <main class="game" v-if="userInput">
     <InputScreen :state="userInput" />
