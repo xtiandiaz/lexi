@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import "@/assets/tungsten/extensions/array.extensions"
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, onBeforeMount } from 'vue'
 import { useRouter } from "vue-router"
 import { type InputSource, type InputState, InputMarkKind, UserInput } from '@/models/input'
 import { InputTool } from '@/models/tools'
@@ -136,11 +136,17 @@ function onPageUnfocusedOrUnmounted() {
   }
 }
 
+onBeforeMount(async () => {
+  await router.isReady()
+  console.log(router, '@ before-mount')
+})
+
 onMounted(async () => {
+  console.log(router, '@ mount')
+  
   resetDailyHistoryIfNeeded()
   
   await resetSessionIfNeeded()
-  await router.isReady()
   
   restoreInputOrResume()
 })
