@@ -19,10 +19,7 @@ watch(async () => state.prefixedInputString, async () => {
 <template>
   <section id="screen">
     <div class="spacer"></div>
-    <h1 
-      ref="input-headline" 
-      class="serif" :class="{ ongoing: !state.isComplete }"
-    >
+    <h1 ref="input-headline" class="serif">
       {{ state.prefixedInputString }}
     </h1>
     <h6 class="serif" v-if="state.isComplete && state.source.term.linkedWords">
@@ -34,15 +31,6 @@ watch(async () => state.prefixedInputString, async () => {
 <style scoped lang="scss">
 @use '@design-tokens/typography';
 @use "@design-tokens/palette";
-
-h1 {
-  padding: 0 0.125em;
-  
-  &.ongoing {
-    border-right: 1px solid;
-    @include palette.color-attribute('border-color', 'tertiary-body');
-  }
-}
 
 h6 {
   @include palette.color-attribute('color', 'tertiary-body');
