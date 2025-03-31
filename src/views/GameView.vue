@@ -137,8 +137,6 @@ function onPageUnfocusedOrUnmounted() {
 }
 
 onMounted(async () => {
-  console.log(router, '@ mount')
-  
   resetDailyHistoryIfNeeded()
   
   await resetSessionIfNeeded()
@@ -150,9 +148,9 @@ onBeforeUnmount(() => {
   onPageUnfocusedOrUnmounted()
 })
 
-// onWindowEvent('blur', onPageUnfocusedOrUnmounted)
-// onWindowEvent('beforeunload', onPageUnfocusedOrUnmounted)
-// onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
+onWindowEvent('blur', onPageUnfocusedOrUnmounted)
+onWindowEvent('beforeunload', onPageUnfocusedOrUnmounted)
+onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
 </script>
 
 <template>
