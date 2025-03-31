@@ -21,8 +21,6 @@ import TestStatusBar from "@/components/TestStatusBar.vue"
 
 const router = useRouter()
 
-console.log(router, '@ Game View')
-
 const session = sessionStore()
 const settings = settingsStore()
 
