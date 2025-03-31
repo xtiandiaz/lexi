@@ -15,7 +15,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '@design-tokens': fileURLToPath(new URL('./src/assets/design-tokens', import.meta.url)),
       '@vueties': fileURLToPath(new URL('./src/vueties', import.meta.url))
-    }
+    },
+    preserveSymlinks: true
   },
   build: {
     rollupOptions: {
