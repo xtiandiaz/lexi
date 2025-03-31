@@ -1,5 +1,6 @@
 import type { CompletedTerm } from "./history";
 import type { Language } from "./language";
+import '@/assets/tungsten/extensions/array.extensions'
 
 export interface Term {
   readonly baseWord: string
@@ -22,15 +23,11 @@ export class Content {
   }
   
   produceNewTerm(): Term {
-    return this._produceRandomTerm()
+    return this.produceTerm(Math.floor(Math.random() * this._rawTerms.length))
   }
   
   produceTerm(index: number, hintPrefixRate: number = 0.25): Term {
     return Content.makeTermFromRaw(this._rawTerms[index], hintPrefixRate)
-  }
-  
-  _produceRandomTerm(): Term {
-    return this.produceTerm(Math.floor(Math.random() * this._rawTerms.length))
   }
   
   static fromCompletedTerms(completedTerms: CompletedTerm[], language: Language) {
