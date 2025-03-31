@@ -2,7 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from "pinia";
 import { type Content } from '@/models/content';
 import { type InputState } from '@/models/input';
-import { Test } from '@/models/game';
+import { GameMode, Test } from '@/models/game';
 import settingsStore from '@/stores/settings'
 import { retrievedSavedSession } from '@/services/session-management';
 
@@ -16,6 +16,7 @@ export default defineStore('session', () => {
     () => inputStates.value.find(is => is.source.language === settings.currentLanguage)
   )
   const test = ref<Test>()
+  const gameMode = computed<GameMode>(() => test.value ? GameMode.Test : GameMode.Exploration)
   
   function setInputState(inputState: InputState) {
     const index = inputStates.value.findIndex(is => is.source.language === settings.currentLanguage)
@@ -28,6 +29,7 @@ export default defineStore('session', () => {
   
   return {
     content,
+    gameMode,
     inputState,
     inputStates,
     test,

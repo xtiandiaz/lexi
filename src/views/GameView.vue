@@ -26,26 +26,20 @@ const settings = settingsStore()
 
 const inputSource = ref<InputSource>()
 const userInput = ref<UserInput>()
-const gameMode = computed<GameMode>(() => session.test ? GameMode.Test : GameMode.Exploration)
 
 const navigationBarVM = computedNavigationBarVM(Section.Game)
-const testBackgroundOpacity = computed(() => gameMode.value === GameMode.Test && userInput.value?.isComplete ? 5 : 0)
+const testBackgroundOpacity = computed(() => session.gameMode === GameMode.Test && userInput.value?.isComplete ? 5 : 0)
 
 function restoreInputOrResume() {
-  switch (gameMode.value) {
-    case GameMode.Exploration:
-      if (session.inputState) {
-        inputSource.value = session.inputState.source
-        userInput.value = new UserInput(session.inputState.source, session.inputState.indices)
-        
-        resetDailyHistoryIfNeeded()
-      } else {
-        resume()
-      }
-      break
-    default:
-      resume()
+  if (session.gameMode === GameMode.Exploration && session.inputState) {
+    inputSource.value = session.inputState.source
+    userInput.value = new UserInput(session.inputState.source, GameMode.Exploration, session.inputState.indices)
+    
+    resetDailyHistoryIfNeeded()
+    return
   }
+  
+  resume()
 }
 
 function resume() {
@@ -61,7 +55,7 @@ function resume() {
     return
   }
   
-  resumeWithTerm(newTerm)
+  resumeWithTerm(newTerm, GameMode.Exploration)
   
   resetDailyHistoryIfNeeded()
 }
@@ -74,15 +68,15 @@ function resumeTest(test: Test) {
     return
   }
   
-  resumeWithTerm(nextTerm)
+  resumeWithTerm(nextTerm, GameMode.Test)
 }
 
-function resumeWithTerm(term: Term) {
+function resumeWithTerm(term: Term, mode: GameMode) {
   inputSource.value = {
     language: settings.currentLanguage,
     term: term
   }
-  userInput.value = new UserInput(inputSource.value)
+  userInput.value = new UserInput(inputSource.value, mode)
 }
 
 function onInput(index: number) {
@@ -138,7 +132,7 @@ function onInputCompleted() {
 function onPageUnfocusedOrUnmounted() {
   console.log("Game View unfocused or unmounted...")
   
-  if (gameMode.value === GameMode.Exploration) {
+  if (userInput.value?.mode === GameMode.Exploration) {
     saveSession(userInput.value as InputState)
   }
 }
@@ -166,8 +160,8 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
   
   <span id="spinner" v-if="!inputSource"></span>
   
-  <NavigationBar v-if="gameMode === GameMode.Exploration" :vm="navigationBarVM" />
-  <TestStatusBar v-if="gameMode === GameMode.Test" />
+  <NavigationBar v-if="session.gameMode === GameMode.Exploration" :vm="navigationBarVM" />
+  <TestStatusBar v-if="session.gameMode === GameMode.Test" />
   
   <main class="game" v-if="userInput">
     <InputScreen :state="userInput" />

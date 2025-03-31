@@ -2,6 +2,7 @@ import type { Language } from './language'
 import type { Term } from './content'
 import '@/assets/tungsten/extensions/array.extensions'
 import { substringFromIndices } from "@/assets/tungsten/stringify"
+import type { GameMode } from './game'
 
 export interface InputSource {
   readonly language: Language
@@ -37,11 +38,13 @@ export class UserInput implements InputState {
   
   indices: number[]
   inputableIndices: number[]
+  mode: GameMode
   source: InputSource
   
-  constructor(source: InputSource, indices: number[] = []) {
+  constructor(source: InputSource, mode: GameMode, indices: number[] = []) {
     this.indices = indices
     this.inputableIndices = (Array.range(source.term.hintPrefixLength, source.term.baseWord.length, 1)).shuffle()
+    this.mode = mode
     this.source = source
   }
   
