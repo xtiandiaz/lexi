@@ -19,7 +19,6 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: ['vue-router'],
       output: {
         assetFileNames: (assetInfo) => {
           if (assetInfo.names && assetInfo.names.find(name => /\.woff2$/.test(name))) {
