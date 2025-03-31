@@ -1,9 +1,9 @@
-[submodule "vue/submodules/design-tokens"]
-	path = vue/submodules/design-tokens
+[submodule "submodules/design-tokens"]
+	path = submodules/design-tokens
 	url = git@github.com:xtiandiaz/design-tokens.git
-[submodule "vue/submodules/tungsten"]
-	path = vue/submodules/tungsten
+[submodule "submodules/tungsten"]
+	path = submodules/tungsten
 	url = git@github.com:xtiandiaz/tungsten.git
-[submodule "vue/submodules/vueties"]
-	path = vue/submodules/vueties
+[submodule "submodules/vueties"]
+	path = submodules/vueties
 	url = git@github.com:xtiandiaz/vueties.git
