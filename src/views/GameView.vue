@@ -35,7 +35,6 @@ function restoreInputOrResume() {
     inputSource.value = session.inputState.source
     userInput.value = new UserInput(session.inputState.source, GameMode.Exploration, session.inputState.indices)
     
-    resetDailyHistoryIfNeeded()
     return
   }
   
@@ -137,10 +136,11 @@ function onPageUnfocusedOrUnmounted() {
   }
 }
 
-onMounted(async () => {  
+onMounted(async () => {
   resetDailyHistoryIfNeeded()
   
   await resetSessionIfNeeded()
+  await router.isReady()
   
   restoreInputOrResume()
 })
