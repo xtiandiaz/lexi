@@ -1,13 +1,45 @@
-# Lexi
+# vue
 
-A simple, gamified app to exercise and expand your vocabulary.
+This template should help get you started developing with Vue 3 in Vite.
 
-Additionally, this project is being developed as a learning task with 2 open-source frameworks:
-1. [Godot](./godot/) (technically a game engine, of course), and 
-2. [Vue](./vue/) (WIP)
+## Recommended IDE Setup
 
-The initiative is also for the sake of comparison between the 2 in terms of ease of production and deployment, for this kind of products.
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-The collected vocabulary so far is of personal attainment, extracted from regular reading, discussion and reflection.
+## Type Support for `.vue` Imports in TS
 
-Feel free to clone, fork and use as the start or a branch of your own initiative.
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+
+## Customize configuration
+
+See [Vite Configuration Reference](https://vite.dev/config/).
+
+## Project Setup
+
+```sh
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Type-Check, Compile and Minify for Production
+
+```sh
+npm run build
+```
+
+### Run Unit Tests with [Vitest](https://vitest.dev/)
+
+```sh
+npm run test:unit
+```
+
+### Lint with [ESLint](https://eslint.org/)
+
+```sh
+npm run lint
+```
