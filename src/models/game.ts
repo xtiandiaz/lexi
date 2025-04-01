@@ -32,7 +32,7 @@ export class Test {
   }
   
   makeProgressWithTerm(term: Term): boolean {
-    if (term.baseWord !== this._currentTerm?.baseWord) {
+    if (term.word !== this._currentTerm?.word) {
       return false
     }
     

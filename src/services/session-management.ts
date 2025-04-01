@@ -49,13 +49,13 @@ export async function resetSessionIfNeeded(): Promise<void> {
 export function prepareTest() {
   const settings = settingsStore()
   const dailyHistory = historyStore().currentDailyHistory
-  const terms = dailyHistory?.completedTerms
-  if (!dailyHistory || !terms || terms.length < settings.minTermCountForTest) {
-    console.error('Scanty content for a test!', terms)
+  const completedTerms = dailyHistory?.completedTerms
+  if (!dailyHistory || !completedTerms || completedTerms.length < settings.minTermCountForTest) {
+    console.error('Scanty content for a test!', completedTerms)
     return
   }
   
-  terms.forEach((ct) => {
+  completedTerms.forEach((ct) => {
     const testMark = ct.inputMarks.find(im => im.kind === InputMarkKind.Test)
     if (testMark) {
       testMark.value = 0
@@ -63,5 +63,7 @@ export function prepareTest() {
   })
   
   const session = sessionStore()
-  session.test = new Test(Content.fromCompletedTerms(terms, dailyHistory.language))
+  const testContent = new Content(dailyHistory.language, [...completedTerms].shuffle())
+  
+  session.test = new Test(testContent)
 }

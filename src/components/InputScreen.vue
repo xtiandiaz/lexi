@@ -22,8 +22,8 @@ watch(async () => state.prefixedInputString, async () => {
     <h1 ref="input-headline" class="serif">
       {{ state.prefixedInputString }}
     </h1>
-    <h6 class="serif" v-if="state.isComplete && state.source.term.linkedWords">
-      {{ Content.makeLinkedWordsStringFromTerm(state.source.term) }}
+    <h6 class="serif" v-if="state.isComplete && state.source.term.aliases">
+      {{ Content.aliasesStringFromTerm(state.source.term) }}
     </h6>
   </section>
 </template>

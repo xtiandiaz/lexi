@@ -15,7 +15,7 @@ const labelForKey = (key: string): string => {
 export const keypadKeyVMs = (inputState: InputState): KeypadKeyVM[] => {
   const keys: KeypadKeyVM[] = inputState.inputableIndices.map(li => {
     return { 
-      label: labelForKey(inputState.source.term.baseWord[li].toLowerCase()),
+      label: labelForKey(inputState.source.term.word[li].toLowerCase()),
       value: li, 
       isEnabled: !inputState.indices.includes(li) 
     }

@@ -1,70 +1,79 @@
-import type { CompletedTerm } from "./history";
 import type { Language } from "./language";
 import '@/assets/tungsten/extensions/array.extensions'
 
+export enum TermTag {
+  Anatomy = 'anat',
+  Bird = 'bird',
+  Botany = 'bot',
+  Chemisty = 'chem',
+  Geometry = 'geom',
+  Medicine = 'med',
+  Physics = 'phys',
+  Plant = 'plant',
+}
+
+export enum TermMetaTag {
+  WikipediaKeyword = 'wk',
+}
+
+export interface TermMetaAttribute {
+  metaTag: TermMetaTag
+  value: string
+}
+
 export interface Term {
-  readonly baseWord: string
-  readonly hintPrefixLength: number
-  readonly linkedWords?: string[][]
+  hintPrefixLength: number
+  
+  readonly aliases?: string[]
+  readonly word: string
+  readonly tags?: TermTag[]
+  readonly metaData?: TermMetaAttribute[]
 }
 
 export class Content {
   readonly language: Language
   
-  _rawTerms: string[]
+  _terms?: Term[]
+  _rawTerms?: string[]
   
-  constructor(language: Language, rawTerms: string[]) {
+  constructor(language: Language, terms?: Term[], rawTerms?: string[]) {
     this.language = language
+    this._terms = terms
     this._rawTerms = rawTerms
   }
   
   get termCount(): number {
-    return this._rawTerms.length
+    return this._terms?.length ?? this._rawTerms?.length ?? 0
   }
   
-  produceNewTerm(): Term {
-    return this.produceTerm(Math.floor(Math.random() * this._rawTerms.length))
+  produceRandomTerm(): Term {
+    return this.produceTerm(
+      Math.floor(Math.random() * (this._terms ? this._terms.length : this._rawTerms!.length))
+    )
   }
   
   produceTerm(index: number, hintPrefixRate: number = 0.25): Term {
-    return Content.makeTermFromRaw(this._rawTerms[index], hintPrefixRate)
-  }
-  
-  static fromCompletedTerms(completedTerms: CompletedTerm[], language: Language) {
-    const rawTerms = completedTerms.map(ct => Content.makeRawFromCompletedTerm(ct))
+    if (this._terms) {
+      const term = this._terms[index]
+      term.hintPrefixLength = hintPrefixRate
+      return term
+    }
     
-    return new Content(language, rawTerms.shuffle())
+    return Content.composeTerm(this._rawTerms![index], hintPrefixRate)
   }
   
-  static makeTermFromRaw(rawTerm: string, hintPrefixRate: number): Term {
-    const isComposite = rawTerm.includes(';')
-    const parts = rawTerm.split(isComposite ? ';' : ',')
+  static composeTerm(rawTerm: string, hintPrefixRate: number): Term {
+    const parts = rawTerm.split(';')
+    const words = parts[0].split(',')
     
     return {
-      baseWord: parts[0], 
-      hintPrefixLength: Math.floor(parts[0].length * hintPrefixRate), 
-      linkedWords: (() => {
-        if (parts.length <= 1) {
-          return undefined
-        }
-        return isComposite ? parts.slice(1).map(ls => ls.split(',')) : [parts.slice(1)]
-      })()
+      word: words[0], 
+      hintPrefixLength: Math.floor(words[0].length * hintPrefixRate), 
+      aliases: words.length > 1 ? words.slice(1) : undefined
     }
   }
   
-  static makeRawFromCompletedTerm(completedTerm: CompletedTerm): string {
-    if (!completedTerm.linkedWords) {
-      return completedTerm.baseWord
-    }
-    
-    const isComposite = completedTerm.linkedWords.length > 1
-    
-    return [completedTerm.baseWord].concat(
-      completedTerm.linkedWords.map(lw => lw.join(','))
-    ).join(isComposite ? ';' : ',')
-  }
-  
-  static makeLinkedWordsStringFromTerm(term: Term): string | undefined {
-    return term.linkedWords?.map(ls => ls.join(', ')).join(' | ')
+  static aliasesStringFromTerm(term: Term): string | undefined {
+    return term.aliases?.join(', ')
   }
 }

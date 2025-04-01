@@ -17,10 +17,10 @@ export async function loadRepositoryContent(): Promise<Content | undefined> {
   try {
     const response = await fetch(`${urlString}?salt=${Math.random()}`)
     // console.log(response)
-    const terms = (await response.text()).split('\n')
+    const rawTerms = (await response.text()).split('\n')
     // console.log(terms)
     
-    return new Content(settings.currentLanguage, terms)
+    return new Content(settings.currentLanguage, undefined, rawTerms)
   } catch (error) {
     console.error(`Language: ${settings.currentLanguage}`, error)
     return undefined

@@ -54,10 +54,10 @@ function onTestButtonClicked() {
         </div>
         <div class="rows">
           <FoldableRow 
-            v-for="(term, index) of dailyHistory.completedTerms.sort((s1, s2) => s1.baseWord.localeCompare(s2.baseWord))"
+            v-for="(term, index) of dailyHistory.completedTerms.sort((s1, s2) => s1.word.localeCompare(s2.word))"
             :key="index"
-            :title="term.baseWord"
-            :subtitle="Content.makeLinkedWordsStringFromTerm(term)"
+            :title="term.word"
+            :subtitle="Content.aliasesStringFromTerm(term)"
             :is-unfolded="selectedIndex === index"
             @selected="onWordSelected(index)"
           >
@@ -74,7 +74,7 @@ function onTestButtonClicked() {
           </template>
           <template v-slot:foldable-content>
             <ResearchToolBar
-              @tool-selected="(tool) => launchResearchToolForWord(tool, term.baseWord)"
+              @tool-selected="(tool) => launchResearchToolForWord(tool, term.word)"
             />
           </template>
           </FoldableRow>

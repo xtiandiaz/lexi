@@ -43,13 +43,13 @@ export class UserInput implements InputState {
   
   constructor(source: InputSource, mode: GameMode, indices: number[] = []) {
     this.indices = indices
-    this.inputableIndices = (Array.range(source.term.hintPrefixLength, source.term.baseWord.length, 1)).shuffle()
+    this.inputableIndices = (Array.range(source.term.hintPrefixLength, source.term.word.length, 1)).shuffle()
     this.mode = mode
     this.source = source
   }
   
   get isComplete() {
-    return this.prefixedInputString === this.source.term.baseWord.toLowerCase()
+    return this.prefixedInputString === this.source.term.word.toLowerCase()
   }
   
   get sortedInputableIndices() {
@@ -57,13 +57,13 @@ export class UserInput implements InputState {
   }
   
   get hintPrefixString() {
-    return this.source.term.baseWord.substring(0, this.source.term.hintPrefixLength)
+    return this.source.term.word.substring(0, this.source.term.hintPrefixLength)
   }
   get inputString() {
-    return substringFromIndices(this.source.term.baseWord, this.indices)
+    return substringFromIndices(this.source.term.word, this.indices)
   }
   get inputableString() {
-    return substringFromIndices(this.source.term.baseWord, this.sortedInputableIndices)
+    return substringFromIndices(this.source.term.word, this.sortedInputableIndices)
   }
   get prefixedInputString() {
     return this.hintPrefixString + this.inputString
