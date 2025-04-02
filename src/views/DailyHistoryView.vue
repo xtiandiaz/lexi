@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import router from '@/router'
 import { Section } from '@/models/navigation'
 import { LocalizedString } from '@/models/language'
@@ -10,7 +10,7 @@ import { launchResearchToolForWord } from '@/services/tool-handler'
 import { localizedString } from '@/services/localization'
 import { prepareTest } from '@/services/session-management'
 import { computedNavigationBarVM } from '@/view-models/vm-navigation'
-import { inputMarkIcon, shouldShowInputMarkValue } from '@/view-models/vm-input'
+import { inputMarkIcon, shouldShowInputMarkValue as showsInputMarkValueForKind } from '@/view-models/vm-input'
 import { Icon } from '@design-tokens/iconography'
 import ResearchToolBar from '@/components/ResearchToolBar.vue'
 import NavigationBar from '@vueties/bars/NavigationBar.vue'
@@ -40,6 +40,12 @@ function onTestButtonClicked() {
   
   router.replace('/')
 }
+
+onMounted(() => {
+  if (termCount === 0) {
+    router.replace('/')
+  }
+})
 </script>
 
 <template>
@@ -50,7 +56,7 @@ function onTestButtonClicked() {
         <div class="header inline">
           <span class="title">{{ dateLocaleString }}</span>
           •
-          <span class="subtitle">{{ `${termCount} ${localizedString(LocalizedString.Word, termCount > 1)}` }}</span>
+          <span class="subtitle">{{ `${termCount} ${localizedString(LocalizedString.Word, termCount === 1)}` }}</span>
         </div>
         <div class="rows">
           <FoldableRow 
@@ -68,7 +74,7 @@ function onTestButtonClicked() {
                 :key="index"
                 class="mark" :class="mark.kind"
               >
-                <span v-if="shouldShowInputMarkValue(mark.kind)">{{ mark.value }} ×</span><SvgIcon :icon="inputMarkIcon(mark.kind)" />
+                <span v-if="showsInputMarkValueForKind(mark.kind)">{{ mark.value }} ×</span><SvgIcon :icon="inputMarkIcon(mark.kind)" />
               </span>
             </div>
           </template>
