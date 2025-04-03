@@ -45,8 +45,13 @@ export const localizedStringForTermTag = (tag: TermTag): string => {
       case TermTag.Psychiatry: return LocalizedStringKey.TermTag_Psychiatry
       case TermTag.Psychology: return LocalizedStringKey.TermTag_Psychology
       case TermTag.Plant: return LocalizedStringKey.TermTag_Plant
+      default: return undefined
     }
   })()
   
-  return localizedString(key as LocalizedStringKey)
+  if (key) {
+    return localizedString(key as LocalizedStringKey)
+  }
+  
+  return `#${tag}`
 }

@@ -12,6 +12,7 @@ export enum TermTag {
   Geology = 'geo',
   Geometry = 'geom',
   Medicine = 'med',
+  Meteorology = 'meteor',
   Philosophy = 'philos',
   Physics = 'phys',
   Physiology = 'physiol',

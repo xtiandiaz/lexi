@@ -67,7 +67,7 @@ onMounted(() => {
             @selected="onWordSelected(index)"
           >
             <template v-slot:title>
-              <div class="term-title">
+              <div class="title-wrapper">
                 <span class="title">{{ term.word }}</span>
                 
                 <div v-if="term.tags" class="tags">
@@ -122,54 +122,58 @@ onMounted(() => {
 @use '@design-tokens/palette';
 @use '@design-tokens/typography';
 
-.row.foldable.unfolded {
-  span.title {
-    @extend .h6;
+.row.foldable {
+  &.unfolded {
+    span.title {
+      @extend .h6;
+    }
   }
-}
 
-span.tag.tiny {
-  @extend .italic;
-}
+  div.title-wrapper {
+    &, > * {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      gap: 0.5em;
+    }
+    
+    div.tags, div.marks {
+      gap: 0.25em;
+    }
+    
+    div.tags {
+      span.tag.tiny {
+        @extend .italic;
+      }
+    }
+    
+    div.marks {
+      span.mark {
+        @extend .caption;
+        
+        &.hint {
+          @include palette.color-attribute('color', 'yellow');
+        }
+        &.test {
+          @include palette.color-attribute('color', 'green');
+        }
+        
+        > * {
+          vertical-align: middle;
+        }
+        
+        .svg-icon {
+          height: 1.25em;
+          width: 1.25em;
+        }
+      }  
+    }
+  }
 
-div.term-title {
-  &, > * {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    gap: 0.5em;
+  span.subtitle {
+    @extend .caption;
+    @include palette.color-attribute('color', 'tertiary-body');
   }
-  
-  div.tags, div.marks {
-    gap: 0.25em;
-  }
-  
-  div.marks {
-    span.mark {
-      @extend .caption;
-      
-      &.hint {
-        @include palette.color-attribute('color', 'yellow');
-      }
-      &.test {
-        @include palette.color-attribute('color', 'green');
-      }
-      
-      > * {
-        vertical-align: middle;
-      }
-      
-      .svg-icon {
-        height: 1.25em;
-        width: 1.25em;
-      }
-    }  
-  }
-}
-
-span.subtitle {
-  @extend .caption;
-  @include palette.color-attribute('color', 'tertiary-body');
 }
 
 .review .row.button {
