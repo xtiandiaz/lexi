@@ -33,7 +33,7 @@ const selectedIndex = ref<number>()
 const navigationBarVM = computedNavigationBarVM(Section.DailyHistory)
 
 const showsSubtitleForTerm = (term: Term): boolean => {
-  return term.aliases !== undefined || term.tags !== undefined
+  return term.aliases !== undefined
 }
 
 function onWordSelected(index: number) {
@@ -70,36 +70,38 @@ onMounted(() => {
             :is-unfolded="selectedIndex === index"
             @selected="onWordSelected(index)"
           >
-          <template v-slot:title>
-            <div class="term-title">
-              {{ term.word }}
-              <div v-if="term.inputMarks && term.inputMarks.length > 0" class="marks">
-                <span
-                  v-for="(mark, index) of term.inputMarks.filter(m => m.value > 0)" 
-                  :key="index"
-                  class="mark" :class="mark.kind"
-                >
-                  <span v-if="showsInputMarkValueForKind(mark.kind)">{{ mark.value }} ×</span><SvgIcon :icon="inputMarkIcon(mark.kind)" />
-                </span>
+            <template v-slot:title>
+              <div class="term-title">
+                <span class="title">{{ term.word }}</span>
+                
+                <div v-if="term.tags" class="tags">
+                  <TextTag
+                    v-for="(tag, index) of term.tags"
+                    :key="index"
+                    :label="localizedStringForTermTag(tag)"
+                    class="tiny"
+                  />
+                </div>
+                
+                <div v-if="term.inputMarks && term.inputMarks.length > 0" class="marks">
+                  <span
+                    v-for="(mark, index) of term.inputMarks.filter(m => m.value > 0)" 
+                    :key="index"
+                    class="mark" :class="mark.kind"
+                  >
+                    <span v-if="showsInputMarkValueForKind(mark.kind)">{{ mark.value }} ×</span><SvgIcon :icon="inputMarkIcon(mark.kind)" />
+                  </span>
+                </div>
               </div>
-            </div>
-          </template>
-          <template v-slot:subtitle v-if="showsSubtitleForTerm(term)">
-            <div class="term-subtitle">
-              <TextTag
-                v-for="(tag, index) of term.tags"
-                :key="index"
-                :label="localizedStringForTermTag(tag)"
-                class="tiny"
+            </template>
+            <template v-slot:subtitle v-if="showsSubtitleForTerm(term)">
+              <span class="subtitle">{{ Content.aliasesStringFromTerm(term) }}</span>
+            </template>
+            <template v-slot:foldable-content>
+              <ResearchToolBar
+                @tool-selected="(tool) => launchResearchToolForWord(tool, term.word)"
               />
-              {{ Content.aliasesStringFromTerm(term) }}
-            </div>
-          </template>
-          <template v-slot:foldable-content>
-            <ResearchToolBar
-              @tool-selected="(tool) => launchResearchToolForWord(tool, term.word)"
-            />
-          </template>
+            </template>
           </FoldableRow>
         </div>
       </div>
@@ -124,20 +126,29 @@ onMounted(() => {
 @use '@design-tokens/palette';
 @use '@design-tokens/typography';
 
-div.term-title, div.term-subtitle {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  gap: 0.5em;
+.row.foldable.unfolded {
+  span.title {
+    @extend .h6;
+  }
+}
+
+span.tag.tiny {
+  @extend .italic;
 }
 
 div.term-title {
-  div.marks {
+  &, > * {
     align-items: center;
     display: flex;
     flex-direction: row;
     gap: 0.5em;
-
+  }
+  
+  div.tags, div.marks {
+    gap: 0.25em;
+  }
+  
+  div.marks {
     span.mark {
       @extend .caption;
       
@@ -160,9 +171,9 @@ div.term-title {
   }
 }
 
-div.term-subtitle {
+span.subtitle {
   @extend .caption;
-  @include palette.color-attribute('color', 'secondary-body');
+  @include palette.color-attribute('color', 'tertiary-body');
 }
 
 .review .row.button {

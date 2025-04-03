@@ -34,7 +34,6 @@ watch(async () => state.prefixedInputString, async () => {
           v-for="(tag, index) of state.source.term.tags" 
           :key="index"
           :label="localizedStringForTermTag(tag)"
-          class="small"
         />
       </div>
       <h6 v-if="showsAliases" class="serif">
@@ -65,5 +64,9 @@ watch(async () => state.prefixedInputString, async () => {
     margin: 0;
     @include palette.color-attribute('color', 'tertiary-body');
   }
+}
+
+span.tag {
+  @extend .italic;
 }
 </style>
