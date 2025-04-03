@@ -28,7 +28,7 @@ export const localizedString = (key: LocalizedStringKey, pluralized: boolean = f
 }
 
 export const localizedStringForTermTag = (tag: TermTag): string => {
-  const key: LocalizedStringKey = (() => {
+  const key = (() => {
     switch (tag) {
       case TermTag.Anatomy: return LocalizedStringKey.TermTag_Anatomy
       case TermTag.Biochemistry: return LocalizedStringKey.TermTag_Biochemistry
@@ -43,5 +43,5 @@ export const localizedStringForTermTag = (tag: TermTag): string => {
     }
   })()
   
-  return localizedString(key)
+  return localizedString(key as LocalizedStringKey)
 }
