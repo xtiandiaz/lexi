@@ -55,7 +55,7 @@ export const inputMarkIcon = (kind: InputMarkKind) => {
   }
 }
 
-export const shouldShowInputMarkValue = (kind: InputMarkKind) => {
+export const showsInputMarkValueForKind = (kind: InputMarkKind) => {
   switch (kind) {
     case InputMarkKind.Test:
       return false

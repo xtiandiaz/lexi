@@ -1,23 +1,29 @@
+import { enumKeyFromValue } from "@/assets/tungsten/misc";
 import type { Language } from "./language";
 import '@/assets/tungsten/extensions/array.extensions'
 
 export enum TermTag {
   Anatomy = 'anat',
   Bird = 'bird',
+  Biochemistry = 'biochem',
   Botany = 'bot',
   Chemisty = 'chem',
   Geometry = 'geom',
   Medicine = 'med',
+  Philosophy = 'philos',
   Physics = 'phys',
+  Physiology = 'physiol',
+  Psychiatry = 'psych',
+  Psychology = 'psychol',
   Plant = 'plant',
 }
 
-export enum TermMetaTag {
+export enum TermMetaAttributeKey {
   WikipediaKeyword = 'wk',
 }
 
 export interface TermMetaAttribute {
-  metaTag: TermMetaTag
+  key: TermMetaAttributeKey
   value: string
 }
 
@@ -27,7 +33,7 @@ export interface Term {
   readonly aliases?: string[]
   readonly word: string
   readonly tags?: TermTag[]
-  readonly metaData?: TermMetaAttribute[]
+  readonly metaAttributes?: TermMetaAttribute[]
 }
 
 export class Content {
@@ -66,10 +72,23 @@ export class Content {
     const parts = rawTerm.split(';')
     const words = parts[0].split(',')
     
+    const extras = parts.length > 1 ? parts[1].split(' ') : undefined
+    const tags: TermTag[] = []
+    
+    extras?.forEach(extra => {
+      if (extra[0] === '#') {
+        const tag = enumKeyFromValue(TermTag, extra.slice(1))
+        if (tag) {
+          tags.push(tag)
+        }
+      }
+    })
+    
     return {
       word: words[0], 
       hintPrefixLength: Math.floor(words[0].length * hintPrefixRate), 
-      aliases: words.length > 1 ? words.slice(1) : undefined
+      aliases: words.length > 1 ? words.slice(1) : undefined, 
+      tags: tags && tags.length > 0 ? tags : undefined
     }
   }
   

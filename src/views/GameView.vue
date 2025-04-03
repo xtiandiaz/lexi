@@ -33,9 +33,7 @@ const testBackgroundOpacity = computed(() => session.gameMode === GameMode.Test 
 function restoreInputOrResume() {
   if (session.gameMode === GameMode.Exploration && session.inputState) {
     inputSource.value = session.inputState.source
-    console.log(session.inputState.source)
     userInput.value = new UserInput(session.inputState.source, GameMode.Exploration, session.inputState.indices)
-    
     return
   }
   
