@@ -33,12 +33,17 @@ export const localizedStringForTermTag = (tag: TermTag): string => {
       case TermTag.Anatomy: return LocalizedStringKey.TermTag_Anatomy
       case TermTag.Biochemistry: return LocalizedStringKey.TermTag_Biochemistry
       case TermTag.Bird: return LocalizedStringKey.TermTag_Bird
+      case TermTag.Biology: return LocalizedStringKey.TermTag_Biology
       case TermTag.Botany: return LocalizedStringKey.TermTag_Botany
       case TermTag.Chemisty: return LocalizedStringKey.TermTag_Chemisty
+      case TermTag.Geology: return LocalizedStringKey.TermTag_Geology
       case TermTag.Geometry: return LocalizedStringKey.TermTag_Geometry
       case TermTag.Medicine: return LocalizedStringKey.TermTag_Medicine
+      case TermTag.Philosophy: return LocalizedStringKey.TermTag_Philosophy
       case TermTag.Physics: return LocalizedStringKey.TermTag_Physics
       case TermTag.Physiology: return LocalizedStringKey.TermTag_Physiology
+      case TermTag.Psychiatry: return LocalizedStringKey.TermTag_Psychiatry
+      case TermTag.Psychology: return LocalizedStringKey.TermTag_Psychology
       case TermTag.Plant: return LocalizedStringKey.TermTag_Plant
     }
   })()

@@ -7,9 +7,11 @@ export enum LocalizedStringKey {
   
   TermTag_Anatomy,
   TermTag_Biochemistry,
+  TermTag_Biology,
   TermTag_Bird,
   TermTag_Botany,
   TermTag_Chemisty,
+  TermTag_Geology,
   TermTag_Geometry,
   TermTag_Medicine,
   TermTag_Philosophy,

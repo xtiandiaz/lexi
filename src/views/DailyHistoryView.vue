@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import router from '@/router'
 import { Section } from '@/models/navigation'
-import { type Term, Content } from '@/models/content'
+import { Content } from '@/models/content'
 import { LocalizedStringKey } from '@/models/localization'
 import historyStore from '@/stores/history'
 import settingsStore from '@/stores/settings'
@@ -31,10 +31,6 @@ const dateLocaleString = (new Date()).toLocaleDateString(settings.currentLanguag
 
 const selectedIndex = ref<number>()
 const navigationBarVM = computedNavigationBarVM(Section.DailyHistory)
-
-const showsSubtitleForTerm = (term: Term): boolean => {
-  return term.aliases !== undefined
-}
 
 function onWordSelected(index: number) {
   selectedIndex.value = index !== selectedIndex.value ? index : undefined
@@ -94,7 +90,7 @@ onMounted(() => {
                 </div>
               </div>
             </template>
-            <template v-slot:subtitle v-if="showsSubtitleForTerm(term)">
+            <template v-slot:subtitle v-if="term.aliases">
               <span class="subtitle">{{ Content.aliasesStringFromTerm(term) }}</span>
             </template>
             <template v-slot:foldable-content>
