@@ -34,6 +34,7 @@ watch(async () => state.prefixedInputString, async () => {
           v-for="(tag, index) of state.source.term.tags" 
           :key="index"
           :label="localizedStringForTermTag(tag)"
+          class="small"
         />
       </div>
       <h6 v-if="showsAliases" class="serif">
@@ -51,7 +52,7 @@ watch(async () => state.prefixedInputString, async () => {
   align-items: center;
   display: flex;
   flex-direction: row;
-  gap: 1em;
+  gap: 0.75em;
   justify-content: center;
   
   #tags {
