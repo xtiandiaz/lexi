@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig({
-  // root: 'src',
+  root: 'src',
   base: process.env.NODE_ENV === 'production' ? '/lexi/dist/' : '/',
   plugins: [
     vue(),
@@ -21,7 +21,6 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      // input: 'src/index.html',
       output: {
         assetFileNames: (assetInfo) => {
           if (assetInfo.names && assetInfo.names.find(name => /\.woff2$/.test(name))) {
