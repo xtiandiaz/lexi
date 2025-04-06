@@ -4,12 +4,15 @@ import '@/assets/tungsten/extensions/array.extensions'
 
 export enum TermTag {
   Anatomy = 'anat',
-  Bird = 'bird',
+  Astronomy = 'astro',
   Biochemistry = 'biochem',
   Biology = 'bio',
+  Bird = 'bird',
   Botany = 'bot',
   Chemisty = 'chem',
-  Geology = 'geo',
+  Economy = 'econ',
+  Fish = 'fish',
+  Geology = 'geol',
   Geometry = 'geom',
   Medicine = 'med',
   Meteorology = 'meteor',
