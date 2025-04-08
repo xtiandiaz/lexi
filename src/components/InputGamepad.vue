@@ -25,6 +25,10 @@ const keyboardInput = useTemplateRef('keyboard-input')
 const _keypadKeyVMs = computed(() => keypadKeyVMs(state))
 const _inputToolBarButtonVMs = computed(() => inputToolBarButtonVMs(state))
 
+function focusKeyboardInput() {
+  keyboardInput.value?.focus()
+}
+
 watch(() => state, (newValue) => {
   if (keyboardInput.value && !newValue.isComplete) {
     keyboardInput.value.focus()
@@ -32,22 +36,20 @@ watch(() => state, (newValue) => {
 })
 
 onMounted(() => {
+  console.log(isMobile(), keyboardInput.value)
+  
   if (isMobile() || !keyboardInput.value) {
     return
   }
   
   window.addEventListener('keydown', (e) => {
-    switch (e.code) {
-      case 'Escape':
-        keyboardInput.value?.focus()
-        break
-      default:
-        break
+    if (e.code === 'Escape') {
+      focusKeyboardInput()
     }
   })
   
   keyboardInput.value.addEventListener("keydown", (e: KeyboardEvent) => {
-    // console.log(e.key, e.code)
+    console.log(e.key, e.code)
     
     switch (e.code) {
       case 'Backspace':
@@ -63,7 +65,7 @@ onMounted(() => {
     }    
   })
   
-  keyboardInput.value.focus()
+  focusKeyboardInput()
 })
 </script>
 
