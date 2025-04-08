@@ -31,6 +31,7 @@ export interface InputState {
   readonly inputableString: string
   readonly prefixedInputString: string
   
+  firstAvailableInputableCharIndex(char: string): number
 }
 
 export class UserInput implements InputState {
@@ -83,5 +84,22 @@ export class UserInput implements InputState {
     if (markIndex >= 0) {
       this.marks.splice(markIndex, 1)
     }
+  }
+  
+  firstAvailableInputableCharIndex(char: string): number {
+    if (!/[a-z \-áéíóúüàèìòù]/i.test(char)) {
+      return -1
+    }
+    
+    for (let i = 0; i < this.inputableIndices.length; i++) {
+      const indexInWord = this.inputableIndices[i]
+      const charInWord = this.source.term.word[indexInWord]
+      
+      if (charInWord === char && !this.indices.includes(indexInWord)) {
+        return indexInWord
+      }
+    }
+    
+    return -1
   }
 }

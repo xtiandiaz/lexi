@@ -61,7 +61,7 @@ onMounted(async () => {
   align-items: center;
   display: flex;
   flex-direction: row;
-  gap: 0.75em;
+  gap: 0.5em;
   justify-content: center;
   
   #tags {
