@@ -14,10 +14,11 @@ import { resetSessionIfNeeded, saveSession } from "@/services/session-management
 import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/history-management'
 import { onWindowEvent } from '@/composables/window-event'
 import { computedNavigationBarVM } from "@/view-models/vm-navigation"
-import NavigationBar from '@vueties/bars/NavigationBar.vue'
 import InputScreen from '@/components/InputScreen.vue'
 import InputGamepad from '@/components/InputGamepad.vue'
 import TestStatusBar from "@/components/TestStatusBar.vue"
+import NavigationBar from '@vueties/bars/NavigationBar.vue'
+import ProgressIndicator from "@vueties/misc/ProgressIndicator.vue"
 
 const router = useRouter()
 
@@ -155,7 +156,7 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
 <template>
   <div class="test-background" :style="{ opacity: `${testBackgroundOpacity}%` }"></div>
   
-  <span id="spinner" v-if="!inputSource"></span>
+  <ProgressIndicator v-if="!inputSource" class="absolutely-centered-block" />
   
   <NavigationBar v-if="session.gameMode === GameMode.Exploration" :vm="navigationBarVM" />
   
@@ -176,6 +177,11 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
 <style scoped lang="scss">
 @use '@vueties/styles/utils';
 @use '@design-tokens/palette';
+
+.progress-indicator {
+  width: 3em;
+  height: 3em;
+}
 
 .test-background {
   @extend .background;

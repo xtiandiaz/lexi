@@ -73,24 +73,6 @@ div.spacer {
   flex: auto;
 }
 
-@keyframes spin {
-  100% { rotate: 180deg; }
-}
-
-#spinner {
-  animation: spin 1s linear 0s infinite;
-  display: block;
-  width: 3em;
-  height: 3em;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
-  @include iconography.colored-icon-content-attribute('spinner', 'accessory');
-}
-
 // div.modal {
 //   position: absolute;
 //   top: 0;
