@@ -25,47 +25,55 @@ const keyboardInput = useTemplateRef('keyboard-input')
 const _keypadKeyVMs = computed(() => keypadKeyVMs(state))
 const _inputToolBarButtonVMs = computed(() => inputToolBarButtonVMs(state))
 
-function focusKeyboardInput() {
+function onInput(index: number) {
+  emits('input', index)
+  
+  focusKeyboardInputIfNeeded()
+}
+
+function onInputToolSelected(tool: InputTool) {
+  emits('inputToolSelected', tool)
+  
+  focusKeyboardInputIfNeeded()
+}
+
+function focusKeyboardInputIfNeeded() {
   keyboardInput.value?.focus()
 }
 
 watch(() => state, (newValue) => {
   if (keyboardInput.value && !newValue.isComplete) {
-    keyboardInput.value.focus()
+    focusKeyboardInputIfNeeded()
   }
 })
 
 onMounted(() => {
-  console.log(isMobile(), keyboardInput.value)
-  
-  if (isMobile() || !keyboardInput.value) {
+  if (!keyboardInput.value) {
     return
   }
   
-  window.addEventListener('keydown', (e) => {
-    if (e.code === 'Escape') {
-      focusKeyboardInput()
-    }
-  })
-  
   keyboardInput.value.addEventListener("keydown", (e: KeyboardEvent) => {
-    console.log(e.key, e.code)
+    // console.log(e.key, e.code)
     
     switch (e.code) {
       case 'Backspace':
-        emits('input', -1)
+        onInput(-1)
         break
       default:
         const char = e.key.toLowerCase()    
-        const inputIndex = state.firstAvailableInputableCharIndex(char)
-        if (inputIndex >= 0) {
-          emits('input', inputIndex)
+        const index = state.firstAvailableInputableCharIndex(char)
+        if (index >= 0) {
+          onInput(index)
         }
         break
     }    
   })
   
-  focusKeyboardInput()
+  window.addEventListener('click', () => {
+    focusKeyboardInputIfNeeded()
+  })
+  
+  focusKeyboardInputIfNeeded()
 })
 </script>
 
@@ -74,7 +82,7 @@ onMounted(() => {
     <SimpleKeypad 
       v-if="!state.isComplete"
       :keyVMs="_keypadKeyVMs"
-      @input="(value: string | number) => emits('input', Number(value))" 
+      @input="(value: string | number) => onInput(Number(value))" 
     />
     
     <input 
@@ -93,7 +101,7 @@ onMounted(() => {
     <ToolBar
       v-if="!state.isComplete"
       :buttonVMs="_inputToolBarButtonVMs"
-      @tool-selected="(tool: InputTool) => emits('inputToolSelected', tool)"
+      @tool-selected="(tool: InputTool) => onInputToolSelected(tool)"
     />
     
     <IconButton 
