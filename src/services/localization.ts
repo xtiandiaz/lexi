@@ -31,11 +31,14 @@ export const localizedStringForTermTag = (tag: TermTag): string => {
   const key = (() => {
     switch (tag) {
       case TermTag.Anatomy: return LocalizedStringKey.TermTag_Anatomy
+      case TermTag.Astronomy: return LocalizedStringKey.TermTag_Astronomy
       case TermTag.Biochemistry: return LocalizedStringKey.TermTag_Biochemistry
-      case TermTag.Bird: return LocalizedStringKey.TermTag_Bird
       case TermTag.Biology: return LocalizedStringKey.TermTag_Biology
+      case TermTag.Bird: return LocalizedStringKey.TermTag_Bird
       case TermTag.Botany: return LocalizedStringKey.TermTag_Botany
       case TermTag.Chemisty: return LocalizedStringKey.TermTag_Chemisty
+      case TermTag.Economy: return LocalizedStringKey.TermTag_Economy
+      case TermTag.Fish: return LocalizedStringKey.TermTag_Fish
       case TermTag.Geology: return LocalizedStringKey.TermTag_Geology
       case TermTag.Geometry: return LocalizedStringKey.TermTag_Geometry
       case TermTag.Medicine: return LocalizedStringKey.TermTag_Medicine
