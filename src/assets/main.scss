@@ -27,8 +27,11 @@ html, body {
 }
 
 #app {
-  height: calc(100% - env(safe-area-inset-bottom));
+  $padding-bottom: env(safe-area-inset-bottom);
+  
+  height: calc(100% - $padding-bottom);
   overflow: auto;
+  padding-bottom: $padding-bottom;
 }
 
 nav.filled {
