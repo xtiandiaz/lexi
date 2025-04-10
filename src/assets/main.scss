@@ -27,7 +27,7 @@ html, body {
 }
 
 #app {
-  height: calc(100% - var(--vueuse-safe-area-bottom));
+  height: calc(100% - env(safe-area-inset-bottom));
   overflow: auto;
 }
 
