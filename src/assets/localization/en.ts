@@ -16,6 +16,7 @@ export default new Map<LocalizedStringKey, string>([
   [LocalizedStringKey.TermTag_Chemisty, "Chemistry"],
   [LocalizedStringKey.TermTag_Economy, "Economy"],
   [LocalizedStringKey.TermTag_Fish, "Fish"],
+  [LocalizedStringKey.TermTag_Geography, "Geography"],
   [LocalizedStringKey.TermTag_Geology, "Geology"],
   [LocalizedStringKey.TermTag_Geometry, "Geometry"],
   [LocalizedStringKey.TermTag_Medicine, "Medicine"],
@@ -25,6 +26,7 @@ export default new Map<LocalizedStringKey, string>([
   [LocalizedStringKey.TermTag_Psychiatry, "Psychiatry"],
   [LocalizedStringKey.TermTag_Psychology, "Psychology"],
   [LocalizedStringKey.TermTag_Plant, "Plant"],
+  [LocalizedStringKey.TermTag_Zoology, "Zoology"],
   
   [LocalizedStringKey.Text_DailyGoalReached, "You've reached your Daily Goal!"],
   

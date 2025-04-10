@@ -28,33 +28,8 @@ export const localizedString = (key: LocalizedStringKey, pluralized: boolean = f
 }
 
 export const localizedStringForTermTag = (tag: TermTag): string => {
-  const key = (() => {
-    switch (tag) {
-      case TermTag.Anatomy: return LocalizedStringKey.TermTag_Anatomy
-      case TermTag.Astronomy: return LocalizedStringKey.TermTag_Astronomy
-      case TermTag.Biochemistry: return LocalizedStringKey.TermTag_Biochemistry
-      case TermTag.Biology: return LocalizedStringKey.TermTag_Biology
-      case TermTag.Bird: return LocalizedStringKey.TermTag_Bird
-      case TermTag.Botany: return LocalizedStringKey.TermTag_Botany
-      case TermTag.Chemisty: return LocalizedStringKey.TermTag_Chemisty
-      case TermTag.Economy: return LocalizedStringKey.TermTag_Economy
-      case TermTag.Fish: return LocalizedStringKey.TermTag_Fish
-      case TermTag.Geology: return LocalizedStringKey.TermTag_Geology
-      case TermTag.Geometry: return LocalizedStringKey.TermTag_Geometry
-      case TermTag.Medicine: return LocalizedStringKey.TermTag_Medicine
-      case TermTag.Philosophy: return LocalizedStringKey.TermTag_Philosophy
-      case TermTag.Physics: return LocalizedStringKey.TermTag_Physics
-      case TermTag.Physiology: return LocalizedStringKey.TermTag_Physiology
-      case TermTag.Psychiatry: return LocalizedStringKey.TermTag_Psychiatry
-      case TermTag.Psychology: return LocalizedStringKey.TermTag_Psychology
-      case TermTag.Plant: return LocalizedStringKey.TermTag_Plant
-      default: return undefined
-    }
-  })()
+  const key = Object.values(LocalizedStringKey).find(v => v === tag) as (LocalizedStringKey | undefined)
+  // console.log('tag localized string key', key)
   
-  if (key) {
-    return localizedString(key as LocalizedStringKey)
-  }
-  
-  return `#${tag}`
+  return key ? localizedString(key) : `#${tag}`
 }

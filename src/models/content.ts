@@ -12,6 +12,7 @@ export enum TermTag {
   Chemisty = 'chem',
   Economy = 'econ',
   Fish = 'fish',
+  Geography = 'geogr',
   Geology = 'geol',
   Geometry = 'geom',
   Medicine = 'med',
@@ -22,6 +23,7 @@ export enum TermTag {
   Psychiatry = 'psych',
   Psychology = 'psychol',
   Plant = 'plant',
+  Zoology = 'zool'
 }
 
 export enum TermMetaAttributeKey {
