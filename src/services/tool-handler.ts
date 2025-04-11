@@ -1,4 +1,5 @@
 import { InputTool, ResearchTool } from "@/models/tools";
+import { type Term, TermMetaAttributeKey } from '@/models/content'
 import type { InputState } from "@/models/input"
 import { Language } from "@/models/language";
 import settingsStore from "@/stores/settings"
@@ -41,10 +42,19 @@ const researchUrlString = (tool: ResearchTool, language: Language): string => {
   }
 }
 
-export function launchResearchToolForWord(tool: ResearchTool, word: string) {
+export function launchResearchToolForTerm(tool: ResearchTool, term: Term) {
+  let queryValue = term.word
+  
+  switch (tool) {
+    case ResearchTool.WikipediaSearch:
+      const wikipediaKeyword = term.extras?.metaAttributes?.find(ma => ma.key === TermMetaAttributeKey.WikipediaKeyword)?.value
+      queryValue = wikipediaKeyword ?? term.word
+      break
+  }
+  
   const settings = settingsStore()
-
-  window.open(researchUrlString(tool, settings.currentLanguage) + word, '_blank')
+  
+  window.open(researchUrlString(tool, settings.currentLanguage) + queryValue, '_blank')
 }
 
 function fixOrExtendInput(state: InputState): number[] | undefined {

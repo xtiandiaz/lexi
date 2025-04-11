@@ -2,7 +2,7 @@
 import { computed, onMounted, useTemplateRef, watch } from 'vue'
 import { type InputState } from '@/models/input';
 import { InputTool } from '@/models/tools'
-import { launchResearchToolForWord } from '@/services/tool-handler';
+import { launchResearchToolForTerm } from '@/services/tool-handler';
 import { inputToolBarButtonVMs, keypadKeyVMs } from '@/view-models/vm-input';
 import { Icon } from '@design-tokens/iconography'
 import ResearchToolBar from './ResearchToolBar.vue';
@@ -93,7 +93,7 @@ onMounted(() => {
     
     <ResearchToolBar
       v-if="state.isComplete"
-      @tool-selected="(tool) => launchResearchToolForWord(tool, state.source.term.word)"
+      @tool-selected="(tool) => launchResearchToolForTerm(tool, state.source.term)"
     />
     
     <div class="spacer"></div>

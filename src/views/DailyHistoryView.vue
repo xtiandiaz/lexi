@@ -6,7 +6,7 @@ import { Content } from '@/models/content'
 import { LocalizedStringKey } from '@/models/localization'
 import historyStore from '@/stores/history'
 import settingsStore from '@/stores/settings'
-import { launchResearchToolForWord } from '@/services/tool-handler'
+import { launchResearchToolForTerm } from '@/services/tool-handler'
 import { localizedString, localizedStringForTermTag } from '@/services/localization'
 import { prepareTest } from '@/services/session-management'
 import { computedNavigationBarVM } from '@/view-models/vm-navigation'
@@ -70,9 +70,9 @@ onMounted(() => {
               <div class="title-wrapper">
                 <span class="title">{{ term.word }}</span>
                 
-                <div v-if="term.tags" class="tags">
+                <div v-if="term.extras?.tags" class="tags">
                   <TextTag
-                    v-for="(tag, index) of term.tags"
+                    v-for="(tag, index) of term.extras.tags"
                     :key="index"
                     :label="localizedStringForTermTag(tag)"
                     class="tiny"
@@ -95,7 +95,7 @@ onMounted(() => {
             </template>
             <template v-slot:foldable-content>
               <ResearchToolBar
-                @tool-selected="(tool) => launchResearchToolForWord(tool, term.word)"
+                @tool-selected="(tool) => launchResearchToolForTerm(tool, term)"
               />
             </template>
           </FoldableRow>

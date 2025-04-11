@@ -38,8 +38,13 @@ export interface TermMetaAttribute {
 export interface Term {
   hintPrefixLength: number
   
-  readonly aliases?: string[]
   readonly word: string
+  
+  readonly aliases?: string[]
+  readonly extras?: TermExtras
+}
+
+export interface TermExtras {
   readonly tags?: TermTag[]
   readonly metaAttributes?: TermMetaAttribute[]
 }
@@ -80,27 +85,55 @@ export class Content {
     const parts = rawTerm.split(';')
     const words = parts[0].split(',')
     
-    const extras = parts.length > 1 ? parts[1].split(' ') : undefined
-    const tags: TermTag[] = []
-    
-    extras?.forEach(extra => {
-      if (extra[0] === '#') {
-        const tag = enumKeyFromValue(TermTag, extra.slice(1))
-        if (tag) {
-          tags.push(tag)
-        }
-      }
-    })
+    const extras = parts.length > 1 ? Content.extractExtrasFromRaw(parts[1]) : undefined
     
     return {
       word: words[0], 
       hintPrefixLength: Math.floor(words[0].length * hintPrefixRate), 
       aliases: words.length > 1 ? words.slice(1) : undefined, 
-      tags: tags && tags.length > 0 ? tags : undefined
+      extras
     }
   }
   
   static aliasesStringFromTerm(term: Term): string | undefined {
     return term.aliases?.join(', ')
+  }
+  
+  private static extractExtrasFromRaw(rawExtras: string): TermExtras | undefined {
+    const extraStrings = rawExtras.split(' ')
+    const tags: TermTag[] = []
+    const metaAttributes: TermMetaAttribute[] = []
+    
+    for (const extraString of extraStrings) {
+      const extraHead = extraString[0]
+      
+      switch (extraHead) {
+        case '#':
+          const tag = enumKeyFromValue(TermTag, extraString.slice(1))
+          if (tag) {
+            tags.push(tag)
+          }
+          break
+        case '[':
+          const parts = extraString.slice(1, -1).split(':')
+          if (parts.length < 2) {
+            continue
+          }
+          const attributeKey = enumKeyFromValue(TermMetaAttributeKey, parts[0])
+          if (attributeKey) {
+            metaAttributes.push({ key: attributeKey, value: parts[1] })
+          }
+          break
+      }
+    }
+    
+    if (tags.length > 0 || metaAttributes.length > 0) {
+      return {
+        tags: tags.length > 0 ? tags : undefined,
+        metaAttributes: metaAttributes.length > 0 ? metaAttributes : undefined
+      }
+    }
+    
+    return undefined
   }
 }

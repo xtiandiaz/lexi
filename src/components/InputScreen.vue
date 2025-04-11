@@ -12,7 +12,7 @@ const { state } = defineProps<{
 
 const inputHeadlineRef = useTemplateRef('input-headline')
 
-const showsTags = computed(() => state.source.term.tags !== undefined)
+const showsTags = computed(() => state.source.term.extras?.tags !== undefined)
 const showsAliases = computed(() => state.source.term.aliases !== undefined)
 const showsExtras = computed(() => state.isComplete && (showsTags.value || showsAliases.value))
 
@@ -40,7 +40,7 @@ onMounted(async () => {
     <div v-if="showsExtras" id="extras">
       <div v-if="showsTags" id="tags">
         <TextTag 
-          v-for="(tag, index) of state.source.term.tags" 
+          v-for="(tag, index) of state.source.term.extras!.tags" 
           :key="index"
           :label="localizedStringForTermTag(tag)"
           class="small"
