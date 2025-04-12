@@ -26,6 +26,7 @@ export enum LocalizedStringKey {
   TermTag_Geology = 'geol',
   TermTag_Geometry = 'geom',
   TermTag_Medicine = 'med',
+  TermTag_Meteorology = 'meteor',
   TermTag_Philosophy = 'philos',
   TermTag_Physics = 'phys',
   TermTag_Physiology = 'physiol',

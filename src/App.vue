@@ -8,7 +8,7 @@ import { hexString } from '@/assets/tungsten/stringify'
 const currentColorScheme = trackColorSheme()
 
 function updateThemeColor() {
-  const metaTag = document.getElementById('themeColorMetaTag')
+  const metaTag = document.getElementById('theme-color-meta-tag')
   const colorString = hexString(schemeColor(currentColorScheme.value, Color.Background))
   
   metaTag?.setAttribute('content', colorString)

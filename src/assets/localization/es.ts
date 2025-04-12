@@ -20,6 +20,7 @@ export default new Map<LocalizedStringKey, string>([
   [LocalizedStringKey.TermTag_Geology, "Geología"],
   [LocalizedStringKey.TermTag_Geometry, "Geometría"],
   [LocalizedStringKey.TermTag_Medicine, "Medicina"],
+  [LocalizedStringKey.TermTag_Meteorology, "Meteorología"],
   [LocalizedStringKey.TermTag_Philosophy, "Filosofía"],
   [LocalizedStringKey.TermTag_Physics, "Física"],
   [LocalizedStringKey.TermTag_Physiology, "Fisiología"],

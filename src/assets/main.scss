@@ -34,10 +34,6 @@ html, body {
   padding-bottom: $padding-bottom;
 }
 
-nav.filled {
-  @include palette.color-attribute('background-color', 'secondary-background');
-}
-
 main {
   margin: calc(bars.$nav-bar-height + 0.25em) 0 0 0;
   
@@ -76,33 +72,3 @@ main {
 div.spacer {
   flex: auto;
 }
-
-// div.modal {
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-//   bottom: 0;
-//   left: 0;
-//   background-color: rgba(black, 0.85);
-//   z-index: 100;
-// }
-
-/*
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-    }
-    }
-    
-    @media (min-width: 1024px) {
-      body {
-        display: flex;
-        place-items: center;
-        }
-        
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
-} */

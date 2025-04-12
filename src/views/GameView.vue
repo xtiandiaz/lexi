@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import "@/assets/tungsten/extensions/array.extensions"
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import { useRouter } from "vue-router"
+// import { useRouter } from "vue-router"
 import { type InputSource, type InputState, InputMarkKind, UserInput } from '@/models/input'
 import { InputTool } from '@/models/tools'
-import { Section } from '@/models/navigation'
+import { Section, sectionHashPath } from '@/models/navigation'
 import { GameMode, type Test } from '@/models/game'
 import { type Term } from '@/models/content'
 import sessionStore from '@/stores/session'
@@ -13,14 +13,15 @@ import { produceInputWithTool } from '@/services/tool-handler'
 import { resetSessionIfNeeded, saveSession } from "@/services/session-management"
 import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/history-management'
 import { onWindowEvent } from '@/composables/window-event'
-import { computedNavigationBarVM } from "@/view-models/vm-navigation"
+import { computedNavigationBarVM, sectionTitleFromHashPath, sectionViewFromHashPath } from "@/view-models/vm-navigation"
 import InputScreen from '@/components/InputScreen.vue'
 import InputGamepad from '@/components/InputGamepad.vue'
 import TestStatusBar from "@/components/TestStatusBar.vue"
 import NavigationBar from '@vueties/bars/NavigationBar.vue'
 import ProgressIndicator from "@vueties/misc/ProgressIndicator.vue"
+import ModalView from "@/vueties/views/ModalView.vue"
 
-const router = useRouter()
+// const router = useRouter()
 
 const session = sessionStore()
 const settings = settingsStore()
@@ -28,7 +29,10 @@ const settings = settingsStore()
 const inputSource = ref<InputSource>()
 const userInput = ref<UserInput>()
 
+const currentHashPath = ref<string>()
+const currentModalView = computed(() => currentHashPath.value ? sectionViewFromHashPath(currentHashPath.value) : undefined)
 const navigationBarVM = computedNavigationBarVM(Section.Game)
+
 const testBackgroundOpacity = computed(() => session.gameMode === GameMode.Test && userInput.value?.isComplete ? 5 : 0)
 
 function restoreInputOrResume() {
@@ -63,7 +67,8 @@ function resumeTest(test: Test) {
   const nextTerm = test.nextTerm()
   if (!nextTerm) {
     session.test = undefined
-    router.push(Section.DailyHistory)
+    currentHashPath.value = '#/daily-history'
+    // router.push(Section.DailyHistory)
     return
   }
   
@@ -128,6 +133,14 @@ function onInputCompleted() {
   saveWordInDailyHistory(userInput.value)
 }
 
+function onNavigationTargetSelected(section: Section) {
+  currentHashPath.value = sectionHashPath(section)
+}
+
+function onModalViewCloseButtonClicked() {
+  currentHashPath.value = undefined
+}
+
 function onPageUnfocusedOrUnmounted() {
   console.log("Game View unfocused or unmounted...")
   
@@ -158,7 +171,11 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
   
   <ProgressIndicator v-if="!inputSource" class="absolutely-centered-block" />
   
-  <NavigationBar v-if="session.gameMode === GameMode.Exploration" :vm="navigationBarVM" />
+  <NavigationBar 
+    v-if="session.gameMode === GameMode.Exploration" 
+    :vm="navigationBarVM" 
+    :custom-target-selected-action="onNavigationTargetSelected"
+  />
   
   <TestStatusBar v-if="session.gameMode === GameMode.Test" />
   
@@ -172,6 +189,15 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
       @continued="resume()"
     />
   </main>
+  
+  <ModalView 
+    v-if="currentHashPath"
+    :title="sectionTitleFromHashPath(currentHashPath)"
+    :custom-close-button-action="onModalViewCloseButtonClicked"
+  >
+    <component :is="currentModalView" />
+  </ModalView>
+  
 </template>
 
 <style scoped lang="scss">
@@ -184,7 +210,7 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
 }
 
 .test-background {
-  @extend .background;
+  @extend .absolute-background;
   opacity: 0;
   transition: opacity 0.5s linear;
   @include palette.color-attribute('background-color', 'green');
