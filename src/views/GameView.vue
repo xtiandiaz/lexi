@@ -214,7 +214,6 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
   >
     <component :is="currentModalView" />
   </ModalView>
-  
 </template>
 
 <style scoped lang="scss">
