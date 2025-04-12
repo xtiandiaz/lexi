@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import "@/assets/tungsten/extensions/array.extensions"
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-// import { useRouter } from "vue-router"
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { type InputSource, type InputState, InputMarkKind, UserInput } from '@/models/input'
 import { InputTool } from '@/models/tools'
-import { Section, sectionHashPath } from '@/models/navigation'
+import { Section, sectionFromHashPath, sectionHashPath } from '@/models/navigation'
 import { GameMode, type Test } from '@/models/game'
 import { type Term } from '@/models/content'
 import sessionStore from '@/stores/session'
@@ -21,8 +20,6 @@ import NavigationBar from '@vueties/bars/NavigationBar.vue'
 import ProgressIndicator from "@vueties/misc/ProgressIndicator.vue"
 import ModalView from "@/vueties/views/ModalView.vue"
 
-// const router = useRouter()
-
 const session = sessionStore()
 const settings = settingsStore()
 
@@ -34,6 +31,17 @@ const currentModalView = computed(() => currentHashPath.value ? sectionViewFromH
 const navigationBarVM = computedNavigationBarVM(Section.Game)
 
 const testBackgroundOpacity = computed(() => session.gameMode === GameMode.Test && userInput.value?.isComplete ? 5 : 0)
+
+async function reset() {
+  inputSource.value = undefined
+  userInput.value = undefined
+  
+  resetDailyHistoryIfNeeded()
+  
+  await resetSessionIfNeeded()
+  
+  restoreInputOrResume()
+}
 
 function restoreInputOrResume() {
   if (session.gameMode === GameMode.Exploration && session.inputState) {
@@ -67,8 +75,7 @@ function resumeTest(test: Test) {
   const nextTerm = test.nextTerm()
   if (!nextTerm) {
     session.test = undefined
-    currentHashPath.value = '#/daily-history'
-    // router.push(Section.DailyHistory)
+    currentHashPath.value = sectionHashPath(Section.DailyHistory)
     return
   }
   
@@ -137,8 +144,18 @@ function onNavigationTargetSelected(section: Section) {
   currentHashPath.value = sectionHashPath(section)
 }
 
-function onModalViewCloseButtonClicked() {
+async function onModalViewCloseButtonClicked() {
+  const closedSection = sectionFromHashPath(currentHashPath.value!)
+  
   currentHashPath.value = undefined
+  
+  switch (closedSection) {
+    case Section.Settings:
+      await reset()
+      break
+    default:
+      break
+  }
 }
 
 function onPageUnfocusedOrUnmounted() {
@@ -149,12 +166,12 @@ function onPageUnfocusedOrUnmounted() {
   }
 }
 
+watch(() => currentHashPath.value, (newValue) => {
+  window.location.hash = newValue ?? ''
+})
+
 onMounted(async () => {
-  resetDailyHistoryIfNeeded()
-  
-  await resetSessionIfNeeded()
-  
-  restoreInputOrResume()
+  await reset()
 })
 
 onBeforeUnmount(() => {
