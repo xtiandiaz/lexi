@@ -28,8 +28,7 @@ const testProgress = computed(() => session.test?.progress ?? 0)
 .status-bar {
   height: bars.$nav-bar-height;
   left: 0;
-  padding: bars.$nav-bar-padding;
-  padding-left: 1em;
+  padding: 0 bars.$nav-bar-h-padding 0 1em;
   position: absolute;
   right: 0;
   top: 0;
