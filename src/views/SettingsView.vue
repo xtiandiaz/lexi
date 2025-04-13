@@ -22,7 +22,7 @@ const choiceSectionVM = computed(() => languageChoiceSectionVM(settings.currentL
 
 <style scoped lang="scss">
 @use '@vueties/styles/form' with (
-  $max-width: auto
+  $max-width: none
 );
 @use '@design-tokens/palette';
 

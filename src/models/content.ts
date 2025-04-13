@@ -85,12 +85,12 @@ export class Content {
     const parts = rawTerm.split(';')
     const words = parts[0].split(',')
     
-    const extras = parts.length > 1 ? Content.extractExtrasFromRaw(parts[1]) : undefined
+    const extras = parts.length > 1 ? Content._extractExtrasFromRaw(parts[1]) : undefined
     
     return {
-      word: words[0], 
+      word: Content._cleanWord(words[0]), 
       hintPrefixLength: Math.floor(words[0].length * hintPrefixRate), 
-      aliases: words.length > 1 ? words.slice(1) : undefined, 
+      aliases: words.length > 1 ? words.slice(1).map(Content._cleanWord) : undefined, 
       extras
     }
   }
@@ -99,7 +99,7 @@ export class Content {
     return term.aliases?.join(', ')
   }
   
-  private static extractExtrasFromRaw(rawExtras: string): TermExtras | undefined {
+  private static _extractExtrasFromRaw(rawExtras: string): TermExtras | undefined {
     const extraStrings = rawExtras.split(' ')
     const tags: TermTag[] = []
     const metaAttributes: TermMetaAttribute[] = []
@@ -135,5 +135,21 @@ export class Content {
     }
     
     return undefined
+  }
+  
+  private static _cleanWord(word: string): string {
+    const matches = /^(\s)?[\S\s]+\S+(\s)?$/m.exec(word)
+    console.log(`Word '${word}' cleaning; matches:`, matches)
+    
+    if (matches) {
+      if (matches[1]) {
+        word = word.slice(matches[1].length)
+      }
+      if (matches[2]) {
+        word = word.slice(-matches[2].length)
+      }
+    }
+    
+    return word
   }
 }

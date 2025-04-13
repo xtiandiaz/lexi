@@ -1,6 +1,7 @@
-import { type ComputedRef, computed } from 'vue'
+import { type ComputedRef, type Component, computed } from 'vue'
 import { Section, sectionFromHashPath } from '@/models/navigation'
 import { LocalizedStringKey } from '@/models/localization'
+import { type Scene } from '@/models/scene'
 import settingsStore from '@/stores/settings'
 import historyStore from '@/stores/history'
 import { localizedString } from '@/services/localization'
@@ -9,7 +10,7 @@ import { type NavigationBarVM, pushedViewNavigationBarItems } from '@vueties/vie
 import DailyHistoryView from '@/views/DailyHistoryView.vue'
 import SettingsView from '@/views/SettingsView.vue'
 
-export const sectionView = (section: Section) => {
+export const sectionView = (section: Section): Component | undefined => {
   switch (section) {
     case Section.DailyHistory: return DailyHistoryView
     case Section.Settings: return SettingsView
@@ -31,6 +32,13 @@ export const sectionTitle = (section: Section) => {
       return localizedString(LocalizedStringKey.Title_DailyHistory)!
     default:
       return undefined
+  }
+}
+
+export const sectionScene = (section: Section): Scene<Section> => {
+  return {
+    key: section,
+    title: sectionTitle(section)
   }
 }
 

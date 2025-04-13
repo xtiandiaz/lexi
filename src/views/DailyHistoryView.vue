@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import router from '@/router'
+import { ref } from 'vue'
 import { Content } from '@/models/content'
 import { LocalizedStringKey } from '@/models/localization'
 import historyStore from '@/stores/history'
@@ -34,15 +33,7 @@ function onWordSelected(index: number) {
 
 function onTestButtonClicked() {
   prepareTest()
-  
-  router.replace('/')
 }
-
-onMounted(() => {
-  if (termCount === 0) {
-    router.replace('/')
-  }
-})
 </script>
 
 <template>
@@ -51,7 +42,7 @@ onMounted(() => {
       <div class="header inline">
         <span class="title">{{ dateLocaleString }}</span>
         •
-        <span class="subtitle">{{ `${termCount} ${localizedString(LocalizedStringKey.Word, termCount > 1)}` }}</span>
+        <span class="subtitle">{{ `${termCount} ${localizedString(LocalizedStringKey.Word, termCount === 0 || termCount > 1)}` }}</span>
       </div>
       <div class="rows">
         <FoldableRow 
@@ -95,7 +86,7 @@ onMounted(() => {
         </FoldableRow>
       </div>
     </div>
-    <div v-if="history.canReview" class="section review">
+    <div v-if="/*history.canReview*/false" class="section review">
       <div class="rows">
         <ButtonRow 
           :label="localizedString(LocalizedStringKey.Button_Test)" 
@@ -110,7 +101,7 @@ onMounted(() => {
 <style scoped lang="scss">
 @use '@vueties/styles/buttons';
 @use '@vueties/styles/form' with (
-  $max-width: auto
+  $max-width: none
 );
 @use '@design-tokens/palette';
 @use '@design-tokens/typography';

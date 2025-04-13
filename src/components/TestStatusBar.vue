@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { Section } from '@/models/navigation'
 import sessionStore from '@/stores/session'
 import { Icon } from '@design-tokens/iconography'
 import CloseButton from '@vueties/buttons/CloseButton.vue';
 import ProgressBar from '@vueties/bars/ProgressBar.vue'
 
-const router = useRouter()
+const emits = defineEmits<{
+  testCancelled: [void]
+}>()
 
 const session = sessionStore()
 
@@ -15,8 +15,7 @@ const testProgress = computed(() => session.test?.progress ?? 0)
 
 function cancelTest() {
   session.test = undefined
-  
-  router.push(Section.DailyHistory)
+  emits('testCancelled')
 }
 </script>
 
