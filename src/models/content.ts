@@ -139,7 +139,7 @@ export class Content {
   
   private static _cleanWord(word: string): string {
     const matches = /^(\s)?[\S\s]+\S+(\s)?$/m.exec(word)
-    console.log(`Word '${word}' cleaning; matches:`, matches)
+    // console.log(`Word '${word}' cleaning; matches:`, matches)
     
     if (matches) {
       if (matches[1]) {

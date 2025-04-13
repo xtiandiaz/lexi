@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import "@/assets/tungsten/extensions/array.extensions"
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { type InputSource, type InputState, InputMarkKind, UserInput } from '@/models/input'
 import { InputTool } from '@/models/tools'
-import { Section } from '@/models/navigation'
 import { GameMode, type Test } from '@/models/game'
 import { type Term } from '@/models/content'
 import sessionStore from '@/stores/session'
@@ -16,6 +15,11 @@ import InputScreen from '@/components/InputScreen.vue'
 import InputGamepad from '@/components/InputGamepad.vue'
 import TestStatusBar from "@/components/TestStatusBar.vue"
 import ProgressIndicator from "@vueties/misc/ProgressIndicator.vue"
+
+const emits = defineEmits<{
+  completedTest: [void]
+  intendedToCancelTest: [void]
+}>()
 
 const session = sessionStore()
 const settings = settingsStore()
@@ -68,7 +72,7 @@ function resumeTest(test: Test) {
   const nextTerm = test.nextTerm()
   if (!nextTerm) {
     session.test = undefined
-    // currentHashPath.value = sectionHashPath(Section.DailyHistory)
+    emits('completedTest')
     return
   }
   
@@ -100,22 +104,6 @@ function onInput(index: number) {
   }
 }
 
-function onInputToolSelected(tool: InputTool) {
-  if (!userInput.value) {
-    return
-  }
-  
-  switch(tool) {
-    case InputTool.Hint:
-      const newInputIndices = produceInputWithTool(tool, userInput.value)
-      if (newInputIndices) {
-        userInput.value.indices = newInputIndices
-        userInput.value.addMark(InputMarkKind.Hint, 1)
-      }
-      break
-  }
-}
-
 function onInputCompleted() {
   if (!userInput.value || !userInput.value.isComplete) {
     return
@@ -133,27 +121,20 @@ function onInputCompleted() {
   saveWordInDailyHistory(userInput.value)
 }
 
-function onNavigationTargetSelected(section: Section) {
-  // hashRouter?.navigateToPage(section)
-  // currentHashPath.value = sectionHashPath(section)
-}
-
-async function onModalViewCloseButtonClicked() {
-  // const closedSection = sectionFromHashPath(currentHashPath.value!)
+function onInputToolSelected(tool: InputTool) {
+  if (!userInput.value) {
+    return
+  }
   
-  // currentHashPath.value = undefined
-  
-  // switch (closedSection) {
-  //   case Section.Settings:
-  //     await reset()
-  //     break
-  //   default:
-  //     break
-  // }
-}
-
-function onTestCancelled() {
-  // currentHashPath.value = sectionHashPath(Section.DailyHistory)
+  switch(tool) {
+    case InputTool.Hint:
+      const newInputIndices = produceInputWithTool(tool, userInput.value)
+      if (newInputIndices) {
+        userInput.value.indices = newInputIndices
+        userInput.value.addMark(InputMarkKind.Hint, 1)
+      }
+      break
+  }
 }
 
 function onPageUnfocusedOrUnmounted() {
@@ -163,6 +144,10 @@ function onPageUnfocusedOrUnmounted() {
     saveSession(userInput.value as InputState)
   }
 }
+
+watch(async () => [settings.currentLanguage, session.gameMode], async () => {
+  await reset()
+})
 
 onMounted(async () => {
   await reset()
@@ -184,7 +169,7 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
   
   <TestStatusBar 
     v-if="session.gameMode === GameMode.Test" 
-    @test-cancelled="onTestCancelled"
+    @intended-to-cancel="emits('intendedToCancelTest')"
   />
   
   <main class="game" v-if="userInput">

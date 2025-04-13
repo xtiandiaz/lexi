@@ -26,18 +26,31 @@ function updateThemeColor() {
   metaTag?.setAttribute('content', colorString)
 }
 
-function onNavigationTargetSelected(section: Section) {
+function navigateToSection(section: Section) {
   modalScene.value = sectionScene(section)
 }
 
-function onIntentToCloseModalScene() {
-  console.log('Closing modal section:', modalScene.value?.key)
-  
+function closeModalScene() {  
   modalScene.value = undefined
+}
+
+function cancelTest() {
+  session.test = undefined
+  
+  onTestCancelledOrCompleted()
+}
+
+function onTestCancelledOrCompleted() {
+  navigateToSection(Section.DailyHistory)
 }
 
 watch(() => currentColorScheme, () => {
   updateThemeColor()
+})
+watch(() => session.gameMode, (newMode) => {
+  if (newMode === GameMode.Test) {
+    closeModalScene()
+  }
 })
 
 onMounted(() => {
@@ -51,14 +64,17 @@ onMounted(() => {
   <NavigationBar 
     v-if="session.gameMode === GameMode.Exploration" 
     :vm="navigationBarVM" 
-    @target-selected="onNavigationTargetSelected"
+    @target-selected="navigateToSection"
   />
   
-  <GameView />
+  <GameView 
+    @completed-test="onTestCancelledOrCompleted"
+    @intended-to-cancel-test="cancelTest"
+  />
   
   <ModalScene 
     :scene="modalScene" 
     :view-factory="sectionView"
-    @intended-to-close="onIntentToCloseModalScene" 
+    @intended-to-close="closeModalScene" 
   />
 </template>

@@ -86,7 +86,7 @@ function onTestButtonClicked() {
         </FoldableRow>
       </div>
     </div>
-    <div v-if="/*history.canReview*/false" class="section review">
+    <div v-if="history.canReview" class="section review">
       <div class="rows">
         <ButtonRow 
           :label="localizedString(LocalizedStringKey.Button_Test)" 

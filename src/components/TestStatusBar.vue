@@ -6,23 +6,18 @@ import CloseButton from '@vueties/buttons/CloseButton.vue';
 import ProgressBar from '@vueties/bars/ProgressBar.vue'
 
 const emits = defineEmits<{
-  testCancelled: [void]
+  intendedToCancel: [void]
 }>()
 
 const session = sessionStore()
 
 const testProgress = computed(() => session.test?.progress ?? 0)
-
-function cancelTest() {
-  session.test = undefined
-  emits('testCancelled')
-}
 </script>
 
 <template>
   <div class="item-bar status-bar">
     <ProgressBar :progress="testProgress" :iconFrom="Icon.Right" />
-    <CloseButton :icon="Icon.Xmark" @click="cancelTest" />
+    <CloseButton :icon="Icon.Xmark" @click="emits('intendedToCancel')" />
   </div>
 </template>
 
