@@ -13,24 +13,24 @@ function component(section: Section) {
   }
 }
 
-export default createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'lexi',
-      component: GameView,
-    }
-  ].concat(
-    [
-      Section.Settings, 
-      Section.DailyHistory
-    ].map(section => {
-      return {
-        path: `/${section}`,
-        name: section,
-        component: component(section)!
-      }
-    })
-  )
-})
+// export default createRouter({
+//   history: createWebHistory(import.meta.env.BASE_URL),
+//   routes: [
+//     {
+//       path: '/',
+//       name: 'lexi',
+//       component: GameView,
+//     }
+//   ].concat(
+//     [
+//       Section.Settings, 
+//       Section.DailyHistory
+//     ].map(section => {
+//       return {
+//         path: `/${section}`,
+//         name: section,
+//         component: component(section)!
+//       }
+//     })
+//   )
+// })
