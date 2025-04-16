@@ -29,10 +29,10 @@ export function saveSettings() {
   )
 }
 
-export function resetCurrentLanguage(language: Language) {
+export function storeAndSaveSelectedSettings(selectedSettings: Settings) {
   const settings = settingsStore()
   
-  settings.currentLanguage = language
+  settings.currentLanguage = selectedSettings.currentLanguage
   
   saveSettings()
 }

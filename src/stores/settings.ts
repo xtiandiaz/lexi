@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { Language } from '@/models/language'
-import { type LanguageSettings, defaultLanguageSettings } from '@/models/settings'
+import { type LanguageSettings, defaultLanguageSettings, defaultMinTermCountForTest } from '@/models/settings'
 import { retrieveSavedSettings } from '@/services/settings-management'
 
 export default defineStore('settings', () => {
@@ -16,14 +16,14 @@ export default defineStore('settings', () => {
   const currentLanguage = ref<Language>(savedSettings?.currentLanguage ?? Language.Spanish)
   
   const currentLanguageSettings = computed(() => languageSettings(currentLanguage.value))
-  const currentDailyGoal = computed(() => currentLanguageSettings.value.dailyGoal)
+  // const currentDailyGoal = computed(() => currentLanguageSettings.value.dailyGoal)
   
   return {
     currentLanguage,
     currentLanguageSettings,
-    currentDailyGoal,
+    // currentDailyGoal,
     languagesSettings,    
-    minTermCountForTest: savedSettings?.minTermCountForTest ?? 5,
+    minTermCountForTest: savedSettings?.minTermCountForTest ?? defaultMinTermCountForTest,
     
     languageSettings,
   }

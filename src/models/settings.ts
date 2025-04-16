@@ -7,8 +7,9 @@ export interface DailyGoalSettings {
 export interface LanguageSettings {
   language: Language
   translationLanguage: Language
-  dailyGoal: DailyGoalSettings
 }
+
+export const defaultMinTermCountForTest = 5
 
 export interface Settings {
   currentLanguage: Language
@@ -33,6 +34,5 @@ export const defaultLanguageSettings = (language: Language): LanguageSettings =>
   return {
     language,
     translationLanguage: translationLanguage(language),
-    dailyGoal: defaultDailyGoalSettings,
   }
 }
