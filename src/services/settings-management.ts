@@ -1,17 +1,16 @@
-import { defaultDailyGoalSettings, type Settings } from '@/models/settings'
-import type { Language } from '@/models/language'
+import { type Settings } from '@/models/settings'
 import settingsStore from '@/stores/settings'
 import { LocalStorageItem, retrieve, save } from './persistence'
 
 export function retrieveSavedSettings(): Settings | undefined {
   const savedSettings = retrieve<Settings>(LocalStorageItem.Settings)
-  if (savedSettings) {
-    for (let i=0; i < savedSettings.languagesSettings.length; i++) {
-      if (!savedSettings.languagesSettings[i].dailyGoal) {
-        savedSettings.languagesSettings[i].dailyGoal = defaultDailyGoalSettings
-      }
-    }
-  }
+  // if (savedSettings) {
+    // for (let i=0; i < savedSettings.languagesSettings.length; i++) {
+      // if (!savedSettings.languagesSettings[i].dailyGoal) {
+      //   savedSettings.languagesSettings[i].dailyGoal = defaultDailyGoalSettings
+      // }
+    // }
+  // }
   
   return savedSettings
 }

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted, watch, inject } from 'vue'
+import { HashRouter } from './plugins/hash-router'
 import sessionStore from '@/stores/session'
 import { Section } from '@/models/navigation'
 import { type Scene } from '@/models/scene'
@@ -8,9 +9,11 @@ import { trackColorSheme } from '@/composables/color-scheme'
 import { hexString } from '@/assets/tungsten/stringify'
 import { Color, schemeColor } from '@design-tokens/palette'
 import { computedNavigationBarVM, sectionScene, sectionView } from "@/view-models/vm-navigation"
-import GameView from '@/views/GameView.vue'
-import ModalScene from './views/ModalScene.vue'
+import HashRouterScene from './views/HashRouterScene.vue'
+import HashRouterModalScene from './views/HashRouterModalScene.vue'
 import NavigationBar from '@vueties/bars/NavigationBar.vue'
+
+const hashRouter: HashRouter = inject('hash-router')!
 
 const session = sessionStore()
 
@@ -67,12 +70,19 @@ onMounted(() => {
     @target-selected="navigateToSection"
   />
   
-  <GameView 
+  <HashRouterScene 
+    :route='hashRouter.currentRoute.value'
+    
     @completed-test="onTestCancelledOrCompleted"
     @intended-to-cancel-test="cancelTest"
   />
   
-  <ModalScene 
+  <!-- <GameView 
+    @completed-test="onTestCancelledOrCompleted"
+    @intended-to-cancel-test="cancelTest"
+  /> -->
+  
+  <HashRouterModalScene 
     :scene="modalScene" 
     :view-factory="sectionView"
     @intended-to-close="closeModalScene" 
