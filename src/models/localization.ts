@@ -14,6 +14,7 @@ export enum LocalizedStringKey {
   Word,
   
   TermTag_Anatomy = 'anat',
+  TermTag_Architecture = 'arch',
   TermTag_Astronomy = 'astro',
   TermTag_Biochemistry = 'biochem',
   TermTag_Biology = 'bio',

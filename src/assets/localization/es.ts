@@ -8,6 +8,7 @@ export default new Map<LocalizedStringKey, string>([
   [LocalizedStringKey.LanguageName, "Español"],
   
   [LocalizedStringKey.TermTag_Anatomy, "Anatomía"],
+  [LocalizedStringKey.TermTag_Architecture, "Arquitectura"],
   [LocalizedStringKey.TermTag_Astronomy, "Astronomía"],
   [LocalizedStringKey.TermTag_Biochemistry, "Bioquímica"],
   [LocalizedStringKey.TermTag_Bird, "Ave"],

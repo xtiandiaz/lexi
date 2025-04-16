@@ -4,6 +4,7 @@ import '@/assets/tungsten/extensions/array.extensions'
 
 export enum TermTag {
   Anatomy = 'anat',
+  Architecture = 'arch',
   Astronomy = 'astro',
   Biochemistry = 'biochem',
   Biology = 'bio',
