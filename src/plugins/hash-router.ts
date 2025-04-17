@@ -26,7 +26,7 @@ export class HashRouter {
   readonly _rootRouteKey: string
   
   constructor(routes: HashRoute[], rootRouteKey: string) {
-    this._routes = Object.fromEntries(routes.map(r => [ r.key, r ]))
+    this._routes = Object.fromEntries(routes.map(r => [r.key, r]))
     this._rootRouteKey = rootRouteKey
     this._trail = ref(this._trailFromHash(location.hash))
     
