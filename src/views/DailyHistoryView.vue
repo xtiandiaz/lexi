@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { Content } from '@/models/content'
-import { LocalizedStringKey } from '@/models/localization'
+import { onBeforeMount, ref } from 'vue'
 import historyStore from '@/stores/history'
 import settingsStore from '@/stores/settings'
+import { Content } from '@/models/content'
+import { LocalizedStringKey } from '@/models/localization'
+import { Section } from '@/models/section'
 import { launchResearchToolForTerm } from '@/services/tool-handler'
 import { localizedString, localizedStringForTermTag } from '@/services/localization'
 import { prepareTest } from '@/services/session-management'
+import { sectionTitle } from '@/utils/section.utils'
 import { inputMarkIcon, showsInputMarkValueForKind } from '@/view-models/vm-input'
 import { Icon } from '@design-tokens/iconography'
 import ResearchToolBar from '@/components/ResearchToolBar.vue'
@@ -14,6 +16,10 @@ import FoldableRow from '@vueties/form/FoldableRow.vue'
 import SvgIcon from '@vueties/misc/SvgIcon.vue'
 import ButtonRow from '@vueties/form/ButtonRow.vue'
 import TextTag from '@vueties/misc/TextTag.vue'
+
+const emits = defineEmits<{
+  viewTitle: [string?]
+}>()
 
 const settings = settingsStore()
 
@@ -34,6 +40,10 @@ function onWordSelected(index: number) {
 function onTestButtonClicked() {
   prepareTest()
 }
+
+onBeforeMount(() => {
+  emits('viewTitle', sectionTitle(Section.DailyHistory))
+})
 </script>
 
 <template>
@@ -86,7 +96,7 @@ function onTestButtonClicked() {
         </FoldableRow>
       </div>
     </div>
-    <div v-if="history.canReview" class="section review">
+    <div v-if="history.canTakeTest" class="section test">
       <div class="rows">
         <ButtonRow 
           :label="localizedString(LocalizedStringKey.Button_Test)" 
@@ -160,7 +170,7 @@ function onTestButtonClicked() {
   }
 }
 
-.review .row.button {
+.test .row.button {
   @include palette.color-attribute('color', 'green');
 }
 

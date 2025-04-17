@@ -16,11 +16,6 @@ import InputGamepad from '@/components/InputGamepad.vue'
 import TestStatusBar from "@/components/TestStatusBar.vue"
 import ProgressIndicator from "@vueties/misc/ProgressIndicator.vue"
 
-const emits = defineEmits<{
-  completedTest: [void]
-  intendedToCancelTest: [void]
-}>()
-
 const session = sessionStore()
 const settings = settingsStore()
 
@@ -72,7 +67,6 @@ function resumeTest(test: Test) {
   const nextTerm = test.nextTerm()
   if (!nextTerm) {
     session.test = undefined
-    emits('completedTest')
     return
   }
   
@@ -85,6 +79,10 @@ function resumeWithTerm(term: Term, mode: GameMode) {
     term: term
   }
   userInput.value = new UserInput(inputSource.value, mode)
+}
+
+function cancelTest() {
+  session.test = undefined
 }
 
 function onInput(index: number) {
@@ -169,7 +167,7 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
   
   <TestStatusBar 
     v-if="session.gameMode === GameMode.Test" 
-    @intended-to-cancel="emits('intendedToCancelTest')"
+    @intended-to-cancel="cancelTest"
   />
   
   <main class="game" v-if="userInput">

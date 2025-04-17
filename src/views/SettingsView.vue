@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import { ref, computed, onBeforeUnmount } from 'vue';
+import { ref, computed, onBeforeMount, onBeforeUnmount } from 'vue';
+import settingsStore from '@/stores/settings'
 import type { Language } from '@/models/language'
 import { type Settings } from '@/models/settings'
-import settingsStore from '@/stores/settings'
+import { Section } from '@/models/section'
+import { sectionTitle } from '@/utils/section.utils'
 import { storeAndSaveSelectedSettings } from '@/services/settings-management';
 import { languageChoiceSectionVM } from '@/view-models/vm-settings';
 import ChoiceSection from '@vueties/form/ChoiceSection.vue';
+
+const emits = defineEmits<{
+  viewTitle: [string?]
+}>()
 
 const settings = settingsStore()
 
@@ -16,6 +22,10 @@ const selectedSettings = ref<Settings>({
 })
 
 const choiceSectionVM = computed(() => languageChoiceSectionVM(selectedSettings.value.currentLanguage))
+
+onBeforeMount(() => {
+  emits('viewTitle', sectionTitle(Section.Settings))
+})
 
 onBeforeUnmount(() => {
   if (selectedSettings.value != settings) {

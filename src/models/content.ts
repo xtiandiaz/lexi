@@ -1,4 +1,4 @@
-import { enumKeyFromValue } from "@/assets/tungsten/misc";
+import { enumKeyFromValue } from "@/assets/tungsten/enum";
 import type { Language } from "./language";
 import '@/assets/tungsten/extensions/array.extensions'
 

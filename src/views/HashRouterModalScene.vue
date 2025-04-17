@@ -1,28 +1,29 @@
-<script setup lang="ts" generic="Key">
-import { type Component, computed } from 'vue';
-import type { Scene } from '@/models/scene';
+<script setup lang="ts">
+import { ref, inject } from 'vue'
+import { type HashRouter } from '@/plugins/hash-router'
 import ModalView from '@vueties/views/ModalView.vue'
+import type { HashRoute } from '@/plugins/hash-router';
 
-const { scene, viewFactory } = defineProps<{
-  scene?: Scene<Key>,
-  viewFactory: (key: Key) => Component | undefined
+defineProps<{
+  route?: HashRoute
 }>()
 
-const emits = defineEmits<{
-  intendedToClose: [Key]
-}>()
+const hashRouter = inject('hash-router') as HashRouter | undefined
 
-const view = computed(() => scene ? viewFactory(scene.key) : undefined)
+const currentTitle = ref<string>()
 </script>
 
 <template>
   <Transition>
     <ModalView 
-      v-if="scene"
-      :title="scene.title"
-      @close-button-clicked="emits('intendedToClose', scene.key)"
+      v-if="route"
+      :title="currentTitle"
+      @close-button-clicked="hashRouter?.popRoute()"
     >
-      <component :is="view"></component>
+      <component 
+        :is="route.view" 
+        @view-title="(title: string) => currentTitle = title"
+      />
     </ModalView>
   </Transition>
 </template>

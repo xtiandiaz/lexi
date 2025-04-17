@@ -1,50 +1,88 @@
 import type { App, Component, ComputedRef, Ref } from 'vue'
 import { ref, computed } from "vue"
+import '@/assets/tungsten/extensions/array.extensions'
 
-export interface Route {
+export enum HashRoutePresentationStyle {
+  Modal
+}
+
+export interface HashRoute {
   key: string
   view: Component
+  presentationStyle?: HashRoutePresentationStyle
 }
 
 export interface HashRouterOptions {
   rootRouteKey: string
-  routes: Route[]
+  routes: HashRoute[]
 }
 
 export class HashRouter {
-  currentRoute: ComputedRef<Route>
+  currentRoute: ComputedRef<HashRoute>
   
-  _path: Ref<string[]>
-  _routes: Record<string, Route>
+  _trail: Ref<string[]>
+  _routes: Record<string, HashRoute>
   
-  readonly _rootKey: string
+  readonly _rootRouteKey: string
   
-  constructor(routes: Route[], rootRouteKey: string) {
+  constructor(routes: HashRoute[], rootRouteKey: string) {
     this._routes = Object.fromEntries(routes.map(r => [ r.key, r ]))
-    this._rootKey = rootRouteKey
-    this._path = ref(this._keysFromHash(location.hash))
-    this.currentRoute = computed(() => this._routes[this._path.value[this._path.value.length - 1]])
+    this._rootRouteKey = rootRouteKey
+    this._trail = ref(this._trailFromHash(location.hash))
+    
+    this.currentRoute = computed(() => this._routes[this._trail.value.last()!])
     
     window.addEventListener('hashchange', () => {
       this._onHashChanged()
     })
   }
   
-  navigateToPage<Page extends Record<keyof Page, string>>(page: Page) {
-    location.hash = `#${page}`
+  isValidRouteKey(key: string): boolean {
+    return this._routes[key] !== undefined
+  }
+  
+  pushRoute(key: string) {
+    if (this.isValidRouteKey(key)) {
+      this._trail.value.push(key)
+    }
+    this._applyTrail()
+  }
+  
+  popRoute(): string | undefined {
+    const poppedRouteKey = this._trail.value.pop()
+    if (this._trail.value.length === 0) {
+      this._trail.value = [this._rootRouteKey]
+    }
+    
+    this._applyTrail()
+    
+    return poppedRouteKey
+  }
+  
+  setPath(path: string) {
+    this._trail.value = this._trailFromPath(path)
+    this._applyTrail()
+  }
+  
+  _applyTrail() {
+    location.hash = `#${this._trail.value.join('/')}`
+  }
+  
+  _trailFromHash(hash: string): string[] {
+    return this._trailFromPath(hash.slice(1))
+  }
+  
+  _trailFromPath(path: string): string[] {    
+    const rawKeys = path.split('/')
+    // console.log('rawKeys:', rawKeys)
+    const routeKeys = rawKeys.filter(rk => this.isValidRouteKey(rk) ? rk : undefined)
+    // console.log('routeKeys:', routeKeys)
+    
+    return routeKeys.length > 0 ? routeKeys : [this._rootRouteKey]
   }
   
   _onHashChanged() {
-    this._path.value = this._keysFromHash(location.hash)
-  }
-  
-  _keysFromHash(hash: string): string[] {
-    const hashKeys = hash.slice(1).split('/')
-    // console.log('hashKeys:', hashKeys)
-    const routeKeys = hashKeys.map(k => k.length === 0 ? this._rootKey : this._routes[k]?.key).filter(k => k)
-    // console.log('routeKeys:', routeKeys)
-    
-    return routeKeys.length > 0 ? routeKeys : [this._rootKey]
+    this._trail.value = this._trailFromHash(location.hash)
   }
 }
 

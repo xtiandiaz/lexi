@@ -1,5 +1,5 @@
 import { onMounted, onUnmounted, ref, type Ref } from "vue";
-import { enumKeyFromValue } from "@/assets/tungsten/misc";
+import { enumKeyFromValue } from "@/assets/tungsten/enum";
 
 // export class HashRouter<Page extends Record<keyof Page, string>> {
 //   readonly currentPage: Page
