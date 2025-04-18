@@ -1,5 +1,6 @@
-import { enumKeyFromValue } from "@/assets/tungsten/enum";
 import type { Language } from "./language";
+import * as Utils from '@/utils/content.utils'
+import { enumKeyFromValue } from "@/assets/tungsten/enum";
 import '@/assets/tungsten/extensions/array.extensions'
 
 export enum TermTag {
@@ -89,9 +90,9 @@ export class Content {
     const extras = parts.length > 1 ? Content._extractExtrasFromRaw(parts[1]) : undefined
     
     return {
-      word: Content._cleanWord(words[0]), 
+      word: Utils.cleanWord(words[0]), 
       hintPrefixLength: Math.floor(words[0].length * hintPrefixRate), 
-      aliases: words.length > 1 ? words.slice(1).map(Content._cleanWord) : undefined, 
+      aliases: words.length > 1 ? words.slice(1).map(Utils.cleanWord) : undefined, 
       extras
     }
   }
@@ -136,21 +137,5 @@ export class Content {
     }
     
     return undefined
-  }
-  
-  private static _cleanWord(word: string): string {
-    const matches = /^(\s)?[\S\s]+\S+(\s)?$/m.exec(word)
-    // console.log(`Word '${word}' cleaning; matches:`, matches)
-    
-    if (matches) {
-      if (matches[1]) {
-        word = word.slice(matches[1].length)
-      }
-      if (matches[2]) {
-        word = word.slice(-matches[2].length)
-      }
-    }
-    
-    return word
   }
 }

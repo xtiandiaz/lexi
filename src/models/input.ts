@@ -1,8 +1,8 @@
 import type { Language } from './language'
 import type { Term } from './content'
-import '@/assets/tungsten/extensions/array.extensions'
-import { substringFromIndices } from "@/assets/tungsten/stringify"
 import type { GameMode } from './game'
+import { substringFromIndices } from "@/assets/tungsten/stringify"
+import '@/assets/tungsten/extensions/array.extensions'
 
 export interface InputSource {
   readonly language: Language
