@@ -5,7 +5,8 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 
-import hashRouter, { HashRoutePresentationStyle } from '@/plugins/hash-router'
+import hashRouter from './hash-router/plugin'
+import { HashRoutePresentationStyle } from './hash-router/models'
 import { Section } from '@/models/section'
 import GameView from './views/GameView.vue'
 import DailyHistoryView from './views/DailyHistoryView.vue'

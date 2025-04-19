@@ -7,3 +7,6 @@
 [submodule "submodules/vueties"]
 	path = submodules/vueties
 	url = git@github.com:xtiandiaz/vueties.git
+[submodule "submodules/vue-hash-router"]
+	path = submodules/vue-hash-router
+	url = git@github.com:xtiandiaz/vue-hash-router

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, watch, inject } from 'vue'
-import type { HashRouter } from './plugins/hash-router'
+import type { HashRouter } from './hash-router/models'
 import sessionStore from '@/stores/session'
 import settingsStore from '@/stores/settings'
 import historyStore from '@/stores/history'
@@ -11,7 +11,7 @@ import { type NavigationBarVM } from './vueties/view-models'
 import { hexString } from '@/assets/tungsten/stringify'
 import { Color, schemeColor } from '@design-tokens/palette'
 import { Icon } from '@design-tokens/iconography'
-import HashRouterScene from './views/HashRouterScene.vue'
+import HashRouterScene from './hash-router/views/HashRouterScene.vue'
 
 const hashRouter: HashRouter = inject('hash-router')!
 
