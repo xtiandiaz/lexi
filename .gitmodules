@@ -10,3 +10,6 @@
 [submodule "submodules/vue-hash-router"]
 	path = submodules/vue-hash-router
 	url = git@github.com:xtiandiaz/vue-hash-router
+[submodule "submodules/lexicon"]
+	path = submodules/lexicon
+	url = git@github.com:xtiandiaz/lexicon.git

@@ -12,8 +12,10 @@ export enum TermTag {
   Bird = 'bird',
   Botany = 'bot',
   Chemisty = 'chem',
+  Ecology ='eco',
   Economy = 'econ',
   Fish = 'fish',
+  Food = 'food', 
   Geography = 'geogr',
   Geology = 'geol',
   Geometry = 'geom',
@@ -87,13 +89,13 @@ export class Content {
     const parts = rawTerm.split(';')
     const words = parts[0].split(',')
     
-    const extras = parts.length > 1 ? Content._extractExtrasFromRaw(parts[1]) : undefined
+    // const extras = parts.length > 1 ? Content._extractExtrasFromRaw(parts[1]) : undefined
     
     return {
       word: Utils.cleanWord(words[0]), 
       hintPrefixLength: Math.floor(words[0].length * hintPrefixRate), 
       aliases: words.length > 1 ? words.slice(1).map(Utils.cleanWord) : undefined, 
-      extras
+      // extras
     }
   }
   
