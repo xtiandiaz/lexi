@@ -114,6 +114,7 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
+@use '@vueties/styles/utils';
 @use '@design-tokens/palette';
 
 .keyboard-input {

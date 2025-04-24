@@ -16,13 +16,10 @@ html {
   ));
 }
 
-html, body {
+html, body, main {
+  height: 100%;
   margin: 0;
   overflow: hidden;
-}
-
-html, body {
-  height: 100%;
   width: 100%;
 }
 
@@ -34,41 +31,27 @@ html, body {
   padding-bottom: $padding-bottom;
 }
 
-main {
-  margin: calc(bars.$nav-bar-height + 0.25em) 0 0 0;
+main.game section {
+  $h-padding: 0.5em;
+  $v-padding: 1.5em;
   
-  &.game {
-    margin: 0;
-    height: 100%;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: $v-padding $h-padding;
+  width: calc(100% - $h-padding * 2);
+  height: calc(50% - $v-padding * 2);
+  
+  &#screen {
+    gap: 0.25em;
     
-    section {
-      $h-padding: 0.5em;
-      $v-padding: 1.5em;
-      
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: $v-padding $h-padding;
-      width: calc(100% - $h-padding * 2);
-      height: calc(50% - $v-padding * 2);
-      
-      &#screen {
-        gap: 0.25em;
-        
-        h1 {
-          margin-bottom: 0.25em;
-        }
-        
-        h6 {
-          margin: 0;
-        }
-      }
+    h1 {
+      margin-bottom: 0.25em;
+    }
+    
+    h6 {
+      margin: 0;
     }
   }
-}
-
-div.spacer {
-  flex: auto;
 }

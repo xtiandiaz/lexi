@@ -6,6 +6,7 @@ import { type Settings } from '@/models/settings'
 import { Section } from '@/models/section'
 import { sectionTitle } from '@/utils/section.utils'
 import { storeAndSaveSelectedSettings } from '@/services/settings-management';
+import { version } from '@/../package.json'
 import { languageChoiceSectionVM } from '@/view-models/vm-settings';
 import ChoiceSection from '@vueties/form/ChoiceSection.vue';
 
@@ -35,12 +36,15 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section class="form">
-    <ChoiceSection 
-      :vm="choiceSectionVM" 
-      @selected="(lang: Language) => selectedSettings.currentLanguage = lang"
-    />
-  </section>
+  <main>
+    <section class="form">
+      <ChoiceSection 
+        :vm="choiceSectionVM" 
+        @selected="(lang: Language) => selectedSettings.currentLanguage = lang"
+      />
+    </section>
+    <span class='version'>v{{ version }}</span>
+  </main>
 </template>
 
 <style scoped lang="scss">
@@ -48,6 +52,16 @@ onBeforeUnmount(() => {
   $max-width: none
 );
 @use '@design-tokens/palette';
+@use '@design-tokens/typography';
+
+main {
+  text-align: center;
+  
+  .version {
+    @extend .caption;
+    @include palette.color-attribute('color', 'tertiary-body');
+  }
+}
 
 :deep(.representative-icon) {
   @include palette.color-attribute('color', 'tertiary-body');

@@ -1,6 +1,6 @@
 {
-  "name": "vue",
-  "version": "1.0.0",
+  "name": "lexi",
+  "version": "1.0.10",
   "private": false,
   "type": "module",
   "scripts": {

@@ -54,6 +54,7 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
+@use '@vueties/styles/utils';
 @use '@design-tokens/typography';
 @use "@design-tokens/palette";
 
