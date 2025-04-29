@@ -1,6 +1,7 @@
 import { Section } from '@/models/section'
 import { LocalizedStringKey } from '@/models/localization'
 import { localizedString } from "@/services/localization"
+import { currentDailyHistoryTitle } from './history.utils'
 import { enumKeyFromValue } from '@/assets/tungsten/enum'
 
 export const sectionHashPath = (section: Section): string => `#/${section}`
@@ -14,7 +15,7 @@ export const sectionTitle = (section: Section) => {
     case Section.Settings:
       return localizedString(LocalizedStringKey.Title_Settings)!
     case Section.DailyHistory:
-      return localizedString(LocalizedStringKey.Title_DailyHistory)!
+      return currentDailyHistoryTitle()
     default:
       return undefined
   }

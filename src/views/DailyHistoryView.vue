@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue'
 import historyStore from '@/stores/history'
-import settingsStore from '@/stores/settings'
 import { Content } from '@/models/content'
 import { LocalizedStringKey } from '@/models/localization'
 import { Section } from '@/models/section'
 import { launchResearchToolForTerm } from '@/services/tool-handler'
 import { localizedString, localizedStringForTermTag } from '@/services/localization'
 import { prepareTest } from '@/services/session-management'
+import { dailyHistoryDateLocaleString } from '@/utils/history.utils'
 import { sectionTitle } from '@/utils/section.utils'
 import { inputMarkIcon, showsInputMarkValueForKind } from '@/view-models/vm-input'
 import { Icon } from '@design-tokens/iconography'
@@ -21,15 +21,9 @@ const emits = defineEmits<{
   viewTitle: [string?]
 }>()
 
-const settings = settingsStore()
-
 const history = historyStore()
 const dailyHistory = history.currentDailyHistory
 const termCount = dailyHistory?.completedTerms.length ?? 0
-const dateLocaleString = (new Date()).toLocaleDateString(settings.currentLanguage, {
-  month: 'long',
-  day: 'numeric'
-})
 
 const selectedIndex = ref<number>()
 
@@ -50,7 +44,7 @@ onBeforeMount(() => {
   <section v-if="dailyHistory" class="form">
     <div class="section">
       <div class="header inline">
-        <span class="title">{{ dateLocaleString }}</span>
+        <span class="title">{{ dailyHistoryDateLocaleString(dailyHistory) }}</span>
         •
         <span class="subtitle">{{ `${termCount} ${localizedString(LocalizedStringKey.Word, termCount === 0 || termCount > 1)}` }}</span>
       </div>

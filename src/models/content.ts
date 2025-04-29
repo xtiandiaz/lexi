@@ -1,6 +1,6 @@
 import type { Language } from "./language";
-import * as Utils from '@/utils/content.utils'
 import { enumKeyFromValue } from "@/assets/tungsten/enum";
+import { cleanWord } from "@/lexicon/utils"
 import '@/assets/tungsten/extensions/array.extensions'
 
 export enum TermTag {
@@ -92,9 +92,9 @@ export class Content {
     // const extras = parts.length > 1 ? Content._extractExtrasFromRaw(parts[1]) : undefined
     
     return {
-      word: Utils.cleanWord(words[0]), 
+      word: cleanWord(words[0]), 
       hintPrefixLength: Math.floor(words[0].length * hintPrefixRate), 
-      aliases: words.length > 1 ? words.slice(1).map(Utils.cleanWord) : undefined, 
+      aliases: words.length > 1 ? words.slice(1).map(cleanWord) : undefined, 
       // extras
     }
   }

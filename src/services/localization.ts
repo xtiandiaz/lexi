@@ -4,6 +4,7 @@ import { TermTag } from "@/models/content"
 import settingsStore from "@/stores/settings"
 import ES from '@/assets/localization/es'
 import EN from '@/assets/localization/en'
+import { dateLocaleString } from "@/utils/date.utils"
 
 export const localizedStringInLanguage = (key: LocalizedStringKey, language: Language): string => {
   const element: string | undefined = (() => {
@@ -25,6 +26,28 @@ export const localizedString = (key: LocalizedStringKey, pluralized: boolean = f
   }
   
   return `{LocalizedStringKey: ${key}}`
+}
+
+export const dynamicLocalizedString = (key: LocalizedStringKey, ...args: unknown[]): string => {
+  const settings = settingsStore()
+  
+  switch (key) {
+    case LocalizedStringKey.Title_HistoryOfToday:
+      const dayDiff = args[0] as number
+      
+      if (dayDiff >= 2) {
+        const date = args[1] as Date
+        return localizedString(LocalizedStringKey.Title_HistoryFromDate).replace(
+          /{date}/, 
+          dateLocaleString(date, settings.currentLanguage)
+        )
+      } else if (dayDiff >= 1) {
+        return localizedString(LocalizedStringKey.Title_HistoryOfYesterday)
+      }
+      break
+  }
+  
+  return localizedString(key)
 }
 
 export const localizedStringForTermTag = (tag: TermTag): string => {

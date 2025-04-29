@@ -12,7 +12,7 @@ export async function loadRepositoryContent(): Promise<Content | undefined> {
     return session.content
   }
   
-  const urlString = `https://raw.githubusercontent.com/xtiandiaz/lexicon/refs/heads/main/terms/${settings.currentLanguage}.txt`
+  const urlString = `https://raw.githubusercontent.com/xtiandiaz/lexicon/refs/heads/main/src/terms/${settings.currentLanguage}.txt`
   
   try {
     const response = await fetch(`${urlString}?salt=${Math.random()}`)
