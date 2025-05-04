@@ -22,6 +22,7 @@ app.use(hashRouter, {
     {
       key: Section.Game,
       view: GameView,
+      path: '/',
     },
     {
       key: Section.DailyHistory,
