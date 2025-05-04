@@ -1,12 +1,10 @@
-@use './design-tokens/palette';
-@use './design-tokens/typography';
-@use './design-tokens/iconography';
+@use '@design-tokens/palette';
+@use '@design-tokens/typography';
+@use '@vueties/styles/utils';
 @use '@vueties/styles/bars';
 
 * {
-  touch-action: manipulation;
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: transparent;
+  @extend .inhibit-contextual-touch-action;
 }
 
 html { 
@@ -24,11 +22,7 @@ html, body, main {
 }
 
 #app {
-  $padding-bottom: env(safe-area-inset-bottom);
-  
-  height: calc(100% - $padding-bottom);
-  overflow: auto;
-  padding-bottom: $padding-bottom;
+  @include utils.safe-area(false, true);
 }
 
 main.game section {
