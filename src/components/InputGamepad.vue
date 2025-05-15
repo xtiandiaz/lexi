@@ -6,7 +6,7 @@ import { launchResearchToolForTerm } from '@/services/tool-handler';
 import { inputToolBarButtonVMs, keypadKeyVMs } from '@/view-models/vm-input';
 import { Icon } from '@design-tokens/iconography'
 import ResearchToolBar from './ResearchToolBar.vue';
-import SimpleKeypad from '@vueties/pads/SimpleKeypad.vue';
+import KeyPad from '@/vueties/pads/KeyPad.vue';
 import ToolBar from '@vueties/bars/ToolBar.vue'
 import IconButton from '@vueties/buttons/IconButton.vue'
 import { isMobile } from '@/assets/tungsten/navigator';
@@ -79,7 +79,7 @@ onMounted(() => {
 
 <template>
   <section id="gamepad">
-    <SimpleKeypad 
+    <KeyPad 
       v-if="!state.isComplete"
       :keyVMs="_keypadKeyVMs"
       @input="(value: string | number) => onInput(Number(value))" 
