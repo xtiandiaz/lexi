@@ -23,5 +23,5 @@ html, body, main {
 }
 
 #app {
-  @include utils.safe-area(true, true);
+  @include utils.safe-area();
 }
