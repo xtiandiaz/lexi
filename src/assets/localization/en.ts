@@ -34,8 +34,8 @@ export default new Map<LocalizedStringKey, string>([
   
   [LocalizedStringKey.Title_DailyGoalReached, "Daily Goal reached!"],
   [LocalizedStringKey.Title_HistoryFromDate, "History from {date}"],
-  [LocalizedStringKey.Title_HistoryOfToday, "History of Today"],
-  [LocalizedStringKey.Title_HistoryOfYesterday, "History of Yesterday"],
+  [LocalizedStringKey.Title_HistoryOfToday, "Today's History"],
+  [LocalizedStringKey.Title_HistoryOfYesterday, "Yesterday's History"],
   [LocalizedStringKey.Title_Settings, "Settings"],
   
   [LocalizedStringKey.Word, "word"],
