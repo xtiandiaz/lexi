@@ -11,7 +11,7 @@ import { type NavigationBarVM } from './vueties/view-models'
 import { hexString } from '@/assets/tungsten/stringify'
 import { Color, schemeColor } from '@design-tokens/palette'
 import { Icon } from '@design-tokens/iconography'
-import HashRouterScene from './hash-router/views/HashRouterScene.vue'
+import HashRouterScene from '@/hash-router/scenes/HashRouterScene.vue'
 
 const hashRouter: HashRouter = inject('hash-router')!
 
