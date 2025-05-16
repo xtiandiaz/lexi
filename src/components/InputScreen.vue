@@ -14,7 +14,7 @@ const inputHeadlineRef = useTemplateRef('input-headline')
 
 const showsTags = computed(() => state.source.term.extras?.tags !== undefined)
 const showsAliases = computed(() => state.source.term.aliases !== undefined)
-const showsExtras = computed(() => state.isComplete && (showsTags.value || showsAliases.value))
+const showsExtras = computed(() => state.isComplete && (showsAliases.value || showsTags.value))
 
 function fitInput() {
   fitText(inputHeadlineRef.value!, 3)
@@ -58,6 +58,10 @@ onMounted(async () => {
 @use '@design-tokens/typography';
 @use "@design-tokens/palette";
 
+h1, h6 {
+  margin: 0.125em 0;
+}
+
 #extras {
   align-items: center;
   display: flex;
@@ -72,7 +76,6 @@ onMounted(async () => {
   }
   
   h6 {
-    margin: 0;
     @include palette.color-attribute('color', 'tertiary-body');
   }
 }
