@@ -24,28 +24,3 @@ html, body, main {
 #app {
   @include utils.safe-area(false, true);
 }
-
-main.game section {
-  $h-padding: 0.5em;
-  $v-padding: 1.5em;
-  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: $v-padding $h-padding;
-  width: calc(100% - $h-padding * 2);
-  height: calc(50% - $v-padding * 2);
-  
-  &#screen {
-    gap: 0.25em;
-    
-    h1 {
-      margin-bottom: 0.25em;
-    }
-    
-    h6 {
-      margin: 0;
-    }
-  }
-}

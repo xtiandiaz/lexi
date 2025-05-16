@@ -161,7 +161,7 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
 </script>
 
 <template>
-  <div class="test-background" :style="{ opacity: `${testBackgroundOpacity}%` }"></div>
+  <div id="test-background" :style="{ opacity: `${testBackgroundOpacity}%` }"></div>
   
   <ProgressIndicator v-if="!inputSource" class="absolutely-centered-block" />
   
@@ -186,12 +186,37 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
 @use '@vueties/styles/utils';
 @use '@design-tokens/palette';
 
+main section {
+  $h-padding: 0.5em;
+  $v-padding: 1.5em;
+  
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: calc(50% - $v-padding * 2);
+  padding: $v-padding $h-padding;
+  text-align: center;
+  width: calc(100% - $h-padding * 2);
+  
+  &#screen {
+    gap: 0.25em;
+    
+    h1 {
+      margin-bottom: 0.25em;
+    }
+    
+    h6 {
+      margin: 0;
+    }
+  }
+}
+
 .progress-indicator {
   width: 3em;
   height: 3em;
 }
 
-.test-background {
+#test-background {
   @extend .absolute-background;
   opacity: 0;
   transition: opacity 0.5s linear;
