@@ -187,8 +187,8 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
 @use '@design-tokens/palette';
 
 main section {
-  $h-padding: 0.5em;
-  $v-padding: 1.5em;
+  $h-padding: 1em;
+  $v-padding: 1em;
   
   align-items: center;
   display: flex;
