@@ -186,9 +186,7 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
 @use '@vueties/styles/utils';
 @use '@design-tokens/palette';
 
-main {
-  background-color: mintcream;
-  
+main {  
   section {
     $h-padding: 1em;
     $v-padding: 1em;
