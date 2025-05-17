@@ -187,7 +187,7 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
 @use '@design-tokens/palette';
 
 main {
-  background-color: aqua;
+  background-color: green;
   
   section {
     $h-padding: 1em;
