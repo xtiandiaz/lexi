@@ -193,12 +193,12 @@ main section {
   align-items: center;
   display: flex;
   flex-direction: column;
-  height: calc(50% - $v-padding * 2);
   padding: $v-padding $h-padding;
   text-align: center;
   width: calc(100% - $h-padding * 2);
   
   &#screen {
+    height: calc(45% - $v-padding * 2);
     gap: 0.25em;
     
     h1 {
@@ -208,6 +208,10 @@ main section {
     h6 {
       margin: 0;
     }
+  }
+  
+  &#gamepad {
+    height: calc(55% - $v-padding * 2);
   }
 }
 
