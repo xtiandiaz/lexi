@@ -170,7 +170,7 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
     @intended-to-cancel="cancelTest"
   />
   
-  <main class="game" v-if="userInput">
+  <main v-if="userInput">
     <InputScreen :state="userInput" />
     
     <InputGamepad 
@@ -186,32 +186,36 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
 @use '@vueties/styles/utils';
 @use '@design-tokens/palette';
 
-main section {
-  $h-padding: 1em;
-  $v-padding: 1em;
+main {
+  background-color: aqua;
   
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  padding: $v-padding $h-padding;
-  text-align: center;
-  width: calc(100% - $h-padding * 2);
-  
-  &#screen {
-    height: calc(45% - $v-padding * 2);
-    gap: 0.25em;
+  section {
+    $h-padding: 1em;
+    $v-padding: 1em;
     
-    h1 {
-      margin-bottom: 0.25em;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: $v-padding $h-padding;
+    text-align: center;
+    width: calc(100% - $h-padding * 2);
+    
+    &#screen {
+      height: calc(45% - $v-padding * 2);
+      gap: 0.25em;
+      
+      h1 {
+        margin-bottom: 0.25em;
+      }
+      
+      h6 {
+        margin: 0;
+      }
     }
     
-    h6 {
-      margin: 0;
+    &#gamepad {
+      height: calc(55% - $v-padding * 2);
     }
-  }
-  
-  &#gamepad {
-    height: calc(55% - $v-padding * 2);
   }
 }
 
