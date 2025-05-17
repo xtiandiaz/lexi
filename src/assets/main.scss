@@ -13,8 +13,9 @@ html {
   
   height: calc(100% - $padding-bottom);
   margin: 0;
-  padding: $padding-top 0 $padding-bottom 0;
   overflow: hidden;
+  padding: $padding-top 0 $padding-bottom 0;
+  position: relative;
   @include palette.color-attributes((
     'color': 'body',
     'background-color': 'secondary-background'
