@@ -1,7 +1,6 @@
 @use '@design-tokens/palette';
 @use '@design-tokens/typography';
 @use '@vueties/styles/utils';
-@use '@vueties/styles/bars';
 
 * {
   @extend .inhibit-contextual-touch-action;
@@ -16,7 +15,6 @@ html {
   overflow: hidden;
   overscroll-behavior: none;
   padding: $padding-top 0 $padding-bottom 0;
-  position: relative;
   @include palette.color-attributes((
     'color': 'body',
     'background-color': 'secondary-background'
@@ -27,6 +25,5 @@ body, main, #app {
   height: 100%;
   margin: 0;
   overflow: hidden;
-  position: relative;
   width: 100%;
 }
