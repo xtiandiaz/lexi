@@ -1,18 +1,12 @@
-import type { DailyHistory, CompletedTerm } from "@/models/history";
+import type { RawDailyHistory, DailyHistory, CompletedTerm } from "@/models/history";
 import type { InputState } from "@/models/input";
-import { Language } from "@/models/language";
+import { LocalStorageItemKey } from '@/models/persistence'
 import historyStore from "@/stores/history";
-import { LocalStorageItem, retrieve, save } from './persistence';
+import { retrieve, save } from '@/assets/tungsten/local-storage'
 import '@/assets/tungsten/extensions/date.extensions'
 
-interface RawDailyHistory {
-  completedTerms: CompletedTerm[],
-  date: string,
-  language: Language
-}
-
 export function retrieveSavedDailyHistories(): DailyHistory[] | undefined {
-  const rawDailyHistories = retrieve<RawDailyHistory[]>(LocalStorageItem.DailyHistories)
+  const rawDailyHistories = retrieve<RawDailyHistory[]>(LocalStorageItemKey.DailyHistories)
   if (!rawDailyHistories) {
     return undefined
   }
@@ -30,7 +24,7 @@ export function saveDailyHistory() {
   const history = historyStore()
   
   save(
-    LocalStorageItem.DailyHistories, 
+    LocalStorageItemKey.DailyHistories, 
     history.dailyHistories
   )
 }

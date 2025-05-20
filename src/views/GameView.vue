@@ -10,7 +10,7 @@ import settingsStore from '@/stores/settings'
 import { produceInputWithTool } from '@/services/tool-handler'
 import { resetSessionIfNeeded, saveSession } from "@/services/session-management"
 import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/history-management'
-import { onWindowEvent } from '@/composables/window-event'
+import { onWindowEvent } from '@/vueties/composables/window-event'
 import InputScreen from '@/components/InputScreen.vue'
 import InputGamepad from '@/components/InputGamepad.vue'
 import TestStatusBar from "@/components/TestStatusBar.vue"

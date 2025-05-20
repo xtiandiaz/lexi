@@ -74,7 +74,8 @@ onBeforeMount(() => {
                   :key="index"
                   class="mark" :class="mark.kind"
                 >
-                  <span v-if="showsInputMarkValueForKind(mark.kind)">{{ mark.value }} ×</span><SvgIcon :icon="inputMarkIcon(mark.kind)" />
+                  <span v-if="showsInputMarkValueForKind(mark.kind)">{{ mark.value }} ×</span>
+                  <SvgIcon :icon="inputMarkIcon(mark.kind)" />
                 </span>
               </div>
             </div>

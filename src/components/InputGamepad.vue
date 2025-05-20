@@ -86,8 +86,8 @@ onMounted(() => {
     />
     
     <input 
-      ref="keyboard-input" 
       v-if="!isMobile()" 
+      ref="keyboard-input" 
       class="keyboard-input"
     />
     

@@ -1,9 +1,11 @@
 import { type Settings } from '@/models/settings'
+import { LocalStorageItemKey } from '@/models/persistence'
 import settingsStore from '@/stores/settings'
-import { LocalStorageItem, retrieve, save } from './persistence'
+import { retrieve, save } from '@/assets/tungsten/local-storage'
 
 export function retrieveSavedSettings(): Settings | undefined {
-  const savedSettings = retrieve<Settings>(LocalStorageItem.Settings)
+  const savedSettings = retrieve<Settings>(LocalStorageItemKey.Settings)
+  
   // if (savedSettings) {
     // for (let i=0; i < savedSettings.languagesSettings.length; i++) {
       // if (!savedSettings.languagesSettings[i].dailyGoal) {
@@ -19,7 +21,7 @@ export function saveSettings() {
   const settings = settingsStore()
   
   save<Settings>(
-    LocalStorageItem.Settings, 
+    LocalStorageItemKey.Settings, 
     {
       currentLanguage: settings.currentLanguage,
       languagesSettings: settings.languagesSettings,

@@ -2,11 +2,12 @@ import { Test } from '@/models/game'
 import { InputMarkKind, type InputState } from '@/models/input'
 import { type Session } from '@/models/session'
 import { Content } from '@/models/content'
+import { LocalStorageItemKey } from '@/models/persistence'
 import sessionStore from '@/stores/session'
 import historyStore from '@/stores/history'
 import settingsStore from '@/stores/settings'
 import { loadRepositoryContent } from '@/services/content-provision'
-import { LocalStorageItem, retrieve, save } from '@/services/persistence'
+import { retrieve, save } from '@/assets/tungsten/local-storage'
 
 export function saveSession(currentInputState?: InputState) {
   const session = sessionStore()
@@ -20,13 +21,13 @@ export function saveSession(currentInputState?: InputState) {
     session.setInputState(currentInputState)
   }
   
-  save<Session>(LocalStorageItem.Session, {
+  save<Session>(LocalStorageItemKey.Session, {
     inputStates: session.inputStates
   })
 }
 
 export function retrievedSavedSession(): Session | undefined {
-  return retrieve<Session>(LocalStorageItem.Session)
+  return retrieve<Session>(LocalStorageItemKey.Session)
 }
 
 export async function resetSession(): Promise<void> {
