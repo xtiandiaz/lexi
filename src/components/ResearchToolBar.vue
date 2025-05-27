@@ -29,13 +29,13 @@ const toolButtonVMs = computed(() => researchToolButtonVMs(settings.currentLangu
     @include palette.color-attribute('color', 'orange');
   }
   &.image-search {
-    @include palette.color-attribute('color', 'sky-blue');
+    @include palette.color-attribute('color', 'mint');
   }
   &.translate {
-    @include palette.color-attribute('color', 'blue');
+    @include palette.color-attribute('color', 'sky-blue');
   }
   &.web-search {
-    @include palette.color-attribute('color', 'mint');
+    @include palette.color-attribute('color', 'blue');
   }
   &.wikipedia-search {
     @include palette.color-attribute('color', 'body');
