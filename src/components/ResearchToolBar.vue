@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import type { ResearchTool } from '@/models/tools';
 import settingsStore from '@/stores/settings'
 import { researchToolButtonVMs } from '@/view-models/vm-tools'
-import ToolBar from '@vueties/bars/ToolBar.vue'
+import ToolBar from '@vueties/components/bars/VuetyToolBar.vue'
 
 const settings = settingsStore()
 

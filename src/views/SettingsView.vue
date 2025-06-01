@@ -8,7 +8,8 @@ import { sectionTitle } from '@/utils/section.utils'
 import { storeAndSaveSelectedSettings } from '@/services/settings-management';
 import { version } from '@/../package.json'
 import { languageChoiceSectionVM } from '@/view-models/vm-settings';
-import ChoiceSection from '@vueties/form/ChoiceSection.vue';
+import Form from '@vueties/components/form/VuetyForm.vue'
+import ChoiceFormSection from '@vueties/components/form/VuetyChoiceFormSection.vue';
 
 const emits = defineEmits<{
   viewTitle: [string?]
@@ -37,18 +38,18 @@ onBeforeUnmount(() => {
 
 <template>
   <main>
-    <section class="form">
-      <ChoiceSection 
+    <Form>
+      <ChoiceFormSection 
         :vm="choiceSectionVM" 
         @selected="(lang: Language) => selectedSettings.currentLanguage = lang"
       />
-    </section>
+    </Form>
     <span class='version'>v{{ version }}</span>
   </main>
 </template>
 
 <style scoped lang="scss">
-@use '@vueties/styles/form' with (
+@use '@vueties/components/form/styles' as form-styles with (
   $max-width: none
 );
 @use '@design-tokens/palette';

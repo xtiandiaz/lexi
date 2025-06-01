@@ -2,8 +2,8 @@
 import { computed } from 'vue'
 import sessionStore from '@/stores/session'
 import { Icon } from '@design-tokens/iconography'
-import CloseButton from '@vueties/buttons/CloseButton.vue';
-import ProgressBar from '@vueties/bars/ProgressBar.vue'
+import CloseButton from '@vueties/components/buttons/VuetyCloseButton.vue'
+import ProgressBar from '@vueties/components/bars/VuetyProgressBar.vue'
 
 const emits = defineEmits<{
   intendedToCancel: [void]
@@ -22,13 +22,13 @@ const testProgress = computed(() => session.test?.progress ?? 0)
 </template>
 
 <style scoped lang="scss">
-@use '@vueties/styles/bars';
+@use '@vueties/components/bars/styles' as vueties-bar-styles;
 @use '@design-tokens/palette';
 
 .status-bar {
-  height: bars.$nav-bar-height;
+  height: vueties-bar-styles.$nav-bar-height;
   left: 0;
-  padding: 0 bars.$nav-bar-h-padding 0 1em;
+  padding: 0 vueties-bar-styles.$nav-bar-h-padding 0 1em;
   position: absolute;
   right: 0;
   top: 0;

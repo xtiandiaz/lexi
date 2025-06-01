@@ -1,7 +1,7 @@
 @use '@design-tokens/palette';
 @use '@design-tokens/typography';
-@use '@vueties/styles/utils';
-@use '@vueties/styles/bars';
+@use '@vueties/utils/styles' as vueties-util-styles;
+@use '@vueties/components/bars/styles' as vueties-bar-styles;
 
 * {
   @extend .inhibit-contextual-touch-action;

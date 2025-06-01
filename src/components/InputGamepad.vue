@@ -6,9 +6,9 @@ import { launchResearchToolForTerm } from '@/services/tool-handler';
 import { inputToolBarButtonVMs, keypadKeyVMs } from '@/view-models/vm-input';
 import { Icon } from '@design-tokens/iconography'
 import ResearchToolBar from './ResearchToolBar.vue';
-import KeyPad from '@/vueties/pads/KeyPad.vue';
-import ToolBar from '@vueties/bars/ToolBar.vue'
-import IconButton from '@vueties/buttons/IconButton.vue'
+import KeyPad from '@vueties/components/pads/VuetyKeyPad.vue';
+import ToolBar from '@vueties/components/bars/VuetyToolBar.vue'
+import IconButton from '@vueties/components/buttons/VuetyIconButton.vue'
 import { isMobile } from '@/assets/tungsten/navigator';
 
 const { state } = defineProps<{
@@ -114,7 +114,7 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-@use '@vueties/styles/utils';
+@use '@vueties/utils/styles';
 @use '@design-tokens/palette';
 
 .keyboard-input {

@@ -14,7 +14,7 @@ import { onWindowEvent } from '@/vueties/composables/window-event'
 import InputScreen from '@/components/InputScreen.vue'
 import InputGamepad from '@/components/InputGamepad.vue'
 import TestStatusBar from "@/components/TestStatusBar.vue"
-import ProgressIndicator from "@vueties/misc/ProgressIndicator.vue"
+import ProgressIndicator from "@vueties/components/misc/VuetyProgressIndicator.vue"
 
 const session = sessionStore()
 const settings = settingsStore()
@@ -183,7 +183,7 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
 </template>
 
 <style scoped lang="scss">
-@use '@vueties/styles/utils';
+@use '@vueties/utils/styles';
 @use '@design-tokens/palette';
 
 main {  

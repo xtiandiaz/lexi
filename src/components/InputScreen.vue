@@ -4,7 +4,7 @@ import { type InputState } from '@/models/input'
 import { Content } from '@/models/content'
 import { localizedStringForTermTag } from '@/services/localization';
 import fitText from '@/composables/fit-text'
-import TextTag from '@vueties/misc/TextTag.vue';
+import TextTag from '@vueties/components/misc/VuetyTextTag.vue';
 
 const { state } = defineProps<{
   state: InputState
@@ -54,7 +54,7 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
-@use '@vueties/styles/utils';
+@use '@vueties/utils/styles';
 @use '@design-tokens/typography';
 @use "@design-tokens/palette";
 

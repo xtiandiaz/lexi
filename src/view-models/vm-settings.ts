@@ -1,10 +1,10 @@
 import { Language } from "@/models/language"
 import { LocalizedStringKey } from '@/models/localization'
 import { localizedString, localizedStringInLanguage } from "@/services/localization"
-import type { FormOptionRowVM, FormSectionVM } from "@vueties/view-models"
+import type { VuetyFormOptionRowVM, VuetyFormSectionVM } from "@vueties/components/form/view-models"
 import { dictionaryIcon } from "./vm-language"
 
-export const languageChoiceSectionVM = (currentLanguage: Language): FormSectionVM<FormOptionRowVM<Language>> => {
+export const languageChoiceSectionVM = (currentLanguage: Language): VuetyFormSectionVM<VuetyFormOptionRowVM<Language>> => {
   return {
     rowVMs: Object.values(Language).map(language => {
       return {
@@ -12,7 +12,7 @@ export const languageChoiceSectionVM = (currentLanguage: Language): FormSectionV
         title: localizedStringInLanguage(LocalizedStringKey.LanguageName, language),
         value: language,
         icon: dictionaryIcon(language)
-      } as FormOptionRowVM<Language>
+      } as VuetyFormOptionRowVM<Language>
     }),
     title: localizedString(LocalizedStringKey.Language)
   }

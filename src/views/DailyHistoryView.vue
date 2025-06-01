@@ -12,10 +12,12 @@ import { sectionTitle } from '@/utils/section.utils'
 import { inputMarkIcon, showsInputMarkValueForKind } from '@/view-models/vm-input'
 import { Icon } from '@design-tokens/iconography'
 import ResearchToolBar from '@/components/ResearchToolBar.vue'
-import FoldableRow from '@vueties/form/FoldableRow.vue'
-import SvgIcon from '@vueties/misc/SvgIcon.vue'
-import ButtonRow from '@vueties/form/ButtonRow.vue'
-import TextTag from '@vueties/misc/TextTag.vue'
+import Form from '@vueties/components/form/VuetyForm.vue'
+import FormSection from '@vueties/components/form/VuetyFormSection.vue'
+import FoldableFormRow from '@vueties/components/form/rows/VuetyFoldableFormRow.vue'
+import SvgIcon from '@vueties/components/misc/VuetySvgIcon.vue'
+import ButtonFormRow from '@vueties/components/form/rows/VuetyButtonFormRow.vue'
+import TextTag from '@/vueties/components/misc/VuetyTextTag.vue'
 
 const emits = defineEmits<{
   viewTitle: [string?]
@@ -42,72 +44,65 @@ onBeforeMount(() => {
 
 <template>
   <main>
-    <section v-if="dailyHistory" class="form">
-      <div class="section">
-        <div class="header inline">
-          <span class="title">{{ dailyHistoryDateLocaleString(dailyHistory) }}</span>
-          •
-          <span class="subtitle">{{ `${termCount} ${localizedString(LocalizedStringKey.Word, termCount === 0 || termCount > 1)}` }}</span>
-        </div>
-        <div class="rows">
-          <FoldableRow 
-            v-for="(term, index) of dailyHistory.completedTerms.sort((s1, s2) => s1.word.localeCompare(s2.word))"
-            :key="index"
-            :is-unfolded="selectedIndex === index"
-            @selected="onWordSelected(index)"
-          >
-            <template v-slot:title>
-              <div class="title-wrapper">
-                <span class="title">{{ term.word }}</span>
-                
-                <div v-if="term.extras?.tags" class="tags">
-                  <TextTag
-                    v-for="(tag, index) of term.extras.tags"
-                    :key="index"
-                    :label="localizedStringForTermTag(tag)"
-                    class="tiny"
-                  />
-                </div>
-                
-                <div v-if="term.inputMarks && term.inputMarks.length > 0" class="marks">
-                  <span
-                    v-for="(mark, index) of term.inputMarks.filter(m => m.value > 0)" 
-                    :key="index"
-                    class="mark" :class="mark.kind"
-                  >
-                    <span v-if="showsInputMarkValueForKind(mark.kind)">{{ mark.value }} ×</span>
-                    <SvgIcon :icon="inputMarkIcon(mark.kind)" />
-                  </span>
-                </div>
+    <Form v-if="dailyHistory">
+      <FormSection
+        :title="`${dailyHistoryDateLocaleString(dailyHistory)} • ${termCount} ${localizedString(LocalizedStringKey.Word, termCount === 0 || termCount > 1)}`"
+      >
+        <FoldableFormRow 
+          v-for="(term, index) of dailyHistory.completedTerms.sort((s1, s2) => s1.word.localeCompare(s2.word))"
+          :key="index"
+          :is-unfolded="selectedIndex === index"
+          @selected="onWordSelected(index)"
+        >
+          <template v-slot:title>
+            <div class="title-wrapper">
+              <span class="title">{{ term.word }}</span>
+              
+              <div v-if="term.extras?.tags" class="tags">
+                <TextTag
+                  v-for="(tag, index) of term.extras.tags"
+                  :key="index"
+                  :label="localizedStringForTermTag(tag)"
+                  class="tiny"
+                />
               </div>
-            </template>
-            <template v-slot:subtitle v-if="term.aliases">
-              <span class="subtitle">{{ Content.aliasesStringFromTerm(term) }}</span>
-            </template>
-            <template v-slot:foldable-content>
-              <ResearchToolBar
-                @tool-selected="(tool) => launchResearchToolForTerm(tool, term)"
-              />
-            </template>
-          </FoldableRow>
-        </div>
-      </div>
-      <div v-if="history.canTakeTest" class="section test">
-        <div class="rows">
-          <ButtonRow 
-            :label="localizedString(LocalizedStringKey.Button_Test)" 
-            :icon="Icon.Right"
-            @click="onTestButtonClicked"
-          />
-        </div>
-      </div>
-    </section>
+              
+              <div v-if="term.inputMarks && term.inputMarks.length > 0" class="marks">
+                <span
+                  v-for="(mark, index) of term.inputMarks.filter(m => m.value > 0)" 
+                  :key="index"
+                  class="mark" :class="mark.kind"
+                >
+                  <span v-if="showsInputMarkValueForKind(mark.kind)">{{ mark.value }} ×</span>
+                  <SvgIcon :icon="inputMarkIcon(mark.kind)" />
+                </span>
+              </div>
+            </div>
+          </template>
+          <template v-slot:subtitle v-if="term.aliases">
+            <span class="subtitle">{{ Content.aliasesStringFromTerm(term) }}</span>
+          </template>
+          <template v-slot:foldable-content>
+            <ResearchToolBar
+              @tool-selected="(tool) => launchResearchToolForTerm(tool, term)"
+            />
+          </template>
+        </FoldableFormRow>
+      </FormSection>
+      <FormSection v-if="history.canTakeTest" class="test">
+        <ButtonFormRow 
+          :label="localizedString(LocalizedStringKey.Button_Test)" 
+          :icon="Icon.Right"
+          @click="onTestButtonClicked"
+        />
+      </FormSection>
+    </Form>
   </main>
 </template>
 
 <style scoped lang="scss">
-@use '@vueties/styles/buttons';
-@use '@vueties/styles/form' with (
+@use '@vueties/components/buttons/styles' as button-styles;
+@use '@vueties/components/form/styles' as form-styles with (
   $max-width: none
 );
 @use '@design-tokens/palette';
