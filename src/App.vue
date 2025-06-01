@@ -7,11 +7,11 @@ import historyStore from '@/stores/history'
 import { Section } from '@/models/section'
 import { GameMode } from '@/models/game'
 import { trackColorSheme } from '@/composables/color-scheme'
-import { type NavigationBarVM } from './vueties/view-models'
-import { hexString } from '@/assets/tungsten/stringify'
+import type { VuetyNavigationBarVM } from '@vueties/components/bars/view-models'
 import { Color, schemeColor } from '@design-tokens/palette'
 import { Icon } from '@design-tokens/iconography'
 import HashRouterScene from '@/hash-router/scenes/HashRouterScene.vue'
+import { hexString } from '@/assets/tungsten/stringify'
 
 const hashRouter: HashRouter = inject('hash-router')!
 
@@ -20,7 +20,7 @@ const settings = settingsStore()
 const history = historyStore()
 
 const currentColorScheme = trackColorSheme()
-const navigationBarVM = computed<NavigationBarVM>(() => {
+const navigationBarVM = computed<VuetyNavigationBarVM>(() => {
   return {
     isVisible: session.gameMode === GameMode.Exploration,
     leftBarItems: [
