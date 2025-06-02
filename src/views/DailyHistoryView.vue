@@ -55,9 +55,8 @@ onBeforeMount(() => {
           :is-unfolded="selectedIndex === index"
           @selected="onWordSelected(index)"
           >
-          
           <template v-slot:title>
-            <div v-if="isCompletedTermPassed(term)" class="passed-background rounded-element"></div>
+            <div v-if="isCompletedTermPassed(term)" class="passed-background"></div>
             
             <div class="title-wrapper">
               <span class="title">{{ term.word }}</span>
@@ -123,13 +122,13 @@ onBeforeMount(() => {
   }
   
   div.passed-background {
-    bottom: 1px;
-    left: 1px;
+    bottom: 0;
+    left: 0;
     position: absolute;
-    right: 1px;
-    top: 1px;
+    right: 0;
+    top: 0;
     z-index: -1;
-    @include palette.color-attribute('background-color', 'green', 0.1);
+    @include palette.color-attribute('background-color', 'green', 0.05);
   }
 
   div.title-wrapper {
