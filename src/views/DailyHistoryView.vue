@@ -9,6 +9,7 @@ import { localizedString, localizedStringForTermTag } from '@/services/localizat
 import { prepareTest } from '@/services/session-management'
 import { dailyHistoryDateLocaleString } from '@/utils/history.utils'
 import { sectionTitle } from '@/utils/section.utils'
+import { isCompletedTermPassed } from '@/utils/term.utils'
 import { inputMarkIcon, showsInputMarkValueForKind } from '@/view-models/vm-input'
 import { Icon } from '@design-tokens/iconography'
 import ResearchToolBar from '@/components/ResearchToolBar.vue'
@@ -53,8 +54,11 @@ onBeforeMount(() => {
           :key="index"
           :is-unfolded="selectedIndex === index"
           @selected="onWordSelected(index)"
-        >
+          >
+          
           <template v-slot:title>
+            <div v-if="isCompletedTermPassed(term)" class="passed-background rounded-element"></div>
+            
             <div class="title-wrapper">
               <span class="title">{{ term.word }}</span>
               
@@ -109,10 +113,23 @@ onBeforeMount(() => {
 @use '@design-tokens/typography';
 
 .row.foldable {
+  position: relative;
+  z-index: 1;
+  
   &.unfolded {
     span.title {
       @extend .h6;
     }
+  }
+  
+  div.passed-background {
+    bottom: 1px;
+    left: 1px;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    z-index: -1;
+    @include palette.color-attribute('background-color', 'green', 0.1);
   }
 
   div.title-wrapper {
