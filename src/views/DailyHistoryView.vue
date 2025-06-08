@@ -17,8 +17,8 @@ import Form from '@vueties/components/form/VuetyForm.vue'
 import FormSection from '@vueties/components/form/VuetyFormSection.vue'
 import FoldableFormRow from '@vueties/components/form/rows/VuetyFoldableFormRow.vue'
 import SvgIcon from '@vueties/components/misc/VuetySvgIcon.vue'
-import ButtonFormRow from '@vueties/components/form/rows/VuetyButtonFormRow.vue'
 import TextTag from '@/vueties/components/misc/VuetyTextTag.vue'
+import VuetyTextButton from '@/vueties/components/buttons/VuetyTextButton.vue'
 
 const emits = defineEmits<{
   viewTitle: [string?]
@@ -92,18 +92,22 @@ onBeforeMount(() => {
           </template>
         </FoldableFormRow>
       </FormSection>
-      <FormSection v-if="history.canTakeTest" class="test">
-        <ButtonFormRow 
-          :label="localizedString(LocalizedStringKey.Button_Test)" 
-          :icon="Icon.Right"
-          @click="onTestButtonClicked"
-        />
-      </FormSection>
     </Form>
+    
+    <div id="test-button-wrapper">
+      <VuetyTextButton
+        v-if="history.canTakeTest"
+        id="test-button"
+        :label="localizedString(LocalizedStringKey.Button_Test)"
+        :icon="Icon.Right"
+        @click="onTestButtonClicked"
+      />
+    </div>
   </main>
 </template>
 
 <style scoped lang="scss">
+@use '@vueties/utils/mixins' as utility-mixins;
 @use '@vueties/components/buttons/styles' as button-styles;
 @use '@vueties/components/form/styles' as form-styles with (
   $max-width: none
@@ -178,8 +182,24 @@ onBeforeMount(() => {
   }
 }
 
-.test .row.button {
-  @include palette.color-attribute('color', 'green');
+#test-button-wrapper {
+  bottom: 0;
+  left: 0;
+  padding: form-styles.$form-padding;
+  padding-top: form-styles.$form-padding * 2;
+  position: sticky;
+  right: 0;
+  z-index: 100;
+  @include utility-mixins.linear-gradient(
+    0deg, 
+    'secondary-background' 1 70%, 
+    'secondary-background' 0 100%
+  );
+  
+  #test-button {
+    width: 100%;
+    @include palette.color-attribute('background-color', 'green');
+  }
 }
 
 :deep(.tool-bar) {
@@ -187,7 +207,6 @@ onBeforeMount(() => {
   justify-content: space-between;
   
   button.icon-button .svg-icon {
-    height: 1.75em;
     width: 1.75em;
   }
 }
