@@ -198,7 +198,7 @@ onBeforeMount(() => {
   
   #test-button {
     width: 100%;
-    @include palette.color-attribute('background-color', 'green');
+    @include palette.color-attribute('color', 'green');
   }
 }
 
