@@ -1,7 +1,7 @@
-import type { Language } from "./language";
-import { enumKeyFromValue } from "@/assets/tungsten/enum";
-import { cleanWord } from "@/lexicon/utils"
+import type { Language } from "./language"
+import { enumKeyFromValue } from "@/assets/tungsten/enum"
 import '@/assets/tungsten/extensions/array.extensions'
+import '@/assets/tungsten/extensions/string.extensions'
 
 export enum TermTag {
   Anatomy = 'anat',
@@ -92,9 +92,9 @@ export class Content {
     // const extras = parts.length > 1 ? Content._extractExtrasFromRaw(parts[1]) : undefined
     
     return {
-      word: cleanWord(words[0]), 
+      word: words[0].removeLeadingAndTrailingSpaces(), 
       hintPrefixLength: Math.floor(words[0].length * hintPrefixRate), 
-      aliases: words.length > 1 ? words.slice(1).map(cleanWord) : undefined, 
+      aliases: words.length > 1 ? words.slice(1).map(w => w.removeLeadingAndTrailingSpaces()) : undefined, 
       // extras
     }
   }

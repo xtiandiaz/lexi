@@ -5,8 +5,8 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 
-import hashRouter from './hash-router/plugin'
-import { HashRoutePresentationStyle } from './hash-router/models'
+import hashRouter from '@vueties/plugins/hash-router/plugin'
+import { VuetyHashRoutePresentationStyle } from '@vueties/plugins/hash-router/models'
 import { Section } from '@/models/section'
 import GameView from './views/GameView.vue'
 import DailyHistoryView from './views/DailyHistoryView.vue'
@@ -27,12 +27,12 @@ app.use(hashRouter, {
     {
       key: Section.DailyHistory,
       view: DailyHistoryView,
-      presentationStyle: HashRoutePresentationStyle.Modal
+      presentationStyle: VuetyHashRoutePresentationStyle.Modal
     },
     {
       key: Section.Settings,
       view: SettingsView,
-      presentationStyle: HashRoutePresentationStyle.Modal
+      presentationStyle: VuetyHashRoutePresentationStyle.Modal
     }
   ]
 })

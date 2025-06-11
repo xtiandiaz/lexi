@@ -1,19 +1,19 @@
 <script setup lang="ts">
 import { computed, onMounted, watch, inject } from 'vue'
-import type { HashRouter } from './hash-router/models'
 import sessionStore from '@/stores/session'
 import settingsStore from '@/stores/settings'
 import historyStore from '@/stores/history'
 import { Section } from '@/models/section'
 import { GameMode } from '@/models/game'
 import { trackColorSheme } from '@/composables/color-scheme'
+import type { VuetyHashRouter } from '@vueties/plugins/hash-router/models'
 import type { VuetyNavigationBarVM } from '@vueties/components/bars/view-models'
 import { Color, schemeColor } from '@design-tokens/palette'
 import { Icon } from '@design-tokens/iconography'
-import HashRouterScene from '@/hash-router/scenes/HashRouterScene.vue'
+import HashRouterScene from '@vueties/plugins/hash-router/scenes/VuetyHashRouterScene.vue'
 import { hexString } from '@/assets/tungsten/stringify'
 
-const hashRouter: HashRouter = inject('hash-router')!
+const hashRouter: VuetyHashRouter = inject('vuety-hash-router')!
 
 const session = sessionStore()
 const settings = settingsStore()
