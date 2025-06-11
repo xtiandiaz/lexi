@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ref, computed, onBeforeMount, onBeforeUnmount } from 'vue';
+import { ref, computed, watch, onBeforeMount, onBeforeUnmount } from 'vue';
 import settingsStore from '@/stores/settings'
-import type { Language } from '@/models/language'
+import { Language } from '@/models/language'
 import { type Settings } from '@/models/settings'
-import { Section } from '@/models/section'
-import { sectionTitle } from '@/utils/section.utils'
 import { storeAndSaveSelectedSettings } from '@/services/settings-management';
+import { localizedStringInLanguage } from '@/services/localization';
 import { version } from '@/../package.json'
 import { languageChoiceSectionVM } from '@/view-models/vm-settings';
 import Form from '@vueties/components/form/VuetyForm.vue'
 import ChoiceFormSection from '@vueties/components/form/VuetyChoiceFormSection.vue';
+import { LocalizedStringKey } from '@/models/localization';
 
 const emits = defineEmits<{
   viewTitle: [string?]
@@ -25,8 +25,23 @@ const selectedSettings = ref<Settings>({
 
 const choiceSectionVM = computed(() => languageChoiceSectionVM(selectedSettings.value.currentLanguage))
 
+function reflectLanguageSelection() {
+  const title = localizedStringInLanguage(
+    LocalizedStringKey.Title_Settings, 
+    selectedSettings.value.currentLanguage
+  )
+  
+  emits('viewTitle', title)
+}
+
+watch(selectedSettings, () => {
+  reflectLanguageSelection()
+}, { 
+  deep: true
+})
+
 onBeforeMount(() => {
-  emits('viewTitle', sectionTitle(Section.Settings))
+  reflectLanguageSelection()
 })
 
 onBeforeUnmount(() => {
