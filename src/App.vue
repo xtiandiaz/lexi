@@ -6,10 +6,10 @@ import historyStore from '@/stores/history'
 import { Section } from '@/models/section'
 import { GameMode } from '@/models/game'
 import { trackColorSheme } from '@/composables/color-scheme'
-import type { VuetyHashRouter } from '@vueties/plugins/hash-router/models'
 import type { VuetyNavigationBarVM } from '@vueties/components/bars/view-models'
 import { Color, schemeColor } from '@design-tokens/palette'
 import { Icon } from '@design-tokens/iconography'
+import type { VuetyHashRouter } from '@vueties/plugins/hash-router/models'
 import HashRouterScene from '@vueties/plugins/hash-router/scenes/VuetyHashRouterScene.vue'
 import { hexString } from '@/assets/tungsten/stringify'
 
@@ -53,6 +53,7 @@ function updateThemeColor() {
 watch(() => currentColorScheme, () => {
   updateThemeColor()
 })
+
 watch(() => session.gameMode, (newMode, oldMode) => {
   if (newMode === GameMode.Test) {
     hashRouter.setPath('/')
