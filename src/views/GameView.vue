@@ -22,7 +22,7 @@ const settings = settingsStore()
 const inputSource = ref<InputSource>()
 const userInput = ref<UserInput>()
 
-const testBackgroundOpacity = computed(() => session.gameMode === GameMode.Test && userInput.value?.isComplete ? 5 : 0)
+const isTermPass = computed(() => session.gameMode === GameMode.Test && userInput.value?.isComplete)
 
 async function reset() {
   inputSource.value = undefined
@@ -161,7 +161,9 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
 </script>
 
 <template>
-  <div id="test-background" :style="{ opacity: `${testBackgroundOpacity}%` }"></div>
+  <Transition name="fade">
+    <div v-if='isTermPass' id="test-pass-background"></div>
+  </Transition>
   
   <ProgressIndicator v-if="!inputSource" class="absolutely-centered-block" />
   
@@ -184,9 +186,15 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
 
 <style scoped lang="scss">
 @use '@vueties/utils/styles';
+@use '@vueties/utils/mixins' as utility-mixins;
+@use '@vueties/utils/transitions' as utility-transitions;
 @use '@design-tokens/palette';
 
-main {  
+@include utility-transitions.fade(0.5s);
+
+main {
+  z-index: 1;
+  
   section {
     $h-padding: 1em;
     $v-padding: 1em;
@@ -222,10 +230,9 @@ main {
   height: 3em;
 }
 
-#test-background {
+#test-pass-background {
   @extend .absolute-background;
-  opacity: 0;
-  transition: opacity 0.5s linear;
-  @include palette.color-attribute('background-color', 'green');
+  @include utility-mixins.linear-gradient(180deg, 'green' 0.15 0%, 'green' 0 75%);
+  z-index: 0;
 }
 </style>

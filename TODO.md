@@ -1,1 +1,2 @@
 - Add search-term feature
+- Add more verbal memory mini-games
