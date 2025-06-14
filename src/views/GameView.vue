@@ -232,7 +232,7 @@ main {
 
 #test-pass-background {
   @extend .absolute-background;
-  @include utility-mixins.linear-gradient(180deg, 'green' 0.15 0%, 'green' 0 75%);
   z-index: 0;
+  @include utility-mixins.linear-gradient(180deg, 'green' 0.15 0%, 'green' 0 75%);
 }
 </style>
