@@ -231,7 +231,11 @@ main {
 }
 
 #test-pass-background {
-  @extend .absolute-background;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
   z-index: 0;
   @include utility-mixins.linear-gradient(180deg, 'green' 0.15 0%, 'green' 0 75%);
 }
