@@ -56,33 +56,20 @@ export interface TermExtras {
 export class Content {
   readonly language: Language
   
-  _terms?: Term[]
+  _nextIndex?: number
   _rawTerms?: string[]
-  
-  constructor(language: Language, terms?: Term[], rawTerms?: string[]) {
-    this.language = language
-    this._terms = terms
-    this._rawTerms = rawTerms
-  }
+  _terms?: Term[]
   
   get termCount(): number {
     return this._terms?.length ?? this._rawTerms?.length ?? 0
   }
   
-  produceRandomTerm(): Term {
-    return this.produceTerm(
-      Math.floor(Math.random() * (this._terms ? this._terms.length : this._rawTerms!.length))
-    )
+  static instantiateForTest(language: Language, terms: Term[]): Content {
+    return new Content(language, terms)
   }
   
-  produceTerm(index: number, hintPrefixRate: number = 0.25): Term {
-    if (this._terms) {
-      const term = this._terms[index]
-      term.hintPrefixLength = hintPrefixRate
-      return term
-    }
-    
-    return Content.composeTerm(this._rawTerms![index], hintPrefixRate)
+  static instantiateForExploration(language: Language, rawTerms: string[]): Content {
+    return new Content(language, undefined, rawTerms.shuffled())
   }
   
   static composeTerm(rawTerm: string, hintPrefixRate: number): Term {
@@ -101,6 +88,30 @@ export class Content {
   
   static aliasesStringFromTerm(term: Term): string | undefined {
     return term.aliases?.join(', ')
+  }
+  
+  produceNextTerm(hintPrefixRate: number = 0.25): Term | undefined {
+    if (this._nextIndex === undefined) {
+      return undefined
+    }
+    
+    if (this._terms) {
+      const term = this._terms[this._nextIndex]
+      term.hintPrefixLength = hintPrefixRate
+      this._nextIndex = this._nextIndex < (this._terms!.length - 1) ? this._nextIndex + 1 : undefined
+      return term
+    }
+    
+    const term = Content.composeTerm(this._rawTerms![this._nextIndex], hintPrefixRate)
+    this._nextIndex = this._nextIndex < (this._rawTerms!.length - 1) ? this._nextIndex + 1 : 0
+    return term
+  }
+  
+  private constructor(language: Language, terms?: Term[], rawTerms?: string[]) {
+    this.language = language
+    this._rawTerms = rawTerms
+    this._terms = terms
+    this._nextIndex = terms || rawTerms ? 0 : undefined
   }
   
   private static _extractExtrasFromRaw(rawExtras: string): TermExtras | undefined {

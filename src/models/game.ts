@@ -25,7 +25,7 @@ export class Test {
     if (this._nextTermIndex >= this._content.termCount) {
       return undefined
     }
-    this._currentTerm = this._content.produceTerm(this._nextTermIndex, 0)
+    this._currentTerm = this._content.produceNextTerm(this._nextTermIndex, 0)
     this._nextTermIndex++
     
     return this._currentTerm

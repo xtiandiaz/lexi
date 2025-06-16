@@ -64,7 +64,7 @@ export function prepareTest() {
   })
   
   const session = sessionStore()
-  const testContent = new Content(dailyHistory.language, [...completedTerms].shuffle())
+  const testContent = Content.instantiateForTest(dailyHistory.language, completedTerms)
   
   session.test = new Test(testContent)
 }

@@ -20,9 +20,10 @@ export async function loadRepositoryContent(): Promise<Content | undefined> {
     const rawTerms = (await response.text()).split('\n')
     // console.log(terms)
     
-    return new Content(settings.currentLanguage, undefined, rawTerms)
+    return Content.instantiateForExploration(settings.currentLanguage, rawTerms)
   } catch (error) {
     console.error(`Language: ${settings.currentLanguage}`, error)
+    
     return undefined
   }
 }

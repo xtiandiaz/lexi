@@ -52,7 +52,7 @@ function resume() {
     return
   }
   
-  const newTerm = session.content?.produceRandomTerm()
+  const newTerm = session.content?.produceNextTerm()
   if (!newTerm) {
     console.error(`No content available!`)
     return
