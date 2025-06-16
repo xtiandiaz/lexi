@@ -64,7 +64,7 @@ function resume() {
 }
 
 function resumeTest(test: Test) {
-  const nextTerm = test.nextTerm()
+  const nextTerm = test.produceNextTerm()
   if (!nextTerm) {
     session.test = undefined
     return

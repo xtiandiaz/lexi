@@ -65,7 +65,7 @@ export class Content {
   }
   
   static instantiateForTest(language: Language, terms: Term[]): Content {
-    return new Content(language, terms)
+    return new Content(language, terms.shuffled())
   }
   
   static instantiateForExploration(language: Language, rawTerms: string[]): Content {

@@ -21,14 +21,10 @@ export class Test {
     return clamp(this._completedTermCount / this._content.termCount, 0, 1)
   }
   
-  nextTerm(): Term | undefined {
-    if (this._nextTermIndex >= this._content.termCount) {
-      return undefined
-    }
-    this._currentTerm = this._content.produceNextTerm(this._nextTermIndex, 0)
-    this._nextTermIndex++
-    
-    return this._currentTerm
+  produceNextTerm(): Term | undefined {
+    const term = this._content.produceNextTerm(0)
+    this._currentTerm = term
+    return term
   }
   
   makeProgressWithTerm(term: Term): boolean {
