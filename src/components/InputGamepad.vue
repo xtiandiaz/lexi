@@ -21,6 +21,7 @@ const emits = defineEmits<{
   continued: [void]
 }>()
 
+const shouldEnableKeyboard = import.meta.env.DEV || !isMobile()
 const keyboardInput = useTemplateRef('keyboard-input')
 const _keypadKeyVMs = computed(() => keypadKeyVMs(state))
 const _inputToolBarButtonVMs = computed(() => inputToolBarButtonVMs(state))
@@ -86,7 +87,7 @@ onMounted(() => {
     />
     
     <input 
-      v-if="!isMobile()" 
+      v-if="shouldEnableKeyboard" 
       ref="keyboard-input" 
       class="keyboard-input"
     />

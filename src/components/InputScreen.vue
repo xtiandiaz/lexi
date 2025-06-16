@@ -3,7 +3,7 @@ import { computed, watch, useTemplateRef, nextTick, onMounted } from 'vue';
 import { type InputState } from '@/models/input'
 import { Content } from '@/models/content'
 import { localizedStringForTermTag } from '@/services/localization';
-import fitText from '@/composables/fit-text'
+import fitText from '@vueties/composables/fit-text'
 import TextTag from '@vueties/components/misc/VuetyTextTag.vue';
 
 const { state } = defineProps<{
@@ -16,18 +16,18 @@ const showsTags = computed(() => state.source.term.extras?.tags !== undefined)
 const showsAliases = computed(() => state.source.term.aliases !== undefined)
 const showsExtras = computed(() => state.isComplete && (showsAliases.value || showsTags.value))
 
-function fitInput() {
+async function fitInput() {
+  await nextTick()
+  
   fitText(inputHeadlineRef.value!, 3)
 }
 
 watch(async () => state.prefixedInputString, async () => {
-  await nextTick()
-  fitInput()
+  await fitInput()
 })
 
 onMounted(async () => {
-  await nextTick()
-  fitInput()
+  await fitInput()
 })
 </script>
 
