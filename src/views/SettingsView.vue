@@ -1,21 +1,20 @@
 <script setup lang="ts">
-import { ref, computed, watch, onBeforeMount, onBeforeUnmount } from 'vue';
+import { ref, computed, watch, onBeforeUnmount } from 'vue';
 import settingsStore from '@/stores/settings'
 import { Language } from '@/models/language'
 import { type Settings } from '@/models/settings'
 import { storeAndSaveSelectedSettings } from '@/services/settings-management';
-import { localizedStringInLanguage } from '@/services/localization';
+// import { localizedStringInLanguage } from '@/services/localization';
 import { version } from '@/../package.json'
 import { languageChoiceSectionVM } from '@/view-models/vm-settings';
 import Form from '@vueties/components/form/VuetyForm.vue'
 import ChoiceFormSection from '@vueties/components/form/VuetyChoiceFormSection.vue';
-import { LocalizedStringKey } from '@/models/localization';
-
-const emits = defineEmits<{
-  viewTitle: [string?]
-}>()
+// import { LocalizedStringKey } from '@/models/localization';
+// import { useRoute, useRouter } from 'vue-router';
 
 const settings = settingsStore()
+// const route = useRoute()
+// const router = useRouter()
 
 const selectedSettings = ref<Settings>({
   currentLanguage: settings.currentLanguage,
@@ -26,22 +25,18 @@ const selectedSettings = ref<Settings>({
 const choiceSectionVM = computed(() => languageChoiceSectionVM(selectedSettings.value.currentLanguage))
 
 function reflectLanguageSelection() {
-  const title = localizedStringInLanguage(
-    LocalizedStringKey.Title_Settings, 
-    selectedSettings.value.currentLanguage
-  )
+  // const title = localizedStringInLanguage(
+  //   LocalizedStringKey.Title_Settings, 
+  //   selectedSettings.value.currentLanguage
+  // )
   
-  emits('viewTitle', title)
+  // route.meta.title = title ???
 }
 
 watch(selectedSettings, () => {
   reflectLanguageSelection()
 }, { 
   deep: true
-})
-
-onBeforeMount(() => {
-  reflectLanguageSelection()
 })
 
 onBeforeUnmount(() => {

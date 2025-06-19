@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted, watch, inject } from 'vue'
+import { computed, onMounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import sessionStore from '@/stores/session'
 import settingsStore from '@/stores/settings'
 import historyStore from '@/stores/history'
@@ -9,34 +10,33 @@ import { trackColorSheme } from '@/composables/color-scheme'
 import type { VuetyNavigationBarVM } from '@vueties/components/bars/view-models'
 import { Color, schemeColor } from '@design-tokens/palette'
 import { Icon } from '@design-tokens/iconography'
-import type { VuetyHashRouter } from '@vueties/plugins/hash-router/models'
-import HashRouterScene from '@vueties/plugins/hash-router/scenes/VuetyHashRouterScene.vue'
 import { hexString } from '@/assets/tungsten/stringify'
-
-const hashRouter: VuetyHashRouter = inject('vuety-hash-router')!
+import VuetyRouterScene from './vueties/scenes/VuetyRouterScene.vue'
 
 const session = sessionStore()
 const settings = settingsStore()
 const history = historyStore()
+
+const router = useRouter()
 
 const currentColorScheme = trackColorSheme()
 const navigationBarVM = computed<VuetyNavigationBarVM>(() => {
   return {
     isVisible: session.gameMode === GameMode.Exploration,
     leftBarItems: [
-      { 
+      {
         icon: Icon.Gear,
         isEnabled: true,
-        routeKey: Section.Settings,
-        label: settings.currentLanguage.toUpperCase()
+        label: settings.currentLanguage.toUpperCase(),
+        path: `/${Section.Settings}`
       }
     ],
     rightBarItems: [
       {
         icon: Icon.History,
         isEnabled: history.currentTermCount > 0,
-        routeKey: Section.DailyHistory,
-        label: `${history.currentTermCount}`
+        label: `${history.currentTermCount}`,
+        path: `/${Section.DailyHistory}`
       }
     ]
   }
@@ -56,9 +56,9 @@ watch(() => currentColorScheme, () => {
 
 watch(() => session.gameMode, (newMode, oldMode) => {
   if (newMode === GameMode.Test) {
-    hashRouter.setPath('/')
+    router.replace('/')
   } else if (oldMode === GameMode.Test) {
-    hashRouter.pushRoute(Section.DailyHistory)
+    router.replace(`/${Section.DailyHistory}`)
   }
 })
 
@@ -70,7 +70,5 @@ onMounted(() => {
 </script>
 
 <template>  
-  <HashRouterScene
-    :navigationBarVM="navigationBarVM"
-  />
+  <VuetyRouterScene :navigationBarVM="navigationBarVM" />
 </template>

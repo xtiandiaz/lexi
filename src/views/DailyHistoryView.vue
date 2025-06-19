@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import { onBeforeMount, ref } from 'vue'
+import { ref } from 'vue'
 import historyStore from '@/stores/history'
 import { Content } from '@/models/content'
 import { LocalizedStringKey } from '@/models/localization'
-import { Section } from '@/models/section'
 import { launchResearchToolForTerm } from '@/services/tool-handler'
 import { localizedString, localizedStringForTermTag } from '@/services/localization'
 import { prepareTest } from '@/services/session-management'
 import { dailyHistoryDateLocaleString } from '@/utils/history.utils'
-import { sectionTitle } from '@/utils/section.utils'
 import { isCompletedTermPassed } from '@/utils/term.utils'
 import { inputMarkIcon, showsInputMarkValueForKind } from '@/view-models/vm-input'
 import { Icon } from '@design-tokens/iconography'
@@ -19,10 +17,6 @@ import FoldableFormRow from '@vueties/components/form/rows/VuetyFoldableFormRow.
 import SvgIcon from '@vueties/components/misc/VuetySvgIcon.vue'
 import TextTag from '@/vueties/components/misc/VuetyTextTag.vue'
 import VuetyTextButton from '@/vueties/components/buttons/VuetyTextButton.vue'
-
-const emits = defineEmits<{
-  viewTitle: [string?]
-}>()
 
 const history = historyStore()
 const dailyHistory = history.currentDailyHistory
@@ -37,10 +31,6 @@ function onWordSelected(index: number) {
 function onTestButtonClicked() {
   prepareTest()
 }
-
-onBeforeMount(() => {
-  emits('viewTitle', sectionTitle(Section.DailyHistory))
-})
 </script>
 
 <template>
