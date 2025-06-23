@@ -2,9 +2,8 @@ export enum LocalizedStringKey {
   Button_Test,
   
   DailyGoal,
-  
-  Language,
   LanguageName,
+  Word,
   
   Text_DailyGoalReached,
   
@@ -12,10 +11,9 @@ export enum LocalizedStringKey {
   Title_HistoryFromDate,
   Title_HistoryOfToday,
   Title_HistoryOfYesterday,
+  Title_Language,
   Title_Settings,
-  
-  Word,
-  Yesterday,
+  Title_Search,
   
   TermTag_Anatomy = 'anat',
   TermTag_Architecture = 'arch',

@@ -12,11 +12,13 @@ export const sectionFromHashPath = (hashPath: string): Section | undefined => {
 
 export const sectionTitle = (section: Section) => {
   switch (section) {
-    case Section.Settings:
-      return localizedString(LocalizedStringKey.Title_Settings)!
     case Section.DailyHistory:
       return currentDailyHistoryTitle()
+    case Section.Search:
+      return localizedString(LocalizedStringKey.Title_Search)
+    case Section.Settings:
+      return localizedString(LocalizedStringKey.Title_Settings)
     default:
-      return undefined
+      return "Demo"
   }
 }

@@ -10,11 +10,12 @@ import settingsStore from '@/stores/settings'
 import { produceInputWithTool } from '@/services/tool-handler'
 import { resetSessionIfNeeded, saveSession } from "@/services/session-management"
 import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/history-management'
-import { onWindowEvent } from '@/vueties/composables/window-event'
 import InputScreen from '@/components/InputScreen.vue'
 import InputGamepad from '@/components/InputGamepad.vue'
 import TestStatusBar from "@/components/TestStatusBar.vue"
+import { onWindowEvent } from '@/vueties/composables/window-event'
 import ProgressIndicator from "@vueties/components/misc/VuetyProgressIndicator.vue"
+import VuetyRouterModalScene from "@/vueties/scenes/VuetyRouterModalScene.vue"
 
 const session = sessionStore()
 const settings = settingsStore()
@@ -182,52 +183,55 @@ onWindowEvent('pagehide', onPageUnfocusedOrUnmounted) // for iOS
       @continued="resume()"
     />
   </main>
+  
+  <VuetyRouterModalScene />
 </template>
 
 <style scoped lang="scss">
 @use '@vueties/utils/styles';
-@use '@vueties/utils/mixins' as utility-mixins;
-@use '@vueties/utils/transitions' as utility-transitions;
+@use '@vueties/components/bars/styles' as bar-styles;
+@use '@vueties/utils/mixins';
+@use '@vueties/utils/transitions';
 @use '@design-tokens/palette';
 
-@include utility-transitions.fade(0.5s);
+@include transitions.fade(0.5s);
 
 main {
+  height: calc(100% - bar-styles.$nav-bar-height);
   z-index: 1;
+}
+
+section {
+  $h-padding: 1em;
+  $v-padding: 1em;
   
-  section {
-    $h-padding: 1em;
-    $v-padding: 1em;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: $v-padding $h-padding;
+  text-align: center;
+  width: calc(100% - $h-padding * 2);
+  
+  &#screen {
+    height: calc(45% - $v-padding * 2);
+    gap: 0.25em;
     
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    padding: $v-padding $h-padding;
-    text-align: center;
-    width: calc(100% - $h-padding * 2);
-    
-    &#screen {
-      height: calc(45% - $v-padding * 2);
-      gap: 0.25em;
-      
-      h1 {
-        margin-bottom: 0.25em;
-      }
-      
-      h6 {
-        margin: 0;
-      }
+    h1 {
+      margin-bottom: 0.25em;
     }
     
-    &#gamepad {
-      height: calc(55% - $v-padding * 2);
+    h6 {
+      margin: 0;
     }
+  }
+  
+  &#gamepad {
+    height: calc(55% - $v-padding * 2);
   }
 }
 
 .progress-indicator {
   width: 3em;
-  height: 3em;
 }
 
 #test-pass-background {
@@ -237,6 +241,6 @@ main {
   right: 0;
   top: 0;
   z-index: 0;
-  @include utility-mixins.linear-gradient(180deg, 'green' 0.15 0%, 'green' 0 75%);
+  @include mixins.linear-gradient(180deg, 'green' 0.15 0%, 'green' 0 75%);
 }
 </style>

@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { ref, computed, watch, onBeforeUnmount } from 'vue';
+import { ref, computed, onBeforeUnmount, inject } from 'vue'
+import { useRoute } from 'vue-router'
 import settingsStore from '@/stores/settings'
 import { Language } from '@/models/language'
 import { type Settings } from '@/models/settings'
+import { LocalizedStringKey } from '@/models/localization';
 import { storeAndSaveSelectedSettings } from '@/services/settings-management';
-// import { localizedStringInLanguage } from '@/services/localization';
-import { version } from '@/../package.json'
+import { localizedStringInLanguage } from '@/services/localization';
 import { languageChoiceSectionVM } from '@/view-models/vm-settings';
-import Form from '@vueties/components/form/VuetyForm.vue'
+import VuetyForm from '@vueties/components/form/VuetyForm.vue'
 import ChoiceFormSection from '@vueties/components/form/VuetyChoiceFormSection.vue';
-// import { LocalizedStringKey } from '@/models/localization';
-// import { useRoute, useRouter } from 'vue-router';
+import { version } from '@/../package.json'
+
+const route = useRoute()
 
 const settings = settingsStore()
-// const route = useRoute()
-// const router = useRouter()
 
 const selectedSettings = ref<Settings>({
   currentLanguage: settings.currentLanguage,
@@ -24,22 +24,13 @@ const selectedSettings = ref<Settings>({
 
 const choiceSectionVM = computed(() => languageChoiceSectionVM(selectedSettings.value.currentLanguage))
 
-function reflectLanguageSelection() {
-  // const title = localizedStringInLanguage(
-  //   LocalizedStringKey.Title_Settings, 
-  //   selectedSettings.value.currentLanguage
-  // )
+function onLanguageSelected(language: Language) {
+  selectedSettings.value.currentLanguage = language
   
-  // route.meta.title = title ???
+  route.meta.title!.value = localizedStringInLanguage(LocalizedStringKey.Title_Settings, language)
 }
 
-watch(selectedSettings, () => {
-  reflectLanguageSelection()
-}, { 
-  deep: true
-})
-
-onBeforeUnmount(() => {
+onBeforeUnmount(() => {  
   if (selectedSettings.value != settings) {
     storeAndSaveSelectedSettings(selectedSettings.value)
   }
@@ -48,12 +39,12 @@ onBeforeUnmount(() => {
 
 <template>
   <main>
-    <Form>
+    <VuetyForm>
       <ChoiceFormSection 
         :vm="choiceSectionVM" 
-        @selected="(lang: Language) => selectedSettings.currentLanguage = lang"
+        @selected="onLanguageSelected"
       />
-    </Form>
+    </VuetyForm>
     <span class='version'>v{{ version }}</span>
   </main>
 </template>

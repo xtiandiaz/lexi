@@ -107,6 +107,10 @@ export class Content {
     return term
   }
   
+  getRandomRawTerms(count: number): string[] | undefined {
+    return this._rawTerms?.slice(0, count)
+  }
+  
   private constructor(language: Language, terms?: Term[], rawTerms?: string[]) {
     this.language = language
     this._rawTerms = rawTerms

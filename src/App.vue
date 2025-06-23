@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { RouterView, useRouter } from 'vue-router'
 import sessionStore from '@/stores/session'
 import settingsStore from '@/stores/settings'
 import historyStore from '@/stores/history'
@@ -11,7 +11,7 @@ import type { VuetyNavigationBarVM } from '@vueties/components/bars/view-models'
 import { Color, schemeColor } from '@design-tokens/palette'
 import { Icon } from '@design-tokens/iconography'
 import { hexString } from '@/assets/tungsten/stringify'
-import VuetyRouterScene from './vueties/scenes/VuetyRouterScene.vue'
+import VuetyNavigationBar from './vueties/components/bars/VuetyNavigationBar.vue'
 
 const session = sessionStore()
 const settings = settingsStore()
@@ -29,6 +29,11 @@ const navigationBarVM = computed<VuetyNavigationBarVM>(() => {
         isEnabled: true,
         label: settings.currentLanguage.toUpperCase(),
         path: `/${Section.Settings}`
+      },
+      {
+        icon: Icon.MagnifyingGlass,
+        isEnabled: true,
+        path: `/${Section.Search}`
       }
     ],
     rightBarItems: [
@@ -69,6 +74,8 @@ onMounted(() => {
 })
 </script>
 
-<template>  
-  <VuetyRouterScene :navigationBarVM="navigationBarVM" />
+<template>
+  <VuetyNavigationBar :viewModel="navigationBarVM" />
+  
+  <RouterView />
 </template>

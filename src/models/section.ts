@@ -1,5 +1,6 @@
 export enum Section {
+  DailyHistory = 'daily-history',
   Game = 'game',
-  Settings = 'settings',
-  DailyHistory = 'daily-history'
+  Search = 'search',
+  Settings = 'settings'
 }

@@ -2,10 +2,10 @@ import { LocalizedStringKey } from "@/models/localization";
 
 export default new Map<LocalizedStringKey, string>([
   [LocalizedStringKey.Button_Test, "Evaluar"],
-  [LocalizedStringKey.DailyGoal, "Meta Diaria"],
   
-  [LocalizedStringKey.Language, "Idioma"],
+  [LocalizedStringKey.DailyGoal, "Meta Diaria"],
   [LocalizedStringKey.LanguageName, "Español"],
+  [LocalizedStringKey.Word, "palabra"],
   
   [LocalizedStringKey.TermTag_Anatomy, "Anatomía"],
   [LocalizedStringKey.TermTag_Architecture, "Arquitectura"],
@@ -36,7 +36,7 @@ export default new Map<LocalizedStringKey, string>([
   [LocalizedStringKey.Title_HistoryFromDate, "Historial del {date}"],
   [LocalizedStringKey.Title_HistoryOfToday, "Historial de Hoy"],
   [LocalizedStringKey.Title_HistoryOfYesterday, "Historial de Ayer"],
+  [LocalizedStringKey.Title_Language, "Idioma"],
   [LocalizedStringKey.Title_Settings, "Configuración"],
-  
-  [LocalizedStringKey.Word, "palabra"],
+  [LocalizedStringKey.Title_Search, "Buscar Término"],
 ])
