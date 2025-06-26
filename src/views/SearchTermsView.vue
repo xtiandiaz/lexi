@@ -24,7 +24,7 @@ const placeholder = computed(() => {
 function search(input: string) {
   console.log('searching for: ', input)
   
-  return session.content?.searchTerms(input)
+  return session.content?.searchTerms(input.toLocaleLowerCase())
 }
 
 function onTermSelected(index: number) {
@@ -53,7 +53,7 @@ function onTermSelected(index: number) {
     
     <template #no-results="slotProps">
       <div v-if="slotProps.input.length > 0" class="outcome">
-        {{ `${localizedString(LocalizedStringKey.Text_NoResultsFor)} "${slotProps.input}"` }}"
+        {{ `${localizedString(LocalizedStringKey.Text_NoResultsFor)} "${slotProps.input}"` }}
       </div>
     </template>
   </VuetySearchView>
