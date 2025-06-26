@@ -1,2 +1,2 @@
-- Add search-term feature
+- Add setting to refresh lexicon with updates
 - Add more verbal memory mini-games

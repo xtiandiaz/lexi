@@ -13,7 +13,7 @@ import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/hi
 import InputScreen from '@/components/InputScreen.vue'
 import InputGamepad from '@/components/InputGamepad.vue'
 import TestStatusBar from "@/components/TestStatusBar.vue"
-import { onWindowEvent } from '@/vueties/composables/window-event'
+import { onWindowEvent } from '@/vueties/composables/install-window-event'
 import ProgressIndicator from "@vueties/components/misc/VuetyProgressIndicator.vue"
 import VuetyRouterModalScene from "@/vueties/scenes/VuetyRouterModalScene.vue"
 

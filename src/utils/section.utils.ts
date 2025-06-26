@@ -19,6 +19,6 @@ export const sectionTitle = (section: Section) => {
     case Section.Settings:
       return localizedString(LocalizedStringKey.Title_Settings)
     default:
-      return "Demo"
+      return undefined
   }
 }

@@ -6,6 +6,10 @@ export enum LocalizedStringKey {
   Word,
   
   Text_DailyGoalReached,
+  Text_SearchPlaceholder,
+  Text_SearchingFor,
+  Text_ResultsFor,
+  Text_NoResultsFor,
   
   Title_DailyGoalReached,
   Title_HistoryFromDate,

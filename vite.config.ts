@@ -2,10 +2,11 @@ import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-// import vueDevTools from 'vite-plugin-vue-devtools'
 
 export default defineConfig({
   base: process.env.NODE_ENV === 'production' ? '/lexi/dist/' : '/',
+  root: 'src',
+  publicDir: '../public',
   plugins: [
     vue()
   ],
@@ -18,6 +19,8 @@ export default defineConfig({
     preserveSymlinks: true
   },
   build: {
+    outDir: '../dist',
+    emptyOutDir: true,
     rollupOptions: {
       output: {
         assetFileNames: (assetInfo) => {

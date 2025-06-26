@@ -31,6 +31,10 @@ export default new Map<LocalizedStringKey, string>([
   [LocalizedStringKey.TermTag_Zoology, "Zoology"],
   
   [LocalizedStringKey.Text_DailyGoalReached, "You've reached your Daily Goal!"],
+  [LocalizedStringKey.Text_SearchingFor, "Searching for"],
+  [LocalizedStringKey.Text_SearchPlaceholder, "Search for term"],
+  [LocalizedStringKey.Text_ResultsFor, "Results for"],
+  [LocalizedStringKey.Text_NoResultsFor, "No results for"],
   
   [LocalizedStringKey.Title_DailyGoalReached, "Daily Goal reached!"],
   [LocalizedStringKey.Title_HistoryFromDate, "History from {date}"],
@@ -38,5 +42,5 @@ export default new Map<LocalizedStringKey, string>([
   [LocalizedStringKey.Title_HistoryOfYesterday, "Yesterday's History"],
   [LocalizedStringKey.Title_Language, "Language"],
   [LocalizedStringKey.Title_Settings, "Settings"],
-  [LocalizedStringKey.Title_Search, "Search for Term"],
+  [LocalizedStringKey.Title_Search, "Search for Terms"],
 ])

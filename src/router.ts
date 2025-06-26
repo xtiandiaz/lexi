@@ -4,7 +4,7 @@ import { Section } from "@/models/section"
 import GameView from "@/views/GameView.vue"
 import DailyHistoryView from "@/views/DailyHistoryView.vue"
 import SettingsView from "@/views/SettingsView.vue"
-import SearchTermView from "./views/SearchTermView.vue"
+import SearchTermsView from "./views/SearchTermsView.vue"
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -35,19 +35,16 @@ export default createRouter({
           }
         },
         {
-          path: `/${Section.Search}/:term?`,
+          path: `/${Section.Search}`,
           name: Section.Search,
           components: {
-            modal: SearchTermView
+            modal: SearchTermsView
           },
           meta: {
             section: Section.Search,
-          },
-          props: {
-            modal: true
           }
         },
-        { 
+        {
           path: `/${Section.Settings}`,
           components: {
             modal: SettingsView

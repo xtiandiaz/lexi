@@ -27,11 +27,11 @@ const testProgress = computed(() => session.test?.progress ?? 0)
 
 .status-bar {
   height: vueties-bar-styles.$nav-bar-height;
-  left: 0;
+  // left: 0;
   padding: 0 vueties-bar-styles.$nav-bar-h-padding 0 1em;
-  position: absolute;
-  right: 0;
-  top: 0;
+  // position: absolute;
+  // right: 0;
+  // top: 0;
   z-index: 1000;
   
   .progress-bar {

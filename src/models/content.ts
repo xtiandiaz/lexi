@@ -107,8 +107,16 @@ export class Content {
     return term
   }
   
-  getRandomRawTerms(count: number): string[] | undefined {
-    return this._rawTerms?.slice(0, count)
+  getRandomTerms(count: number): Term[] | undefined {
+    return this._rawTerms?.slice(0, count).map(rt => Content.composeTerm(rt, 0))
+  }
+  
+  searchTerms(searchText: string): Term[] | undefined {
+    const regExp = new RegExp(`^${searchText}.*`)
+    
+    return this._rawTerms?.filter(rt => regExp.test(rt))
+      .map(rt => Content.composeTerm(rt, 0))
+      .sort((a, b) => a.word.localeCompare(b.word))
   }
   
   private constructor(language: Language, terms?: Term[], rawTerms?: string[]) {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onBeforeUnmount, inject } from 'vue'
+import { ref, computed, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 import settingsStore from '@/stores/settings'
 import { Language } from '@/models/language'
@@ -9,7 +9,7 @@ import { storeAndSaveSelectedSettings } from '@/services/settings-management';
 import { localizedStringInLanguage } from '@/services/localization';
 import { languageChoiceSectionVM } from '@/view-models/vm-settings';
 import VuetyForm from '@vueties/components/form/VuetyForm.vue'
-import ChoiceFormSection from '@vueties/components/form/VuetyChoiceFormSection.vue';
+import VuetyChoiceFormSection from '@vueties/components/form/VuetyChoiceFormSection.vue';
 import { version } from '@/../package.json'
 
 const route = useRoute()
@@ -40,7 +40,7 @@ onBeforeUnmount(() => {
 <template>
   <main>
     <VuetyForm>
-      <ChoiceFormSection 
+      <VuetyChoiceFormSection 
         :vm="choiceSectionVM" 
         @selected="onLanguageSelected"
       />
