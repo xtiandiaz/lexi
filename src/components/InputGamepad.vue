@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { computed, onMounted, useTemplateRef, watch } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router';
 import { type InputState } from '@/models/input';
 import { InputTool } from '@/models/tools'
 import { Section } from '@/models/section';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
 import { inputToolBarButtonVMs, keypadKeyVMs } from '@/view-models/vm-input';
-import ResearchToolBar from './ResearchToolbar.vue';
+import ResearchToolbar from './ResearchToolbar.vue';
 import KeyPad from '@vueties/components/pads/VuetyKeyPad.vue';
 import ToolBar from '@/vueties/components/bars/VuetyToolbar.vue'
 import IconButton from '@vueties/components/buttons/VuetyIconButton.vue'
@@ -98,7 +98,7 @@ function onInputToolSelected(tool: InputTool) {
       class="keyboard-input"
     /> -->
     
-    <ResearchToolBar
+    <ResearchToolbar
       v-if="state.isComplete"
       @tool-selected="(tool) => launchResearchToolForTerm(tool, state.source.term)"
     />
