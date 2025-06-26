@@ -24,7 +24,7 @@ const toolButtonVMs = computed(() => researchToolButtonVMs(settings.currentLangu
 <style scoped lang="scss">
 @use '@design-tokens/palette';
 
-:deep(.icon-button) {
+:deep(.vuety-icon-button) {
   &.define {
     @include palette.color-attribute('color', 'orange');
   }

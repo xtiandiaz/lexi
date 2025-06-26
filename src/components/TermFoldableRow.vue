@@ -77,7 +77,7 @@ const emits = defineEmits<{
   flex: auto;
   justify-content: space-between;
   
-  button.icon-button .svg-icon {
+  .vuety-icon-button .svg-icon {
     width: 1.75em;
   }
 }

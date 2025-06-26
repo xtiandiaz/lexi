@@ -134,7 +134,7 @@ function onInputToolSelected(tool: InputTool) {
   }
 }
 
-:deep(button.icon-button) {
+:deep(.vuety-icon-button) {
   &.continue {
     @include palette.color-attribute('background-color', 'background');
   }
