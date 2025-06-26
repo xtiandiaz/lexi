@@ -14,11 +14,11 @@ const session = sessionStore()
 const selectedTermIndex = ref<number>()
 
 const placeholder = computed(() => {
-  if (session.content) {
-    return `E.g., ${session.content.getRandomTerms(3)?.map(t => t.word).join(', ')}, ...`
-  } else {
-    return localizedString(LocalizedStringKey.Text_SearchPlaceholder)
-  }
+  const message = localizedString(LocalizedStringKey.Text_SearchPlaceholder)
+  // if (session.content) {
+  //   message += ` e.g., ${session.content.getRandomTerms(3)?.map(t => t.word).join(', ')}, ...`
+  // }
+  return message
 })
 
 function search(input: string) {
