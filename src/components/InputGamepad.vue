@@ -6,9 +6,9 @@ import { InputTool } from '@/models/tools'
 import { Section } from '@/models/section';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
 import { inputToolBarButtonVMs, keypadKeyVMs } from '@/view-models/vm-input';
-import ResearchToolBar from './ResearchToolBar.vue';
+import ResearchToolBar from './ResearchToolbar.vue';
 import KeyPad from '@vueties/components/pads/VuetyKeyPad.vue';
-import ToolBar from '@vueties/components/bars/VuetyToolBar.vue'
+import ToolBar from '@/vueties/components/bars/VuetyToolbar.vue'
 import IconButton from '@vueties/components/buttons/VuetyIconButton.vue'
 import { Icon } from '@design-tokens/iconography'
 import { isMobile } from '@/assets/tungsten/navigator';

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { LocalizedStringKey } from '@/models/localization';
 import sessionStore from '@/stores/session';
+import settingsStore from '@/stores/settings';
 import { localizedString } from '@/services/localization';
 import TermFoldableRow from '@/components/TermFoldableRow.vue';
 import VuetySearchView from '@/vueties/views/VuetySearchView.vue'
@@ -11,20 +12,12 @@ defineProps<{
 }>()
 
 const session = sessionStore()
+const settings = settingsStore()
+
 const selectedTermIndex = ref<number>()
 
-const placeholder = computed(() => {
-  const message = localizedString(LocalizedStringKey.Text_SearchPlaceholder)
-  // if (session.content) {
-  //   message += ` e.g., ${session.content.getRandomTerms(3)?.map(t => t.word).join(', ')}, ...`
-  // }
-  return message
-})
-
 function search(input: string) {
-  console.log('searching for: ', input)
-  
-  return session.content?.searchTerms(input.toLocaleLowerCase())
+  return session.content?.searchForTerms(input, settings.currentLanguage)
 }
 
 function onTermSelected(index: number) {
@@ -34,7 +27,7 @@ function onTermSelected(index: number) {
 
 <template>
   <VuetySearchView 
-    :placeholder="placeholder"
+    :placeholder="localizedString(LocalizedStringKey.Text_SearchPlaceholder)"
     :search="search"
   >
     <template #result="slotProps">

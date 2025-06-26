@@ -107,14 +107,14 @@ export class Content {
     return term
   }
   
-  getRandomTerms(count: number): Term[] | undefined {
-    return this._rawTerms?.slice(0, count).map(rt => Content.composeTerm(rt, 0))
-  }
-  
-  searchTerms(searchText: string): Term[] | undefined {
-    const regExp = new RegExp(`^${searchText}.*`)
+  searchForTerms(searchText: string, language: Language): Term[] | undefined {
+    searchText = searchText.removeLeadingAndTrailingSpaces()
+    if (searchText.length === 0 || !this._rawTerms) {
+      return undefined
+    }
     
-    return this._rawTerms?.filter(rt => regExp.test(rt))
+    return this._rawTerms
+      .filter(rt => searchText.localeCompare(rt.slice(0, searchText.length), language, { sensitivity: "base" }) === 0)
       .map(rt => Content.composeTerm(rt, 0))
       .sort((a, b) => a.word.localeCompare(b.word))
   }

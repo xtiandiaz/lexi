@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import type { ResearchTool } from '@/models/tools';
 import settingsStore from '@/stores/settings'
 import { researchToolButtonVMs } from '@/view-models/vm-tools'
-import ToolBar from '@vueties/components/bars/VuetyToolBar.vue'
+import Toolbar from '@/vueties/components/bars/VuetyToolbar.vue'
 
 const settings = settingsStore()
 
@@ -15,7 +15,7 @@ const toolButtonVMs = computed(() => researchToolButtonVMs(settings.currentLangu
 </script>
 
 <template>
-  <ToolBar 
+  <Toolbar 
     :buttonVMs="toolButtonVMs"
     @tool-selected="(tool) => emits('toolSelected', tool)"
   />

@@ -3,7 +3,7 @@ import { Content, type Term } from '@/models/content';
 import { type ResearchTool } from '@/models/tools';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
 import FoldableFormRow from '@vueties/components/form/rows/VuetyFoldableFormRow.vue'
-import ResearchToolBar from '@/components/ResearchToolBar.vue'
+import ResearchToolBar from '@/components/ResearchToolbar.vue'
 
 // import { inputMarkIcon, showsInputMarkValueForKind } from '@/view-models/vm-input'
 // import SvgIcon from '@vueties/components/misc/VuetySvgIcon.vue'
@@ -75,6 +75,7 @@ const emits = defineEmits<{
 
 :deep(.vuety-toolbar) {
   flex: auto;
+  gap: 0;
   justify-content: space-between;
   
   .vuety-icon-button .svg-icon {
