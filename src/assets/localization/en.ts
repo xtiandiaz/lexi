@@ -33,7 +33,7 @@ export default new Map<LocalizedStringKey, string>([
   [LocalizedStringKey.Text_DailyGoalReached, "You've reached your Daily Goal!"],
   [LocalizedStringKey.Text_SearchingFor, "Searching for"],
   [LocalizedStringKey.Text_SearchPlaceholder, "Search for term"],
-  [LocalizedStringKey.Text_ResultsFor, "Results for"],
+  [LocalizedStringKey.Text_NumResultsFor, "results for"],
   [LocalizedStringKey.Text_NoResultsFor, "No results for"],
   
   [LocalizedStringKey.Title_DailyGoalReached, "Daily Goal reached!"],

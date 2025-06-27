@@ -8,7 +8,7 @@ export enum LocalizedStringKey {
   Text_DailyGoalReached,
   Text_SearchPlaceholder,
   Text_SearchingFor,
-  Text_ResultsFor,
+  Text_NumResultsFor,
   Text_NoResultsFor,
   
   Title_DailyGoalReached,

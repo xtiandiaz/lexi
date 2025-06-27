@@ -44,7 +44,11 @@ export const dynamicLocalizedString = (key: LocalizedStringKey, ...args: unknown
       } else if (dayDiff >= 1) {
         return localizedString(LocalizedStringKey.Title_HistoryOfYesterday)
       }
-      break
+      break  
+    case LocalizedStringKey.Text_NumResultsFor:
+      const count = (args[1] as Array<unknown>).length
+      
+      return `${count} ${localizedString(LocalizedStringKey.Text_NumResultsFor)} "${args[0]}"`
   }
   
   return localizedString(key)

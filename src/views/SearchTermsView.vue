@@ -3,9 +3,10 @@ import { ref } from 'vue';
 import { LocalizedStringKey } from '@/models/localization';
 import sessionStore from '@/stores/session';
 import settingsStore from '@/stores/settings';
-import { localizedString } from '@/services/localization';
+import { dynamicLocalizedString, localizedString } from '@/services/localization';
 import TermFoldableRow from '@/components/TermFoldableRow.vue';
-import VuetySearchView from '@/vueties/views/VuetySearchView.vue'
+import Section from '@vueties/components/form/VuetyFormSection.vue'
+import VuetySearchView from '@vueties/views/VuetySearchView.vue'
 
 defineProps<{
   term?: string
@@ -17,6 +18,8 @@ const settings = settingsStore()
 const selectedTermIndex = ref<number>()
 
 function search(input: string) {
+  selectedTermIndex.value = undefined
+  
   return session.content?.searchForTerms(input, settings.currentLanguage)
 }
 
@@ -30,12 +33,18 @@ function onTermSelected(index: number) {
     :placeholder="localizedString(LocalizedStringKey.Text_SearchPlaceholder)"
     :search="search"
   >
-    <template #result="slotProps">
-      <TermFoldableRow 
-        :term="slotProps.result" 
-        :isUnfolded="slotProps.key === selectedTermIndex"
-        @selected="onTermSelected(slotProps.key)" 
-      />
+    <template #results="slotProps">
+      <Section 
+        :title="dynamicLocalizedString(LocalizedStringKey.Text_NumResultsFor, slotProps.input, slotProps.results)"
+      >
+        <TermFoldableRow
+          v-for="(result, index) in slotProps.results" 
+          :key="index"
+          :isUnfolded="index === selectedTermIndex"
+          :term="result" 
+          @selected="onTermSelected(index)" 
+        />
+      </Section>
     </template>
     
     <template #searching="slotProps">
