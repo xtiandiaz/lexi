@@ -81,7 +81,9 @@ function resumeWithTerm(term: Term, mode: GameMode) {
   }
   userInput.value = new UserInput(inputSource.value, mode)
   
-  session.setInputState(userInput.value)
+  if (mode === GameMode.Exploration) {
+    session.setInputState(userInput.value)
+  }
 }
 
 function cancelTest() {
