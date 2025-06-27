@@ -12,14 +12,16 @@ export default defineStore('session', () => {
   const inputStates = ref<InputState[]>(savedSession?.inputStates ?? [])
   
   const content = ref<Content>()
-  const inputState = computed<InputState | undefined>(
-    () => inputStates.value.find(is => is.source.language === settings.currentLanguage)
+  const inputState = computed<InputState | undefined>(() => 
+    inputStates.value.find(is => is.source.language === settings.currentLanguage)
   )
+  
   const test = ref<Test>()
   const gameMode = computed<GameMode>(() => test.value ? GameMode.Test : GameMode.Exploration)
   
   function setInputState(inputState: InputState) {
     const index = inputStates.value.findIndex(is => is.source.language === settings.currentLanguage)
+    
     if (index >= 0) {
       inputStates.value[index] = inputState
     } else {

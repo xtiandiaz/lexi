@@ -32,6 +32,7 @@ export interface InputState {
   readonly prefixedInputString: string
   
   firstAvailableInputableCharIndex(char: string): number
+  toJSON(): object
 }
 
 export class UserInput implements InputState {
@@ -101,5 +102,9 @@ export class UserInput implements InputState {
     }
     
     return -1
+  }
+  
+  toJSON(): object {
+    return { ...this, isComplete: this.isComplete }
   }
 }

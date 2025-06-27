@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, provide, watch } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import { RouterView, useRouter } from 'vue-router'
 import sessionStore from '@/stores/session'
 import settingsStore from '@/stores/settings'
@@ -28,7 +28,7 @@ const navigationBarVM = computed<VuetyNavigationBarVM>(() => {
       },
       {
         icon: Icon.MagnifyingGlass,
-        isEnabled: true,
+        isEnabled: session.inputState?.isComplete === true,
         path: `/${Section.Search}`
       }
     ],
@@ -42,8 +42,6 @@ const navigationBarVM = computed<VuetyNavigationBarVM>(() => {
     ]
   }
 })
-
-provide('input-focus-key', undefined)
 
 watch(() => session.gameMode, (newMode, oldMode) => {
   if (newMode === GameMode.Test) {

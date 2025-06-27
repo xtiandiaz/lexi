@@ -9,7 +9,7 @@ import settingsStore from '@/stores/settings'
 import { loadRepositoryContent } from '@/services/content-provision'
 import { retrieve, save } from '@/assets/tungsten/local-storage'
 
-export function saveSession(currentInputState?: InputState) {
+export function saveSessionIfNeeded(currentInputState: InputState) {
   const session = sessionStore()
   
   if (session.test) {
