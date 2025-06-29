@@ -1,7 +1,7 @@
 import { InputTool, ResearchTool } from "@/models/tools";
 import { type Term, TermMetaAttributeKey } from '@/models/content'
 import type { InputState } from "@/models/input"
-import { Language } from "@/models/language";
+import { Language } from "@/models/localization";
 import settingsStore from "@/stores/settings"
 
 const dictionaryURLString = (language: Language): string => {

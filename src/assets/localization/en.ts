@@ -5,7 +5,7 @@ export default new Map<LocalizedStringKey, string>([
   
   [LocalizedStringKey.DailyGoal, "Daily Goal"],
   [LocalizedStringKey.LanguageName, "English"],
-  [LocalizedStringKey.Word, "word"],
+  [LocalizedStringKey.Term, "term"],
   
   [LocalizedStringKey.TermTag_Anatomy, "Anatomy"],
   [LocalizedStringKey.TermTag_Architecture, "Architecture"],

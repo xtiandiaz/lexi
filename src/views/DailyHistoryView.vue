@@ -30,7 +30,7 @@ function onTestButtonClicked() {
   <main>
     <Form v-if="dailyHistory">
       <FormSection
-        :title="`${dailyHistoryDateLocaleString(dailyHistory)} • ${termCount} ${localizedString(LocalizedStringKey.Word, termCount === 0 || termCount > 1)}`"
+        :title="`${dailyHistoryDateLocaleString(dailyHistory)} • ${termCount} ${localizedString(LocalizedStringKey.Term, termCount === 0 || termCount > 1)}`"
       >
         <CompletedTermFoldableRow
           v-for="(term, index) of dailyHistory.completedTerms.sort((s1, s2) => s1.word.localeCompare(s2.word))"
@@ -47,7 +47,7 @@ function onTestButtonClicked() {
         v-if="history.canTakeTest"
         id="test-button"
         :label="localizedString(LocalizedStringKey.Button_Test)"
-        :icon="Icon.Right"
+        :icon="Icon.CheckmarkCircleFilled"
         @click="onTestButtonClicked"
       />
     </div>

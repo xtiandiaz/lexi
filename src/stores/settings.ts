@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { Language } from '@/models/language'
+import { Language } from '@/models/localization'
 import { type LanguageSettings, defaultLanguageSettings, defaultMinTermCountForTest } from '@/models/settings'
 import { retrieveSavedSettings } from '@/services/settings-management'
 

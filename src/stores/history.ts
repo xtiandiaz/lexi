@@ -2,7 +2,7 @@ import '@/assets/tungsten/extensions/date.extensions'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { DailyHistory } from '@/models/history'
-import type { Language } from '@/models/language'
+import type { Language } from '@/models/localization'
 import settingsStore from './settings'
 import { retrieveSavedDailyHistories } from '@/services/history-management'
 

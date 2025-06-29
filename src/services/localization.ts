@@ -1,5 +1,4 @@
-import { LocalizedStringKey } from "@/models/localization"
-import { Language } from "@/models/language"
+import { Language, LocalizedStringKey } from "@/models/localization"
 import { TermTag } from "@/models/content"
 import settingsStore from "@/stores/settings"
 import ES from '@/assets/localization/es'

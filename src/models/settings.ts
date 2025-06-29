@@ -1,4 +1,4 @@
-import { Language } from "./language";
+import { Language } from "./localization";
 
 export interface DailyGoalSettings {
   termCount: number

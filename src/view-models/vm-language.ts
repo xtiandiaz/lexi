@@ -1,4 +1,4 @@
-import { Language } from '@/models/language'
+import { Language } from '@/models/localization'
 import { Icon } from '@/assets/design-tokens/iconography'
 
 export const dictionaryIcon = (language: Language) => {

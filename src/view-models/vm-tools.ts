@@ -1,5 +1,5 @@
 import { ResearchTool } from "@/models/tools"
-import { Language } from "@/models/language";
+import { Language } from "@/models/localization"
 import type { LanguageSettings } from "@/models/settings";
 import { dictionaryIcon, translationIcon } from '@/view-models/vm-language'
 import { Icon } from "@/assets/design-tokens/iconography";

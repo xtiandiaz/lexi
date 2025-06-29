@@ -2,7 +2,7 @@
 import { ref, computed, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 import settingsStore from '@/stores/settings'
-import { Language } from '@/models/language'
+import { Language } from '@/models/localization'
 import { type Settings } from '@/models/settings'
 import { LocalizedStringKey } from '@/models/localization';
 import { storeAndSaveSelectedSettings } from '@/services/settings-management';

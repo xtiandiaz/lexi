@@ -1,9 +1,14 @@
+export enum Language {
+  English = 'en',
+  Spanish = 'es',
+}
+
 export enum LocalizedStringKey {  
   Button_Test,
   
   DailyGoal,
   LanguageName,
-  Word,
+  Term,
   
   Text_DailyGoalReached,
   Text_SearchPlaceholder,

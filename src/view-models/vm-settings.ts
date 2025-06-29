@@ -1,4 +1,4 @@
-import { Language } from "@/models/language"
+import { Language } from "@/models/localization"
 import { LocalizedStringKey } from '@/models/localization'
 import { localizedStringInLanguage } from "@/services/localization"
 import type { VuetyFormOptionRowVM, VuetyFormSectionVM } from "@vueties/components/form/view-models"
