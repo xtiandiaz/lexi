@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue'
-import { RouterView, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import sessionStore from '@/stores/session'
 import settingsStore from '@/stores/settings'
 import historyStore from '@/stores/history'
 import { Section } from '@/models/section'
 import { GameMode } from '@/models/game'
 import type { VuetyNavigationBarVM } from '@vueties/components/bars/view-models'
+import VuetyScene from '@vueties/scenes/VuetyScene.vue'
 import { Icon } from '@design-tokens/iconography'
-import VuetyNavigationBar from './vueties/components/bars/VuetyNavigationBar.vue'
 
 const session = sessionStore()
 const settings = settingsStore()
@@ -57,7 +57,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <VuetyNavigationBar :viewModel="navigationBarVM" />
-  
-  <RouterView />
+  <VuetyScene :navigationBarVM="navigationBarVM" />
 </template>

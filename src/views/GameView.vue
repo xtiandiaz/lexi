@@ -12,9 +12,9 @@ import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/hi
 import InputScreen from '@/components/InputScreen.vue'
 import InputGamepad from '@/components/InputGamepad.vue'
 import TestStatusBar from "@/components/TestStatusBar.vue"
-import { setUpEvent } from '@/vueties/composables/set-up-event'
+import { setUpEvent } from '@vueties/composables/set-up-event'
 import ProgressIndicator from "@vueties/components/misc/VuetyProgressIndicator.vue"
-import VuetyRouterModalScene from "@/vueties/scenes/VuetyRouterModalScene.vue"
+import VuetyModalScene from "@vueties/scenes/VuetyModalScene.vue"
 import "@/assets/tungsten/extensions/array.extensions"
 
 const session = sessionStore()
@@ -188,7 +188,7 @@ setUpEvent('pagehide', window, onPageUnfocusedOrUnmounted) // for iOS
     />
   </main>
   
-  <VuetyRouterModalScene />
+  <VuetyModalScene />
 </template>
 
 <style scoped lang="scss">
