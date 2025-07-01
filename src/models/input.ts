@@ -1,4 +1,4 @@
-import type { Language } from './language'
+import type { Language } from './localization'
 import type { Term } from './content'
 import type { GameMode } from './game'
 import { substringFromIndices } from "@/assets/tungsten/stringify"

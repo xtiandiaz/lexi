@@ -1,6 +1,6 @@
 import { type Term } from './content'
 import { type InputMark } from './input'
-import type { Language } from './language'
+import type { Language } from './localization'
 
 export interface CompletedTerm extends Term {
   inputMarks: InputMark[]

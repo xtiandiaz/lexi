@@ -48,7 +48,7 @@ export const inputMarkIcon = (kind: InputMarkKind) => {
     case InputMarkKind.Hint:
       return Icon.Hint
     case InputMarkKind.Test:
-      return Icon.Right
+      return Icon.CheckmarkCircle
   }
 }
 

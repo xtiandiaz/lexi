@@ -16,7 +16,7 @@ const testProgress = computed(() => session.test?.progress ?? 0)
 
 <template>
   <div class="item-bar status-bar">
-    <ProgressBar :progress="testProgress" :iconFrom="Icon.Right" />
+    <ProgressBar :progress="testProgress" :iconFrom="Icon.CheckmarkCircle" />
     <CloseButton :icon="Icon.Xmark" @click="emits('intendedToCancel')" />
   </div>
 </template>
