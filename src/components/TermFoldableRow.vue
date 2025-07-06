@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RawContent, type Term } from '@/models/content';
-import { type ResearchTool } from '@/models/tools';
+import { allResearchTools, type ResearchTool } from '@/models/tools';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
 import FoldableFormRow from '@vueties/components/form/rows/VuetyFoldableFormRow.vue'
 import ResearchToolBar from '@/components/ResearchToolbar.vue'
@@ -38,6 +38,8 @@ const emits = defineEmits<{
     </template>
     <template v-slot:foldable-content>
       <ResearchToolBar
+        :tools="allResearchTools"
+        :language="term.language"
         @tool-selected="(tool: ResearchTool) => launchResearchToolForTerm(tool, term)"
       />
     </template>

@@ -61,9 +61,9 @@ export interface RawTermBatch {
 }
 
 export class RawContent {  
-  _batches?: RawTermBatch[]
+  _batches: RawTermBatch[]
   
-  constructor(batches?: RawTermBatch[]) {
+  constructor(batches: RawTermBatch[]) {
     this._batches = batches
   }
   
@@ -98,21 +98,19 @@ export class RawContent {
     return term
   }
   
-  searchForTerms(searchText: string, language: Language): Term[] | undefined {
+  searchForTerms(searchText: string): Term[] | undefined {
     searchText = searchText.removeLeadingAndTrailingSpaces()
     if (searchText.length === 0) {
       return undefined
     }
     
-    const batch = this._batches?.find(b => b.language === language)
-    if (!batch) {
-      console.error("No batch for language", language)
-      return undefined
-    }
-    
-    return batch.rawTerms
-      .filter(rt => searchText.localeCompare(rt.slice(0, searchText.length), language, { sensitivity: "base" }) === 0)
-      .map(rt => RawContent.composeTerm(rt, 0, language))
+    return this._batches
+      .flatMap(b => b.rawTerms
+        .filter(rt =>
+          searchText.localeCompare(rt.slice(0, searchText.length), b.language, { sensitivity: "base" }) === 0
+        )
+        .map(rt => RawContent.composeTerm(rt, 0, b.language))
+      )
       .sort((a, b) => a.word.localeCompare(b.word))
   }
   

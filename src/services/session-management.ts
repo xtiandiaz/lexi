@@ -48,7 +48,7 @@ export async function resetSessionIfNeeded(): Promise<void> {
 
 export function prepareTest() {
   const settings = settingsStore()
-  const dailyHistory = historyStore().currentDailyHistory
+  const dailyHistory = historyStore().dailyHistory
   const completedTerms = dailyHistory?.completedTerms
   if (!dailyHistory || !completedTerms || completedTerms.length < settings.minTermCountForTest) {
     console.error('Scanty content for a test!', completedTerms)

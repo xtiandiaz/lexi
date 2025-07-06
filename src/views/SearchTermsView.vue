@@ -2,7 +2,6 @@
 import { ref } from 'vue';
 import { LocalizedStringKey } from '@/models/localization';
 import sessionStore from '@/stores/session';
-import settingsStore from '@/stores/settings';
 import { dynamicLocalizedString, localizedString } from '@/services/localization';
 import TermFoldableRow from '@/components/TermFoldableRow.vue';
 import Section from '@vueties/components/form/VuetyFormSection.vue'
@@ -13,14 +12,13 @@ defineProps<{
 }>()
 
 const session = sessionStore()
-const settings = settingsStore()
 
 const selectedTermIndex = ref<number>()
 
 function search(input: string) {
   selectedTermIndex.value = undefined
   
-  return session.content?.searchForTerms(input, settings.currentLanguage)
+  return session.content?.searchForTerms(input) ?? []
 }
 
 function onTermSelected(index: number) {
