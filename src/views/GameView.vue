@@ -13,7 +13,7 @@ import InputScreen from '@/components/InputScreen.vue'
 import InputGamepad from '@/components/InputGamepad.vue'
 import TestStatusBar from "@/components/TestStatusBar.vue"
 import { setUpEvent } from '@vueties/composables/set-up-event'
-import ProgressIndicator from "@vueties/components/misc/VuetyProgressIndicator.vue"
+import VuetyProgressIndicator from "@vueties/components/misc/VuetyProgressIndicator.vue"
 import VuetyModalScene from "@vueties/scenes/VuetyModalScene.vue"
 import "@/assets/tungsten/extensions/array.extensions"
 
@@ -170,7 +170,7 @@ setUpEvent('pagehide', window, onPageUnfocusedOrUnmounted) // for iOS
     <div v-if='isTermPass' id="test-pass-background"></div>
   </Transition>
   
-  <ProgressIndicator v-if="!inputSource" class="absolutely-centered-block" />
+  <VuetyProgressIndicator v-if="!inputSource" class="absolutely-centered-block" />
   
   <TestStatusBar 
     v-if="session.gameMode === GameMode.Test" 
@@ -234,7 +234,7 @@ section {
   }
 }
 
-.progress-indicator {
+.vuety-progress-indicator {
   width: 3em;
 }
 

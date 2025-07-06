@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import historyStore from '@/stores/history'
 import { LocalizedStringKey } from '@/models/localization'
+import { Section } from '@/models/section'
 import { localizedString } from '@/services/localization'
 import { prepareTest } from '@/services/session-management'
 import CompletedTermFoldableRow from '@/components/CompletedTermFoldableRow.vue'
@@ -9,7 +10,12 @@ import Form from '@vueties/components/form/VuetyForm.vue'
 import FormSection from '@vueties/components/form/VuetyFormSection.vue'
 import VuetyTextButton from '@/vueties/components/buttons/VuetyTextButton.vue'
 import { dailyHistoryDateLocaleString } from '@/utils/history.utils'
+import { sectionTitle } from '@/utils/section.utils'
 import { Icon } from '@design-tokens/iconography'
+
+const emits = defineEmits<{
+  setSceneTitle: [string?]
+}>()
 
 const history = historyStore()
 const dailyHistory = history.currentDailyHistory
@@ -24,6 +30,10 @@ function onTermSelected(index: number) {
 function onTestButtonClicked() {
   prepareTest()
 }
+
+onBeforeMount(() => {
+  emits('setSceneTitle', sectionTitle(Section.DailyHistory))
+})
 </script>
 
 <template>

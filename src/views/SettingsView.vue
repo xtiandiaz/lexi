@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onBeforeUnmount } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, computed, onBeforeUnmount, onBeforeMount } from 'vue'
 import settingsStore from '@/stores/settings'
 import { Language } from '@/models/localization'
 import { type Settings } from '@/models/settings'
@@ -12,7 +11,9 @@ import VuetyForm from '@vueties/components/form/VuetyForm.vue'
 import VuetyChoiceFormSection from '@vueties/components/form/VuetyChoiceFormSection.vue';
 import { version } from '@/../package.json'
 
-const route = useRoute()
+const emits = defineEmits<{
+  setSceneTitle: [string?]
+}>()
 
 const settings = settingsStore()
 
@@ -27,8 +28,19 @@ const choiceSectionVM = computed(() => languageChoiceSectionVM(selectedSettings.
 function onLanguageSelected(language: Language) {
   selectedSettings.value.currentLanguage = language
   
-  route.meta.title!.value = localizedStringInLanguage(LocalizedStringKey.Title_Settings, language)
+  setTitle()
 }
+
+function setTitle() {
+  emits('setSceneTitle', localizedStringInLanguage(
+    LocalizedStringKey.Title_Settings, 
+    selectedSettings.value.currentLanguage
+  ))
+}
+
+onBeforeMount(() => {
+  setTitle()
+})
 
 onBeforeUnmount(() => {  
   if (selectedSettings.value != settings) {
