@@ -1,29 +1,36 @@
-import { Content } from '@/models/content'
+import { RawContent, type RawTermBatch } from '@/models/content'
 import settingsStore from '@/stores/settings'
-import sessionStore from '@/stores/session'
 import '@/assets/tungsten/extensions/array.extensions'
 
-export async function loadRepositoryContent(): Promise<Content | undefined> {
+const sourcePath = 'https://raw.githubusercontent.com/xtiandiaz/lexicon/refs/heads/main/src'
+const availableContent: RawTermBatch[] = []
+
+export async function loadRepositoryContent(): Promise<RawContent | undefined> {
   const settings = settingsStore()
-  const session = sessionStore()
-  const currentContent = session.content
   
-  if (currentContent?.language === settings.currentLanguage) {
-    return session.content
+  for (const language of settings.activeLanguages) {
+    if (availableContent.find(c => c.language === language)) {
+      continue
+    }
+    
+    const urlString = `${sourcePath}/terms/${language}.txt`
+  
+    try {
+      const response = await fetch(`${urlString}?salt=${Math.random()}`)
+      // console.log(response)
+      const rawTerms = (await response.text()).split('\n')
+      // console.log(terms)
+      
+      availableContent.push({ language, rawTerms })
+    } catch (error) {
+      console.error(`Language: ${language}`, error)
+      
+      return undefined
+    }
   }
   
-  const urlString = `https://raw.githubusercontent.com/xtiandiaz/lexicon/refs/heads/main/src/terms/${settings.currentLanguage}.txt`
+  const selectedBatches = [...settings.activeLanguages]
+    .compactMap(l => availableContent.find(b => b.language === l))
   
-  try {
-    const response = await fetch(`${urlString}?salt=${Math.random()}`)
-    // console.log(response)
-    const rawTerms = (await response.text()).split('\n')
-    // console.log(terms)
-    
-    return Content.instantiateForExploration(settings.currentLanguage, rawTerms)
-  } catch (error) {
-    console.error(`Language: ${settings.currentLanguage}`, error)
-    
-    return undefined
-  }
+  return new RawContent(selectedBatches)
 }

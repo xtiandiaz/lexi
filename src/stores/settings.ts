@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { Language } from '@/models/localization'
 import { type LanguageSettings, defaultLanguageSettings, defaultMinTermCountForTest } from '@/models/settings'
@@ -9,22 +9,23 @@ export default defineStore('settings', () => {
   
   const languagesSettings: LanguageSettings[] = Object.values(Language).map(lang => {
     const savedLanguageSettings = savedSettings?.languagesSettings.find(ls => ls.language === lang)
+    
     return savedLanguageSettings ?? defaultLanguageSettings(lang)
   })
-  const languageSettings = (language: Language) => languagesSettings.find(ls => ls.language === language)!
   
-  const currentLanguage = ref<Language>(savedSettings?.currentLanguage ?? Language.Spanish)
+  const activeLanguages = ref<Language[]>(savedSettings?.activeLanguages ?? [Language.Spanish])
+  const preferredLanguage = ref<Language>(savedSettings?.preferredLanguage ?? activeLanguages.value[0])
   
-  const currentLanguageSettings = computed(() => languageSettings(currentLanguage.value))
-  // const currentDailyGoal = computed(() => currentLanguageSettings.value.dailyGoal)
+  function getSettingsForLanguage(language: Language): LanguageSettings {
+    return languagesSettings.find(ls => ls.language === language)!
+  }
   
   return {
-    currentLanguage,
-    currentLanguageSettings,
-    // currentDailyGoal,
-    languagesSettings,    
+    activeLanguages,
+    languagesSettings,
     minTermCountForTest: savedSettings?.minTermCountForTest ?? defaultMinTermCountForTest,
+    preferredLanguage,
     
-    languageSettings,
+    getSettingsForLanguage
   }
 })

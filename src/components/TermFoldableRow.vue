@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Content, type Term } from '@/models/content';
+import { RawContent, type Term } from '@/models/content';
 import { type ResearchTool } from '@/models/tools';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
 import FoldableFormRow from '@vueties/components/form/rows/VuetyFoldableFormRow.vue'
@@ -34,7 +34,7 @@ const emits = defineEmits<{
       </div>
     </template>
     <template v-slot:subtitle v-if="term.aliases">
-      <span class="subtitle">{{ Content.aliasesStringFromTerm(term) }}</span>
+      <span class="subtitle">{{ RawContent.aliasesStringFromTerm(term) }}</span>
     </template>
     <template v-slot:foldable-content>
       <ResearchToolBar

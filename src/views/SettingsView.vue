@@ -6,7 +6,7 @@ import { type Settings } from '@/models/settings'
 import { LocalizedStringKey } from '@/models/localization';
 import { storeAndSaveSelectedSettings } from '@/services/settings-management';
 import { localizedStringInLanguage } from '@/services/localization';
-import { languageChoiceSectionVM } from '@/view-models/vm-settings';
+import { produceLanguageChoiceSectionVM } from '@/view-models/vm-settings';
 import VuetyForm from '@vueties/components/form/VuetyForm.vue'
 import VuetyChoiceFormSection from '@vueties/components/form/VuetyChoiceFormSection.vue';
 import { version } from '@/../package.json'
@@ -17,16 +17,18 @@ const emits = defineEmits<{
 
 const settings = settingsStore()
 
-const selectedSettings = ref<Settings>({
-  currentLanguage: settings.currentLanguage,
-  languagesSettings: settings.languagesSettings,
-  minTermCountForTest: settings.minTermCountForTest
-})
+const selectedLanguages = ref<Set<Language>>(new Set(settings.activeLanguages))
+const preferredLanguage = ref<Language>(settings.preferredLanguage)
 
-const choiceSectionVM = computed(() => languageChoiceSectionVM(selectedSettings.value.currentLanguage))
+const choiceSectionVM = computed(() => produceLanguageChoiceSectionVM([...selectedLanguages.value]))
 
 function onLanguageSelected(language: Language) {
-  selectedSettings.value.currentLanguage = language
+  if (selectedLanguages.value.has(language) && selectedLanguages.value.size > 1) {
+    selectedLanguages.value.delete(language)
+  } else {
+    selectedLanguages.value.add(language)
+    preferredLanguage.value = language
+  }
   
   setTitle()
 }
@@ -34,7 +36,7 @@ function onLanguageSelected(language: Language) {
 function setTitle() {
   emits('setSceneTitle', localizedStringInLanguage(
     LocalizedStringKey.Title_Settings, 
-    selectedSettings.value.currentLanguage
+    preferredLanguage.value
   ))
 }
 
@@ -42,9 +44,11 @@ onBeforeMount(() => {
   setTitle()
 })
 
-onBeforeUnmount(() => {  
-  if (selectedSettings.value != settings) {
-    storeAndSaveSelectedSettings(selectedSettings.value)
+onBeforeUnmount(() => {
+  const _selectedLanguages = [...selectedLanguages.value].sort()
+  
+  if (_selectedLanguages !== settings.activeLanguages.sort()) {
+    storeAndSaveSelectedSettings(_selectedLanguages, preferredLanguage.value)
   }
 })
 </script>

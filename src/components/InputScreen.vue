@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, watch, useTemplateRef, nextTick, onMounted } from 'vue';
 import { type InputState } from '@/models/input'
-import { Content } from '@/models/content'
+import { RawContent } from '@/models/content'
 import { localizedStringForTermTag } from '@/services/localization';
 import fitText from '@vueties/composables/fit-text'
 import TextTag from '@vueties/components/misc/VuetyTextTag.vue';
@@ -12,8 +12,8 @@ const { state } = defineProps<{
 
 const inputHeadlineRef = useTemplateRef('input-headline')
 
-const showsTags = computed(() => state.source.term.extras?.tags !== undefined)
-const showsAliases = computed(() => state.source.term.aliases !== undefined)
+const showsTags = computed(() => state.term.extras?.tags !== undefined)
+const showsAliases = computed(() => state.term.aliases !== undefined)
 const showsExtras = computed(() => state.isComplete && (showsAliases.value || showsTags.value))
 
 async function fitInput() {
@@ -34,20 +34,28 @@ onMounted(async () => {
 <template>
   <section id="screen">
     <div class="spacer"></div>
+    
+    <TextTag
+      v-if="!state.isComplete"
+      :label="state.term.language.toUpperCase()"
+      class="small"
+    />
+    
     <h1 ref="input-headline" class="serif">
       {{ state.prefixedInputString }}
     </h1>
+    
     <div v-if="showsExtras" id="extras">
       <div v-if="showsTags" id="tags">
         <TextTag 
-          v-for="(tag, index) of state.source.term.extras!.tags" 
+          v-for="(tag, index) of state.term.extras!.tags" 
           :key="index"
           :label="localizedStringForTermTag(tag)"
           class="small"
         />
       </div>
       <h6 v-if="showsAliases" class="serif">
-        {{ Content.aliasesStringFromTerm(state.source.term) }}
+        {{ RawContent.aliasesStringFromTerm(state.term) }}
       </h6>
     </div>
   </section>
@@ -78,9 +86,5 @@ h1, h6 {
   h6 {
     @include palette.color-attribute('color', 'tertiary-body');
   }
-}
-
-span.tag {
-  @extend .italic;
 }
 </style>

@@ -32,7 +32,7 @@ const researchUrlString = (tool: ResearchTool, language: Language): string => {
       return 'https://duckduckgo.com/?t=ffab&iax=images&ia=images&q='
     case ResearchTool.Translate:
       const settings = settingsStore()
-      const languageSettings = settings.languageSettings(language)
+      const languageSettings = settings.getSettingsForLanguage(language)
       
       return translatorURLString([language, languageSettings.translationLanguage])!
     case ResearchTool.WikipediaSearch:
@@ -52,9 +52,7 @@ export function launchResearchToolForTerm(tool: ResearchTool, term: Term) {
       break
   }
   
-  const settings = settingsStore()
-  
-  window.open(researchUrlString(tool, settings.currentLanguage) + queryValue, '_blank')
+  window.open(researchUrlString(tool, term.language) + queryValue, '_blank')
 }
 
 function fixOrExtendInput(state: InputState): number[] | undefined {
@@ -75,8 +73,8 @@ function fixOrExtendInput(state: InputState): number[] | undefined {
     return undefined
   }
   
-  const inputableStartIndex = state.source.term.word.length - state.inputableIndices.length
-  const fixedOrExtendedSubstring = state.source.term.word.substring(0, letterMatchCount + 1)
+  const inputableStartIndex = state.term.word.length - state.inputableIndices.length
+  const fixedOrExtendedSubstring = state.term.word.substring(0, letterMatchCount + 1)
   // console.log('fixedOrExtendedInput', fixedOrExtendedSubstring)
   
   return Array.range(inputableStartIndex, inputableStartIndex + fixedOrExtendedSubstring.length, 1)

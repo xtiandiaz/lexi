@@ -1,20 +1,11 @@
 import { type Settings } from '@/models/settings'
+import { Language } from '@/models/localization'
 import { LocalStorageItemKey } from '@/models/persistence'
 import settingsStore from '@/stores/settings'
 import { retrieve, save } from '@/assets/tungsten/local-storage'
 
 export function retrieveSavedSettings(): Settings | undefined {
-  const savedSettings = retrieve<Settings>(LocalStorageItemKey.Settings)
-  
-  // if (savedSettings) {
-    // for (let i=0; i < savedSettings.languagesSettings.length; i++) {
-      // if (!savedSettings.languagesSettings[i].dailyGoal) {
-      //   savedSettings.languagesSettings[i].dailyGoal = defaultDailyGoalSettings
-      // }
-    // }
-  // }
-  
-  return savedSettings
+  return retrieve<Settings>(LocalStorageItemKey.Settings)
 }
 
 export function saveSettings() {
@@ -23,17 +14,27 @@ export function saveSettings() {
   save<Settings>(
     LocalStorageItemKey.Settings, 
     {
-      currentLanguage: settings.currentLanguage,
+      activeLanguages: [...settings.activeLanguages],
       languagesSettings: settings.languagesSettings,
-      minTermCountForTest: settings.minTermCountForTest
+      minTermCountForTest: settings.minTermCountForTest,
+      preferredLanguage: settings.preferredLanguage
     }
   )
 }
 
-export function storeAndSaveSelectedSettings(selectedSettings: Settings) {
+export function storeAndSaveSelectedSettings(
+  selectedLanguages: Language[], 
+  preferredLanguage: Language
+) {
+  if (selectedLanguages.length === 0) {
+    console.error("Insufficient languages to store and save")
+    return
+  }
+  
   const settings = settingsStore()
   
-  settings.currentLanguage = selectedSettings.currentLanguage
+  settings.activeLanguages = selectedLanguages
+  settings.preferredLanguage = preferredLanguage
   
   saveSettings()
 }

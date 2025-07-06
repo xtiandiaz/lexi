@@ -1,5 +1,5 @@
 export enum LocalStorageItemKey {
-  DailyHistories = 'daily-histories',
+  DailyHistory = 'daily-history',
   Session = 'session',
   Settings = 'settings',
 }

@@ -1,4 +1,4 @@
-import type { Content, Term } from "./content";
+import type { Term } from "./content";
 import { clamp } from "@/assets/tungsten/math";
 
 export enum GameMode {
@@ -8,31 +8,39 @@ export enum GameMode {
 
 export class Test {
   _completedTermCount = 0
-  _content: Content
+  _terms: Term[]
   
-  _currentTerm?: Term
-  _nextTermIndex = 0
+  _currentIndex = 0
   
-  constructor(content: Content) {
-    this._content = content
+  constructor(terms: Term[]) {
+    this._terms = terms.shuffled()
+  }
+  
+  get currentTerm(): Term {
+    return this._terms[this._currentIndex]
   }
   
   get progress(): number {
-    return clamp(this._completedTermCount / this._content.termCount, 0, 1)
+    return clamp(this._completedTermCount / this._terms.length, 0, 1)
   }
   
   produceNextTerm(): Term | undefined {
-    const term = this._content.produceNextTerm(0)
-    this._currentTerm = term
-    return term
+    if (this._currentIndex >= (this._terms.length - 1)) {
+      return undefined
+    }
+    
+    this._currentIndex += 1
+    
+    return this.currentTerm
   }
   
   makeProgressWithTerm(term: Term): boolean {
-    if (term.word !== this._currentTerm?.word) {
+    if (term.word !== this.currentTerm.word) {
       return false
     }
     
     this._completedTermCount++
+    
     return true
   }
 }

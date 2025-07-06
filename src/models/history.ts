@@ -1,6 +1,5 @@
 import { type Term } from './content'
 import { type InputMark } from './input'
-import type { Language } from './localization'
 
 export interface CompletedTerm extends Term {
   inputMarks: InputMark[]
@@ -8,12 +7,10 @@ export interface CompletedTerm extends Term {
 
 export interface RawDailyHistory {
   completedTerms: CompletedTerm[],
-  date: string,
-  language: Language
+  date: string
 }
 
 export interface DailyHistory {
   completedTerms: CompletedTerm[]
   date: Date
-  language: Language
 }

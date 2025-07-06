@@ -23,7 +23,6 @@ const navigationBarVM = computed<VuetyNavigationBarVM>(() => {
       {
         icon: Icon.Gear,
         isEnabled: true,
-        label: settings.currentLanguage.toUpperCase(),
         path: `/${Section.Settings}`
       },
       {

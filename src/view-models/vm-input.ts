@@ -10,9 +10,9 @@ import type { VuetyToolBarButtonVM } from '@vueties/components/bars/view-models'
 export const keypadKeyVMs = (inputState: InputState): VuetyKeypadKeyVM[] => {
   const keys: VuetyKeypadKeyVM[] = inputState.inputableIndices.map(li => {
     return { 
-      isDimmed: /[ ]/.test(inputState.source.term.word[li]),
+      isDimmed: /[ ]/.test(inputState.term.word[li]),
       isEnabled: !inputState.indices.includes(li),
-      label: labelForKey(inputState.source.term.word[li].toLowerCase()),
+      label: labelForKey(inputState.term.word[li].toLowerCase()),
       value: li, 
     }
   })

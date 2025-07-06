@@ -5,43 +5,37 @@ import historyStore from "@/stores/history";
 import { retrieve, save } from '@/assets/tungsten/local-storage'
 import '@/assets/tungsten/extensions/date.extensions'
 
-export function retrieveSavedDailyHistories(): DailyHistory[] | undefined {
-  const rawDailyHistories = retrieve<RawDailyHistory[]>(LocalStorageItemKey.DailyHistories)
-  if (!rawDailyHistories) {
+export function retrieveSavedDailyHistory(): DailyHistory | undefined {
+  const rawDailyHistory = retrieve<RawDailyHistory>(LocalStorageItemKey.DailyHistory)
+  if (!rawDailyHistory) {
     return undefined
   }
   
-  return rawDailyHistories.map(rdh => {
-    return {
-      completedTerms: rdh.completedTerms,
-      date: new Date(rdh.date),
-      language: rdh.language
-    }
-  })
+  return {
+    completedTerms: rawDailyHistory.completedTerms,
+    date: new Date(rawDailyHistory.date)
+  }
 }
 
 export function saveDailyHistory() {
   const history = historyStore()
   
-  save(
-    LocalStorageItemKey.DailyHistories, 
-    history.dailyHistories
-  )
+  save(LocalStorageItemKey.DailyHistory, history.dailyHistory)
 }
 
 export function resetDailyHistoryIfNeeded() {
   const history = historyStore()
-  if (!history.currentDailyHistory) {
+  if (!history.dailyHistory) {
     return
   }
   
-  const dateDifference = (new Date()).getDaysFrom(history.currentDailyHistory.date)
+  const dateDifference = (new Date()).getDaysFrom(history.dailyHistory.date)
   if (dateDifference < 1) {
     return
   }
   
-  history.currentDailyHistory.date = Date.today()
-  history.currentDailyHistory.completedTerms = []
+  history.dailyHistory.date = Date.today()
+  history.dailyHistory.completedTerms = []
   
   saveDailyHistory()
 }
@@ -52,11 +46,11 @@ export function saveWordInDailyHistory(inputState: InputState) {
   const history = historyStore()
   
   const newCompletedTerm: CompletedTerm = {
-    ...inputState.source.term,
+    ...inputState.term,
     inputMarks: inputState.marks
   }
   
-  const dailyHistory = history.dailyHistory(inputState.source.language)
+  const dailyHistory = history.dailyHistory
   if (dailyHistory) {
     const existingIndex = dailyHistory.completedTerms.findIndex(ct => ct.word === newCompletedTerm.word)
     if (existingIndex >= 0) {
@@ -65,11 +59,10 @@ export function saveWordInDailyHistory(inputState: InputState) {
       dailyHistory.completedTerms.push(newCompletedTerm)
     }
   } else {
-    history.dailyHistories.push({
+    history.dailyHistory = {
       completedTerms: [newCompletedTerm],
-      date: Date.today(),
-      language: inputState.source.language
-    })
+      date: Date.today()
+    }
   }
   
   saveDailyHistory()

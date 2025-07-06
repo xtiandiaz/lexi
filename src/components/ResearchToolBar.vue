@@ -1,17 +1,25 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { ResearchTool } from '@/models/tools';
+import type { Language } from '@/models/localization';
 import settingsStore from '@/stores/settings'
-import { researchToolButtonVMs } from '@/view-models/vm-tools'
+import { produceResearchButtonVMsForLanguageSettings } from '@/view-models/vm-tools'
 import Toolbar from '@/vueties/components/bars/VuetyToolbar.vue'
 
-const settings = settingsStore()
+const { tools, language } = defineProps<{
+  tools: ResearchTool[],
+  language: Language
+}>()
 
 const emits = defineEmits<{
   toolSelected: [tool: ResearchTool]
 }>()
 
-const toolButtonVMs = computed(() => researchToolButtonVMs(settings.currentLanguageSettings))
+const settings = settingsStore()
+
+const toolButtonVMs = computed(
+  () => produceResearchButtonVMsForLanguageSettings(tools, settings.getSettingsForLanguage(language))
+)
 </script>
 
 <template>

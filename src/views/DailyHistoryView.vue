@@ -18,7 +18,7 @@ const emits = defineEmits<{
 }>()
 
 const history = historyStore()
-const dailyHistory = history.currentDailyHistory
+const dailyHistory = history.dailyHistory
 const termCount = dailyHistory?.completedTerms.length ?? 0
 
 const selectedIndex = ref<number>()

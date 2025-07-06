@@ -19,7 +19,7 @@ export const localizedStringInLanguage = (key: LocalizedStringKey, language: Lan
 export const localizedString = (key: LocalizedStringKey, pluralized: boolean = false): string => {
   const settings = settingsStore()
   
-  const _string = localizedStringInLanguage(key, settings.currentLanguage)
+  const _string = localizedStringInLanguage(key, settings.preferredLanguage)
   if (_string) {
     return _string + (pluralized ? 's' : '')
   }
@@ -38,7 +38,7 @@ export const dynamicLocalizedString = (key: LocalizedStringKey, ...args: unknown
         const date = args[1] as Date
         return localizedString(LocalizedStringKey.Title_HistoryFromDate).replace(
           /{date}/, 
-          dateLocaleString(date, settings.currentLanguage)
+          dateLocaleString(date, settings.preferredLanguage)
         )
       } else if (dayDiff >= 1) {
         return localizedString(LocalizedStringKey.Title_HistoryOfYesterday)

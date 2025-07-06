@@ -13,9 +13,10 @@ export interface LanguageSettings {
 export const defaultMinTermCountForTest = 5
 
 export interface Settings {
-  currentLanguage: Language
+  activeLanguages: Language[]
   languagesSettings: LanguageSettings[]
   minTermCountForTest: number
+  preferredLanguage: Language
 }
 
 export const translationLanguage = (language: Language) => {

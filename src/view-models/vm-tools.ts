@@ -40,3 +40,16 @@ export const researchToolButtonVMs = (languageSettings: LanguageSettings): Resea
     }
   })
 }
+
+export function produceResearchButtonVMsForLanguageSettings(
+  tools: ResearchTool[], 
+  languageSettings: LanguageSettings
+): ResearchToolButtonVM[] {
+  return tools.map(tool => {
+    return {
+      tool,
+      icon: researchToolIconForLanguage(tool, languageSettings.language, languageSettings.translationLanguage),
+      isEnabled: true
+    }
+  })
+}

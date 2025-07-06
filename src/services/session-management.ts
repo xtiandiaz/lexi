@@ -1,7 +1,6 @@
 import { Test } from '@/models/game'
 import { InputMarkKind, type InputState } from '@/models/input'
 import { type Session } from '@/models/session'
-import { Content } from '@/models/content'
 import { LocalStorageItemKey } from '@/models/persistence'
 import sessionStore from '@/stores/session'
 import historyStore from '@/stores/history'
@@ -64,7 +63,6 @@ export function prepareTest() {
   })
   
   const session = sessionStore()
-  const testContent = Content.instantiateForTest(dailyHistory.language, completedTerms)
   
-  session.test = new Test(testContent)
+  session.test = new Test(completedTerms)
 }

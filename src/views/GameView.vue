@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
-import { type InputSource, type InputState, InputMarkKind, UserInput } from '@/models/input'
+import { type InputState, InputMarkKind, UserInput } from '@/models/input'
 import { InputTool } from '@/models/tools'
 import { GameMode, type Test } from '@/models/game'
 import { type Term } from '@/models/content'
@@ -20,13 +20,13 @@ import "@/assets/tungsten/extensions/array.extensions"
 const session = sessionStore()
 const settings = settingsStore()
 
-const inputSource = ref<InputSource>()
+const term = ref<Term>()
 const userInput = ref<UserInput>()
 
 const isTermPass = computed(() => session.gameMode === GameMode.Test && userInput.value?.isComplete)
 
 async function reset() {
-  inputSource.value = undefined
+  term.value = undefined
   userInput.value = undefined
   
   resetDailyHistoryIfNeeded()
@@ -38,8 +38,8 @@ async function reset() {
 
 function restoreInputOrResume() {
   if (session.gameMode === GameMode.Exploration && session.inputState) {
-    inputSource.value = session.inputState.source
-    userInput.value = new UserInput(session.inputState.source, GameMode.Exploration, session.inputState.indices)
+    term.value = session.inputState.term
+    userInput.value = new UserInput(session.inputState.term, GameMode.Exploration, session.inputState.indices)
     return
   }
   
@@ -74,12 +74,9 @@ function resumeTest(test: Test) {
   resumeWithTerm(nextTerm, GameMode.Test)
 }
 
-function resumeWithTerm(term: Term, mode: GameMode) {
-  inputSource.value = {
-    language: settings.currentLanguage,
-    term: term
-  }
-  userInput.value = new UserInput(inputSource.value, mode)
+function resumeWithTerm(_term: Term, mode: GameMode) {
+  term.value = _term
+  userInput.value = new UserInput(term.value, mode)
   
   if (mode === GameMode.Exploration) {
     session.setInputState(userInput.value)
@@ -116,7 +113,7 @@ function onInputCompleted() {
     userInput.value.addMark(InputMarkKind.Test, 1)
     userInput.value.resetMark(InputMarkKind.Hint)
     
-    session.test.makeProgressWithTerm(userInput.value.source.term)
+    session.test.makeProgressWithTerm(userInput.value.term)
   } else {
     saveSessionIfNeeded(userInput.value)
   }
@@ -148,7 +145,7 @@ function onPageUnfocusedOrUnmounted() {
   }
 }
 
-watch(async () => [settings.currentLanguage, session.gameMode], async () => {
+watch(async () => [settings.activeLanguages, session.gameMode], async () => {
   await reset()
 })
 
@@ -170,7 +167,7 @@ setUpEvent('pagehide', window, onPageUnfocusedOrUnmounted) // for iOS
     <div v-if='isTermPass' id="test-pass-background"></div>
   </Transition>
   
-  <VuetyProgressIndicator v-if="!inputSource" class="absolutely-centered-block" />
+  <VuetyProgressIndicator v-if="!term" class="absolutely-centered-block" />
   
   <TestStatusBar 
     v-if="session.gameMode === GameMode.Test" 

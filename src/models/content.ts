@@ -2,6 +2,7 @@ import type { Language } from "./localization"
 import { enumKeyFromValue } from "@/assets/tungsten/enum"
 import '@/assets/tungsten/extensions/array.extensions'
 import '@/assets/tungsten/extensions/string.extensions'
+import { getRandomChoice, getRandomInteger } from "@/assets/tungsten/randomness"
 
 export enum TermTag {
   Anatomy = 'anat',
@@ -43,6 +44,7 @@ export interface Term {
   hintPrefixLength: number
   
   readonly word: string
+  readonly language: Language
   
   readonly aliases?: string[]
   readonly extras?: TermExtras
@@ -53,35 +55,33 @@ export interface TermExtras {
   readonly metaAttributes?: TermMetaAttribute[]
 }
 
-export class Content {
+export interface RawTermBatch {
   readonly language: Language
+  readonly rawTerms: string[]
+}
+
+export class RawContent {  
+  _batches?: RawTermBatch[]
   
-  _nextIndex?: number
-  _rawTerms?: string[]
-  _terms?: Term[]
+  constructor(batches?: RawTermBatch[]) {
+    this._batches = batches
+  }
   
   get termCount(): number {
-    return this._terms?.length ?? this._rawTerms?.length ?? 0
+    return this._batches?.reduce((acc, b) => acc + b.rawTerms.length, 0) ?? 0
   }
   
-  static instantiateForTest(language: Language, terms: Term[]): Content {
-    return new Content(language, terms.shuffled())
-  }
-  
-  static instantiateForExploration(language: Language, rawTerms: string[]): Content {
-    return new Content(language, undefined, rawTerms.shuffled())
-  }
-  
-  static composeTerm(rawTerm: string, hintPrefixRate: number): Term {
+  static composeTerm(rawTerm: string, hintPrefixRate: number, language: Language): Term {
     const parts = rawTerm.split(';')
     const words = parts[0].split(',')
     
     // const extras = parts.length > 1 ? Content._extractExtrasFromRaw(parts[1]) : undefined
     
     return {
-      word: words[0].removeLeadingAndTrailingSpaces(), 
-      hintPrefixLength: Math.floor(words[0].length * hintPrefixRate), 
       aliases: words.length > 1 ? words.slice(1).map(w => w.removeLeadingAndTrailingSpaces()) : undefined, 
+      hintPrefixLength: Math.floor(words[0].length * hintPrefixRate), 
+      language,
+      word: words[0].removeLeadingAndTrailingSpaces(), 
       // extras
     }
   }
@@ -91,39 +91,29 @@ export class Content {
   }
   
   produceNextTerm(hintPrefixRate: number = 0.25): Term | undefined {
-    if (this._nextIndex === undefined) {
-      return undefined
-    }
+    const batch = getRandomChoice(this._batches!)
+    const rawTermIndex = getRandomInteger(0, batch.rawTerms.length - 1)
+    const term = RawContent.composeTerm(batch.rawTerms[rawTermIndex], hintPrefixRate, batch.language)
     
-    if (this._terms) {
-      const term = this._terms[this._nextIndex]
-      term.hintPrefixLength = hintPrefixRate
-      this._nextIndex = this._nextIndex < (this._terms!.length - 1) ? this._nextIndex + 1 : undefined
-      return term
-    }
-    
-    const term = Content.composeTerm(this._rawTerms![this._nextIndex], hintPrefixRate)
-    this._nextIndex = this._nextIndex < (this._rawTerms!.length - 1) ? this._nextIndex + 1 : 0
     return term
   }
   
   searchForTerms(searchText: string, language: Language): Term[] | undefined {
     searchText = searchText.removeLeadingAndTrailingSpaces()
-    if (searchText.length === 0 || !this._rawTerms) {
+    if (searchText.length === 0) {
       return undefined
     }
     
-    return this._rawTerms
+    const batch = this._batches?.find(b => b.language === language)
+    if (!batch) {
+      console.error("No batch for language", language)
+      return undefined
+    }
+    
+    return batch.rawTerms
       .filter(rt => searchText.localeCompare(rt.slice(0, searchText.length), language, { sensitivity: "base" }) === 0)
-      .map(rt => Content.composeTerm(rt, 0))
+      .map(rt => RawContent.composeTerm(rt, 0, language))
       .sort((a, b) => a.word.localeCompare(b.word))
-  }
-  
-  private constructor(language: Language, terms?: Term[], rawTerms?: string[]) {
-    this.language = language
-    this._rawTerms = rawTerms
-    this._terms = terms
-    this._nextIndex = terms || rawTerms ? 0 : undefined
   }
   
   private static _extractExtrasFromRaw(rawExtras: string): TermExtras | undefined {

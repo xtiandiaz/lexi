@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router';
 import { type InputState } from '@/models/input';
-import { InputTool } from '@/models/tools'
+import { allResearchTools, InputTool } from '@/models/tools'
 import { Section } from '@/models/section';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
 import { inputToolBarButtonVMs, keypadKeyVMs } from '@/view-models/vm-input';
@@ -100,7 +100,9 @@ function onInputToolSelected(tool: InputTool) {
     
     <ResearchToolbar
       v-if="state.isComplete"
-      @tool-selected="(tool) => launchResearchToolForTerm(tool, state.source.term)"
+      :tools="allResearchTools"
+      :language="state.term.language"
+      @tool-selected="(tool) => launchResearchToolForTerm(tool, state.term)"
     />
     
     <div class="spacer"></div>

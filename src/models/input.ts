@@ -1,13 +1,7 @@
-import type { Language } from './localization'
 import type { Term } from './content'
 import type { GameMode } from './game'
 import { substringFromIndices } from "@/assets/tungsten/stringify"
 import '@/assets/tungsten/extensions/array.extensions'
-
-export interface InputSource {
-  readonly language: Language
-  readonly term: Term
-}
 
 export enum InputMarkKind {
   Hint = 'hint',
@@ -23,7 +17,7 @@ export interface InputState {
   readonly indices: number[]
   readonly inputableIndices: number[]
   readonly marks: InputMark[]
-  readonly source: InputSource
+  readonly term: Term
   
   readonly isComplete: boolean
   
@@ -41,17 +35,17 @@ export class UserInput implements InputState {
   indices: number[]
   inputableIndices: number[]
   mode: GameMode
-  source: InputSource
+  term: Term
   
-  constructor(source: InputSource, mode: GameMode, indices: number[] = []) {
+  constructor(term: Term, mode: GameMode, indices: number[] = []) {
     this.indices = indices
-    this.inputableIndices = (Array.range(source.term.hintPrefixLength, source.term.word.length, 1)).shuffle()
+    this.inputableIndices = (Array.range(term.hintPrefixLength, term.word.length, 1)).shuffle()
     this.mode = mode
-    this.source = source
+    this.term = term
   }
   
   get isComplete() {
-    return this.prefixedInputString === this.source.term.word.toLowerCase()
+    return this.prefixedInputString === this.term.word.toLowerCase()
   }
   
   get sortedInputableIndices() {
@@ -59,13 +53,13 @@ export class UserInput implements InputState {
   }
   
   get hintPrefixString() {
-    return this.source.term.word.substring(0, this.source.term.hintPrefixLength)
+    return this.term.word.substring(0, this.term.hintPrefixLength)
   }
   get inputString() {
-    return substringFromIndices(this.source.term.word, this.indices)
+    return substringFromIndices(this.term.word, this.indices)
   }
   get inputableString() {
-    return substringFromIndices(this.source.term.word, this.sortedInputableIndices)
+    return substringFromIndices(this.term.word, this.sortedInputableIndices)
   }
   get prefixedInputString() {
     return this.hintPrefixString + this.inputString
@@ -94,7 +88,7 @@ export class UserInput implements InputState {
     
     for (let i = 0; i < this.inputableIndices.length; i++) {
       const indexInWord = this.inputableIndices[i]
-      const charInWord = this.source.term.word[indexInWord]
+      const charInWord = this.term.word[indexInWord]
       
       if (charInWord === char && !this.indices.includes(indexInWord)) {
         return indexInWord
