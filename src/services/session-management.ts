@@ -8,7 +8,7 @@ import settingsStore from '@/stores/settings'
 import { loadRepositoryContent } from '@/services/content-provision'
 import { retrieve, save } from '@/assets/tungsten/local-storage'
 
-export function saveSessionIfNeeded(currentInputState: InputState) {
+export function storeAndSaveSessionIfNeeded(inputState: InputState) {
   const session = sessionStore()
   
   if (session.test) {
@@ -16,12 +16,10 @@ export function saveSessionIfNeeded(currentInputState: InputState) {
     return
   }
   
-  if (currentInputState) {
-    session.setInputState(currentInputState)
-  }
+  session.inputState = inputState
   
   save<Session>(LocalStorageItemKey.Session, {
-    inputStates: session.inputStates
+    inputState
   })
 }
 

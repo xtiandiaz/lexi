@@ -2,7 +2,6 @@
 import { computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import sessionStore from '@/stores/session'
-import settingsStore from '@/stores/settings'
 import historyStore from '@/stores/history'
 import { Section } from '@/models/section'
 import { GameMode } from '@/models/game'
@@ -11,7 +10,6 @@ import VuetyScene from '@vueties/scenes/VuetyScene.vue'
 import { Icon } from '@design-tokens/iconography'
 
 const session = sessionStore()
-const settings = settingsStore()
 const history = historyStore()
 
 const router = useRouter()

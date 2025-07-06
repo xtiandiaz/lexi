@@ -7,7 +7,7 @@ import { type Term } from '@/models/content'
 import sessionStore from '@/stores/session'
 import settingsStore from '@/stores/settings'
 import { produceInputWithTool } from '@/services/tool-handler'
-import { resetSessionIfNeeded, saveSessionIfNeeded } from "@/services/session-management"
+import { resetSessionIfNeeded, storeAndSaveSessionIfNeeded } from "@/services/session-management"
 import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/history-management'
 import InputScreen from '@/components/InputScreen.vue'
 import InputGamepad from '@/components/InputGamepad.vue'
@@ -79,7 +79,7 @@ function resumeWithTerm(_term: Term, mode: GameMode) {
   userInput.value = new UserInput(term.value, mode)
   
   if (mode === GameMode.Exploration) {
-    session.setInputState(userInput.value)
+    session.inputState = userInput.value
   }
 }
 
@@ -115,7 +115,7 @@ function onInputCompleted() {
     
     session.test.makeProgressWithTerm(userInput.value.term)
   } else {
-    saveSessionIfNeeded(userInput.value)
+    storeAndSaveSessionIfNeeded(userInput.value)
   }
   
   saveWordInDailyHistory(userInput.value)
@@ -129,6 +129,7 @@ function onInputToolSelected(tool: InputTool) {
   switch(tool) {
     case InputTool.Hint:
       const newInputIndices = produceInputWithTool(tool, userInput.value)
+      
       if (newInputIndices) {
         userInput.value.indices = newInputIndices
         userInput.value.addMark(InputMarkKind.Hint, 1)
@@ -141,7 +142,7 @@ function onPageUnfocusedOrUnmounted() {
   console.log("Game View unfocused or unmounted...")
   
   if (userInput.value?.mode === GameMode.Exploration) {
-    saveSessionIfNeeded(userInput.value as InputState)
+    storeAndSaveSessionIfNeeded(userInput.value as InputState)
   }
 }
 
