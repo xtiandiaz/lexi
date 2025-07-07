@@ -1,5 +1,6 @@
 import { Test } from '@/models/game'
 import { InputMarkKind, type InputState } from '@/models/input'
+import { type CompletedTerm } from '@/models/history'
 import { type Session } from '@/models/session'
 import { LocalStorageItemKey } from '@/models/persistence'
 import sessionStore from '@/stores/session'
@@ -47,13 +48,15 @@ export async function resetSessionIfNeeded(): Promise<void> {
 export function prepareTest() {
   const settings = settingsStore()
   const dailyHistory = historyStore().dailyHistory
-  const completedTerms = dailyHistory?.completedTerms
+  const completedTerms: CompletedTerm[] | undefined = dailyHistory?.completedTerms
   if (!dailyHistory || !completedTerms || completedTerms.length < settings.minTermCountForTest) {
     console.error('Scanty content for a test!', completedTerms)
     return
   }
   
-  completedTerms.forEach((ct) => {
+  completedTerms.forEach(ct => {
+    ct.hintPrefixLength = 0
+    
     const testMark = ct.inputMarks.find(im => im.kind === InputMarkKind.Test)
     if (testMark) {
       testMark.value = 0

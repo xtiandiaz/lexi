@@ -10,7 +10,7 @@ export class Test {
   _completedTermCount = 0
   _terms: Term[]
   
-  _currentIndex = 0
+  _currentIndex = -1
   
   constructor(terms: Term[]) {
     this._terms = terms.shuffled()
@@ -25,11 +25,11 @@ export class Test {
   }
   
   produceNextTerm(): Term | undefined {
-    if (this._currentIndex >= (this._terms.length - 1)) {
+    this._currentIndex += 1
+    
+    if (this._currentIndex >= this._terms.length) {
       return undefined
     }
-    
-    this._currentIndex += 1
     
     return this.currentTerm
   }
