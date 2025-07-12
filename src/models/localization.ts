@@ -1,49 +1,24 @@
 export enum Language {
   English = 'en',
+  Finnish = 'fi',
   Spanish = 'es',
 }
 
 export enum LocalizedStringKey {  
   Button_Test,
   
-  DailyGoal,
   LanguageName,
   Term,
   
-  Text_DailyGoalReached,
   Text_SearchPlaceholder,
   Text_SearchingFor,
   Text_NumResultsFor,
   Text_NoResultsFor,
   
-  Title_DailyGoalReached,
   Title_HistoryFromDate,
   Title_HistoryOfToday,
   Title_HistoryOfYesterday,
   Title_Language,
   Title_Settings,
   Title_Search,
-  
-  TermTag_Anatomy = 'anat',
-  TermTag_Architecture = 'arch',
-  TermTag_Astronomy = 'astro',
-  TermTag_Biochemistry = 'biochem',
-  TermTag_Biology = 'bio',
-  TermTag_Bird = 'bird',
-  TermTag_Botany = 'bot',
-  TermTag_Chemisty = 'chem',
-  TermTag_Economy = 'econ',
-  TermTag_Fish = 'fish',
-  TermTag_Geography = 'geogr',
-  TermTag_Geology = 'geol',
-  TermTag_Geometry = 'geom',
-  TermTag_Medicine = 'med',
-  TermTag_Meteorology = 'meteor',
-  TermTag_Philosophy = 'philos',
-  TermTag_Physics = 'phys',
-  TermTag_Physiology = 'physiol',
-  TermTag_Psychiatry = 'psych',
-  TermTag_Psychology = 'psychol',
-  TermTag_Plant = 'plant',
-  TermTag_Zoology = 'zool',
 }

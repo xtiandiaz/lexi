@@ -5,6 +5,8 @@ export const dictionaryIcon = (language: Language) => {
   switch (language) {
     case Language.English:
       return Icon.DictionaryEnglish
+    case Language.Finnish:
+      return Icon.DictionaryFinnish
     case Language.Spanish:
       return Icon.DictionarySpanish
   }

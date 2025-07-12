@@ -3,12 +3,9 @@ import { defineStore } from "pinia";
 import type { RawContent } from '@/models/content';
 import type { InputState } from '@/models/input';
 import { GameMode, Test } from '@/models/game';
-import settingsStore from '@/stores/settings'
 import { retrievedSavedSession } from '@/services/session-management';
 
-export default defineStore('session', () => {
-  const settings = settingsStore()
-  
+export default defineStore('session', () => {  
   const savedSession = retrievedSavedSession()
   
   const content = ref<RawContent>()

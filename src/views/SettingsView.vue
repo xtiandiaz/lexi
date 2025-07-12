@@ -2,7 +2,6 @@
 import { ref, computed, onBeforeUnmount, onBeforeMount } from 'vue'
 import settingsStore from '@/stores/settings'
 import { Language } from '@/models/localization'
-import { type Settings } from '@/models/settings'
 import { LocalizedStringKey } from '@/models/localization';
 import { storeAndSaveSelectedSettings } from '@/services/settings-management';
 import { localizedStringInLanguage } from '@/services/localization';

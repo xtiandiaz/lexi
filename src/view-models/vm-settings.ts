@@ -6,14 +6,21 @@ import { dictionaryIcon } from "./vm-language"
 
 export function produceLanguageChoiceSectionVM(
   currentSelection: Language[]
-): VuetyFormSectionVM<VuetyFormOptionRowVM<Language>> {  
+): VuetyFormSectionVM<VuetyFormOptionRowVM<Language>> {
+  const languages = Object.values(Language).map(l => {
+    return {    
+      code: l,
+      title: localizedStringInLanguage(LocalizedStringKey.LanguageName, l),
+    }
+  }).sort((a, b) => a.title.localeCompare(b.title))
+  
   return {
-    rowVMs: Object.values(Language).map(l => {
+    rowVMs: languages.map(l => {
       return {
-        isSelected: currentSelection.includes(l),
-        title: localizedStringInLanguage(LocalizedStringKey.LanguageName, l),
-        value: l,
-        icon: dictionaryIcon(l)
+        isSelected: currentSelection.includes(l.code),
+        title: l.title,
+        value: l.code,
+        icon: dictionaryIcon(l.code)
       } as VuetyFormOptionRowVM<Language>
     }),
     title: localizedStringInLanguage(LocalizedStringKey.Title_Language, currentSelection[0])

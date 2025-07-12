@@ -1,15 +1,17 @@
 import { Language, LocalizedStringKey } from "@/models/localization"
 import { TermTag } from "@/models/content"
 import settingsStore from "@/stores/settings"
-import ES from '@/assets/localization/es'
 import EN from '@/assets/localization/en'
+import ES from '@/assets/localization/es'
+import FI from '@/assets/localization/fi'
 import { dateLocaleString } from "@/utils/date.utils"
 
 export const localizedStringInLanguage = (key: LocalizedStringKey, language: Language): string => {
   const element: string | undefined = (() => {
     switch (language) {
-      case Language.Spanish: return ES.get(key)
       case Language.English: return EN.get(key)
+      case Language.Finnish: return FI.get(key)
+      case Language.Spanish: return ES.get(key)
     }
   })()
   
@@ -21,7 +23,7 @@ export const localizedString = (key: LocalizedStringKey, pluralized: boolean = f
   
   const _string = localizedStringInLanguage(key, settings.preferredLanguage)
   if (_string) {
-    return _string + (pluralized ? 's' : '')
+    return _string + (pluralized && settings.preferredLanguage !== Language.Finnish ? 's' : '')
   }
   
   return `{LocalizedStringKey: ${key}}`

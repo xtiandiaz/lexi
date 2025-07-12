@@ -23,6 +23,7 @@ export const translationLanguage = (language: Language) => {
   switch (language) {
     case Language.English:
       return Language.Spanish
+    case Language.Finnish:
     case Language.Spanish:
       return Language.English
   }
