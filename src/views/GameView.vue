@@ -37,7 +37,11 @@ async function reset() {
 }
 
 function restoreInputOrResume() {
-  if (session.gameMode === GameMode.Exploration && session.inputState) {
+  if (
+    session.gameMode === GameMode.Exploration && 
+    session.inputState && 
+    settings.activeLanguages.includes(session.inputState.term.language)
+  ) {
     term.value = session.inputState.term
     userInput.value = new UserInput(session.inputState.term, GameMode.Exploration, session.inputState.indices)
     return
@@ -146,9 +150,9 @@ function onPageUnfocusedOrUnmounted() {
   }
 }
 
-watch(async () => [settings.activeLanguages, session.gameMode], async () => {
+watch(() => [settings.activeLanguages, session.gameMode], async () => {
   await reset()
-})
+}, { deep: true })
 
 onMounted(async () => {
   await reset()

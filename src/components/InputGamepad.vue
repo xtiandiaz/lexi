@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router';
 import { type InputState } from '@/models/input';
-import { allResearchTools, InputTool } from '@/models/tools'
+import { InputTool } from '@/models/tools'
 import { Section } from '@/models/section';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
 import { inputToolBarButtonVMs, keypadKeyVMs } from '@/view-models/vm-input';
@@ -12,6 +12,7 @@ import ToolBar from '@/vueties/components/bars/VuetyToolbar.vue'
 import IconButton from '@vueties/components/buttons/VuetyIconButton.vue'
 import { Icon } from '@design-tokens/iconography'
 import { isMobile } from '@/assets/tungsten/navigator';
+import { termResearchTools } from '@/utils/term.utils';
 
 const route = useRoute()
 
@@ -100,7 +101,7 @@ function onInputToolSelected(tool: InputTool) {
     
     <ResearchToolbar
       v-if="state.isComplete"
-      :tools="allResearchTools"
+      :tools="termResearchTools(state.term)"
       :language="state.term.language"
       @tool-selected="(tool) => launchResearchToolForTerm(tool, state.term)"
     />

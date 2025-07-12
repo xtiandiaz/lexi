@@ -23,7 +23,7 @@ export default defineStore('settings', () => {
   return {
     activeLanguages,
     languagesSettings,
-    minTermCountForTest: savedSettings?.minTermCountForTest ?? defaultMinTermCountForTest,
+    minTermCountForTest: defaultMinTermCountForTest,
     preferredLanguage,
     
     getSettingsForLanguage

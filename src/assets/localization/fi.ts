@@ -1,7 +1,7 @@
 import { LocalizedStringKey } from "@/models/localization";
 
 export default new Map<LocalizedStringKey, string>([
-  [LocalizedStringKey.Button_Test, "Test"],
+  [LocalizedStringKey.Button_Test, "Testata"],
   
   [LocalizedStringKey.LanguageName, "Suomi"],
   [LocalizedStringKey.Term, "termi"],

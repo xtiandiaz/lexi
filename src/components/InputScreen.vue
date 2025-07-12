@@ -2,6 +2,9 @@
 import { computed, watch, useTemplateRef, nextTick, onMounted } from 'vue';
 import { type InputState } from '@/models/input'
 import { RawContent } from '@/models/content'
+import { GameMode } from '@/models/game';
+import useSettingsStore from '@/stores/settings'
+import useSessionStore from '@/stores/session'
 import { localizedStringForTermTag } from '@/services/localization';
 import fitText from '@vueties/composables/fit-text'
 import TextTag from '@vueties/components/misc/VuetyTextTag.vue';
@@ -10,11 +13,17 @@ const { state } = defineProps<{
   state: InputState
 }>()
 
+const settings = useSettingsStore()
+const session = useSessionStore()
+
 const inputHeadlineRef = useTemplateRef('input-headline')
 
 const showsTags = computed(() => state.term.extras?.tags !== undefined)
 const showsAliases = computed(() => state.term.aliases !== undefined)
 const showsExtras = computed(() => state.isComplete && (showsAliases.value || showsTags.value))
+const shouldTagLanguage = computed(() => 
+  !state.isComplete && settings.activeLanguages.length > 1 && session.gameMode === GameMode.Exploration
+)
 
 async function fitInput() {
   await nextTick()
@@ -36,7 +45,7 @@ onMounted(async () => {
     <div class="spacer"></div>
     
     <TextTag
-      v-if="!state.isComplete"
+      v-if="shouldTagLanguage"
       :label="state.term.language.toUpperCase()"
       class="small"
     />

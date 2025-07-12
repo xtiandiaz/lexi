@@ -1,32 +1,44 @@
 <script setup lang="ts">
 import { ref, computed, onBeforeUnmount, onBeforeMount } from 'vue'
-import settingsStore from '@/stores/settings'
+import useSettingsStore from '@/stores/settings'
 import { Language } from '@/models/localization'
 import { LocalizedStringKey } from '@/models/localization';
+import type { Settings } from '@/models/settings';
 import { storeAndSaveSelectedSettings } from '@/services/settings-management';
 import { localizedStringInLanguage } from '@/services/localization';
 import { produceLanguageChoiceSectionVM } from '@/view-models/vm-settings';
 import VuetyForm from '@vueties/components/form/VuetyForm.vue'
 import VuetyChoiceFormSection from '@vueties/components/form/VuetyChoiceFormSection.vue';
+import '@/assets/tungsten/extensions/array.extensions'
 import { version } from '@/../package.json'
 
 const emits = defineEmits<{
   setSceneTitle: [string?]
 }>()
 
-const settings = settingsStore()
+const settings = useSettingsStore()
 
-const selectedLanguages = ref<Set<Language>>(new Set(settings.activeLanguages))
-const preferredLanguage = ref<Language>(settings.preferredLanguage)
+const selectedSettings = ref<Settings>({
+  activeLanguages: settings.activeLanguages,
+  languagesSettings: settings.languagesSettings,
+  preferredLanguage: settings.preferredLanguage,
+})
+const selectedActiveLanguages = computed(() => selectedSettings.value.activeLanguages)
 
-const choiceSectionVM = computed(() => produceLanguageChoiceSectionVM([...selectedLanguages.value]))
+const choiceSectionVM = computed(() => 
+  produceLanguageChoiceSectionVM([...selectedSettings.value.activeLanguages])
+)
 
 function onLanguageSelected(language: Language) {
-  if (selectedLanguages.value.has(language) && selectedLanguages.value.size > 1) {
-    selectedLanguages.value.delete(language)
+  if (
+    selectedActiveLanguages.value.includes(language) && 
+    selectedActiveLanguages.value.length > 1
+  ) {
+    selectedActiveLanguages.value.remove(l => l === language)
+    selectedSettings.value.preferredLanguage = selectedActiveLanguages.value.last()!
   } else {
-    selectedLanguages.value.add(language)
-    preferredLanguage.value = language
+    selectedActiveLanguages.value.push(language)
+    selectedSettings.value.preferredLanguage = language
   }
   
   setTitle()
@@ -35,7 +47,7 @@ function onLanguageSelected(language: Language) {
 function setTitle() {
   emits('setSceneTitle', localizedStringInLanguage(
     LocalizedStringKey.Title_Settings, 
-    preferredLanguage.value
+    selectedSettings.value.preferredLanguage
   ))
 }
 
@@ -43,11 +55,12 @@ onBeforeMount(() => {
   setTitle()
 })
 
-onBeforeUnmount(() => {
-  const _selectedLanguages = [...selectedLanguages.value].sort()
-  
-  if (_selectedLanguages !== settings.activeLanguages.sort()) {
-    storeAndSaveSelectedSettings(_selectedLanguages, preferredLanguage.value)
+onBeforeUnmount(() => {  
+  if (
+    settings.activeLanguages !== selectedActiveLanguages.value ||
+    settings.preferredLanguage !== selectedSettings.value.preferredLanguage
+  ) {
+    storeAndSaveSelectedSettings(selectedSettings.value)
   }
 })
 </script>

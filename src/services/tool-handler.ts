@@ -7,7 +7,9 @@ import settingsStore from "@/stores/settings"
 const dictionaryURLString = (language: Language): string => {
   switch (language) {
     case Language.English:
-      return 'https://www.wordreference.com/definition/'
+      return 'https://www.merriam-webster.com/dictionary/'
+    case Language.Finnish:
+      return 'https://www.sanakirja.org/search.php?q='
     case Language.Spanish:
       return 'https://dle.rae.es/'
   }

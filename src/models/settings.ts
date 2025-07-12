@@ -15,7 +15,6 @@ export const defaultMinTermCountForTest = 5
 export interface Settings {
   activeLanguages: Language[]
   languagesSettings: LanguageSettings[]
-  minTermCountForTest: number
   preferredLanguage: Language
 }
 
@@ -27,10 +26,6 @@ export const translationLanguage = (language: Language) => {
     case Language.Spanish:
       return Language.English
   }
-}
-
-export const defaultDailyGoalSettings: DailyGoalSettings = {
-  termCount: 10
 }
 
 export const defaultLanguageSettings = (language: Language): LanguageSettings => {
