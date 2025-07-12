@@ -16,6 +16,8 @@ export const translationIcon = (language: Language) => {
   switch (language) {
     case Language.English:
       return Icon.LanguageEnglish
+    case Language.Finnish:
+      return Icon.LanguageFinnish
     case Language.Spanish:
       return Icon.LanguageSpanish
   }

@@ -21,15 +21,5 @@ export default defineConfig({
   build: {
     outDir: '../dist',
     emptyOutDir: true,
-    rollupOptions: {
-      output: {
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.names && assetInfo.names.find(name => /\.woff2$/.test(name))) {
-            return 'assets/fonts/[name].[ext]'
-          }
-          return 'assets/[name]-[hash].[ext]'
-        }
-      }
-    }  
   }
 })
