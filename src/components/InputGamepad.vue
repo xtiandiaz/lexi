@@ -7,9 +7,9 @@ import { Section } from '@/models/section';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
 import { inputToolBarButtonVMs, keypadKeyVMs } from '@/view-models/vm-input';
 import ResearchToolbar from './ResearchToolbar.vue';
-import KeyPad from '@vueties/components/pads/VuetyKeyPad.vue';
-import ToolBar from '@/vueties/components/bars/VuetyToolbar.vue'
-import IconButton from '@vueties/components/buttons/VuetyIconButton.vue'
+import VuetyKeypad from '@vueties/components/pads/VuetyKeypad.vue';
+import VuetyToolbar from '@vueties/components/bars/VuetyToolbar.vue'
+import VuetyIconButton from '@vueties/components/buttons/VuetyIconButton.vue'
 import { Icon } from '@design-tokens/iconography'
 import { isMobile } from '@/assets/tungsten/navigator';
 import { termResearchTools } from '@/utils/term.utils';
@@ -87,7 +87,7 @@ function onInputToolSelected(tool: InputTool) {
 
 <template>
   <section id="gamepad">
-    <KeyPad 
+    <VuetyKeypad 
       v-if="!state.isComplete"
       :keyVMs="_keypadKeyVMs"
       @input="(value: string | number) => onInput(Number(value))" 
@@ -108,13 +108,13 @@ function onInputToolSelected(tool: InputTool) {
     
     <div class="spacer"></div>
     
-    <ToolBar
+    <VuetyToolbar
       v-if="!state.isComplete"
       :buttonVMs="_inputToolBarButtonVMs"
       @tool-selected="(tool: InputTool) => onInputToolSelected(tool)"
     />
     
-    <IconButton 
+    <VuetyIconButton 
       v-if="state.isComplete"
       :icon="Icon.ArrowRight" 
       class="continue"
@@ -124,7 +124,6 @@ function onInputToolSelected(tool: InputTool) {
 </template>
 
 <style scoped lang="scss">
-@use '@vueties/utils/styles';
 @use '@design-tokens/palette';
 
 .keyboard-input {

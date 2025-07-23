@@ -14,7 +14,6 @@ import InputGamepad from '@/components/InputGamepad.vue'
 import TestStatusBar from "@/components/TestStatusBar.vue"
 import { setUpEvent } from '@vueties/composables/set-up-event'
 import VuetyProgressIndicator from "@vueties/components/misc/VuetyProgressIndicator.vue"
-import VuetyModalScene from "@vueties/scenes/VuetyModalScene.vue"
 import "@/assets/tungsten/extensions/array.extensions"
 
 const session = sessionStore()
@@ -189,21 +188,18 @@ setUpEvent('pagehide', window, onPageUnfocusedOrUnmounted) // for iOS
       @continued="resume()"
     />
   </main>
-  
-  <VuetyModalScene />
 </template>
 
 <style scoped lang="scss">
-@use '@vueties/utils/styles';
 @use '@vueties/components/bars/styles' as bar-styles;
-@use '@vueties/utils/mixins';
-@use '@vueties/utils/transitions';
+@use '@vueties/styles/mixins';
+@use '@vueties/styles/transitions';
 @use '@design-tokens/palette';
 
 @include transitions.fade(0.5s);
 
 main {
-  height: calc(100% - bar-styles.$nav-bar-height);
+  height: 100%;
   z-index: 1;
 }
 
@@ -212,14 +208,15 @@ section {
   $v-padding: 1em;
   
   align-items: center;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   padding: $v-padding $h-padding;
   text-align: center;
-  width: calc(100% - $h-padding * 2);
+  width: 100%;
   
   &#screen {
-    height: calc(45% - $v-padding * 2);
+    height: 45%;
     gap: 0.25em;
     
     h1 {
@@ -232,21 +229,19 @@ section {
   }
   
   &#gamepad {
-    height: calc(55% - $v-padding * 2);
+    height: 55%;
   }
 }
 
 .vuety-progress-indicator {
-  width: 3em;
+  margin: auto;
+  @include mixins.size(3em);
+  @include mixins.position(absolute, 0, 0, 0, 0);
 }
 
 #test-pass-background {
-  bottom: 0;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
   z-index: 0;
+  @include mixins.position(fixed, 0, 0, 0, 0);
   @include mixins.linear-gradient(180deg, 'green' 0.15 0%, 'green' 0 75%);
 }
 </style>

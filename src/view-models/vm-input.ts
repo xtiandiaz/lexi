@@ -5,7 +5,7 @@ import { canUseInputTool } from '@/services/tool-handler'
 import { labelForKey } from '@/utils/input.utils'
 import { Icon } from '@/assets/design-tokens/iconography'
 import type { VuetyKeypadKeyVM } from '@vueties/components/pads/view-models'
-import type { VuetyToolBarButtonVM } from '@vueties/components/bars/view-models'
+import type { VuetyToolbarButtonVM } from '@vueties/components/bars/view-models'
 
 export const keypadKeyVMs = (inputState: InputState): VuetyKeypadKeyVM[] => {
   const keys: VuetyKeypadKeyVM[] = inputState.inputableIndices.map(li => {
@@ -28,7 +28,7 @@ export const keypadKeyVMs = (inputState: InputState): VuetyKeypadKeyVM[] => {
   return keys
 }
 
-export const inputToolBarButtonVMs = (inputState: InputState): VuetyToolBarButtonVM<InputTool>[] => {
+export const inputToolBarButtonVMs = (inputState: InputState): VuetyToolbarButtonVM<InputTool>[] => {
   const session = sessionStore()
   if (session.test) {
     return []

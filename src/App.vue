@@ -20,14 +20,13 @@ const navigationBarVM = computed<VuetyNavigationBarVM>(() => {
     leftBarItems: [
       {
         icon: Icon.Gear,
-        isEnabled: true,
         path: `/${Section.Settings}`
       },
-      {
-        icon: Icon.MagnifyingGlass,
-        isEnabled: session.inputState?.isComplete === true,
-        path: `/${Section.Search}`
-      }
+      // {
+      //   icon: Icon.MagnifyingGlass,
+      //   isEnabled: session.inputState?.isComplete === true,
+      //   path: `/${Section.Search}`
+      // }
     ],
     rightBarItems: [
       {

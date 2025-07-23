@@ -3,7 +3,7 @@ import { Language } from "@/models/localization"
 import type { LanguageSettings } from "@/models/settings";
 import { dictionaryIcon, translationIcon } from '@/view-models/vm-language'
 import { Icon } from "@/assets/design-tokens/iconography";
-import type { VuetyToolBarButtonVM } from "@vueties/components/bars/view-models";
+import type { VuetyToolbarButtonVM } from "@vueties/components/bars/view-models";
 
 const researchToolIconForLanguage = (
   tool: ResearchTool, 
@@ -24,7 +24,7 @@ const researchToolIconForLanguage = (
   }
 }
 
-export type ResearchToolButtonVM = VuetyToolBarButtonVM<ResearchTool>
+export type ResearchToolButtonVM = VuetyToolbarButtonVM<ResearchTool>
 export const researchToolButtonVMs = (languageSettings: LanguageSettings): ResearchToolButtonVM[] => {
   return [
     ResearchTool.Define,

@@ -4,7 +4,7 @@ import type { ResearchTool } from '@/models/tools';
 import type { Language } from '@/models/localization';
 import settingsStore from '@/stores/settings'
 import { produceResearchButtonVMsForLanguageSettings } from '@/view-models/vm-tools'
-import Toolbar from '@/vueties/components/bars/VuetyToolbar.vue'
+import VuetyToolbar from '@vueties/components/bars/VuetyToolbar.vue'
 
 const { tools, language } = defineProps<{
   tools: ResearchTool[],
@@ -17,13 +17,13 @@ const emits = defineEmits<{
 
 const settings = settingsStore()
 
-const toolButtonVMs = computed(
-  () => produceResearchButtonVMsForLanguageSettings(tools, settings.getSettingsForLanguage(language))
+const toolButtonVMs = computed(() => 
+  produceResearchButtonVMsForLanguageSettings(tools, settings.getSettingsForLanguage(language))
 )
 </script>
 
 <template>
-  <Toolbar 
+  <VuetyToolbar 
     :buttonVMs="toolButtonVMs"
     @tool-selected="(tool) => emits('toolSelected', tool)"
   />
@@ -33,19 +33,19 @@ const toolButtonVMs = computed(
 @use '@design-tokens/palette';
 
 :deep(.vuety-icon-button) {
-  &.define {
+  &.define * {
     @include palette.color-attribute('color', 'orange');
   }
-  &.image-search {
+  &.image-search * {
     @include palette.color-attribute('color', 'mint');
   }
-  &.translate {
+  &.translate * {
     @include palette.color-attribute('color', 'sky-blue');
   }
-  &.web-search {
+  &.web-search * {
     @include palette.color-attribute('color', 'blue');
   }
-  &.wikipedia-search {
+  &.wikipedia-search * {
     @include palette.color-attribute('color', 'body');
   }
 }

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue'
-import historyStore from '@/stores/history'
+import { useRoute } from 'vue-router'
 import { LocalizedStringKey } from '@/models/localization'
+import historyStore from '@/stores/history'
 import { Section } from '@/models/section'
 import { localizedString } from '@/services/localization'
 import { prepareTest } from '@/services/session-management'
@@ -13,9 +14,7 @@ import { dailyHistoryDateLocaleString } from '@/utils/history.utils'
 import { sectionTitle } from '@/utils/section.utils'
 import { Icon } from '@design-tokens/iconography'
 
-const emits = defineEmits<{
-  setSceneTitle: [string?]
-}>()
+const route = useRoute()
 
 const history = historyStore()
 const dailyHistory = history.dailyHistory
@@ -32,7 +31,7 @@ function onTestButtonClicked() {
 }
 
 onBeforeMount(() => {
-  emits('setSceneTitle', sectionTitle(Section.DailyHistory))
+  route.meta.setTitle(sectionTitle(Section.DailyHistory))
 })
 </script>
 
@@ -65,7 +64,7 @@ onBeforeMount(() => {
 </template>
 
 <style scoped lang="scss">
-@use '@vueties/utils/mixins';
+@use '@vueties/styles/mixins';
 @use '@vueties/components/buttons/styles' as button-styles;
 @use '@vueties/components/form/styles' as form-styles with (
   $max-width: none

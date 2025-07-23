@@ -1,35 +1,6 @@
-@use '@design-tokens/palette';
+@use '@vueties/styles/base';
 @use '@design-tokens/typography';
-@use '@vueties/utils/styles' as vueties-util-styles;
-@use '@vueties/components/bars/styles' as vueties-bar-styles;
 
-* {
-  @extend .inhibit-contextual-touch-action;
-}
-
-html {
-  $padding-top: env(safe-area-inset-top);
-  $padding-bottom: env(safe-area-inset-bottom);
-  
-  height: calc(100% - $padding-bottom);
-  margin: 0;
-  overflow: hidden;
-  overscroll-behavior: none;
-  padding: $padding-top 0 $padding-bottom 0;
-  position: relative;
-  @include palette.color-attributes((
-    'color': 'body',
-    'background-color': 'secondary-background'
-  ));
-}
-
-body, main, #app {
-  height: 100%;
-  margin: 0;
-  position: relative;
-  width: 100%;
-}
-
-body, #app {
-  overflow: hidden;
+div.spacer {
+  flex: auto;
 }

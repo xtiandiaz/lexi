@@ -7,7 +7,7 @@ import useSettingsStore from '@/stores/settings'
 import useSessionStore from '@/stores/session'
 import { localizedStringForTermTag } from '@/services/localization';
 import fitText from '@vueties/composables/fit-text'
-import TextTag from '@vueties/components/misc/VuetyTextTag.vue';
+import VuetyTextTag from '@vueties/components/misc/VuetyTextTag.vue';
 
 const { state } = defineProps<{
   state: InputState
@@ -44,7 +44,7 @@ onMounted(async () => {
   <section id="screen">
     <div class="spacer"></div>
     
-    <TextTag
+    <VuetyTextTag
       v-if="shouldTagLanguage"
       :label="state.term.language.toUpperCase()"
       class="small"
@@ -56,7 +56,7 @@ onMounted(async () => {
     
     <div v-if="showsExtras" id="extras">
       <div v-if="showsTags" id="tags">
-        <TextTag 
+        <VuetyTextTag 
           v-for="(tag, index) of state.term.extras!.tags" 
           :key="index"
           :label="localizedStringForTermTag(tag)"
@@ -71,7 +71,6 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
-@use '@vueties/utils/styles';
 @use '@design-tokens/typography';
 @use "@design-tokens/palette";
 
