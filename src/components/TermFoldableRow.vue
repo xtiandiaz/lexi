@@ -31,7 +31,7 @@ const emits = defineEmits<{
       </div>
     </template>
     <template v-slot:subtitle v-if="term.aliases">
-      <span class="subtitle">{{ RawContent.aliasesStringFromTerm(term) }}</span>
+      <span class="subtitle caption">{{ RawContent.aliasesStringFromTerm(term) }}</span>
     </template>
     <template v-slot:foldable-content>
       <ResearchToolBar
@@ -44,16 +44,15 @@ const emits = defineEmits<{
 </template>
 
 <style scoped lang="scss">
-@use '@design-tokens/typography';
-@use '@design-tokens/palette';
+@use '@vueties/utils/vuetystrap' as vs;
 
 .row.foldable {
   position: relative;
   z-index: 1;
   
   &.unfolded {
-    span.title {
-      @extend .h6;
+    .title {
+      @include vs.h6();
     }
   }
   
@@ -67,18 +66,16 @@ const emits = defineEmits<{
   }
   
   .subtitle {
-    @extend .caption;
-    @include palette.color-attribute('color', 'tertiary-body');
+    @include vs.color-attribute('color', vs.$tertiary-body-color);
   }
 }
 
 :deep(.vuety-toolbar) {
-  // flex: auto;
-  // gap: 0;
-  // justify-content: space-between;
+  justify-content: space-evenly;
+  width: 100%;
   
   .vuety-icon-button .svg-icon {
-    width: 1.75em;
+    @include vs.size(1.75em);
   }
 }
 </style>

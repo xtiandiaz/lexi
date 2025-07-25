@@ -67,27 +67,25 @@ onBeforeUnmount(() => {
         @selected="onLanguageSelected"
       />
     </VuetyForm>
-    <span class='version'>v{{ version }}</span>
+    <span class='version caption'>v{{ version }}</span>
   </main>
 </template>
 
 <style scoped lang="scss">
+@use '@vueties/utils/vuetystrap' as vs;
 @use '@vueties/components/form/styles' as form-styles with (
   $max-width: none
 );
-@use '@design-tokens/palette';
-@use '@design-tokens/typography';
 
 main {
   text-align: center;
   
   .version {
-    @extend .caption;
-    @include palette.color-attribute('color', 'tertiary-body');
+    @include vs.color-attribute('color', vs.$tertiary-body-color);
   }
 }
 
 :deep(.representative-icon) {
-  @include palette.color-attribute('color', 'tertiary-body');
+  @include vs.color-attribute('color', vs.$tertiary-body-color);
 }
 </style>

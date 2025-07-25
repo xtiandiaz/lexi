@@ -7,7 +7,7 @@ import useSettingsStore from '@/stores/settings'
 import useSessionStore from '@/stores/session'
 import { localizedStringForTermTag } from '@/services/localization';
 import fitText from '@vueties/composables/fit-text'
-import VuetyTextTag from '@vueties/components/misc/VuetyTextTag.vue';
+import VuetyTag from '@vueties/components/misc/VuetyTag.vue';
 
 const { state } = defineProps<{
   state: InputState
@@ -42,9 +42,9 @@ onMounted(async () => {
 
 <template>
   <section id="screen">
-    <div class="spacer"></div>
+    <div class="flex-spacer"></div>
     
-    <VuetyTextTag
+    <VuetyTag
       v-if="shouldTagLanguage"
       :label="state.term.language.toUpperCase()"
       class="small"
@@ -56,7 +56,7 @@ onMounted(async () => {
     
     <div v-if="showsExtras" id="extras">
       <div v-if="showsTags" id="tags">
-        <VuetyTextTag 
+        <VuetyTag 
           v-for="(tag, index) of state.term.extras!.tags" 
           :key="index"
           :label="localizedStringForTermTag(tag)"
@@ -71,8 +71,7 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
-@use '@design-tokens/typography';
-@use "@design-tokens/palette";
+@use '@vueties/utils/vuetystrap' as vs;
 
 h1, h6 {
   margin: 0.125em 0;
@@ -92,7 +91,7 @@ h1, h6 {
   }
   
   h6 {
-    @include palette.color-attribute('color', 'tertiary-body');
+    @include vs.color-attribute('color', vs.$tertiary-body-color);
   }
 }
 </style>

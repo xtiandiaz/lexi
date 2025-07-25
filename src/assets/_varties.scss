@@ -1,8 +1,24 @@
-$tint-color: 'body' !default;
+// COLORS
 
-$tag-color: 'tertiary-body';
-$tag-background-color: 'tertiary-body' !default;
+$tint-color: 'body-alt';
+
+$body-color: 'body-alt';
+$secondary-body-color: 'secondary-body-alt';
+$tertiary-body-color: 'tertiary-body-alt';
+
+$background-color: 'background-alt';
+$secondary-background-color: 'secondary-background-alt';
+$tertiary-background-color: 'tertiary-background-alt';
+
+$accessory-color: 'accessory-alt';
+
+// PADS
+
+$keypad-key-color: 'body-alt';
+$keypad-key-background-color: 'background-alt';
+
+// TAGS
+
+$tag-color: 'tertiary-body-alt';
+$tag-background-color: 'tertiary-body-alt';
 $tag-background-opacity: 0.1;
-
-$key-color: 'body' !default;
-$key-background-color: 'background' !default;

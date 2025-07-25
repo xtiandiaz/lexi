@@ -64,13 +64,11 @@ onBeforeMount(() => {
 </template>
 
 <style scoped lang="scss">
-@use '@vueties/styles/mixins';
+@use '@vueties/utils/vuetystrap' as vs;
 @use '@vueties/components/buttons/styles' as button-styles;
 @use '@vueties/components/form/styles' as form-styles with (
   $max-width: none
 );
-@use '@design-tokens/palette';
-@use '@design-tokens/typography';
 
 #test-button-wrapper {
   bottom: 0;
@@ -80,7 +78,7 @@ onBeforeMount(() => {
   position: sticky;
   right: 0;
   z-index: 100;
-  @include mixins.linear-gradient(
+  @include vs.linear-gradient(
     0deg, 
     'secondary-background' 1 70%, 
     'secondary-background' 0 100%
@@ -88,7 +86,7 @@ onBeforeMount(() => {
   
   #test-button {
     width: 100%;
-    @include palette.color-attribute('color', 'green');
+    @include vs.color-attribute('color', 'green');
   }
 }
 </style>

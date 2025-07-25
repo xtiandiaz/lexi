@@ -191,12 +191,10 @@ setUpEvent('pagehide', window, onPageUnfocusedOrUnmounted) // for iOS
 </template>
 
 <style scoped lang="scss">
+@use '@vueties/utils/vuetystrap' as vs;
 @use '@vueties/components/bars/styles' as bar-styles;
-@use '@vueties/styles/mixins';
-@use '@vueties/styles/transitions';
-@use '@design-tokens/palette';
 
-@include transitions.fade(0.5s);
+@include vs.fade(0.5s);
 
 main {
   height: 100%;
@@ -204,14 +202,11 @@ main {
 }
 
 section {
-  $h-padding: 1em;
-  $v-padding: 1em;
-  
   align-items: center;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: $v-padding $h-padding;
+  padding: 1em;
   text-align: center;
   width: 100%;
   
@@ -235,13 +230,13 @@ section {
 
 .vuety-progress-indicator {
   margin: auto;
-  @include mixins.size(3em);
-  @include mixins.position(absolute, 0, 0, 0, 0);
+  @include vs.size(3em);
+  @include vs.position(absolute, 0, 0, 0, 0);
 }
 
 #test-pass-background {
   z-index: 0;
-  @include mixins.position(fixed, 0, 0, 0, 0);
-  @include mixins.linear-gradient(180deg, 'green' 0.15 0%, 'green' 0 75%);
+  @include vs.position(fixed, 0, 0, 0, 0);
+  @include vs.linear-gradient(180deg, 'green' 0.15 0%, 'green' 0 75%);
 }
 </style>

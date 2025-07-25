@@ -106,7 +106,7 @@ function onInputToolSelected(tool: InputTool) {
       @tool-selected="(tool) => launchResearchToolForTerm(tool, state.term)"
     />
     
-    <div class="spacer"></div>
+    <div class="flex-spacer"></div>
     
     <VuetyToolbar
       v-if="!state.isComplete"
@@ -124,7 +124,7 @@ function onInputToolSelected(tool: InputTool) {
 </template>
 
 <style scoped lang="scss">
-@use '@design-tokens/palette';
+@use '@vueties/utils/vuetystrap' as vs;
 
 .keyboard-input {
   opacity: 0;
@@ -137,11 +137,11 @@ function onInputToolSelected(tool: InputTool) {
 }
 
 :deep(.vuety-icon-button) {
-  &.continue {
-    @include palette.color-attribute('background-color', 'background');
+  &.continue * {
+    @include vs.color-attribute('background-color', vs.$background-color);
   }
-  &.hint {
-    @include palette.color-attribute('color', 'yellow');
+  &.hint * {
+    @include vs.color-attribute('color', 'yellow');
   }
 }
 </style>
