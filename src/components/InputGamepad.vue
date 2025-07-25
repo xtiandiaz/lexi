@@ -7,7 +7,7 @@ import { Section } from '@/models/section';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
 import { inputToolBarButtonVMs, keypadKeyVMs } from '@/view-models/vm-input';
 import ResearchToolbar from './ResearchToolbar.vue';
-import VuetyKeypad from '@vueties/components/pads/VuetyKeypad.vue';
+import VuetyKeypad from '@/vueties/components/pads/VuetyKeypad.vue';
 import VuetyToolbar from '@vueties/components/bars/VuetyToolbar.vue'
 import VuetyIconButton from '@vueties/components/buttons/VuetyIconButton.vue'
 import { Icon } from '@design-tokens/iconography'
