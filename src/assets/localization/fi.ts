@@ -14,7 +14,7 @@ export default new Map<LocalizedStringKey, string>([
   [LocalizedStringKey.Title_HistoryFromDate, "History päivästä lähtien {date}"],
   [LocalizedStringKey.Title_HistoryOfToday, "Tämän päivän historia"],
   [LocalizedStringKey.Title_HistoryOfYesterday, "Eilisen historia"],
-  [LocalizedStringKey.Title_Language, "Kieli"],
+  [LocalizedStringKey.Title_Languages, "Kieliä"],
   [LocalizedStringKey.Title_Settings, "Asetukset"],
   [LocalizedStringKey.Title_Search, "Etsi termejä"],
 ])

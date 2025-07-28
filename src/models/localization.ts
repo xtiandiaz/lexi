@@ -18,7 +18,7 @@ export enum LocalizedStringKey {
   Title_HistoryFromDate,
   Title_HistoryOfToday,
   Title_HistoryOfYesterday,
-  Title_Language,
+  Title_Languages,
   Title_Settings,
   Title_Search,
 }

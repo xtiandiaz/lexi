@@ -2,9 +2,15 @@ import { type Settings } from '@/models/settings'
 import { LocalStorageItemKey } from '@/models/persistence'
 import useGameStore from '@/stores/game'
 import { retrieve, save } from '@/assets/tungsten/local-storage'
+import { defaultLanguagesSettings } from '@/utils/settings.utils'
 
 export function retrieveSavedSettings(): Settings | undefined {
-  return retrieve<Settings>(LocalStorageItemKey.Settings)
+  const _settings = retrieve<Settings>(LocalStorageItemKey.Settings)
+  if (_settings && !_settings.languagesSettings) {
+    _settings.languagesSettings = defaultLanguagesSettings
+  }
+  
+  return _settings
 }
 
 export function saveSettings() {

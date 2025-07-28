@@ -46,11 +46,11 @@ onBeforeUnmount(() => {
   <main>
     <VuetyForm>
       <VuetySelectionFormSection 
-        :title="localizedStringInLanguage(LocalizedStringKey.Title_Language, preferredLanguage)"
+        :title="localizedStringInLanguage(LocalizedStringKey.Title_Languages, preferredLanguage)"
         :choices="selectedLanguages"
         :options="languageOptions"
         :minimumChoiceCount="1"
-        @deselect="(lang) => selectedLanguages.removeFirst(lang)"
+        @deselect="(lang) => selectedLanguages.removeFirst((l) => l === lang)"
         @select="(lang) => selectedLanguages.push(lang)"
       />
     </VuetyForm>

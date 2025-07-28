@@ -14,7 +14,7 @@ export default new Map<LocalizedStringKey, string>([
   [LocalizedStringKey.Title_HistoryFromDate, "History from {date}"],
   [LocalizedStringKey.Title_HistoryOfToday, "Today's History"],
   [LocalizedStringKey.Title_HistoryOfYesterday, "Yesterday's History"],
-  [LocalizedStringKey.Title_Language, "Language"],
+  [LocalizedStringKey.Title_Languages, "Languages"],
   [LocalizedStringKey.Title_Settings, "Settings"],
   [LocalizedStringKey.Title_Search, "Search for Terms"],
 ])

@@ -1,34 +1,12 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { GameMode, Test } from '@/models/game'
-import { Language } from '@/models/localization'
 import type { Settings } from '@/models/settings'
 import type { InputState } from '@/models/input'
 import { RawContent } from '@/models/content'
 import { retrieveSavedSettings } from '@/services/settings-management'
 import { retrievedSavedSession } from '@/services/session-management'
-
-const defaultSettings: Settings = {
-  activeLanguages: [Language.English, Language.Spanish],
-  dailyGoal: {
-    termCount: 10
-  },
-  languagesSettings: [
-    {
-      language: Language.English,
-      translationLanguage: Language.Spanish
-    },
-    {
-      language: Language.Finnish,
-      translationLanguage: Language.English
-    },
-    {
-      language: Language.Spanish,
-      translationLanguage: Language.English
-    },
-  ],
-  minTermCountForTest: 5,
-}
+import { defaultSettings } from '@/utils/settings.utils'
 
 export default defineStore('game', () => {
   const settings = ref<Settings>(retrieveSavedSettings() ?? defaultSettings)
