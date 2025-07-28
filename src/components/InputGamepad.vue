@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useRoute } from 'vue-router';
+// import { useRoute } from 'vue-router';
 import { type InputState } from '@/models/input';
 import { InputTool } from '@/models/tools'
-import { Section } from '@/models/section';
+// import { Section } from '@/models/section';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
 import { inputToolBarButtonVMs, keypadKeyVMs } from '@/view-models/vm-input';
 import ResearchToolbar from './ResearchToolbar.vue';
@@ -11,10 +11,10 @@ import VuetyKeypad from '@/vueties/components/pads/VuetyKeypad.vue';
 import VuetyToolbar from '@vueties/components/bars/VuetyToolbar.vue'
 import VuetyIconButton from '@vueties/components/buttons/VuetyIconButton.vue'
 import { Icon } from '@design-tokens/iconography'
-import { isMobile } from '@/assets/tungsten/navigator';
+// import { isMobile } from '@/assets/tungsten/navigator';
 import { termResearchTools } from '@/utils/term.utils';
 
-const route = useRoute()
+// const route = useRoute()
 
 const { state } = defineProps<{
   state: InputState
@@ -26,7 +26,7 @@ const emits = defineEmits<{
   continued: [void]
 }>()
 
-const shouldEnableKeyboard = computed(() => route.name === Section.Game && (import.meta.env.DEV || !isMobile()))
+// const shouldEnableKeyboard = computed(() => route.name === Section.Game && (import.meta.env.DEV || !isMobile()))
 // const keyboardInput = useTemplateRef('keyboard-input')
 const _keypadKeyVMs = computed(() => keypadKeyVMs(state))
 const _inputToolBarButtonVMs = computed(() => inputToolBarButtonVMs(state))
@@ -117,7 +117,7 @@ function onInputToolSelected(tool: InputTool) {
     <VuetyIconButton 
       v-if="state.isComplete"
       :icon="Icon.ArrowRight" 
-      class="continue"
+      class="continue filled"
       @click="emits('continued')" 
     />
   </section>
@@ -137,9 +137,6 @@ function onInputToolSelected(tool: InputTool) {
 }
 
 :deep(.vuety-icon-button) {
-  &.continue * {
-    @include vs.color-attribute('background-color', vs.$background-color);
-  }
   &.hint * {
     @include vs.color-attribute('color', 'yellow');
   }

@@ -1,6 +1,6 @@
 import { Language, LocalizedStringKey } from "@/models/localization"
 import { TermTag } from "@/models/content"
-import settingsStore from "@/stores/settings"
+import useGameStore from "@/stores/game"
 import EN from '@/assets/localization/en'
 import ES from '@/assets/localization/es'
 import FI from '@/assets/localization/fi'
@@ -19,18 +19,18 @@ export const localizedStringInLanguage = (key: LocalizedStringKey, language: Lan
 }
 
 export const localizedString = (key: LocalizedStringKey, pluralized: boolean = false): string => {
-  const settings = settingsStore()
+  const preferredLanguage = useGameStore().preferredLanguage
   
-  const _string = localizedStringInLanguage(key, settings.preferredLanguage)
+  const _string = localizedStringInLanguage(key, preferredLanguage)
   if (_string) {
-    return _string + (pluralized && settings.preferredLanguage !== Language.Finnish ? 's' : '')
+    return _string + (pluralized && preferredLanguage !== Language.Finnish ? 's' : '')
   }
   
   return `{LocalizedStringKey: ${key}}`
 }
 
 export const dynamicLocalizedString = (key: LocalizedStringKey, ...args: unknown[]): string => {
-  const settings = settingsStore()
+  const preferredLanguage = useGameStore().preferredLanguage
   
   switch (key) {
     case LocalizedStringKey.Title_HistoryOfToday:
@@ -40,7 +40,7 @@ export const dynamicLocalizedString = (key: LocalizedStringKey, ...args: unknown
         const date = args[1] as Date
         return localizedString(LocalizedStringKey.Title_HistoryFromDate).replace(
           /{date}/, 
-          dateLocaleString(date, settings.preferredLanguage)
+          dateLocaleString(date, preferredLanguage)
         )
       } else if (dayDiff >= 1) {
         return localizedString(LocalizedStringKey.Title_HistoryOfYesterday)

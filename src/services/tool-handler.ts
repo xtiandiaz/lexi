@@ -2,7 +2,7 @@ import { InputTool, ResearchTool } from "@/models/tools";
 import { type Term, TermMetaAttributeKey } from '@/models/content'
 import type { InputState } from "@/models/input"
 import { Language } from "@/models/localization";
-import settingsStore from "@/stores/settings"
+import useGameStore from '@/stores/game'
 
 const dictionaryURLString = (language: Language): string => {
   switch (language) {
@@ -33,10 +33,10 @@ const researchUrlString = (tool: ResearchTool, language: Language): string => {
     case ResearchTool.ImageSearch:
       return 'https://duckduckgo.com/?t=ffab&iax=images&ia=images&q='
     case ResearchTool.Translate:
-      const settings = settingsStore()
-      const languageSettings = settings.getSettingsForLanguage(language)
+      const settings = useGameStore().settings
+      const languageSettings = settings.languagesSettings.find(ls => ls.language === language)
       
-      return translatorURLString([language, languageSettings.translationLanguage])!
+      return translatorURLString([language, languageSettings!.translationLanguages.first()!])!
     case ResearchTool.WikipediaSearch:
       return `https://${language}.wikipedia.org/wiki/`
     case ResearchTool.WebSearch:

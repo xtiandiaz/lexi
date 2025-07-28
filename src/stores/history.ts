@@ -2,11 +2,11 @@ import '@/assets/tungsten/extensions/date.extensions'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { DailyHistory } from '@/models/history'
-import settingsStore from './settings'
+import useGameStore from './game'
 import { retrieveSavedDailyHistory } from '@/services/history-management'
 
 export default defineStore('history', () => {
-  const settings = settingsStore()
+  const settings = useGameStore().settings
   
   const dailyHistory = ref<DailyHistory | undefined>(retrieveSavedDailyHistory())
   

@@ -1,7 +1,7 @@
 import { type DailyHistory } from '@/models/history'
 import { LocalizedStringKey } from '@/models/localization'
-import historyStore from '@/stores/history'
-import settingsStore from '@/stores/settings'
+import useHistoryStore from '@/stores/history'
+import useGameStore from '@/stores/game'
 import { localizedString, dynamicLocalizedString } from "@/services/localization"
 import { dateLocaleString } from './date.utils'
 import '@/assets/tungsten/extensions/date.extensions'
@@ -15,13 +15,11 @@ export const isDailyHistoryStale = (dailyHistory: DailyHistory): boolean  => {
 }
 
 export const dailyHistoryDateLocaleString = (dailyHistory: DailyHistory): string => {
-  const settings = settingsStore()
-  
-  return dateLocaleString(dailyHistory.date, settings.preferredLanguage)
+  return dateLocaleString(dailyHistory.date, useGameStore().preferredLanguage)
 }
 
 export const currentDailyHistoryTitle = (): string => {
-  const history = historyStore()
+  const history = useHistoryStore()
   
   if (!history.dailyHistory) {
     return localizedString(LocalizedStringKey.Title_HistoryOfToday)

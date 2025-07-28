@@ -1,6 +1,6 @@
 import { InputMarkKind, type InputState } from '@/models/input'
 import { InputTool } from '@/models/tools'
-import sessionStore from '@/stores/session'
+import useGameStore from '@/stores/game'
 import { canUseInputTool } from '@/services/tool-handler'
 import { labelForKey } from '@/utils/input.utils'
 import { Icon } from '@/assets/design-tokens/iconography'
@@ -29,8 +29,7 @@ export const keypadKeyVMs = (inputState: InputState): VuetyKeypadKeyVM[] => {
 }
 
 export const inputToolBarButtonVMs = (inputState: InputState): VuetyToolbarButtonVM<InputTool>[] => {
-  const session = sessionStore()
-  if (session.test) {
+  if (useGameStore().test) {
     return []
   }
   

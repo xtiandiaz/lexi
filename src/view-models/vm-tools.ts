@@ -1,7 +1,7 @@
 import { ResearchTool } from "@/models/tools"
 import { Language } from "@/models/localization"
 import type { LanguageSettings } from "@/models/settings";
-import { dictionaryIcon, translationIcon } from '@/view-models/vm-language'
+import { dictionaryIcon, translationIcon } from '@/utils/localization.utils'
 import { Icon } from "@/assets/design-tokens/iconography";
 import type { VuetyToolbarButtonVM } from "@vueties/components/bars/view-models";
 
@@ -35,7 +35,11 @@ export const researchToolButtonVMs = (languageSettings: LanguageSettings): Resea
   ].map((tool) => {
     return {
       tool,
-      icon: researchToolIconForLanguage(tool, languageSettings.language, languageSettings.translationLanguage),
+      icon: researchToolIconForLanguage(
+        tool, 
+        languageSettings.language, 
+        languageSettings.translationLanguages.first()!
+      ),
       isEnabled: true
     }
   })
@@ -48,7 +52,11 @@ export function produceResearchButtonVMsForLanguageSettings(
   return tools.map(tool => {
     return {
       tool,
-      icon: researchToolIconForLanguage(tool, languageSettings.language, languageSettings.translationLanguage),
+      icon: researchToolIconForLanguage(
+        tool, 
+        languageSettings.language, 
+        languageSettings.translationLanguages.first()!
+      ),
       isEnabled: true
     }
   })

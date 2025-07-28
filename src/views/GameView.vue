@@ -4,8 +4,7 @@ import { type InputState, InputMarkKind, UserInput } from '@/models/input'
 import { InputTool } from '@/models/tools'
 import { GameMode, type Test } from '@/models/game'
 import { type Term } from '@/models/content'
-import sessionStore from '@/stores/session'
-import settingsStore from '@/stores/settings'
+import useGameStore from '@/stores/game'
 import { produceInputWithTool } from '@/services/tool-handler'
 import { resetSessionIfNeeded, storeAndSaveSessionIfNeeded } from "@/services/session-management"
 import { saveWordInDailyHistory, resetDailyHistoryIfNeeded } from '@/services/history-management'
@@ -16,13 +15,12 @@ import { setUpEvent } from '@vueties/composables/set-up-event'
 import VuetyProgressIndicator from "@vueties/components/misc/VuetyProgressIndicator.vue"
 import "@/assets/tungsten/extensions/array.extensions"
 
-const session = sessionStore()
-const settings = settingsStore()
+const store = useGameStore()
 
 const term = ref<Term>()
 const userInput = ref<UserInput>()
 
-const isTermPass = computed(() => session.gameMode === GameMode.Test && userInput.value?.isComplete)
+const isTermPass = computed(() => store.mode === GameMode.Test && userInput.value?.isComplete)
 
 async function reset() {
   term.value = undefined
@@ -37,12 +35,12 @@ async function reset() {
 
 function restoreInputOrResume() {
   if (
-    session.gameMode === GameMode.Exploration && 
-    session.inputState && 
-    settings.activeLanguages.includes(session.inputState.term.language)
+    store.mode === GameMode.Exploration && 
+    store.inputState && 
+    store.settings.activeLanguages.includes(store.inputState.term.language)
   ) {
-    term.value = session.inputState.term
-    userInput.value = new UserInput(session.inputState.term, GameMode.Exploration, session.inputState.indices)
+    term.value = store.inputState.term
+    userInput.value = new UserInput(store.inputState.term, GameMode.Exploration, store.inputState.indices)
     return
   }
   
@@ -50,13 +48,13 @@ function restoreInputOrResume() {
 }
 
 function resume() {
-  const test = session.test
+  const test = store.test
   if (test) {
     resumeTest(test)
     return
   }
   
-  const newTerm = session.content?.produceNextTerm()
+  const newTerm = store.content?.produceNextTerm()
   if (!newTerm) {
     console.error(`No content available!`)
     return
@@ -70,7 +68,7 @@ function resume() {
 function resumeTest(test: Test) {
   const nextTerm = test.produceNextTerm()
   if (!nextTerm) {
-    session.test = undefined
+    store.test = undefined
     return
   }
   
@@ -82,12 +80,12 @@ function resumeWithTerm(_term: Term, mode: GameMode) {
   userInput.value = new UserInput(term.value, mode)
   
   if (mode === GameMode.Exploration) {
-    session.inputState = userInput.value
+    store.inputState = userInput.value
   }
 }
 
 function cancelTest() {
-  session.test = undefined
+  store.test = undefined
 }
 
 function onInput(index: number) {
@@ -112,11 +110,11 @@ function onInputCompleted() {
     return
   }
   
-  if (session.test) {
+  if (store.test) {
     userInput.value.addMark(InputMarkKind.Test, 1)
     userInput.value.resetMark(InputMarkKind.Hint)
     
-    session.test.makeProgressWithTerm(userInput.value.term)
+    store.test.makeProgressWithTerm(userInput.value.term)
   } else {
     storeAndSaveSessionIfNeeded(userInput.value)
   }
@@ -149,7 +147,7 @@ function onPageUnfocusedOrUnmounted() {
   }
 }
 
-watch(() => [settings.activeLanguages, session.gameMode], async () => {
+watch(() => [store.settings.activeLanguages, store.mode], async () => {
   await reset()
 }, { deep: true })
 
@@ -174,7 +172,7 @@ setUpEvent('pagehide', window, onPageUnfocusedOrUnmounted) // for iOS
   <VuetyProgressIndicator v-if="!term" class="absolutely-centered-block" />
   
   <TestStatusBar 
-    v-if="session.gameMode === GameMode.Test" 
+    v-if="store.mode === GameMode.Test" 
     @intended-to-cancel="cancelTest"
   />
   

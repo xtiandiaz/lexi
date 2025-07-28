@@ -1,4 +1,6 @@
-import { Language } from '@/models/localization'
+import { Language } from "@/models/localization";
+import { LocalizedStringKey } from "@/models/localization";
+import { localizedStringInLanguage } from "@/services/localization";
 import { Icon } from '@/assets/design-tokens/iconography'
 
 export const dictionaryIcon = (language: Language) => {
@@ -21,4 +23,15 @@ export const translationIcon = (language: Language) => {
     case Language.Spanish:
       return Icon.LanguageSpanish
   }
+}
+
+type NamedLanguage = { key: Language, name: string }
+export const languagesOrderedByName = (): NamedLanguage[] => {
+  return Object.values(Language).map(l => {
+    return {    
+      key: l,
+      name: localizedStringInLanguage(LocalizedStringKey.LanguageName, l),
+    }
+  })
+  .sort((a, b) => a.name.localeCompare(b.name))
 }

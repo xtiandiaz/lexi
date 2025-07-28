@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import type { ResearchTool } from '@/models/tools';
 import type { Language } from '@/models/localization';
-import settingsStore from '@/stores/settings'
+import useGameStore from '@/stores/game'
 import { produceResearchButtonVMsForLanguageSettings } from '@/view-models/vm-tools'
 import VuetyToolbar from '@vueties/components/bars/VuetyToolbar.vue'
 
@@ -15,10 +15,13 @@ const emits = defineEmits<{
   toolSelected: [tool: ResearchTool]
 }>()
 
-const settings = settingsStore()
+const settings = useGameStore().settings
 
 const toolButtonVMs = computed(() => 
-  produceResearchButtonVMsForLanguageSettings(tools, settings.getSettingsForLanguage(language))
+  produceResearchButtonVMsForLanguageSettings(
+    tools, 
+    settings.languagesSettings.find(ls => ls.language === language)!
+  )
 )
 </script>
 

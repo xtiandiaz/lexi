@@ -1,36 +1,21 @@
 import { Language } from "./localization";
 
-
 export interface DailyGoalSettings {
   termCount: number
 }
 
 export interface LanguageSettings {
   language: Language
-  translationLanguage: Language
+  translationLanguages: Language[]
 }
 
 export const defaultMinTermCountForTest = 5
 
 export interface Settings {
   activeLanguages: Language[]
+  dailyGoal: DailyGoalSettings
   languagesSettings: LanguageSettings[]
-  preferredLanguage: Language
-}
-
-export const translationLanguage = (language: Language) => {
-  switch (language) {
-    case Language.English:
-      return Language.Spanish
-    case Language.Finnish:
-    case Language.Spanish:
-      return Language.English
-  }
-}
-
-export const defaultLanguageSettings = (language: Language): LanguageSettings => {
-  return {
-    language,
-    translationLanguage: translationLanguage(language),
-  }
+  
+  // TODO: Remove when revamp complete
+  minTermCountForTest: number
 }

@@ -1,16 +1,15 @@
 import { Test } from '@/models/game'
 import { InputMarkKind, type InputState } from '@/models/input'
-import { type CompletedTerm } from '@/models/history'
-import { type Session } from '@/models/session'
+import type { CompletedTerm } from '@/models/history'
+import type { Session } from '@/models/session'
 import { LocalStorageItemKey } from '@/models/persistence'
-import sessionStore from '@/stores/session'
+import useGameStore from '@/stores/game'
 import historyStore from '@/stores/history'
-import settingsStore from '@/stores/settings'
 import { loadRepositoryContent } from '@/services/content-provision'
 import { retrieve, save } from '@/assets/tungsten/local-storage'
 
 export function storeAndSaveSessionIfNeeded(inputState: InputState) {
-  const session = sessionStore()
+  const session = useGameStore()
   
   if (session.test) {
     console.warn("Session NOT saved during test", session.test)
@@ -29,14 +28,14 @@ export function retrievedSavedSession(): Session | undefined {
 }
 
 export async function resetSession(): Promise<void> {
-  const session = sessionStore()
+  const session = useGameStore()
   
   session.test = undefined
   session.content = await loadRepositoryContent()
 }
 
 export async function resetSessionIfNeeded(): Promise<void> {
-  const session = sessionStore()
+  const session = useGameStore()
   
   if (session.test) {
     return
@@ -46,7 +45,7 @@ export async function resetSessionIfNeeded(): Promise<void> {
 }
 
 export function prepareTest() {
-  const settings = settingsStore()
+  const settings = useGameStore().settings
   const dailyHistory = historyStore().dailyHistory
   const completedTerms: CompletedTerm[] | undefined = dailyHistory?.completedTerms
   if (!dailyHistory || !completedTerms || completedTerms.length < settings.minTermCountForTest) {
@@ -63,7 +62,7 @@ export function prepareTest() {
     }
   })
   
-  const session = sessionStore()
+  const session = useGameStore()
   
   session.test = new Test(completedTerms)
 }

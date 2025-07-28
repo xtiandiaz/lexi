@@ -1,14 +1,14 @@
 import { RawContent, type RawTermBatch } from '@/models/content'
-import settingsStore from '@/stores/settings'
+import useGameStore from '@/stores/game'
 import '@/assets/tungsten/extensions/array.extensions'
 
 const sourcePath = 'https://raw.githubusercontent.com/xtiandiaz/lexicon/refs/heads/main/src'
 const availableContent: RawTermBatch[] = []
 
 export async function loadRepositoryContent(): Promise<RawContent | undefined> {
-  const settings = settingsStore()
+  const game = useGameStore()
   
-  for (const language of settings.activeLanguages) {
+  for (const language of game.settings.activeLanguages) {
     if (availableContent.find(c => c.language === language)) {
       continue
     }
@@ -29,8 +29,9 @@ export async function loadRepositoryContent(): Promise<RawContent | undefined> {
     }
   }
   
-  const selectedBatches = [...settings.activeLanguages]
-    .compactMap(l => availableContent.find(b => b.language === l))
+  const selectedBatches = [...game.settings.activeLanguages].compactMap(
+    l => availableContent.find(b => b.language === l)
+  )
   
   return new RawContent(selectedBatches)
 }

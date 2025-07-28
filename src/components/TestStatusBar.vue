@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import sessionStore from '@/stores/session'
+import useGameStore from '@/stores/game'
 import { Icon } from '@design-tokens/iconography'
 import CloseButton from '@vueties/components/buttons/VuetyCloseButton.vue'
 import ProgressBar from '@vueties/components/bars/VuetyProgressBar.vue'
@@ -9,9 +9,9 @@ const emits = defineEmits<{
   intendedToCancel: [void]
 }>()
 
-const session = sessionStore()
+const game = useGameStore()
 
-const testProgress = computed(() => session.test?.progress ?? 0)
+const testProgress = computed(() => game.test?.progress ?? 0)
 </script>
 
 <template>
@@ -27,11 +27,7 @@ const testProgress = computed(() => session.test?.progress ?? 0)
 
 .status-bar {
   height: vueties-bar-styles.$nav-bar-height;
-  // left: 0;
   padding: 0 vueties-bar-styles.$nav-bar-h-padding 0 1em;
-  // position: absolute;
-  // right: 0;
-  // top: 0;
   z-index: 1000;
   
   .progress-bar {
