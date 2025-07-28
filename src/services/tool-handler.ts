@@ -1,60 +1,17 @@
-import { InputTool, ResearchTool } from "@/models/tools";
-import { type Term, TermMetaAttributeKey } from '@/models/content'
+import { ToolKey } from "@/models/tools";
+import type { AnyTool } from "@/models/tools";
+import type { Term } from '@/models/content'
 import type { InputState } from "@/models/input"
-import { Language } from "@/models/localization";
-import useGameStore from '@/stores/game'
+import { toolUrlString } from "@/utils/tool.utils";
 
-const dictionaryURLString = (language: Language): string => {
-  switch (language) {
-    case Language.English:
-      return 'https://www.merriam-webster.com/dictionary/'
-    case Language.Finnish:
-      return 'https://www.sanakirja.org/search.php?q='
-    case Language.Spanish:
-      return 'https://dle.rae.es/'
-  }
-}
-
-const translatorURLString = (languages: [string, string]): string | undefined => {  
-  switch (languages.join('-')) {
-    case 'en-es':
-      return 'https://www.wordreference.com/es/translation.asp?tranword='
-    case 'es-en':
-      return 'https://www.wordreference.com/es/en/translation.asp?spen='
-    default:
-      return undefined
-  }
-}
-
-const researchUrlString = (tool: ResearchTool, language: Language): string => {
-  switch (tool) {
-    case ResearchTool.Define:
-      return dictionaryURLString(language)
-    case ResearchTool.ImageSearch:
-      return 'https://duckduckgo.com/?t=ffab&iax=images&ia=images&q='
-    case ResearchTool.Translate:
-      const settings = useGameStore().settings
-      const languageSettings = settings.languagesSettings.find(ls => ls.language === language)
-      
-      return translatorURLString([language, languageSettings!.translationLanguages.first()!])!
-    case ResearchTool.WikipediaSearch:
-      return `https://${language}.wikipedia.org/wiki/`
-    case ResearchTool.WebSearch:
-      return 'https://duckduckgo.com/?t=ffab&q='
-  }
-}
-
-export function launchResearchToolForTerm(tool: ResearchTool, term: Term) {
-  let queryValue = term.word
-  
-  switch (tool) {
-    case ResearchTool.WikipediaSearch:
-      const wikipediaKeyword = term.extras?.metaAttributes?.find(ma => ma.key === TermMetaAttributeKey.WikipediaKeyword)?.value
-      queryValue = wikipediaKeyword ?? term.word
-      break
+export function launchResearchToolForTerm(tool: AnyTool, term: Term) {
+  const urlString = toolUrlString(tool)
+  if (!urlString) {
+    console.error("Undefined URL string for tool", tool.key)
+    return
   }
   
-  window.open(researchUrlString(tool, term.language) + queryValue, '_blank')
+  window.open(urlString.replace('{query}', term.word), '_blank')
 }
 
 function fixOrExtendInput(state: InputState): number[] | undefined {
@@ -82,16 +39,20 @@ function fixOrExtendInput(state: InputState): number[] | undefined {
   return Array.range(inputableStartIndex, inputableStartIndex + fixedOrExtendedSubstring.length, 1)
 }
 
-export function canUseInputTool(tool: InputTool, inputState: InputState): boolean {
-  switch (tool) {
-    case InputTool.Hint:
+export function canUseInputTool(key: ToolKey, inputState: InputState): boolean {
+  switch (key) {
+    case ToolKey.Hint:
       return fixOrExtendInput(inputState) !== undefined
+    default:
+      return false
   }
 }
 
-export function produceInputWithTool(tool: InputTool, inputState: InputState): number[] | undefined {
-  switch (tool) {
-    case InputTool.Hint:
+export function produceInputWithTool(key: ToolKey, inputState: InputState): number[] | undefined {
+  switch (key) {
+    case ToolKey.Hint:
       return fixOrExtendInput(inputState)
+    default:
+      return undefined
   }
 }

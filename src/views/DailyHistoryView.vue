@@ -46,7 +46,7 @@ onBeforeMount(() => {
           :key="index"
           :term="term"
           :isUnfolded="selectedIndex === index"
-          @selected="onTermSelected(index)"
+          @select="onTermSelected(index)"
         />
       </FormSection>
     </Form>

@@ -1,55 +1,50 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { ResearchTool } from '@/models/tools';
-import type { Language } from '@/models/localization';
-import useGameStore from '@/stores/game'
-import { produceResearchButtonVMsForLanguageSettings } from '@/view-models/vm-tools'
+import type { AnyTool, ToolKey } from '@/models/tools';
+import type { Term } from '@/models/content';
+import { produceToolsForTerm, toolIcon } from '@/utils/tool.utils';
+import type { VuetyToolbarItem } from '@vueties/components/shared.vm';
 import VuetyToolbar from '@vueties/components/bars/VuetyToolbar.vue'
 
-const { tools, language } = defineProps<{
-  tools: ResearchTool[],
-  language: Language
+const { toolKeys, term } = defineProps<{
+  term: Term
+  toolKeys: ToolKey[]
 }>()
 
 const emits = defineEmits<{
-  toolSelected: [tool: ResearchTool]
+  enableTool: [tool: AnyTool]
 }>()
 
-const settings = useGameStore().settings
-
-const toolButtonVMs = computed(() => 
-  produceResearchButtonVMsForLanguageSettings(
-    tools, 
-    settings.languagesSettings.find(ls => ls.language === language)!
-  )
-)
+const tools = computed(() => produceToolsForTerm(toolKeys, term))
+const items = computed<VuetyToolbarItem<ToolKey>[]>(() => tools.value.map(tool => {
+  return { icon: toolIcon(tool), key: tool.key }
+}))
 </script>
 
 <template>
   <VuetyToolbar 
-    :buttonVMs="toolButtonVMs"
-    @tool-selected="(tool) => emits('toolSelected', tool)"
+    :items="items"
+    @enableTool="(key) => emits('enableTool', tools.find(t => t.key === key)!)"
   />
 </template>
 
 <style scoped lang="scss">
+@use 'sass:map';
 @use '@design-tokens/palette';
 
 :deep(.vuety-icon-button) {
-  &.define * {
-    @include palette.color-attribute('color', 'orange');
-  }
-  &.image-search * {
-    @include palette.color-attribute('color', 'mint');
-  }
-  &.translate * {
-    @include palette.color-attribute('color', 'sky-blue');
-  }
-  &.web-search * {
-    @include palette.color-attribute('color', 'blue');
-  }
-  &.wikipedia-search * {
-    @include palette.color-attribute('color', 'body');
+  $tool-color-map: (
+    ('define', 'orange'),
+    ('image-search', 'mint'),
+    ('translate', 'sky-blue'),
+    ('web-search', 'blue'),
+    ('wikipedia-search', 'body'),
+  );
+  
+  @each $tool, $color in $tool-color-map {
+    &.#{$tool} .svg-icon {
+      @include palette.color-attribute('color', $color);
+    }
   }
 }
 </style>

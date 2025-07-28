@@ -1,26 +1,25 @@
 <script setup lang="ts">
 import { RawContent, type Term } from '@/models/content';
-import type { ResearchTool } from '@/models/tools';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
-import ResearchToolBar from '@/components/ResearchToolbar.vue'
+import ResearchToolbar from '@/components/ResearchToolbar.vue'
 import FoldableFormRow from '@vueties/components/form/rows/VuetyFoldableFormRow.vue'
-import { termResearchTools } from '@/utils/term.utils';
+import { researchToolKeysInDisplayOrder } from '@/utils/game.utils';
 
 defineProps<{
-  term: Term
   isUnfolded: boolean
+  term: Term
 }>()
 
 const emits = defineEmits<{
-  selected: [void]
+  select: [void]
 }>()
 </script>
 
 <template>
   <FoldableFormRow 
-    :is-unfolded="isUnfolded"
-    @selected="emits('selected')"
-    >
+    :isUnfolded="isUnfolded"
+    @select="emits('select')"
+  >
     <template v-slot:title>
       <slot name="background"></slot>
       
@@ -30,14 +29,16 @@ const emits = defineEmits<{
         <slot name="marks"></slot>
       </div>
     </template>
+    
     <template v-slot:subtitle v-if="term.aliases">
       <span class="subtitle caption">{{ RawContent.aliasesStringFromTerm(term) }}</span>
     </template>
+    
     <template v-slot:foldable-content>
-      <ResearchToolBar
-        :tools="termResearchTools(term)"
-        :language="term.language"
-        @tool-selected="(tool: ResearchTool) => launchResearchToolForTerm(tool, term)"
+      <ResearchToolbar
+        :term="term"
+        :toolKeys="researchToolKeysInDisplayOrder"
+        @enableTool="(tool) => launchResearchToolForTerm(tool, term)"
       />
     </template>
   </FoldableFormRow>
@@ -46,7 +47,7 @@ const emits = defineEmits<{
 <style scoped lang="scss">
 @use '@vueties/utils/vuetystrap' as vs;
 
-.row.foldable {
+.vuety-foldable-form-row {
   position: relative;
   z-index: 1;
   

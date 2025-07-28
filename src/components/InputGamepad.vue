@@ -2,17 +2,20 @@
 import { computed } from 'vue'
 // import { useRoute } from 'vue-router';
 import { type InputState } from '@/models/input';
-import { InputTool } from '@/models/tools'
+import { ToolKey } from '@/models/tools'
 // import { Section } from '@/models/section';
+import useGameStore from '@/stores/game'
 import { launchResearchToolForTerm } from '@/services/tool-handler';
-import { inputToolBarButtonVMs, keypadKeyVMs } from '@/view-models/vm-input';
+import { keypadKeyVMs } from '@/view-models/vm-input';
 import ResearchToolbar from './ResearchToolbar.vue';
 import VuetyKeypad from '@/vueties/components/pads/VuetyKeypad.vue';
 import VuetyToolbar from '@vueties/components/bars/VuetyToolbar.vue'
 import VuetyIconButton from '@vueties/components/buttons/VuetyIconButton.vue'
 import { Icon } from '@design-tokens/iconography'
+import { researchToolKeysInDisplayOrder } from '@/utils/game.utils'
 // import { isMobile } from '@/assets/tungsten/navigator';
-import { termResearchTools } from '@/utils/term.utils';
+import { toolIcon } from '@/utils/tool.utils';
+import type { VuetyToolbarItem } from '@/vueties/components/shared.vm';
 
 // const route = useRoute()
 
@@ -22,14 +25,19 @@ const { state } = defineProps<{
 
 const emits = defineEmits<{
   input: [index: number],
-  inputToolSelected: [tool: InputTool],
+  enableTool: [tool: ToolKey],
   continued: [void]
 }>()
+
+const game = useGameStore()
 
 // const shouldEnableKeyboard = computed(() => route.name === Section.Game && (import.meta.env.DEV || !isMobile()))
 // const keyboardInput = useTemplateRef('keyboard-input')
 const _keypadKeyVMs = computed(() => keypadKeyVMs(state))
-const _inputToolBarButtonVMs = computed(() => inputToolBarButtonVMs(state))
+
+const inputToolItems: VuetyToolbarItem<ToolKey>[] = [ToolKey.Hint].map(key => {
+  return { icon: toolIcon({ key }), key: key }
+})
 
 function onInput(index: number) {
   emits('input', index)
@@ -37,8 +45,8 @@ function onInput(index: number) {
   // focusKeyboardInputIfNeeded()
 }
 
-function onInputToolSelected(tool: InputTool) {
-  emits('inputToolSelected', tool)
+function onInputToolSelected(key: ToolKey) {
+  emits('enableTool', key)
   
   // focusKeyboardInputIfNeeded()
 }
@@ -101,17 +109,17 @@ function onInputToolSelected(tool: InputTool) {
     
     <ResearchToolbar
       v-if="state.isComplete"
-      :tools="termResearchTools(state.term)"
-      :language="state.term.language"
-      @tool-selected="(tool) => launchResearchToolForTerm(tool, state.term)"
+      :term="state.term"
+      :toolKeys="researchToolKeysInDisplayOrder"
+      @enableTool="(tool) => launchResearchToolForTerm(tool, state.term)"
     />
     
     <div class="flex-spacer"></div>
     
     <VuetyToolbar
-      v-if="!state.isComplete"
-      :buttonVMs="_inputToolBarButtonVMs"
-      @tool-selected="(tool: InputTool) => onInputToolSelected(tool)"
+      v-if="!game.test && !state.isComplete"
+      :items="inputToolItems"
+      @enableTool="(key) => onInputToolSelected(key)"
     />
     
     <VuetyIconButton 

@@ -6,7 +6,7 @@ export interface DailyGoalSettings {
 
 export interface LanguageSettings {
   language: Language
-  translationLanguages: Language[]
+  translationLanguage: Language
 }
 
 export const defaultMinTermCountForTest = 5

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { type InputState, InputMarkKind, UserInput } from '@/models/input'
-import { InputTool } from '@/models/tools'
+import { ToolKey } from '@/models/tools'
 import { GameMode, type Test } from '@/models/game'
 import { type Term } from '@/models/content'
 import useGameStore from '@/stores/game'
@@ -122,13 +122,13 @@ function onInputCompleted() {
   saveWordInDailyHistory(userInput.value)
 }
 
-function onInputToolSelected(tool: InputTool) {
-  if (!userInput.value) {
-    return
-  }
-  
+function enableTool(tool: ToolKey) { 
   switch(tool) {
-    case InputTool.Hint:
+    case ToolKey.Hint:
+      if (!userInput.value) {
+        return
+      }
+      
       const newInputIndices = produceInputWithTool(tool, userInput.value)
       
       if (newInputIndices) {
@@ -182,7 +182,7 @@ setUpEvent('pagehide', window, onPageUnfocusedOrUnmounted) // for iOS
     <InputGamepad 
       :state="userInput"
       @input="onInput"
-      @input-tool-selected="onInputToolSelected" 
+      @input-tool-selected="enableTool" 
       @continued="resume()"
     />
   </main>

@@ -16,15 +16,15 @@ const defaultSettings: Settings = {
   languagesSettings: [
     {
       language: Language.English,
-      translationLanguages: [Language.Spanish]
+      translationLanguage: Language.Spanish
     },
     {
       language: Language.Finnish,
-      translationLanguages: [Language.English]
+      translationLanguage: Language.English
     },
     {
       language: Language.Spanish,
-      translationLanguages: [Language.English]
+      translationLanguage: Language.English
     },
   ],
   minTermCountForTest: 5,
