@@ -12,7 +12,7 @@ const { toolKeys, term } = defineProps<{
 }>()
 
 const emits = defineEmits<{
-  enableTool: [tool: AnyTool]
+  setTool: [tool: AnyTool]
 }>()
 
 const tools = computed(() => produceToolsForTerm(toolKeys, term))
@@ -24,7 +24,7 @@ const items = computed<VuetyToolbarItem<ToolKey>[]>(() => tools.value.map(tool =
 <template>
   <VuetyToolbar 
     :items="items"
-    @enableTool="(key) => emits('enableTool', tools.find(t => t.key === key)!)"
+    @setTool="(key) => emits('setTool', tools.find(t => t.key === key)!)"
   />
 </template>
 

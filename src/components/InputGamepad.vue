@@ -25,7 +25,7 @@ const { state } = defineProps<{
 
 const emits = defineEmits<{
   input: [index: number],
-  enableTool: [tool: ToolKey],
+  setTool: [key: ToolKey],
   continued: [void]
 }>()
 
@@ -35,9 +35,13 @@ const game = useGameStore()
 // const keyboardInput = useTemplateRef('keyboard-input')
 const _keypadKeyVMs = computed(() => keypadKeyVMs(state))
 
-const inputToolItems: VuetyToolbarItem<ToolKey>[] = [ToolKey.Hint].map(key => {
-  return { icon: toolIcon({ key }), key: key }
-})
+const inputToolItems = computed<VuetyToolbarItem<ToolKey>[]>(() => [ToolKey.Hint].map(key => {
+  return { 
+    icon: toolIcon({ key }), 
+    isEnabled: state.inputString !== state.inputableString.substring(0, state.inputableString.length - 1),
+    key: key 
+  }
+}))
 
 function onInput(index: number) {
   emits('input', index)
@@ -46,7 +50,7 @@ function onInput(index: number) {
 }
 
 function onInputToolSelected(key: ToolKey) {
-  emits('enableTool', key)
+  emits('setTool', key)
   
   // focusKeyboardInputIfNeeded()
 }
@@ -111,7 +115,7 @@ function onInputToolSelected(key: ToolKey) {
       v-if="state.isComplete"
       :term="state.term"
       :toolKeys="researchToolKeysInDisplayOrder"
-      @enableTool="(tool) => launchResearchToolForTerm(tool, state.term)"
+      @setTool="(tool) => launchResearchToolForTerm(tool, state.term)"
     />
     
     <div class="flex-spacer"></div>
@@ -119,7 +123,7 @@ function onInputToolSelected(key: ToolKey) {
     <VuetyToolbar
       v-if="!game.test && !state.isComplete"
       :items="inputToolItems"
-      @enableTool="(key) => onInputToolSelected(key)"
+      @setTool="(key) => onInputToolSelected(key)"
     />
     
     <VuetyIconButton 

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RawContent, type Term } from '@/models/content';
+import type { AnyTool } from '@/models/tools';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
 import ResearchToolbar from '@/components/ResearchToolbar.vue'
 import FoldableFormRow from '@vueties/components/form/rows/VuetyFoldableFormRow.vue'
@@ -38,7 +39,7 @@ const emits = defineEmits<{
       <ResearchToolbar
         :term="term"
         :toolKeys="researchToolKeysInDisplayOrder"
-        @enableTool="(tool) => launchResearchToolForTerm(tool, term)"
+        @enableTool="(tool: AnyTool) => launchResearchToolForTerm(tool, term)"
       />
     </template>
   </FoldableFormRow>

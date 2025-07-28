@@ -122,7 +122,7 @@ function onInputCompleted() {
   saveWordInDailyHistory(userInput.value)
 }
 
-function enableTool(tool: ToolKey) { 
+function setTool(tool: ToolKey) { 
   switch(tool) {
     case ToolKey.Hint:
       if (!userInput.value) {
@@ -182,7 +182,7 @@ setUpEvent('pagehide', window, onPageUnfocusedOrUnmounted) // for iOS
     <InputGamepad 
       :state="userInput"
       @input="onInput"
-      @input-tool-selected="enableTool" 
+      @setTool="setTool" 
       @continued="resume()"
     />
   </main>
