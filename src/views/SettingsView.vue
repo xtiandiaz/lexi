@@ -7,7 +7,7 @@ import type { Settings } from '@/models/settings';
 import useGameStore from '@/stores/game'
 import { storeAndSaveSelectedSettings } from '@/services/settings-management';
 import { localizedStringInLanguage } from '@/services/localization';
-import type { VuetySelectionOption } from '@vueties/components/shared-vm';
+import type { VuetySelectionOption } from '@/vueties/components/shared.vm';
 import VuetyForm from '@vueties/components/form/VuetyForm.vue'
 import VuetySelectionFormSection from '@/vueties/components/form/VuetySelectionFormSection.vue';
 import { languagesOrderedByName, dictionaryIcon } from '@/utils/localization.utils';
