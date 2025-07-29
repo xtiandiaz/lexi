@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, ref } from 'vue'
+import { onBeforeMount, ref, computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { LocalizedStringKey } from '@/models/localization'
 import historyStore from '@/stores/history'
@@ -18,7 +18,9 @@ const route = useRoute()
 
 const history = historyStore()
 const dailyHistory = history.dailyHistory
-const termCount = dailyHistory?.completedTerms.length ?? 0
+
+const terms = dailyHistory?.completedTerms.sort((s1, s2) => s1.word.localeCompare(s2.word))
+const termCount = terms?.length ?? 0 // TODO: interpolate count in localized string
 
 const selectedIndex = ref<number>()
 
@@ -42,7 +44,7 @@ onBeforeMount(() => {
         :title="`${dailyHistoryDateLocaleString(dailyHistory)} • ${termCount} ${localizedString(LocalizedStringKey.Term, termCount === 0 || termCount > 1)}`"
       >
         <CompletedTermFoldableRow
-          v-for="(term, index) of dailyHistory.completedTerms.sort((s1, s2) => s1.word.localeCompare(s2.word))"
+          v-for="(term, index) of terms"
           :key="index"
           :term="term"
           :isUnfolded="selectedIndex === index"
@@ -71,17 +73,14 @@ onBeforeMount(() => {
 );
 
 #test-button-wrapper {
-  bottom: 0;
-  left: 0;
   padding: form-styles.$form-padding;
   padding-top: form-styles.$form-padding * 2;
-  position: sticky;
-  right: 0;
   z-index: 100;
+  @include vs.position(sticky, null, 0, 0, 0);
   @include vs.linear-gradient(
     0deg, 
-    'secondary-background' 1 70%, 
-    'secondary-background' 0 100%
+    vs.$secondary-background-color 1 70%, 
+    vs.$secondary-background-color 0 100%
   );
   
   #test-button {

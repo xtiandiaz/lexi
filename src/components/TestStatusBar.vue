@@ -22,23 +22,24 @@ const testProgress = computed(() => game.test?.progress ?? 0)
 </template>
 
 <style scoped lang="scss">
-@use '@vueties/components/bars/styles' as vueties-bar-styles;
-@use '@design-tokens/palette';
+@use '@vueties/utils/vuetystrap' as vs;
+@use '@vueties/components/bars/styles' as bar-styles;
 
 .status-bar {
-  height: vueties-bar-styles.$nav-bar-height;
-  padding: 0 vueties-bar-styles.$nav-bar-h-padding 0 1em;
+  height: bar-styles.$nav-bar-height;
+  padding: 0 bar-styles.$nav-bar-h-padding 0 1em;
   z-index: 1000;
+  @include vs.position(absolute, env(safe-area-inset-top), 0, null, 0);
   
   .progress-bar {
     flex: auto;
     
     :deep(.bar .fill) {
-      @include palette.color-attribute('background-color', 'green');
+      @include vs.color-attribute('background-color', 'green');
     }
     
     :deep(.svg-icon) {
-      @include palette.color-attribute('color', 'green');
+      @include vs.color-attribute('color', 'green');
     }
   }
 }

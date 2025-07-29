@@ -39,7 +39,7 @@ const emits = defineEmits<{
       <ResearchToolbar
         :term="term"
         :toolKeys="researchToolKeysInDisplayOrder"
-        @enableTool="(tool: AnyTool) => launchResearchToolForTerm(tool, term)"
+        @setTool="(tool: AnyTool) => launchResearchToolForTerm(tool, term)"
       />
     </template>
   </FoldableFormRow>
