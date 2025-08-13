@@ -16,7 +16,7 @@ export default defineStore('game', () => {
   
   const inputState = ref<InputState | undefined>((() => {
     const savedSession = retrievedSavedSession()
-    const inputLanguage = savedSession?.inputState.term.language
+    const inputLanguage = savedSession?.inputState?.term.language
     if (inputLanguage && settings.value.activeLanguages.includes(inputLanguage)) {
       return savedSession?.inputState
     }
