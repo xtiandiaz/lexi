@@ -1,9 +1,10 @@
-import type { AnyTool, LocalizableTool, Tool, TranslationalTool } from "@/models/tools";
-import type { Term } from "@/models/content";
+import type { AnyTool, LocalizableTool, Tool, TranslationTool } from "@/models/tools";
+import type { Term } from "@/models/content.models";
 import { ToolKey } from "@/models/tools";
 import { Language } from "@/models/localization"
 import useGameStore from '@/stores/game'
 import { translationIcon, dictionaryIcon } from "./localization.utils";
+import { canClueAtTerm } from "./input.utils";
 import { Icon } from "@/assets/design-tokens/iconography";
 import '@/assets/tungsten/extensions/array.extensions'
 
@@ -16,10 +17,15 @@ const localizableToolIcon = (tool: LocalizableTool): Icon => {
   }
 }
 
-const translationalToolIcon = (tool: TranslationalTool): Icon => {
+const translationalToolIcon = (tool: TranslationTool): Icon => {
   switch (tool.key) {
     case ToolKey.Translate:
-      return translationIcon(tool.translationLanguage)
+      switch (tool.language) {
+        case Language.Finnish:
+          return Icon.Translation
+        default:
+          return translationIcon(tool.translationLanguage)
+      }
     default:
       return Icon.RadioCircle
   }
@@ -31,9 +37,9 @@ export const toolIcon = (tool: AnyTool): Icon => {
       return localizableToolIcon(tool as LocalizableTool)
 
     case ToolKey.Translate:
-      return translationalToolIcon(tool as TranslationalTool)
+      return translationalToolIcon(tool as TranslationTool)
     
-    case ToolKey.Hint:
+    case ToolKey.Clue:
       return Icon.Hint
     case ToolKey.ImageSearch:
       return Icon.Image
@@ -51,7 +57,7 @@ export const localizableToolUrlString = (tool: LocalizableTool): string | undefi
         case Language.English:
           return 'https://www.merriam-webster.com/dictionary/{query}'
         case Language.Finnish:
-          return 'https://www.sanakirja.org/search.php?q={query}'
+          return 'https://fi.wiktionary.org/wiki/{query}'
         case Language.Spanish:
           return 'https://dle.rae.es/{query}'
       }
@@ -62,7 +68,7 @@ export const localizableToolUrlString = (tool: LocalizableTool): string | undefi
     }
 }
 
-export const translationalToolUrlString = (tool: TranslationalTool): string | undefined => {
+export const translationalToolUrlString = (tool: TranslationTool): string | undefined => {
   switch(tool.key) {
     case ToolKey.Translate:
       switch (`${tool.language}-${tool.translationLanguage}`) {
@@ -71,7 +77,12 @@ export const translationalToolUrlString = (tool: TranslationalTool): string | un
         case 'es-en':
           return 'https://www.wordreference.com/es/en/translation.asp?spen={query}'
         default:
-          return `https://translate.google.com/?sl=${tool.language}&tl=${tool.translationLanguage}&op=translate`
+          switch (tool.language) {
+            case Language.Finnish:
+              return 'https://www.sanakirja.org/search.php?q={query}&l=17'
+            default:
+              return `https://translate.google.com/?sl=${tool.language}&tl=${tool.translationLanguage}&op=translate`
+          }
       }
     default:
       return undefined
@@ -85,7 +96,7 @@ export const toolUrlString = (tool: AnyTool): string | undefined => {
       return localizableToolUrlString(tool as LocalizableTool)
       
     case ToolKey.Translate:
-      return translationalToolUrlString(tool as TranslationalTool)
+      return translationalToolUrlString(tool as TranslationTool)
     
     case ToolKey.ImageSearch:
       return 'https://duckduckgo.com/?t=ffab&iax=images&ia=images&q={query}'
@@ -96,14 +107,25 @@ export const toolUrlString = (tool: AnyTool): string | undefined => {
   }
 }
 
+export const canUseToolForTerm = (tool: AnyTool, term: Term): boolean => {
+  switch (tool.key) {
+    case ToolKey.Clue:
+      return canClueAtTerm(term)
+    default:
+      return true
+  }
+}
+
 export function produceToolsForTerm(keys: ToolKey[], term: Term): Tool[] {
   return keys.compactMap(key => {
+    const tool = { key } as Tool
+    
     switch (key) {
       case ToolKey.Define:
       case ToolKey.WebSearch:
       case ToolKey.WikipediaSearch:
-        return { key, language: term.language } as LocalizableTool
-      case ToolKey.Hint:
+        return { ...tool, language: term.language } as LocalizableTool
+      case ToolKey.Clue:
       case ToolKey.ImageSearch:
         return { key } as Tool
       case ToolKey.Translate:
@@ -115,11 +137,8 @@ export function produceToolsForTerm(keys: ToolKey[], term: Term): Tool[] {
         if (!translationLanguage) {
           return undefined
         }
-        return {
-          key, 
-          language: term.language, 
-          translationLanguage
-        } as TranslationalTool
+        
+        return { ...tool, language: term.language, translationLanguage } as TranslationTool
     }
   })
 }

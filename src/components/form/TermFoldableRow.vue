@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { RawContent, type Term } from '@/models/content';
+import type { Term } from '@/models/content.models';
 import type { AnyTool } from '@/models/tools';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
-import ResearchToolbar from '@/components/ResearchToolbar.vue'
+import ResearchToolbar from '@/components/TermToolbar.vue'
 import FoldableFormRow from '@vueties/components/form/rows/VuetyFoldableFormRow.vue'
 import { researchToolKeysInDisplayOrder } from '@/utils/game.utils';
 
@@ -32,7 +32,7 @@ const emits = defineEmits<{
     </template>
     
     <template v-slot:subtitle v-if="term.aliases">
-      <span class="subtitle caption">{{ RawContent.aliasesStringFromTerm(term) }}</span>
+      <span class="subtitle caption">{{ term.aliases.join(', ') }}</span>
     </template>
     
     <template v-slot:foldable-content>

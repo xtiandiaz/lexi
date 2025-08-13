@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { computed, watch, useTemplateRef, nextTick, onMounted } from 'vue';
 import { type InputState } from '@/models/input'
-import { RawContent } from '@/models/content'
 import { GameMode } from '@/models/game';
 import useGameStore from '@/stores/game'
-import { localizedStringForTermTag } from '@/services/localization';
 import fitText from '@vueties/composables/fit-text'
 import VuetyTag from '@vueties/components/misc/VuetyTag.vue';
 
@@ -17,9 +15,6 @@ const settings = game.settings
 
 const inputHeadlineRef = useTemplateRef('input-headline')
 
-const showsTags = computed(() => state.term.extras?.tags !== undefined)
-const showsAliases = computed(() => state.term.aliases !== undefined)
-const showsExtras = computed(() => state.isComplete && (showsAliases.value || showsTags.value))
 const shouldTagLanguage = computed(() => 
   !state.isComplete && settings.activeLanguages.length > 1 && game.mode === GameMode.Exploration
 )
@@ -52,20 +47,6 @@ onMounted(async () => {
     <h1 ref="input-headline" class="serif">
       {{ state.prefixedInputString }}
     </h1>
-    
-    <div v-if="showsExtras" id="extras">
-      <div v-if="showsTags" id="tags">
-        <VuetyTag 
-          v-for="(tag, index) of state.term.extras!.tags" 
-          :key="index"
-          :label="localizedStringForTermTag(tag)"
-          class="small"
-        />
-      </div>
-      <h6 v-if="showsAliases" class="serif">
-        {{ RawContent.aliasesStringFromTerm(state.term) }}
-      </h6>
-    </div>
   </section>
 </template>
 

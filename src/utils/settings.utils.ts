@@ -1,5 +1,6 @@
-import type { LanguageSettings, Settings } from "@/models/settings"
+import type { DailyGoalSettings, LanguageSettings, Settings } from "@/models/settings"
 import { Language } from "@/models/localization"
+import useGameStore from '@/stores/game'
 
 export const defaultLanguagesSettings: LanguageSettings[] = [
   {
@@ -16,11 +17,30 @@ export const defaultLanguagesSettings: LanguageSettings[] = [
   },
 ]
 
+export const defaultDailyGoalSettings: DailyGoalSettings = {
+  termCount: 10
+}
+
 export const defaultSettings: Settings = {
   activeLanguages: [Language.English, Language.Spanish],
-  dailyGoal: {
-    termCount: 10
-  },
+  dailyGoal: defaultDailyGoalSettings,
   languagesSettings: defaultLanguagesSettings,
   minTermCountForTest: 5,
+}
+
+export const settingsAreEqual = (a: Settings, b: Settings): boolean => {
+  return a.activeLanguages.equals(b.activeLanguages) &&
+    a.languagesSettings.sorted().equals(b.languagesSettings.sorted()) &&
+    a.dailyGoal.termCount === b.dailyGoal.termCount
+}
+
+export function cloneSettings(): Settings {
+  const settings = useGameStore().settings
+  
+  return {
+    ...settings,
+    activeLanguages: [...settings.activeLanguages],
+    dailyGoal: { ...settings.dailyGoal },
+    languagesSettings: settings.languagesSettings.map(ls => { return { ...ls } }),
+  }
 }

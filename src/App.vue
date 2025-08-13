@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { computed, onMounted, watch } from 'vue'
-import { useRouter } from 'vue-router'
-import useGameStore from '@/stores/game'
-import historyStore from '@/stores/history'
 import { Section } from '@/models/section'
 import { GameMode } from '@/models/game'
+import useGameStore from '@/stores/game'
+import useContentStore from '@/stores/content.store'
 import type { VuetyNavigationBarVM } from '@vueties/components/bars/view-models'
+import VuetyProgressIndicator from '@vueties/components/misc/VuetyProgressIndicator.vue';
 import VuetyScene from '@vueties/scenes/VuetyScene.vue'
 import { Icon } from '@design-tokens/iconography'
+import VuetyNavigationalView from '@vueties/views/VuetyNavigationalView.vue'
 
 const game = useGameStore()
-const history = historyStore()
-
-const router = useRouter()
+const settings = game.settings
+const content = useContentStore()
 
 const navigationBarVM = computed<VuetyNavigationBarVM>(() => {
   return {
@@ -28,30 +28,30 @@ const navigationBarVM = computed<VuetyNavigationBarVM>(() => {
       //   path: `/${Section.Search}`
       // }
     ],
-    rightBarItems: [
-      {
-        icon: Icon.History,
-        isEnabled: history.currentTermCount > 0,
-        label: `${history.currentTermCount}`,
-        path: `/${Section.DailyHistory}`
-      }
-    ]
+    // rightBarItems: [
+    //   {
+    //     icon: Icon.Listing,
+    //     isEnabled: session.explorationExtent > 0,
+    //     label: `${session.explorationExtent}`,
+    //     path: `/${Section.DailyHistory}`
+    //   }
+    // ]
   }
 })
 
-watch(() => game.mode, (newMode, oldMode) => {
-  if (newMode === GameMode.Test) {
-    router.replace('/')
-  } else if (oldMode === GameMode.Test) {
-    router.replace(`/${Section.DailyHistory}`)
-  }
-})
-
-onMounted(() => {
-  document.ondblclick = (e) => e.preventDefault()
-})
 </script>
 
 <template>
-  <VuetyScene :navigationBarVM="navigationBarVM" />
+  <VuetyProgressIndicator v-if="content.isLoading" />
+  <VuetyScene v-else />
 </template>
+
+<style scoped lang="scss">
+@use '@vueties/utils/vuetystrap' as vs;
+
+.vuety-progress-indicator {
+  margin: auto;
+  @include vs.size(3rem);
+  @include vs.position(absolute, 0, 0, 0, 0);
+}
+</style>

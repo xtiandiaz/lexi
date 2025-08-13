@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { onBeforeMount, ref, computed } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { LocalizedStringKey } from '@/models/localization'
 import historyStore from '@/stores/history'
 import { Section } from '@/models/section'
 import { localizedString } from '@/services/localization'
-import { prepareTest } from '@/services/session-management'
-import CompletedTermFoldableRow from '@/components/CompletedTermFoldableRow.vue'
+// import { prepareTest } from '@/services/session-management'
+import CompletedTermFoldableRow from '@/components/form/CompletedTermFoldableRow.vue'
 import Form from '@vueties/components/form/VuetyForm.vue'
 import FormSection from '@vueties/components/form/VuetyFormSection.vue'
 import VuetyTextButton from '@/vueties/components/buttons/VuetyTextButton.vue'
@@ -29,7 +29,7 @@ function onTermSelected(index: number) {
 }
 
 function onTestButtonClicked() {
-  prepareTest()
+  // prepareTest()
 }
 
 onBeforeMount(() => {

@@ -1,12 +1,13 @@
-import type { RawDailyHistory, DailyHistory, CompletedTerm } from "@/models/history";
+import type { RawDailyHistory, DailyHistory } from "@/models/history";
 import type { InputState } from "@/models/input";
-import { LocalStorageItemKey } from '@/models/persistence'
 import historyStore from "@/stores/history";
 import { retrieve, save } from '@/assets/tungsten/local-storage'
 import '@/assets/tungsten/extensions/date.extensions'
 
+const dailyHistoryKey = 'daily-history'
+
 export function retrieveSavedDailyHistory(): DailyHistory | undefined {
-  const rawDailyHistory = retrieve<RawDailyHistory>(LocalStorageItemKey.DailyHistory)
+  const rawDailyHistory = retrieve<RawDailyHistory>(dailyHistoryKey)
   if (!rawDailyHistory) {
     return undefined
   }
@@ -20,7 +21,7 @@ export function retrieveSavedDailyHistory(): DailyHistory | undefined {
 export function saveDailyHistory() {
   const history = historyStore()
   
-  save(LocalStorageItemKey.DailyHistory, history.dailyHistory)
+  save(dailyHistoryKey, history.dailyHistory)
 }
 
 export function resetDailyHistoryIfNeeded() {
@@ -45,25 +46,25 @@ export function saveWordInDailyHistory(inputState: InputState) {
 
   const history = historyStore()
   
-  const newCompletedTerm: CompletedTerm = {
-    ...inputState.term,
-    inputMarks: inputState.marks
-  }
+  // const newCompletedTerm: CompletedTerm = {
+  //   ...inputState.term,
+  //   inputMarks: inputState.marks
+  // }
   
-  const dailyHistory = history.dailyHistory
-  if (dailyHistory) {
-    const existingIndex = dailyHistory.completedTerms.findIndex(ct => ct.word === newCompletedTerm.word)
-    if (existingIndex >= 0) {
-      dailyHistory.completedTerms[existingIndex].inputMarks = inputState.marks
-    } else {
-      dailyHistory.completedTerms.push(newCompletedTerm)
-    }
-  } else {
-    history.dailyHistory = {
-      completedTerms: [newCompletedTerm],
-      date: Date.today()
-    }
-  }
+  // const dailyHistory = history.dailyHistory
+  // if (dailyHistory) {
+  //   const existingIndex = dailyHistory.completedTerms.findIndex(ct => ct.word === newCompletedTerm.word)
+  //   if (existingIndex >= 0) {
+  //     dailyHistory.completedTerms[existingIndex].inputMarks = inputState.marks
+  //   } else {
+  //     dailyHistory.completedTerms.push(newCompletedTerm)
+  //   }
+  // } else {
+  //   history.dailyHistory = {
+  //     completedTerms: [newCompletedTerm],
+  //     date: Date.today()
+  //   }
+  // }
   
   saveDailyHistory()
 }

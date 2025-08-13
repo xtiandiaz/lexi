@@ -1,5 +1,7 @@
-import { type InputState } from '@/models/input'
+import type { Term } from './content.models'
 
 export interface Session {
-  readonly inputState: InputState
+  currentTermIndex: number
+  latestActivityAt: string
+  terms: Term[]
 }

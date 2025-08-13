@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { type CompletedTerm } from '@/models/history';
-import { inputMarkIcon, showsInputMarkValueForKind } from '@/view-models/vm-input'
+import type { CompletedTerm } from '@/models/history';
 import TermFoldableRow from './TermFoldableRow.vue';
 import SvgIcon from '@vueties/components/misc/VuetySvgIcon.vue'
-import { isCompletedTermPassed } from '@/utils/term.utils';
+import { termMarkIcon } from '@/utils/game.utils'
 
 defineProps<{
   term: CompletedTerm
@@ -22,7 +21,7 @@ const emits = defineEmits<{
     @selected="emits('selected')"
   >
     <template #background>
-      <div v-if="isCompletedTermPassed(term)" class="term-passed-background"></div>
+      <div v-if="!term.inputState" class="term-passed-background"></div>
     </template>
     
     <template #marks>
@@ -32,8 +31,8 @@ const emits = defineEmits<{
           :key="index"
           class="mark" :class="mark.kind"
         >
-          <span v-if="showsInputMarkValueForKind(mark.kind)">{{ mark.value }} ×</span>
-          <SvgIcon :icon="inputMarkIcon(mark.kind)" />
+          <span>{{ mark.value }} ×</span>
+          <SvgIcon :icon="termMarkIcon(mark.kind)" />
         </span>
       </div>
     </template>

@@ -1,23 +1,31 @@
 <script setup lang="ts">
-import { ref, computed, onBeforeUnmount, watch } from 'vue'
+import { ref, computed, onBeforeUnmount, watch, onBeforeMount } from 'vue'
 import { useRoute } from 'vue-router';
 import { Language } from '@/models/localization'
 import { LocalizedStringKey } from '@/models/localization';
-import type { Settings } from '@/models/settings';
+import type { Settings } from '@/models/game';
 import useGameStore from '@/stores/game'
 import { storeAndSaveSelectedSettings } from '@/services/settings-management';
 import { localizedStringInLanguage } from '@/services/localization';
-import type { VuetySelectionOption } from '@/vueties/components/shared.vm';
+import type { VuetySelectionOption } from '@/vueties/components/shared/view-models';
 import VuetyForm from '@vueties/components/form/VuetyForm.vue'
 import VuetySelectionFormSection from '@/vueties/components/form/VuetySelectionFormSection.vue';
+import VuetyFormSection from '@/vueties/components/form/VuetyFormSection.vue';
+import VuetyStepperFormRow from '@/vueties/components/form/rows/VuetyStepperFormRow.vue';
 import { languagesOrderedByName, dictionaryIcon } from '@/utils/localization.utils';
 import '@/assets/tungsten/extensions/array.extensions'
 import { version } from '@/../package.json'
+import { Icon } from '@/assets/design-tokens/iconography';
+import { cloneSettings, settingsAreEqual } from '@/utils/settings.utils';
+import { useModalNavigationStore } from '@/vueties/stores/navigation.store';
+import { Section } from '@/models/section';
 
 const route = useRoute()
+const modalNavigation = useModalNavigationStore()
+
 const settings = useGameStore().settings
 
-const selectedSettings = ref<Settings>({ ...settings })
+const selectedSettings = ref<Settings>(cloneSettings())
 const selectedLanguages = computed(() => selectedSettings.value.activeLanguages)
 const preferredLanguage = computed(() => selectedLanguages.value.last()!)
 
@@ -31,12 +39,18 @@ const languageOptions = computed<VuetySelectionOption<Language>[]>(() => {
   })
 })
 
+const localizedString = (key: LocalizedStringKey) => localizedStringInLanguage(key, preferredLanguage.value)
+
 watch(preferredLanguage, (lang) => {
-  route.meta.setTitle(localizedStringInLanguage(LocalizedStringKey.Title_Settings, lang))
+  modalNavigation.title = localizedStringInLanguage(LocalizedStringKey.Title_Settings, lang)
 }, { immediate: true })
 
-onBeforeUnmount(() => {  
-  if (settings !== selectedSettings.value) {
+onBeforeMount(() => {
+  modalNavigation.barItems = []
+})
+
+onBeforeUnmount(() => {
+  if (!settingsAreEqual(settings, selectedSettings.value)) {
     storeAndSaveSelectedSettings(selectedSettings.value)
   }
 })
@@ -46,13 +60,27 @@ onBeforeUnmount(() => {
   <main>
     <VuetyForm>
       <VuetySelectionFormSection 
-        :title="localizedStringInLanguage(LocalizedStringKey.Title_Languages, preferredLanguage)"
         :choices="selectedLanguages"
+        :icon="Icon.Globe"
         :options="languageOptions"
         :minimumChoiceCount="1"
-        @deselect="(lang) => selectedLanguages.removeFirst((l) => l === lang)"
+        :title="localizedString(LocalizedStringKey.Title_Languages)"
+        @deselect="(lang) => selectedLanguages.remove((l) => l === lang)"
         @select="(lang) => selectedLanguages.push(lang)"
       />
+      
+      <VuetyFormSection 
+        :icon="Icon.DailyGoal"
+        :title="localizedString(LocalizedStringKey.Title_DailyGoal)"
+      >
+        <VuetyStepperFormRow
+          :title="localizedString(LocalizedStringKey.Term)"
+          :initialValue="selectedSettings.dailyGoal.termCount"
+          :range="{ min: 5, max: 50 }"
+          :step="5"
+          @setValue="value => selectedSettings.dailyGoal.termCount = value"
+        />
+      </VuetyFormSection>
     </VuetyForm>
     <span class='version caption'>v{{ version }}</span>
   </main>
@@ -65,6 +93,7 @@ onBeforeUnmount(() => {
 );
 
 main {
+  margin-bottom: 1rem;
   text-align: center;
   
   .version {

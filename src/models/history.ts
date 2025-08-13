@@ -1,4 +1,4 @@
-import { type Term } from './content'
+import { type Term } from './content.models'
 import { type InputMark } from './input'
 
 export interface CompletedTerm extends Term {

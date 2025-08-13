@@ -35,3 +35,11 @@ export const languagesOrderedByName = (): NamedLanguage[] => {
   })
   .sort((a, b) => a.name.localeCompare(b.name))
 }
+
+export const preferredSpeechLanguageCode = (language: Language): string => {
+  switch (language) {
+    case Language.English: return 'en'
+    case Language.Spanish: return 'es-419'
+    case Language.Finnish: return 'fi-FI'
+  }
+}

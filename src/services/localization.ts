@@ -1,5 +1,4 @@
 import { Language, LocalizedStringKey } from "@/models/localization"
-import { TermTag } from "@/models/content"
 import useGameStore from "@/stores/game"
 import EN from '@/assets/localization/en'
 import ES from '@/assets/localization/es'
@@ -53,11 +52,4 @@ export const dynamicLocalizedString = (key: LocalizedStringKey, ...args: unknown
   }
   
   return localizedString(key)
-}
-
-export const localizedStringForTermTag = (tag: TermTag): string => {
-  const key = Object.values(LocalizedStringKey).find(v => v === tag) as (LocalizedStringKey | undefined)
-  // console.log('tag localized string key', key)
-  
-  return key ? localizedString(key) : `#${tag}`
 }

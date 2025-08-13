@@ -1,20 +1,26 @@
-import { type Settings } from '@/models/settings'
-import { LocalStorageItemKey } from '@/models/persistence'
+import type { Settings } from '@/models/game'
 import useGameStore from '@/stores/game'
+import { defaultDailyGoalSettings, defaultLanguagesSettings } from '@/utils/settings.utils'
 import { retrieve, save } from '@/assets/tungsten/local-storage'
-import { defaultLanguagesSettings } from '@/utils/settings.utils'
+
+const settingsKey = 'settings'
 
 export function retrieveSavedSettings(): Settings | undefined {
-  const _settings = retrieve<Settings>(LocalStorageItemKey.Settings)
-  if (_settings && !_settings.languagesSettings) {
-    _settings.languagesSettings = defaultLanguagesSettings
+  const settings = retrieve<Settings>(settingsKey)
+  if (settings) {
+    if (!settings.languagesSettings) {
+      settings.languagesSettings = defaultLanguagesSettings
+    }
+    if (!settings.dailyGoal) {
+      settings.dailyGoal = defaultDailyGoalSettings
+    }
   }
   
-  return _settings
+  return settings
 }
 
 export function saveSettings() {
-  save<Settings>(LocalStorageItemKey.Settings, useGameStore().settings)
+  save<Settings>(settingsKey, useGameStore().settings)
 }
 
 export function storeAndSaveSelectedSettings(selectedSettings: Settings) {
@@ -22,6 +28,8 @@ export function storeAndSaveSelectedSettings(selectedSettings: Settings) {
     console.error("Insufficient languages to store and save")
     return
   }
+  
+  useGameStore().settings = selectedSettings
   
   saveSettings()
 }

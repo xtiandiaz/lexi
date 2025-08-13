@@ -1,68 +1,41 @@
-import { Test } from '@/models/game'
-import { InputMarkKind, type InputState } from '@/models/input'
-import type { CompletedTerm } from '@/models/history'
 import type { Session } from '@/models/session'
-import { LocalStorageItemKey } from '@/models/persistence'
-import useGameStore from '@/stores/game'
-import historyStore from '@/stores/history'
-import { loadRepositoryContent } from '@/services/content-provision'
+import useSessionStore from '@/stores/session.store'
 import { retrieve, save } from '@/assets/tungsten/local-storage'
+import '@/assets/tungsten/extensions/date.extensions'
 
-export function storeAndSaveSessionIfNeeded(inputState: InputState) {
-  const session = useGameStore()
+const sessionKey = 'session'
+
+export function retrieveSession(): Session | undefined {
+  return retrieve<Session>(sessionKey)
+}
+
+export function saveSession() {
+  const session = useSessionStore()
   
-  if (session.test) {
-    console.warn("Session NOT saved during test", session.test)
-    return
-  }
-  
-  session.inputState = inputState
-  
-  save<Session>(LocalStorageItemKey.Session, {
-    inputState
+  save<Session>(sessionKey, {
+    currentTermIndex: session.currentTermIndex,
+    latestActivityAt: session.latestActivityAt.toDateString(),
+    terms: session.terms,
   })
 }
 
-export function retrievedSavedSession(): Session | undefined {
-  return retrieve<Session>(LocalStorageItemKey.Session)
+export function resetSession() {
+  const session = useSessionStore()
+  
+  session.latestActivityAt = Date.today()
+  session.currentTermIndex = 0
+  session.terms = []
+  
+  saveSession()
 }
 
-export async function resetSession(): Promise<void> {
-  const session = useGameStore()
+export function resetSessionIfNeeded() {
+  const session = useSessionStore()
   
-  session.test = undefined
-  session.content = await loadRepositoryContent()
-}
-
-export async function resetSessionIfNeeded(): Promise<void> {
-  const session = useGameStore()
-  
-  if (session.test) {
+  const isStale = session.latestActivityAt.getDaysFrom(new Date()) >= 1
+  if (isStale) {
     return
   }
   
-  return resetSession()
-}
-
-export function prepareTest() {
-  const settings = useGameStore().settings
-  const dailyHistory = historyStore().dailyHistory
-  const completedTerms: CompletedTerm[] | undefined = dailyHistory?.completedTerms
-  if (!dailyHistory || !completedTerms || completedTerms.length < settings.minTermCountForTest) {
-    console.error('Scanty content for a test!', completedTerms)
-    return
-  }
-  
-  completedTerms.forEach(ct => {
-    ct.hintPrefixLength = 0
-    
-    const testMark = ct.inputMarks.find(im => im.kind === InputMarkKind.Test)
-    if (testMark) {
-      testMark.value = 0
-    }
-  })
-  
-  const session = useGameStore()
-  
-  session.test = new Test(completedTerms)
+  resetSession()
 }
