@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { Section } from '@/models/section'
 import { GameMode } from '@/models/game'
 import useGameStore from '@/stores/game'
@@ -9,10 +9,12 @@ import VuetyProgressIndicator from '@vueties/components/misc/VuetyProgressIndica
 import VuetyScene from '@vueties/scenes/VuetyScene.vue'
 import { Icon } from '@design-tokens/iconography'
 import VuetyNavigationalView from '@vueties/views/VuetyNavigationalView.vue'
+import { Language } from './models/localization'
 
 const game = useGameStore()
-const settings = game.settings
 const content = useContentStore()
+
+const isLoading = ref(true)
 
 const navigationBarVM = computed<VuetyNavigationBarVM>(() => {
   return {
@@ -39,10 +41,16 @@ const navigationBarVM = computed<VuetyNavigationBarVM>(() => {
   }
 })
 
+onMounted(async () => {
+  await content.load(Object.values(Language))
+  
+  isLoading.value = false
+})
+
 </script>
 
 <template>
-  <VuetyProgressIndicator v-if="content.isLoading" />
+  <VuetyProgressIndicator v-if="isLoading" />
   <VuetyScene v-else />
 </template>
 

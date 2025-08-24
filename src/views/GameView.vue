@@ -16,13 +16,11 @@ import '@/assets/tungsten/extensions/array.extensions'
 import { clamp } from '@/assets/tungsten/math';
 import { Section } from '@/models/section';
 import { Icon } from '@/assets/design-tokens/iconography';
-import { useNavigationStore } from '@/vueties/stores/navigation.store';
+import useNavigationStore from '@/vueties/stores/navigation.store';
 
 const route = useRoute()
 const navigation = useNavigationStore()
 
-const store = useGameStore()
-const settings = store.settings
 const session = useSessionStore()
 
 const { terms, currentTermIndex } = storeToRefs(session)
@@ -81,12 +79,12 @@ watch(terms, (newTerms) => {
 
 onBeforeMount(() => {
   navigation.barItems = [
-    { key: Section.Settings, icon: Icon.Gear, path: 'settings/revenge', position: -1 }
+    { key: Section.Settings, icon: Icon.Gear, path: '/settings', position: -1 }
   ]
 })
 
 onMounted(async () => {
-  // await session.load(settings.activeLanguages)
+  await session.resetTerms()
 })
 </script>
 

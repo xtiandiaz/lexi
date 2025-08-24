@@ -25,17 +25,9 @@ export default defineStore('session', () => {
   
   const explorationExtent = computed(() => Math.max(dailyGoalSettings.value.termCount, terms.value.length))
   
-  async function load(languages: Language[]) {
-    terms.value = []
-    
-    const newTerms = await content.getTerms(settings.dailyGoal.termCount, languages)
-    
-    terms.value = newTerms.map(t => prepareTermToGuess(t))
+  async function resetTerms() {
+    terms.value = await content.getTerms(settings.dailyGoal.termCount, settings.activeLanguages)
   }
-  
-  // watch(() => gameStore.settings.activeLanguages, async (newLanguages) => {
-  //   await load(newLanguages)
-  // }, { immediate: true })
   
   return {
     currentTermIndex,
@@ -43,6 +35,6 @@ export default defineStore('session', () => {
     terms,
     
     explorationExtent,
-    load
+    resetTerms
   }
 })

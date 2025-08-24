@@ -17,12 +17,18 @@ export default createVuetyRouter([
           modal: DailyHistoryView
         },
       },
-      {
-        path: `/${Section.Settings}/:name?`,
-        components: {
-          modal: SettingsView
-        }
-      },
+      // {
+      //   path: `/${Section.Settings}/:name?`,
+      //   components: {
+      //     modal: SettingsView
+      //   }
+      // },
     ]
-  }
+  },
+  {
+    path: '/settings',
+    components: {
+      default: SettingsView
+    },
+  },
 ])

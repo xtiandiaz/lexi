@@ -2,6 +2,7 @@ import { dailyTermCountCapPerLanguage } from '@/constants'
 import type { Term, RawLanguageContent, LanguageTermCollection } from '@/models/content.models'
 import { Language } from '@/models/localization'
 import '@/assets/tungsten/extensions/array.extensions'
+import '@/assets/tungsten/extensions/string.extensions'
 
 const sourcePath = 'https://raw.githubusercontent.com/xtiandiaz/lexicon/refs/heads/main/src'
 const rawContent: RawLanguageContent[] = []

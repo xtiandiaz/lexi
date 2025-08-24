@@ -17,11 +17,11 @@ import '@/assets/tungsten/extensions/array.extensions'
 import { version } from '@/../package.json'
 import { Icon } from '@/assets/design-tokens/iconography';
 import { cloneSettings, settingsAreEqual } from '@/utils/settings.utils';
-import { useModalNavigationStore } from '@/vueties/stores/navigation.store';
+import useNavigationStore from '@/vueties/stores/navigation.store';
 import { Section } from '@/models/section';
 
 const route = useRoute()
-const modalNavigation = useModalNavigationStore()
+const modalNavigation = useNavigationStore()
 
 const settings = useGameStore().settings
 
