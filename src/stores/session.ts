@@ -1,16 +1,17 @@
 import { defineStore } from "pinia";
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import type { Term } from '@/models/content.models'
+import useHistoryStore from '@/stores/history'
 import useGameStore from '@/stores/game'
-import useContentStore from '@/stores/content.store'
+import useContentStore from '@/stores/content'
 import { retrieveSession } from "@/services/session-management";
 import { prepareTermToGuess } from "@/utils/game.utils";
 import '@/assets/tungsten/extensions/date.extensions'
-import type { Language } from "@/models/localization";
 
 export default defineStore('session', () => {
   const rawSession = retrieveSession()
   
+  const history = useHistoryStore()
   const gameStore = useGameStore()
   const settings = gameStore.settings
   const content = useContentStore()
@@ -26,7 +27,14 @@ export default defineStore('session', () => {
   const explorationExtent = computed(() => Math.max(dailyGoalSettings.value.termCount, terms.value.length))
   
   async function resetTerms() {
-    terms.value = await content.getTerms(settings.dailyGoal.termCount, settings.activeLanguages)
+    const savedTerms = history.dailyHistory?.terms ?? []
+    const missingTermCount = settings.dailyGoal.termCount - savedTerms.length
+    const newTerms = missingTermCount > 0 
+      ? await content.getNewTerms(missingTermCount, settings.activeLanguages) 
+      : []
+    newTerms.forEach(t => prepareTermToGuess(t))
+    
+    terms.value = savedTerms.concat(newTerms)
   }
   
   return {

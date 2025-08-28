@@ -1,5 +1,5 @@
 import type { Session } from '@/models/session'
-import useSessionStore from '@/stores/session.store'
+import useSessionStore from '@/stores/session'
 import { retrieve, save } from '@/assets/tungsten/local-storage'
 import '@/assets/tungsten/extensions/date.extensions'
 

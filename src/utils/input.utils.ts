@@ -66,3 +66,20 @@ export function clueAtTerm(term: Term): boolean {
   
   return clue != undefined
 }
+
+export function getFirstCharIndexAtInputState(char: string, inputState: InputState): number {
+  if (!/[a-z \-áéíóúüàèìòù]/i.test(char)) {
+    return -1
+  }
+
+  for (let i = 0; i < inputState.inputableIndices.length; i++) {
+    const indexInWord = inputState.inputableIndices[i]
+    const charInWord = inputState.word[indexInWord]
+    
+    if (charInWord === char && !inputState.indices.includes(indexInWord)) {
+      return indexInWord
+    }
+  }
+
+  return -1
+}

@@ -1,5 +1,4 @@
 import type { RawDailyHistory, DailyHistory } from "@/models/history";
-import type { InputState } from "@/models/input";
 import historyStore from "@/stores/history";
 import { retrieve, save } from '@/assets/tungsten/local-storage'
 import '@/assets/tungsten/extensions/date.extensions'
@@ -13,7 +12,7 @@ export function retrieveSavedDailyHistory(): DailyHistory | undefined {
   }
   
   return {
-    completedTerms: rawDailyHistory.completedTerms,
+    terms: rawDailyHistory.terms,
     date: new Date(rawDailyHistory.date)
   }
 }
@@ -36,35 +35,7 @@ export function resetDailyHistoryIfNeeded() {
   }
   
   history.dailyHistory.date = Date.today()
-  history.dailyHistory.completedTerms = []
-  
-  saveDailyHistory()
-}
-
-export function saveWordInDailyHistory(inputState: InputState) {
-  resetDailyHistoryIfNeeded()
-
-  const history = historyStore()
-  
-  // const newCompletedTerm: CompletedTerm = {
-  //   ...inputState.term,
-  //   inputMarks: inputState.marks
-  // }
-  
-  // const dailyHistory = history.dailyHistory
-  // if (dailyHistory) {
-  //   const existingIndex = dailyHistory.completedTerms.findIndex(ct => ct.word === newCompletedTerm.word)
-  //   if (existingIndex >= 0) {
-  //     dailyHistory.completedTerms[existingIndex].inputMarks = inputState.marks
-  //   } else {
-  //     dailyHistory.completedTerms.push(newCompletedTerm)
-  //   }
-  // } else {
-  //   history.dailyHistory = {
-  //     completedTerms: [newCompletedTerm],
-  //     date: Date.today()
-  //   }
-  // }
+  history.dailyHistory.terms = []
   
   saveDailyHistory()
 }

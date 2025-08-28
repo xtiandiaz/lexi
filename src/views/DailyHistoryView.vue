@@ -7,8 +7,8 @@ import { Section } from '@/models/section'
 import { localizedString } from '@/services/localization'
 // import { prepareTest } from '@/services/session-management'
 import CompletedTermFoldableRow from '@/components/form/CompletedTermFoldableRow.vue'
-import Form from '@vueties/components/form/VuetyForm.vue'
-import FormSection from '@vueties/components/form/VuetyFormSection.vue'
+import VuetyForm from '@vueties/components/form/VuetyForm.vue'
+import VuetyFormSection from '@vueties/components/form/VuetyFormSection.vue'
 import VuetyTextButton from '@/vueties/components/buttons/VuetyTextButton.vue'
 import { dailyHistoryDateLocaleString } from '@/utils/history.utils'
 import { sectionTitle } from '@/utils/section.utils'
@@ -19,7 +19,7 @@ const route = useRoute()
 const history = historyStore()
 const dailyHistory = history.dailyHistory
 
-const terms = dailyHistory?.completedTerms.sort((s1, s2) => s1.word.localeCompare(s2.word))
+const terms = dailyHistory?.terms.sort((s1, s2) => s1.word.localeCompare(s2.word))
 const termCount = terms?.length ?? 0 // TODO: interpolate count in localized string
 
 const selectedIndex = ref<number>()
@@ -39,8 +39,8 @@ onBeforeMount(() => {
 
 <template>
   <main>
-    <Form v-if="dailyHistory">
-      <FormSection
+    <VuetyForm v-if="dailyHistory">
+      <VuetyFormSection
         :title="`${dailyHistoryDateLocaleString(dailyHistory)} • ${termCount} ${localizedString(LocalizedStringKey.Term, termCount === 0 || termCount > 1)}`"
       >
         <CompletedTermFoldableRow
@@ -50,8 +50,8 @@ onBeforeMount(() => {
           :isUnfolded="selectedIndex === index"
           @select="onTermSelected(index)"
         />
-      </FormSection>
-    </Form>
+      </VuetyFormSection>
+    </VuetyForm>
     
     <div id="test-button-wrapper">
       <VuetyTextButton

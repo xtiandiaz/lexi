@@ -1,27 +1,25 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
-import { computed, onBeforeMount, onMounted, watch } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia';
-import useGameStore from '@/stores/game'
-import useSessionStore from '@/stores/session.store'
+import useSessionStore from '@/stores/session'
+import useHistoryStore from '@/stores/history'
 import { TermMarkKind } from '@/models/content.models';
 import { ToolKey, type AnyTool } from '@/models/tools';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
 import ExplorationControls from '@/components/ExplorationControls.vue';
 import InputKeypad from '@/components/InputKeypad.vue';
-import TermSlideshow from '@/components/TermSlideshow.vue';
+import TermSlideshow from '@/components/TermCarrousel.vue';
 import { clueAtTerm, inputStringsFromState } from '@/utils/input.utils'
 import { markTerm } from '@/utils/game.utils'
 import '@/assets/tungsten/extensions/array.extensions'
 import { clamp } from '@/assets/tungsten/math';
-import { Section } from '@/models/section';
 import { Icon } from '@/assets/design-tokens/iconography';
-import useNavigationStore from '@/vueties/stores/navigation.store';
-
-const route = useRoute()
-const navigation = useNavigationStore()
+import VuetyNavigationalView from '@/vueties/views/VuetyNavigationalView.vue';
+import { navBarItem } from '@/vueties/components/shared/view-models';
+import { saveDailyHistory } from '@/services/history-management';
 
 const session = useSessionStore()
+const history = useHistoryStore()
 
 const { terms, currentTermIndex } = storeToRefs(session)
 
@@ -62,26 +60,24 @@ function useTool(tool: AnyTool) {
 }
 
 watch(inputState, (newInputState) => {
-  if (newInputState != undefined) {
-    const inputStrings = inputStringsFromState(newInputState)
+  if (newInputState == undefined) {
+    return
+  }
+  const inputStrings = inputStringsFromState(newInputState)
+  
+  if (inputStrings.input === inputStrings.inputable && currentTerm.value) {
+    currentTerm.value.inputState = undefined
     
-    if (inputStrings.input === inputStrings.inputable && currentTerm.value) {
-      currentTerm.value.inputState = undefined
-    }
+    history.dailyHistory.terms = session.terms
+    saveDailyHistory()
   }
 }, { deep: true })
 
-watch(terms, (newTerms) => {
-  console.log(newTerms)
+watch(terms, () => {
+  // console.log(newTerms)
   // session.
   // goToSlide(Math.min(currentTermIndex.value, newTerms.length - 1))
 }, { immediate: true })
-
-onBeforeMount(() => {
-  navigation.barItems = [
-    { key: Section.Settings, icon: Icon.Gear, path: '/settings', position: -1 }
-  ]
-})
 
 onMounted(async () => {
   await session.resetTerms()
@@ -89,29 +85,36 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main v-if="terms">
-    <TermSlideshow 
-      v-if="currentTerm"
-      :currentTerm="currentTerm"
-      :index="currentTermIndex"
-      @useTool="useTool"
-    />
+  <VuetyNavigationalView
+    :nav-bar-items="[
+      navBarItem('/settings', -1, undefined, Icon.Gear),
+      navBarItem('/daily-history', 1, undefined, Icon.History),
+    ]"
+  >
+    <main v-if="terms">
+      <TermSlideshow 
+        v-if="currentTerm"
+        :currentTerm="currentTerm"
+        :index="currentTermIndex"
+        @useTool="useTool"
+      />
+        
+      <div class="flex-spacer"></div>
       
-    <div class="flex-spacer"></div>
-    
-    <InputKeypad 
-      v-if="inputState"
-      :inputState="inputState"
-      @input="input"
-    />
-    <ExplorationControls
-      v-else
-      :currentStep="currentTermIndex + 1"
-      :stepCount="session.explorationExtent"
-      @goPrevious="goToSlide(currentTermIndex - 1)"
-      @goNext="goToSlide(currentTermIndex + 1)"
-    />
-  </main>
+      <InputKeypad 
+        v-if="inputState"
+        :inputState="inputState"
+        @input="input"
+      />
+      <ExplorationControls
+        v-else
+        :currentStep="currentTermIndex + 1"
+        :stepCount="session.explorationExtent"
+        @goPrevious="goToSlide(currentTermIndex - 1)"
+        @goNext="goToSlide(currentTermIndex + 1)"
+      />
+    </main>
+  </VuetyNavigationalView>
 </template>
 
 <style scoped lang="scss">

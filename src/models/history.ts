@@ -1,16 +1,11 @@
 import { type Term } from './content.models'
-import { type InputMark } from './input'
-
-export interface CompletedTerm extends Term {
-  inputMarks: InputMark[]
-}
 
 export interface RawDailyHistory {
-  completedTerms: CompletedTerm[],
+  terms: Term[],
   date: string
 }
 
 export interface DailyHistory {
-  completedTerms: CompletedTerm[]
+  terms: Term[]
   date: Date
 }

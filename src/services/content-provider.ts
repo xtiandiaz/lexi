@@ -1,25 +1,12 @@
 import { dailyTermCountCapPerLanguage } from '@/constants'
-import type { Term, RawLanguageContent, LanguageTermCollection } from '@/models/content.models'
+import type { RawLanguageContent, LanguageTermCollection } from '@/models/content.models'
 import { Language } from '@/models/localization'
+import { produceTerm } from '@/utils/content.utils'
 import '@/assets/tungsten/extensions/array.extensions'
 import '@/assets/tungsten/extensions/string.extensions'
 
 const sourcePath = 'https://raw.githubusercontent.com/xtiandiaz/lexicon/refs/heads/main/src'
 const rawContent: RawLanguageContent[] = []
-
-let currentTermId = 0
-
-function produceTerm(rawTerm: string, language: Language): Term {
-  const parts = rawTerm.split(';')
-  const words = parts[0].split(',')
-  
-  const word = words[0].removeLeadingAndTrailingSpaces()
-  const aliases = words.length > 1 
-    ? words.slice(1).map(w => w.removeLeadingAndTrailingSpaces()) 
-    : undefined
-  
-  return { aliases, id: ++currentTermId, language, marks: [], word }
-}
 
 export async function loadContent(languages: Language[]): Promise<LanguageTermCollection[]> {  
   for (const language of languages) {

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onBeforeUnmount, watch, onBeforeMount } from 'vue'
-import { useRoute } from 'vue-router';
+import { ref, computed, onBeforeUnmount } from 'vue'
 import { Language } from '@/models/localization'
 import { LocalizedStringKey } from '@/models/localization';
 import type { Settings } from '@/models/game';
@@ -17,11 +16,6 @@ import '@/assets/tungsten/extensions/array.extensions'
 import { version } from '@/../package.json'
 import { Icon } from '@/assets/design-tokens/iconography';
 import { cloneSettings, settingsAreEqual } from '@/utils/settings.utils';
-import useNavigationStore from '@/vueties/stores/navigation.store';
-import { Section } from '@/models/section';
-
-const route = useRoute()
-const modalNavigation = useNavigationStore()
 
 const settings = useGameStore().settings
 
@@ -41,13 +35,13 @@ const languageOptions = computed<VuetySelectionOption<Language>[]>(() => {
 
 const localizedString = (key: LocalizedStringKey) => localizedStringInLanguage(key, preferredLanguage.value)
 
-watch(preferredLanguage, (lang) => {
-  modalNavigation.title = localizedStringInLanguage(LocalizedStringKey.Title_Settings, lang)
-}, { immediate: true })
+// watch(preferredLanguage, (lang) => {
+//   modalNavigation.title = localizedStringInLanguage(LocalizedStringKey.Title_Settings, lang)
+// }, { immediate: true })
 
-onBeforeMount(() => {
-  modalNavigation.barItems = []
-})
+// onBeforeMount(() => {
+//   modalNavigation.barItems = []
+// })
 
 onBeforeUnmount(() => {
   if (!settingsAreEqual(settings, selectedSettings.value)) {

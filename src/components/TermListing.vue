@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useSessionStore from '@/stores/session.store'
+import useSessionStore from '@/stores/session'
 import VuetyForm from '@vueties/components/form/VuetyForm.vue';
 import VuetyFormSection from '@vueties/components/form/VuetyFormSection.vue';
 import TermFoldableRow from './form/TermFoldableRow.vue';

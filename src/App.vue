@@ -3,7 +3,7 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { Section } from '@/models/section'
 import { GameMode } from '@/models/game'
 import useGameStore from '@/stores/game'
-import useContentStore from '@/stores/content.store'
+import useContentStore from '@/stores/content'
 import type { VuetyNavigationBarVM } from '@vueties/components/bars/view-models'
 import VuetyProgressIndicator from '@vueties/components/misc/VuetyProgressIndicator.vue';
 import VuetyScene from '@vueties/scenes/VuetyScene.vue'

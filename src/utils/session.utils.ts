@@ -1,6 +1,6 @@
 import { prepareTermToGuess } from "./game.utils"
 import useGameStore from '@/stores/game'
-import useSessionStore from '@/stores/session.store'
+import useSessionStore from '@/stores/session'
 
 // export function supplyTermsInSessionIfNeeded() {
 //   const game = useGameStore()

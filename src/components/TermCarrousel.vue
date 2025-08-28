@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue'
 import type { Term } from '@/models/content.models';
 import type { AnyTool } from '@/models/tools';
-import TermSlide from './TermSlide.vue';
+import TermSlide from './TermCard.vue';
 
 const { index } = defineProps<{
   currentTerm: Term,

@@ -5,7 +5,7 @@ import { ToolKey } from '@/models/tools';
 import type { Term } from '@/models/content.models';
 import { canUseToolForTerm, produceToolsForTerm, toolIcon } from '@/utils/tool.utils';
 import type { VuetyToolbarItem } from '@/vueties/components/shared/view-models';
-import VuetyToolbar from '@vueties/components/bars/VuetyToolbar.vue'
+import VuetyToolbar from '@/vueties/components/bars/VuetyToolbar.vue'
 
 const { toolKeys, term } = defineProps<{
   term: Term
@@ -19,18 +19,16 @@ const emits = defineEmits<{
 const tools = computed(() => produceToolsForTerm(toolKeys, term))
 const toolbarItems = computed<VuetyToolbarItem<ToolKey>[]>(() => tools.value.map(tool => {
   return { 
+    key: tool.key,
     icon: toolIcon(tool), 
     isEnabled: canUseToolForTerm(tool, term), 
-    key: tool.key 
+    action: () => emits('useTool', tool)
   }
 }))
 </script>
 
 <template>
-  <VuetyToolbar 
-    :items="toolbarItems"
-    @setTool="(key) => emits('useTool', tools.find(t => t.key === key)!)"
-  />
+  <VuetyToolbar :items="toolbarItems" />
 </template>
 
 <style scoped lang="scss">
