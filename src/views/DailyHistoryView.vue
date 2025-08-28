@@ -1,25 +1,23 @@
 <script setup lang="ts">
-import { onBeforeMount, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref } from 'vue'
 import { LocalizedStringKey } from '@/models/localization'
 import historyStore from '@/stores/history'
 import { Section } from '@/models/section'
 import { localizedString } from '@/services/localization'
-// import { prepareTest } from '@/services/session-management'
-import CompletedTermFoldableRow from '@/components/form/CompletedTermFoldableRow.vue'
 import VuetyForm from '@vueties/components/form/VuetyForm.vue'
 import VuetyFormSection from '@vueties/components/form/VuetyFormSection.vue'
-import VuetyTextButton from '@/vueties/components/buttons/VuetyTextButton.vue'
 import { dailyHistoryDateLocaleString } from '@/utils/history.utils'
 import { sectionTitle } from '@/utils/section.utils'
-import { Icon } from '@design-tokens/iconography'
-
-const route = useRoute()
+import TermFoldableRow from '@/components/form/TermFoldableRow.vue'
+import { obfuscatedWordHTMLFromTerm } from '@/utils/game.utils'
+import VuetyInfoFormRow from '@/vueties/components/form/rows/VuetyInfoFormRow.vue'
+import VuetyNavigationalView from '@/vueties/views/VuetyNavigationalView.vue'
+import { closeNavBarItem } from '@/vueties/components/shared/view-models'
 
 const history = historyStore()
 const dailyHistory = history.dailyHistory
 
-const terms = dailyHistory?.terms.sort((s1, s2) => s1.word.localeCompare(s2.word))
+const terms = dailyHistory?.terms
 const termCount = terms?.length ?? 0 // TODO: interpolate count in localized string
 
 const selectedIndex = ref<number>()
@@ -27,42 +25,46 @@ const selectedIndex = ref<number>()
 function onTermSelected(index: number) {
   selectedIndex.value = index !== selectedIndex.value ? index : undefined
 }
-
-function onTestButtonClicked() {
-  // prepareTest()
-}
-
-onBeforeMount(() => {
-  route.meta.setTitle(sectionTitle(Section.DailyHistory))
-})
 </script>
 
 <template>
-  <main>
-    <VuetyForm v-if="dailyHistory">
-      <VuetyFormSection
-        :title="`${dailyHistoryDateLocaleString(dailyHistory)} • ${termCount} ${localizedString(LocalizedStringKey.Term, termCount === 0 || termCount > 1)}`"
-      >
-        <CompletedTermFoldableRow
-          v-for="(term, index) of terms"
-          :key="index"
-          :term="term"
-          :isUnfolded="selectedIndex === index"
-          @select="onTermSelected(index)"
+  <VuetyNavigationalView
+    :nav-bar-items="[closeNavBarItem('/')]"
+    :title="sectionTitle(Section.DailyHistory)"
+  >
+    <main>
+      <VuetyForm v-if="dailyHistory">
+        <VuetyFormSection
+          :title="`${dailyHistoryDateLocaleString(dailyHistory)} • ${termCount} ${localizedString(LocalizedStringKey.Term, termCount === 0 || termCount > 1)}`"
+        >
+          <div 
+            v-for="(term, index) of terms"
+            :key="index"
+          >
+            <VuetyInfoFormRow 
+              v-if="term.inputState"
+              :title="obfuscatedWordHTMLFromTerm(term) ?? term.word"
+            />
+            <TermFoldableRow
+              v-else
+              :term="term"
+              :isUnfolded="selectedIndex === index"
+              @select="onTermSelected(index)"
+            />
+          </div>
+        </VuetyFormSection>
+      </VuetyForm>
+      
+      <!-- <div id="test-button-wrapper">
+        <VuetyTextButton
+          id="test-button"
+          :label="localizedString(LocalizedStringKey.Button_Test)"
+          :icon="Icon.CheckmarkCircleFilled"
+          @click="onTestButtonClicked"
         />
-      </VuetyFormSection>
-    </VuetyForm>
-    
-    <div id="test-button-wrapper">
-      <VuetyTextButton
-        v-if="history.canTakeTest"
-        id="test-button"
-        :label="localizedString(LocalizedStringKey.Button_Test)"
-        :icon="Icon.CheckmarkCircleFilled"
-        @click="onTestButtonClicked"
-      />
-    </div>
-  </main>
+      </div> -->
+    </main>
+  </VuetyNavigationalView>
 </template>
 
 <style scoped lang="scss">
@@ -86,6 +88,14 @@ onBeforeMount(() => {
   #test-button {
     width: 100%;
     @include vs.color-attribute('color', 'green');
+  }
+}
+
+.vuety-info-form-row {
+  @include vs.color-attribute('color', vs.$secondary-body-color);
+  
+  :deep(.obfuscated) {
+    opacity: 50%;
   }
 }
 </style>

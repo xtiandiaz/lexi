@@ -131,10 +131,5 @@ const toolKeys = computed(() => inputState.value ? [ToolKey.Clue] : researchTool
       @include vs.color-attribute('color', vs.$tertiary-body-color);
     }
   }
-  
-  .vuety-toolbar {
-    gap: 0;
-    justify-content: space-evenly;
-  }
 }
 </style>

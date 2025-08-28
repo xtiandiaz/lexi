@@ -2,7 +2,7 @@
 import { computed, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia';
 import useSessionStore from '@/stores/session'
-import useHistoryStore from '@/stores/history'
+import useGameStore from '@/stores/game'
 import { TermMarkKind } from '@/models/content.models';
 import { ToolKey, type AnyTool } from '@/models/tools';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
@@ -16,10 +16,10 @@ import { clamp } from '@/assets/tungsten/math';
 import { Icon } from '@/assets/design-tokens/iconography';
 import VuetyNavigationalView from '@/vueties/views/VuetyNavigationalView.vue';
 import { navBarItem } from '@/vueties/components/shared/view-models';
-import { saveDailyHistory } from '@/services/history-management';
+import { updateAndSaveDailyHistory } from '@/services/history-management';
 
 const session = useSessionStore()
-const history = useHistoryStore()
+const store = useGameStore()
 
 const { terms, currentTermIndex } = storeToRefs(session)
 
@@ -68,16 +68,14 @@ watch(inputState, (newInputState) => {
   if (inputStrings.input === inputStrings.inputable && currentTerm.value) {
     currentTerm.value.inputState = undefined
     
-    history.dailyHistory.terms = session.terms
-    saveDailyHistory()
+    updateAndSaveDailyHistory()
   }
 }, { deep: true })
 
-watch(terms, () => {
-  // console.log(newTerms)
-  // session.
-  // goToSlide(Math.min(currentTermIndex.value, newTerms.length - 1))
-}, { immediate: true })
+watch([() => store.settings.activeLanguages, () => store.settings.dailyGoal], async () => {
+  await session.resetTerms()
+  updateAndSaveDailyHistory()
+}, { deep: true })
 
 onMounted(async () => {
   await session.resetTerms()
@@ -98,7 +96,7 @@ onMounted(async () => {
         :index="currentTermIndex"
         @useTool="useTool"
       />
-        
+      
       <div class="flex-spacer"></div>
       
       <InputKeypad 

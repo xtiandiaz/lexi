@@ -4,9 +4,10 @@ import type { AnyTool } from '@/models/tools';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
 import ResearchToolbar from '@/components/TermToolbar.vue'
 import FoldableFormRow from '@vueties/components/form/rows/VuetyFoldableFormRow.vue'
-import { researchToolKeysInDisplayOrder } from '@/utils/game.utils';
+import { researchToolKeysInDisplayOrder, termMarkIcon } from '@/utils/game.utils';
+import VuetySvgIcon from '@/vueties/components/misc/VuetySvgIcon.vue';
 
-defineProps<{
+const { term } = defineProps<{
   isUnfolded: boolean
   term: Term
 }>()
@@ -18,16 +19,25 @@ const emits = defineEmits<{
 
 <template>
   <FoldableFormRow 
-    :isUnfolded="isUnfolded"
+    :is-unfolded="isUnfolded"
     @select="emits('select')"
   >
-    <template v-slot:title>
-      <slot name="background"></slot>
+    <template #title>
+      <!-- <div class="background"></div> -->
       
       <div class="title-wrapper">
         <span class="title">{{ term.word }}</span>
         
-        <slot name="marks"></slot>
+        <div v-if="term.marks.length > 0" class="marks">
+          <span
+            v-for="(mark, index) of term.marks.filter(m => m.value > 0)" 
+            :class="['mark', mark.kind]"
+            :key="index"
+          >
+            <span>{{ mark.value }} ×</span>
+            <VuetySvgIcon :icon="termMarkIcon(mark.kind)" />
+          </span>
+        </div>
       </div>
     </template>
     
@@ -35,7 +45,7 @@ const emits = defineEmits<{
       <span class="subtitle caption">{{ term.aliases.join(', ') }}</span>
     </template>
     
-    <template v-slot:foldable-content>
+    <template #foldable-content>
       <ResearchToolbar
         :term="term"
         :toolKeys="researchToolKeysInDisplayOrder"
@@ -48,6 +58,37 @@ const emits = defineEmits<{
 <style scoped lang="scss">
 @use '@vueties/utils/vuetystrap' as vs;
 
+.background {
+  opacity: 10%;
+  z-index: -1;
+  @include vs.position(absolute, 0, 0, 0, 0);
+  @include vs.color-attribute('background-color', 'green', 0.05);
+}
+
+.marks {
+  gap: 0.25rem;
+
+  .mark {
+    @extend %caption;
+    
+    &.clue {
+      @include vs.color-attribute('color', 'yellow');
+    }
+    &.test {
+      @include vs.color-attribute('color', 'green');
+    }
+    
+    > * {
+      vertical-align: middle;
+    }
+    
+    .svg-icon {
+      height: 1.25rem;
+      width: 1.25rem;
+    }
+  }
+}
+
 .vuety-foldable-form-row {
   position: relative;
   z-index: 1;
@@ -58,6 +99,10 @@ const emits = defineEmits<{
     }
   }
   
+  .subtitle {
+    @include vs.color-attribute('color', vs.$tertiary-body-color);
+  }
+  
   .title-wrapper {
     &, > * {
       align-items: center;
@@ -65,10 +110,6 @@ const emits = defineEmits<{
       flex-direction: row;
       gap: 0.5em;
     }
-  }
-  
-  .subtitle {
-    @include vs.color-attribute('color', vs.$tertiary-body-color);
   }
 }
 

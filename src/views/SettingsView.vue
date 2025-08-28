@@ -11,11 +11,13 @@ import VuetyForm from '@vueties/components/form/VuetyForm.vue'
 import VuetySelectionFormSection from '@/vueties/components/form/VuetySelectionFormSection.vue';
 import VuetyFormSection from '@/vueties/components/form/VuetyFormSection.vue';
 import VuetyStepperFormRow from '@/vueties/components/form/rows/VuetyStepperFormRow.vue';
+import VuetyNavigationalView from '@/vueties/views/VuetyNavigationalView.vue';
 import { languagesOrderedByName, dictionaryIcon } from '@/utils/localization.utils';
 import '@/assets/tungsten/extensions/array.extensions'
 import { version } from '@/../package.json'
 import { Icon } from '@/assets/design-tokens/iconography';
 import { cloneSettings, settingsAreEqual } from '@/utils/settings.utils';
+import { closeNavBarItem } from '@/vueties/components/shared/view-models';
 
 const settings = useGameStore().settings
 
@@ -35,14 +37,6 @@ const languageOptions = computed<VuetySelectionOption<Language>[]>(() => {
 
 const localizedString = (key: LocalizedStringKey) => localizedStringInLanguage(key, preferredLanguage.value)
 
-// watch(preferredLanguage, (lang) => {
-//   modalNavigation.title = localizedStringInLanguage(LocalizedStringKey.Title_Settings, lang)
-// }, { immediate: true })
-
-// onBeforeMount(() => {
-//   modalNavigation.barItems = []
-// })
-
 onBeforeUnmount(() => {
   if (!settingsAreEqual(settings, selectedSettings.value)) {
     storeAndSaveSelectedSettings(selectedSettings.value)
@@ -51,33 +45,38 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <main>
-    <VuetyForm>
-      <VuetySelectionFormSection 
-        :choices="selectedLanguages"
-        :icon="Icon.Globe"
-        :options="languageOptions"
-        :minimumChoiceCount="1"
-        :title="localizedString(LocalizedStringKey.Title_Languages)"
-        @deselect="(lang) => selectedLanguages.remove((l) => l === lang)"
-        @select="(lang) => selectedLanguages.push(lang)"
-      />
-      
-      <VuetyFormSection 
-        :icon="Icon.DailyGoal"
-        :title="localizedString(LocalizedStringKey.Title_DailyGoal)"
-      >
-        <VuetyStepperFormRow
-          :title="localizedString(LocalizedStringKey.Term)"
-          :initialValue="selectedSettings.dailyGoal.termCount"
-          :range="{ min: 5, max: 50 }"
-          :step="5"
-          @setValue="value => selectedSettings.dailyGoal.termCount = value"
+  <VuetyNavigationalView
+    :nav-bar-items="[closeNavBarItem('/')]"
+    :title="localizedStringInLanguage(LocalizedStringKey.Title_Settings, preferredLanguage)"
+  >
+    <main>
+      <VuetyForm>
+        <VuetySelectionFormSection 
+          :choices="selectedLanguages"
+          :icon="Icon.Globe"
+          :options="languageOptions"
+          :minimumChoiceCount="1"
+          :title="localizedString(LocalizedStringKey.Title_Languages)"
+          @deselect="(lang) => selectedLanguages.remove((l) => l === lang)"
+          @select="(lang) => selectedLanguages.push(lang)"
         />
-      </VuetyFormSection>
-    </VuetyForm>
-    <span class='version caption'>v{{ version }}</span>
-  </main>
+        
+        <VuetyFormSection 
+          :icon="Icon.DailyGoal"
+          :title="localizedString(LocalizedStringKey.Title_DailyGoal)"
+        >
+          <VuetyStepperFormRow
+            :title="localizedString(LocalizedStringKey.Term).capitalized()"
+            :initialValue="selectedSettings.dailyGoal.termCount"
+            :range="{ min: 5, max: 50 }"
+            :step="5"
+            @setValue="value => selectedSettings.dailyGoal.termCount = value"
+          />
+        </VuetyFormSection>
+      </VuetyForm>
+      <span class='version caption'>v{{ version }}</span>
+    </main>
+  </VuetyNavigationalView>
 </template>
 
 <style scoped lang="scss">

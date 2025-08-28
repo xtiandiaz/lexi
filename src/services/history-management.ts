@@ -1,5 +1,6 @@
-import type { RawDailyHistory, DailyHistory } from "@/models/history";
-import historyStore from "@/stores/history";
+import type { RawDailyHistory, DailyHistory } from "@/models/history"
+import useHistoryStore from "@/stores/history"
+import useSessionStore from '@/stores/session'
 import { retrieve, save } from '@/assets/tungsten/local-storage'
 import '@/assets/tungsten/extensions/date.extensions'
 
@@ -12,19 +13,24 @@ export function retrieveSavedDailyHistory(): DailyHistory | undefined {
   }
   
   return {
+    currentIndex: rawDailyHistory.currentIndex,
+    date: new Date(rawDailyHistory.date),
     terms: rawDailyHistory.terms,
-    date: new Date(rawDailyHistory.date)
   }
 }
 
-export function saveDailyHistory() {
-  const history = historyStore()
+export function updateAndSaveDailyHistory() {
+  const history = useHistoryStore()
+  const session = useSessionStore()
+  
+  history.dailyHistory.terms = session.terms
+  history.dailyHistory.currentIndex = session.currentTermIndex
   
   save(dailyHistoryKey, history.dailyHistory)
 }
 
 export function resetDailyHistoryIfNeeded() {
-  const history = historyStore()
+  const history = useHistoryStore()
   if (!history.dailyHistory) {
     return
   }
@@ -36,6 +42,7 @@ export function resetDailyHistoryIfNeeded() {
   
   history.dailyHistory.date = Date.today()
   history.dailyHistory.terms = []
+  history.dailyHistory.currentIndex = undefined
   
-  saveDailyHistory()
+  updateAndSaveDailyHistory()
 }

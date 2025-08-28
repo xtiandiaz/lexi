@@ -18,6 +18,20 @@ export const termMarkIcon = (kind: TermMarkKind) => {
   }
 }
 
+export const obfuscatedSlabFromTerm = (term: Term): string => {
+  if (!term.inputState) {
+    return ''
+  }
+  return Array.range(0, term.inputState.inputableIndices.length).map(() => '•').join('')
+}
+
+export const obfuscatedWordHTMLFromTerm = (term: Term): string | undefined => {
+  if (!term.inputState) {
+    return undefined
+  }
+  return `${term.word.substring(0, term.word.length - term.inputState.inputableIndices.length)}<span class='obfuscated'>${obfuscatedSlabFromTerm(term)}</span>`
+}
+
 export function prepareTermToGuess(term: Term): Term {
   const inputableLength = term.word.length <= 3 ? term.word.length : Math.floor(term.word.length * 0.75)
     
