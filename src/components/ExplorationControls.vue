@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import VuetyIconButton from '@vueties/components/buttons/VuetyIconButton.vue';
 import { Icon } from '@/assets/design-tokens/iconography';
+import { useEvent } from '@/vueties/composables/event';
 
 const { currentStep, stepCount } = defineProps<{
   currentStep: number
@@ -9,12 +10,23 @@ const { currentStep, stepCount } = defineProps<{
 }>()
 
 const emits = defineEmits<{
-  goNext: [void]
-  goPrevious: [void]
+  next: [void]
+  previous: [void]
 }>()
 
 const canGoNext = computed(() => currentStep < stepCount)
 const canGoPrevious = computed(() => currentStep > 1)
+
+useEvent('keydown', window, (e) => {
+  switch ((e as KeyboardEvent).code) {
+    case 'ArrowLeft': 
+      emits('previous')
+      break
+    case 'ArrowRight': 
+      emits('next')
+      break
+  }
+})
 </script>
 
 <template>
@@ -22,7 +34,7 @@ const canGoPrevious = computed(() => currentStep > 1)
     <VuetyIconButton
       :class="['filled', { disabled: !canGoPrevious}]"
       :icon="Icon.ArrowLeft"
-      @click="emits('goPrevious')"
+      @click="emits('previous')"
     />
     <div class="state">
       <strong>{{currentStep}}</strong> / {{stepCount}}
@@ -30,7 +42,7 @@ const canGoPrevious = computed(() => currentStep > 1)
     <VuetyIconButton
       :class="['filled', { disabled: !canGoNext}]"
       :icon="Icon.ArrowRight"
-      @click="emits('goNext')"
+      @click="emits('next')"
     />
   </div>
 </template>

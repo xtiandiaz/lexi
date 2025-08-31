@@ -16,7 +16,7 @@ import { clamp } from '@/assets/tungsten/math';
 import { Icon } from '@/assets/design-tokens/iconography';
 import VuetyNavigationalView from '@/vueties/views/VuetyNavigationalView.vue';
 import { navBarItem } from '@/vueties/components/shared/view-models';
-import { useWindowEvent } from '@/vueties/composables/window-event';
+import { useEvent } from '@/vueties/composables/event';
 import '@/assets/tungsten/extensions/array.extensions'
 
 const session = useSessionStore()
@@ -100,9 +100,9 @@ onMounted(async () => {
   saveSession()
 })
 
-useWindowEvent('blur', window, onPageUnfocusedOrUnmounted)
-useWindowEvent('beforeunload', window, onPageUnfocusedOrUnmounted)
-useWindowEvent('pagehide', window, onPageUnfocusedOrUnmounted) // for iOS
+useEvent('blur', window, onPageUnfocusedOrUnmounted)
+useEvent('beforeunload', window, onPageUnfocusedOrUnmounted)
+useEvent('pagehide', window, onPageUnfocusedOrUnmounted) // for iOS
 </script>
 
 <template>
@@ -131,8 +131,8 @@ useWindowEvent('pagehide', window, onPageUnfocusedOrUnmounted) // for iOS
         v-else
         :currentStep="currentTermIndex + 1"
         :stepCount="session.explorationExtent"
-        @goPrevious="goToCard(currentTermIndex - 1)"
-        @goNext="goToCard(currentTermIndex + 1)"
+        @previous="goToCard(currentTermIndex - 1)"
+        @next="goToCard(currentTermIndex + 1)"
       />
     </main>
   </VuetyNavigationalView>
