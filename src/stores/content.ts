@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { LanguageTermCollection, Term } from '@/models/content.models'
+import type { LanguageTermCollection, Term } from '@/models/content'
 import { getRandomChoice } from '@/assets/tungsten/randomness'
 import { loadContent } from '@/services/content-provider'
 import { Language } from '@/models/localization'

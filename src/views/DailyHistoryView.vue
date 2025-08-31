@@ -1,23 +1,22 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { LocalizedStringKey } from '@/models/localization'
-import historyStore from '@/stores/history'
+import useSessionStore from '@/stores/session'
 import { Section } from '@/models/section'
 import { localizedString } from '@/services/localization'
 import VuetyForm from '@vueties/components/form/VuetyForm.vue'
 import VuetyFormSection from '@vueties/components/form/VuetyFormSection.vue'
-import { dailyHistoryDateLocaleString } from '@/utils/history.utils'
-import { sectionTitle } from '@/utils/section.utils'
 import TermFoldableRow from '@/components/form/TermFoldableRow.vue'
-import { obfuscatedWordHTMLFromTerm } from '@/utils/game.utils'
 import VuetyInfoFormRow from '@/vueties/components/form/rows/VuetyInfoFormRow.vue'
 import VuetyNavigationalView from '@/vueties/views/VuetyNavigationalView.vue'
 import { closeNavBarItem } from '@/vueties/components/shared/view-models'
+import { sectionTitle } from '@/utils/section.utils'
+import { sessionDateLocaleString } from '@/utils/session.utils'
+import { obfuscatedWordHTMLFromTerm } from '@/utils/game.utils'
 
-const history = historyStore()
-const dailyHistory = history.dailyHistory
+const session = useSessionStore()
 
-const terms = dailyHistory?.terms
+const terms = session?.terms
 const termCount = terms?.length ?? 0 // TODO: interpolate count in localized string
 
 const selectedIndex = ref<number>()
@@ -33,9 +32,9 @@ function onTermSelected(index: number) {
     :title="sectionTitle(Section.DailyHistory)"
   >
     <main>
-      <VuetyForm v-if="dailyHistory">
+      <VuetyForm v-if="session">
         <VuetyFormSection
-          :title="`${dailyHistoryDateLocaleString(dailyHistory)} • ${termCount} ${localizedString(LocalizedStringKey.Term, termCount === 0 || termCount > 1)}`"
+          :title="`${sessionDateLocaleString()} • ${termCount} ${localizedString(LocalizedStringKey.Term, termCount === 0 || termCount > 1)}`"
         >
           <div 
             v-for="(term, index) of terms"
@@ -54,15 +53,6 @@ function onTermSelected(index: number) {
           </div>
         </VuetyFormSection>
       </VuetyForm>
-      
-      <!-- <div id="test-button-wrapper">
-        <VuetyTextButton
-          id="test-button"
-          :label="localizedString(LocalizedStringKey.Button_Test)"
-          :icon="Icon.CheckmarkCircleFilled"
-          @click="onTestButtonClicked"
-        />
-      </div> -->
     </main>
   </VuetyNavigationalView>
 </template>

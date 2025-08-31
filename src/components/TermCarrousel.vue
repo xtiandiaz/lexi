@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import type { Term } from '@/models/content.models';
+import type { Term } from '@/models/content';
 import type { AnyTool } from '@/models/tools';
 import TermSlide from './TermCard.vue';
 

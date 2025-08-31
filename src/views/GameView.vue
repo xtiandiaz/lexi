@@ -3,30 +3,37 @@ import { computed, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia';
 import useSessionStore from '@/stores/session'
 import useGameStore from '@/stores/game'
-import { TermMarkKind } from '@/models/content.models';
+import { TermMarkKind } from '@/models/content';
 import { ToolKey, type AnyTool } from '@/models/tools';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
+import { resetSessionIfNeeded, saveSession } from '@/services/session-management';
 import ExplorationControls from '@/components/ExplorationControls.vue';
 import InputKeypad from '@/components/InputKeypad.vue';
 import TermSlideshow from '@/components/TermCarrousel.vue';
 import { clueAtTerm, inputStringsFromState } from '@/utils/input.utils'
-import { markTerm } from '@/utils/game.utils'
-import '@/assets/tungsten/extensions/array.extensions'
+import { getDeckStateFromTerms, markTerm } from '@/utils/game.utils'
 import { clamp } from '@/assets/tungsten/math';
 import { Icon } from '@/assets/design-tokens/iconography';
 import VuetyNavigationalView from '@/vueties/views/VuetyNavigationalView.vue';
 import { navBarItem } from '@/vueties/components/shared/view-models';
-import { updateAndSaveDailyHistory } from '@/services/history-management';
+import { useWindowEvent } from '@/vueties/composables/window-event';
+import '@/assets/tungsten/extensions/array.extensions'
 
 const session = useSessionStore()
 const store = useGameStore()
 
-const { terms, currentTermIndex } = storeToRefs(session)
+const { terms } = storeToRefs(session)
 
+const currentTermIndex = computed({
+  get: () => session.currentTermIndex ?? 0,
+  set: (val) => session.currentTermIndex = val
+})
 const currentTerm = computed(() => terms.value?.[currentTermIndex.value])
+const deckState = computed(() => getDeckStateFromTerms(terms.value))
+
 const inputState = computed(() => currentTerm.value?.inputState)
 
-function goToSlide(index: number) {
+function goToCard(index: number) {
   currentTermIndex.value = clamp(index, 0, terms.value.length - 1)
 }
 
@@ -59,6 +66,14 @@ function useTool(tool: AnyTool) {
   }
 }
 
+function onPageUnfocusedOrUnmounted() {
+  console.log("Game View unfocused or unmounted...")
+  
+  if (!resetSessionIfNeeded()) {
+    saveSession()
+  }
+}
+
 watch(inputState, (newInputState) => {
   if (newInputState == undefined) {
     return
@@ -68,25 +83,33 @@ watch(inputState, (newInputState) => {
   if (inputStrings.input === inputStrings.inputable && currentTerm.value) {
     currentTerm.value.inputState = undefined
     
-    updateAndSaveDailyHistory()
+    saveSession()
   }
 }, { deep: true })
 
 watch([() => store.settings.activeLanguages, () => store.settings.dailyGoal], async () => {
   await session.resetTerms()
-  updateAndSaveDailyHistory()
+  saveSession()
 }, { deep: true })
 
 onMounted(async () => {
+  resetSessionIfNeeded()
+  
   await session.resetTerms()
+  
+  saveSession()
 })
+
+useWindowEvent('blur', window, onPageUnfocusedOrUnmounted)
+useWindowEvent('beforeunload', window, onPageUnfocusedOrUnmounted)
+useWindowEvent('pagehide', window, onPageUnfocusedOrUnmounted) // for iOS
 </script>
 
 <template>
   <VuetyNavigationalView
     :nav-bar-items="[
       navBarItem('/settings', -1, undefined, Icon.Gear),
-      navBarItem('/daily-history', 1, undefined, Icon.History),
+      navBarItem('/daily-history', 1, `${deckState.solvedCount} (${deckState.termCount})`, Icon.History),
     ]"
   >
     <main v-if="terms">
@@ -108,8 +131,8 @@ onMounted(async () => {
         v-else
         :currentStep="currentTermIndex + 1"
         :stepCount="session.explorationExtent"
-        @goPrevious="goToSlide(currentTermIndex - 1)"
-        @goNext="goToSlide(currentTermIndex + 1)"
+        @goPrevious="goToCard(currentTermIndex - 1)"
+        @goNext="goToCard(currentTermIndex + 1)"
       />
     </main>
   </VuetyNavigationalView>

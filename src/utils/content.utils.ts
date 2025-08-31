@@ -1,5 +1,5 @@
 import { Language } from "@/models/localization"
-import type { Term } from "@/models/content.models"
+import type { Term } from "@/models/content"
 
 let currentTermId = 0
 

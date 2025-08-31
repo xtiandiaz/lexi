@@ -1,4 +1,4 @@
-import type { Term } from '@/models/content.models'
+import type { Term } from '@/models/content'
 import type { InputState } from '@/models/input'
 
 export const labelForKey = (key: string): string | undefined => {

@@ -6,6 +6,21 @@ export enum GameMode {
   Test
 }
 
+// export interface TermCard {
+//   term: Term
+// }
+
+// export interface Deck {
+//   cards: TermCard[]
+//   startCardIndex: number
+// }
+
+export interface TermDeckState {
+  obfuscatedCount: number
+  solvedCount: number
+  termCount: number
+}
+
 export interface DailyGoalSettings {
   termCount: number
 }
@@ -20,3 +35,4 @@ export interface Settings {
   dailyGoal: DailyGoalSettings
   languagesSettings: LanguageSettings[]
 }
+

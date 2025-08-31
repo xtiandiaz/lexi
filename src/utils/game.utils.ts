@@ -1,8 +1,9 @@
 import { ToolKey } from "@/models/tools";
-import type { Term, TermMark } from '@/models/content.models'
-import { TermMarkKind } from "@/models/content.models";
+import type { Term, TermMark } from '@/models/content'
+import { TermMarkKind } from "@/models/content";
 import '@/assets/tungsten/extensions/array.extensions'
 import { Icon } from "@/assets/design-tokens/iconography";
+import type { TermDeckState } from "@/models/game";
 
 export const researchToolKeysInDisplayOrder = [
   ToolKey.Define,
@@ -50,5 +51,15 @@ export function markTerm(mark: TermMark, term: Term) {
     currentMark.value += mark.value
   } else {
     term.marks.push(mark)
+  }
+}
+
+export function getDeckStateFromTerms(terms: Term[]): TermDeckState {
+  const obfuscatedCount = terms.filter(t => t.inputState != undefined).length
+  
+  return {
+    obfuscatedCount,
+    solvedCount: terms.length - obfuscatedCount,
+    termCount: terms.length
   }
 }

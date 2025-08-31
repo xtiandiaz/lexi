@@ -1,6 +1,6 @@
 import { ToolKey } from "@/models/tools";
 import type { AnyTool } from "@/models/tools";
-import type { Term } from '@/models/content.models'
+import type { Term } from '@/models/content'
 import type { InputState } from "@/models/input"
 import { toolUrlString } from "@/utils/tool.utils";
 

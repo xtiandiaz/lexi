@@ -1,5 +1,5 @@
 import type { AnyTool, LocalizableTool, Tool, TranslationTool } from "@/models/tools";
-import type { Term } from "@/models/content.models";
+import type { Term } from "@/models/content";
 import { ToolKey } from "@/models/tools";
 import { Language } from "@/models/localization"
 import useGameStore from '@/stores/game'

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Term } from '@/models/content.models';
+import type { Term } from '@/models/content';
 import type { AnyTool } from '@/models/tools';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
 import ResearchToolbar from '@/components/TermToolbar.vue'

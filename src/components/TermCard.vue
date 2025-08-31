@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { Term } from '@/models/content.models';
+import type { Term } from '@/models/content';
 import type { AnyTool } from '@/models/tools';
 import { ToolKey } from '@/models/tools';
 import TermToolbar from './TermToolbar.vue'

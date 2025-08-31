@@ -1,45 +1,13 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
-import { Section } from '@/models/section'
-import { GameMode } from '@/models/game'
-import useGameStore from '@/stores/game'
+import { ref, onMounted } from 'vue'
 import useContentStore from '@/stores/content'
-import type { VuetyNavigationBarVM } from '@vueties/components/bars/view-models'
 import VuetyProgressIndicator from '@vueties/components/misc/VuetyProgressIndicator.vue';
 import VuetyScene from '@vueties/scenes/VuetyScene.vue'
-import { Icon } from '@design-tokens/iconography'
-import VuetyNavigationalView from '@vueties/views/VuetyNavigationalView.vue'
 import { Language } from './models/localization'
 
-const game = useGameStore()
 const content = useContentStore()
 
 const isLoading = ref(true)
-
-const navigationBarVM = computed<VuetyNavigationBarVM>(() => {
-  return {
-    isVisible: game.mode === GameMode.Exploration,
-    leftBarItems: [
-      {
-        icon: Icon.Gear,
-        path: `/${Section.Settings}`
-      },
-      // {
-      //   icon: Icon.MagnifyingGlass,
-      //   isEnabled: game.inputState?.isComplete === true,
-      //   path: `/${Section.Search}`
-      // }
-    ],
-    // rightBarItems: [
-    //   {
-    //     icon: Icon.Listing,
-    //     isEnabled: session.explorationExtent > 0,
-    //     label: `${session.explorationExtent}`,
-    //     path: `/${Section.DailyHistory}`
-    //   }
-    // ]
-  }
-})
 
 onMounted(async () => {
   await content.load(Object.values(Language))

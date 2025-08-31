@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import type { AnyTool } from '@/models/tools';
 import { ToolKey } from '@/models/tools';
-import type { Term } from '@/models/content.models';
+import type { Term } from '@/models/content';
 import { canUseToolForTerm, produceToolsForTerm, toolIcon } from '@/utils/tool.utils';
 import type { VuetyToolbarItem } from '@/vueties/components/shared/view-models';
 import VuetyToolbar from '@/vueties/components/bars/VuetyToolbar.vue'

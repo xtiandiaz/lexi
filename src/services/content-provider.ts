@@ -1,5 +1,5 @@
 import { dailyTermCountCapPerLanguage } from '@/constants'
-import type { RawLanguageContent, LanguageTermCollection } from '@/models/content.models'
+import type { RawLanguageContent, LanguageTermCollection } from '@/models/content'
 import { Language } from '@/models/localization'
 import { produceTerm } from '@/utils/content.utils'
 import '@/assets/tungsten/extensions/array.extensions'
