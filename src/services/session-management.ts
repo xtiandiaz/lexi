@@ -11,11 +11,12 @@ export function retrievedSavedSession(): Session | undefined {
     return undefined
   }
   
+  const latestActivityAt = rawSession.latestActivityAt ?? (new Date(0)).toISOString()
+  
   return {
     currentTermIndex: rawSession.currentTermIndex ?? 0,
-    date: new Date(rawSession.latestActivityAt.split('T')[0]),
-    // deck: rawSession.deck,
-    latestActivityAt: new Date(rawSession.latestActivityAt),
+    date: new Date(latestActivityAt.split('T')[0]),
+    latestActivityAt: new Date(latestActivityAt),
     terms: rawSession.terms
   }
 }
