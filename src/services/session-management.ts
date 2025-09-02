@@ -45,11 +45,11 @@ export async function resetSessionIfNeeded(): Promise<boolean> {
   const session = useSessionStore()
   
   const isStale = (new Date()).getDaysFrom(session.date) >= 1
-  if (!isStale) {
-    return false
+  if (isStale || !session.terms) {
+    await resetSession()
+    
+    return true
   }
   
-  await resetSession()
-  
-  return true
+  return false
 }
