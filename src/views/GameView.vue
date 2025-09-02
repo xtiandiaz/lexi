@@ -29,12 +29,14 @@ const currentTermIndex = computed({
   set: (val) => session.currentTermIndex = val
 })
 const currentTerm = computed(() => terms.value?.[currentTermIndex.value])
-const deckState = computed(() => getDeckStateFromTerms(terms.value))
+const deckState = computed(() => terms.value ? getDeckStateFromTerms(terms.value) : undefined)
 
 const inputState = computed(() => currentTerm.value?.inputState)
 
 function goToCard(index: number) {
-  currentTermIndex.value = clamp(index, 0, terms.value.length - 1)
+  if (terms.value) {
+    currentTermIndex.value = clamp(index, 0, terms.value.length - 1)
+  }
 }
 
 function input(index: number) {  
@@ -105,7 +107,7 @@ useEvent('pagehide', window, onPageUnfocusedOrUnmounted) // for iOS
   <VuetyNavigationalView
     :nav-bar-items="[
       navBarItem('/settings', -1, undefined, Icon.Gear),
-      navBarItem('/daily-summary', 1, `${deckState.solvedCount} (${deckState.termCount})`, Icon.History, deckState.solvedCount > 0),
+      navBarItem('/daily-summary', 1, undefined, Icon.History, (deckState?.solvedCount ?? 0) > 0),
     ]"
   >
     <main v-if="terms">

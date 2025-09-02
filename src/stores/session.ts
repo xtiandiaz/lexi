@@ -8,8 +8,8 @@ import '@/assets/tungsten/extensions/date.extensions'
 
 export default defineStore('session', () => {  
   const savedSession = retrievedSavedSession()
-  const date = ref(savedSession?.date ?? Date.today())
-  const terms = ref(savedSession?.terms ?? [])
+  const date = ref(savedSession?.date ?? new Date(0))
+  const terms = ref(savedSession?.terms)
   const currentTermIndex = ref(savedSession?.currentTermIndex)
   
   const content = useContentStore()
@@ -17,19 +17,19 @@ export default defineStore('session', () => {
   const { settings } = storeToRefs(gameStore)
   const dailyGoalSettings = computed(() => settings.value.dailyGoal)
   
-  const explorationExtent = computed(() => Math.max(dailyGoalSettings.value.termCount, terms.value.length))
+  const explorationExtent = computed(() => Math.max(dailyGoalSettings.value.termCount, terms.value?.length ?? 0))
   
   async function resetTerms() {
     const goalCount = settings.value.dailyGoal.termCount
-    const missingTermCount = goalCount - terms.value.length
+    const missingTermCount = goalCount - (terms.value?.length ?? 0)
     
     if (missingTermCount <= 0) {
-      terms.value = terms.value.slice(0, goalCount)
+      terms.value = terms.value!.slice(0, goalCount)
     } else {
       const newTerms = await content.getNewTerms(missingTermCount, settings.value.activeLanguages)
       newTerms.forEach(t => prepareTermToGuess(t))
       
-      terms.value = terms.value.concat(newTerms)
+      terms.value = terms.value ? terms.value.concat(newTerms) : newTerms
     }
     
     currentTermIndex.value = Math.min(currentTermIndex.value ?? 0, terms.value.length - 1)
