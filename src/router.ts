@@ -1,36 +1,31 @@
-import { Section } from "@/models/section"
+import { createRouter, createWebHashHistory } from "vue-router"
 import GameView from "@/views/GameView.vue"
-import DailyHistoryView from "@/views/DailyHistoryView.vue"
+import DailyHistoryView from "@/views/DailySummaryView.vue"
 import SettingsView from "@/views/SettingsView.vue"
-import SearchTermsView from "./views/SearchTermsView.vue"
-import { createVuetyRouter } from "./vueties/router/vuety-router"
 
-export default createVuetyRouter([
-  {
-    path: '/',
-    component: GameView,
-    name: Section.Game,
-    children: [
-      {
-        path: `/${Section.DailyHistory}`,
-        name: Section.DailyHistory,
-        components: {
-          modal: DailyHistoryView
-        },
+export default createRouter({
+  history: createWebHashHistory(),
+  routes: [
+    {
+      path: '/',
+      name: 'game',
+      components: {
+        default: GameView
       },
-      {
-        path: `/${Section.Search}`,
-        name: Section.Search,
-        components: {
-          modal: SearchTermsView
+      children: [
+        {
+          path: '/daily-summary',
+          components: {
+            modal: DailyHistoryView
+          },
         },
-      },
-      {
-        path: `/${Section.Settings}`,
-        components: {
-          modal: SettingsView
+        {
+          path: '/settings',
+          components: {
+            modal: SettingsView
+          }
         },
-      },  
-    ]
-  },
-])
+      ]
+    }
+  ],
+})

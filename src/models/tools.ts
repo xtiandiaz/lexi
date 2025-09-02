@@ -1,8 +1,8 @@
 import { Language } from "./localization"
 
 export enum ToolKey {
+  Clue = 'clue',
   Define = 'define',
-  Hint = 'hint',  
   ImageSearch = 'image-search',
   Translate = 'translate',
   WebSearch = 'web-search',
@@ -17,8 +17,8 @@ export interface LocalizableTool extends Tool {
   language: Language
 }
 
-export interface TranslationalTool extends LocalizableTool {
+export interface TranslationTool extends LocalizableTool {
   translationLanguage: Language
 }
 
-export type AnyTool = Tool | LocalizableTool | TranslationalTool
+export type AnyTool = Tool | LocalizableTool | TranslationTool

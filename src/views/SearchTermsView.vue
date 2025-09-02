@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { LocalizedStringKey } from '@/models/localization';
 import useGameStore from '@/stores/game';
 import { dynamicLocalizedString, localizedString } from '@/services/localization';
-import TermFoldableRow from '@/components/TermFoldableRow.vue';
+import TermFoldableRow from '@/components/form/TermFoldableRow.vue';
 import Section from '@vueties/components/form/VuetyFormSection.vue'
 import VuetySearchView from '@vueties/views/VuetySearchView.vue'
 

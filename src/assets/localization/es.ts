@@ -11,6 +11,7 @@ export default new Map<LocalizedStringKey, string>([
   [LocalizedStringKey.Text_NumResultsFor, "resultados para"],
   [LocalizedStringKey.Text_NoResultsFor, "Sin resultados para"],
   
+  [LocalizedStringKey.Title_DailyGoal, "Meta del día"],
   [LocalizedStringKey.Title_HistoryFromDate, "Historial del {date}"],
   [LocalizedStringKey.Title_HistoryOfToday, "Historial de Hoy"],
   [LocalizedStringKey.Title_HistoryOfYesterday, "Historial de Ayer"],

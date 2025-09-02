@@ -1,68 +1,54 @@
-import { Test } from '@/models/game'
-import { InputMarkKind, type InputState } from '@/models/input'
-import type { CompletedTerm } from '@/models/history'
-import type { Session } from '@/models/session'
-import { LocalStorageItemKey } from '@/models/persistence'
-import useGameStore from '@/stores/game'
-import historyStore from '@/stores/history'
-import { loadRepositoryContent } from '@/services/content-provision'
+import type { RawSession, Session } from '@/models/session'
+import useSessionStore from '@/stores/session'
 import { retrieve, save } from '@/assets/tungsten/local-storage'
+import '@/assets/tungsten/extensions/date.extensions'
 
-export function storeAndSaveSessionIfNeeded(inputState: InputState) {
-  const session = useGameStore()
-  
-  if (session.test) {
-    console.warn("Session NOT saved during test", session.test)
-    return
-  }
-  
-  session.inputState = inputState
-  
-  save<Session>(LocalStorageItemKey.Session, {
-    inputState
-  })
-}
+const sessionStorageKey = 'session'
 
 export function retrievedSavedSession(): Session | undefined {
-  return retrieve<Session>(LocalStorageItemKey.Session)
-}
-
-export async function resetSession(): Promise<void> {
-  const session = useGameStore()
-  
-  session.test = undefined
-  session.content = await loadRepositoryContent()
-}
-
-export async function resetSessionIfNeeded(): Promise<void> {
-  const session = useGameStore()
-  
-  if (session.test) {
-    return
+  const rawSession = retrieve<RawSession>(sessionStorageKey)
+  if (!rawSession) {
+    return undefined
   }
   
-  return resetSession()
+  return {
+    currentTermIndex: rawSession.currentTermIndex ?? 0,
+    date: new Date(rawSession.latestActivityAt.split('T')[0]),
+    // deck: rawSession.deck,
+    latestActivityAt: new Date(rawSession.latestActivityAt),
+    terms: rawSession.terms
+  }
 }
 
-export function prepareTest() {
-  const settings = useGameStore().settings
-  const dailyHistory = historyStore().dailyHistory
-  const completedTerms: CompletedTerm[] | undefined = dailyHistory?.completedTerms
-  if (!dailyHistory || !completedTerms || completedTerms.length < settings.minTermCountForTest) {
-    console.error('Scanty content for a test!', completedTerms)
-    return
-  }
+export function saveSession() {
+  const session = useSessionStore()
   
-  completedTerms.forEach(ct => {
-    ct.hintPrefixLength = 0
-    
-    const testMark = ct.inputMarks.find(im => im.kind === InputMarkKind.Test)
-    if (testMark) {
-      testMark.value = 0
-    }
+  save<RawSession>(sessionStorageKey, {
+    currentTermIndex: session.currentTermIndex,
+    latestActivityAt: (new Date()).toISOString(),
+    terms: session.terms,
   })
+}
+
+export async function resetSession() {
+  const session = useSessionStore()
   
-  const session = useGameStore()
+  await session.resetTerms()
   
-  session.test = new Test(completedTerms)
+  session.currentTermIndex = 0
+  
+  saveSession()
+}
+
+export async function resetSessionIfNeeded(): Promise<boolean> {
+  const session = useSessionStore()
+  
+  const isStale = (new Date()).getDaysFrom(session.date) >= 1
+  if (!isStale) {
+    return false
+  }
+  
+  await resetSession()
+  
+  return true
 }

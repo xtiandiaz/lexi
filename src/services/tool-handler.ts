@@ -41,7 +41,7 @@ function fixOrExtendInput(state: InputState): number[] | undefined {
 
 export function canUseInputTool(key: ToolKey, inputState: InputState): boolean {
   switch (key) {
-    case ToolKey.Hint:
+    case ToolKey.Clue:
       return fixOrExtendInput(inputState) !== undefined
     default:
       return false
@@ -50,7 +50,7 @@ export function canUseInputTool(key: ToolKey, inputState: InputState): boolean {
 
 export function produceInputWithTool(key: ToolKey, inputState: InputState): number[] | undefined {
   switch (key) {
-    case ToolKey.Hint:
+    case ToolKey.Clue:
       return fixOrExtendInput(inputState)
     default:
       return undefined
