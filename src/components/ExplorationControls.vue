@@ -37,7 +37,7 @@ useEvent('keydown', window, (e) => {
       @click="emits('previous')"
     />
     <div class="state">
-      <strong>{{currentStep}}</strong> / {{stepCount}}
+      {{currentStep}} / {{stepCount}}
     </div>
     <VuetyIconButton
       :class="['filled', { disabled: !canGoNext}]"
