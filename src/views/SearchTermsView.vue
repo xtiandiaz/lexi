@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { LocalizedStringKey } from '@/models/localization';
-import useGameStore from '@/stores/game';
+// import useContentStore from '@/stores/content';
 import { dynamicLocalizedString, localizedString } from '@/services/localization';
 import TermFoldableRow from '@/components/form/TermFoldableRow.vue';
 import Section from '@vueties/components/form/VuetyFormSection.vue'
@@ -11,14 +11,17 @@ defineProps<{
   term?: string
 }>()
 
-const content = useGameStore().content
+// const content = useContentStore()
 
 const selectedTermIndex = ref<number>()
 
 function search(input: string) {
   selectedTermIndex.value = undefined
   
-  return content?.searchForTerms(input) ?? []
+  console.log(input)
+  
+  // return content?.searchForTerms(input) ?? []
+  return []
 }
 
 function onTermSelected(index: number) {

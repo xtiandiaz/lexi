@@ -1,8 +1,7 @@
 import type { Settings } from '@/models/game'
 import useGameStore from '@/stores/game'
-import { defaultDailyGoalSettings, defaultLanguagesSettings } from '@/utils/settings.utils'
+import { defaultDailyGoalSettings, defaultLanguagesSettings, defaultSettings } from '@/utils/settings.utils'
 import { retrieve, save } from '@/assets/tungsten/local-storage'
-import { Language } from '@/models/localization'
 
 const settingsKey = 'settings'
 
@@ -16,7 +15,7 @@ export function retrieveSavedSettings(): Settings | undefined {
       settings.dailyGoal = defaultDailyGoalSettings
     }
     if (!settings.activeLanguages) {
-      settings.activeLanguages = [Language.Spanish]
+      settings.activeLanguages = defaultSettings.activeLanguages
     }
   }
   

@@ -1,4 +1,4 @@
-import type { Tool } from "./game"
+import type { Tool } from "./tools"
 
 export enum Language {
   English = 'en',

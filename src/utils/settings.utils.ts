@@ -1,4 +1,4 @@
-import type { DailyGoalSettings, LanguageSettings, Settings } from "@/models/settings"
+import type { DailyGoalSettings, LanguageSettings, Settings } from "@/models/game"
 import { Language } from "@/models/localization"
 import useGameStore from '@/stores/game'
 
@@ -22,10 +22,9 @@ export const defaultDailyGoalSettings: DailyGoalSettings = {
 }
 
 export const defaultSettings: Settings = {
-  activeLanguages: [Language.English, Language.Spanish],
+  activeLanguages: [Language.Spanish],
   dailyGoal: defaultDailyGoalSettings,
   languagesSettings: defaultLanguagesSettings,
-  minTermCountForTest: 5,
 }
 
 export const settingsAreEqual = (a: Settings, b: Settings): boolean => {
