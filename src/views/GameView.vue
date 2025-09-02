@@ -16,7 +16,6 @@ import { clamp } from '@/assets/tungsten/math';
 import { Icon } from '@/assets/design-tokens/iconography';
 import VuetyNavigationalView from '@/vueties/views/VuetyNavigationalView.vue';
 import { navBarItem } from '@/vueties/components/shared/view-models';
-import { useEvent } from '@/vueties/composables/event';
 import '@/assets/tungsten/extensions/array.extensions'
 
 const session = useSessionStore()
@@ -96,11 +95,11 @@ watch([() => store.settings.activeLanguages, () => store.settings.dailyGoal], as
 
 onMounted(async () => {
   await resetSessionIfNeeded()
+  
+  window.addEventListener('blur', onPageUnfocusedOrUnmounted)
+  window.addEventListener('beforeunload', onPageUnfocusedOrUnmounted)
+  window.addEventListener('pagehide', onPageUnfocusedOrUnmounted)
 })
-
-useEvent('blur', window, onPageUnfocusedOrUnmounted)
-useEvent('beforeunload', window, onPageUnfocusedOrUnmounted)
-useEvent('pagehide', window, onPageUnfocusedOrUnmounted) // for iOS
 </script>
 
 <template>

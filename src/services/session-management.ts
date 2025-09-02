@@ -36,8 +36,6 @@ export async function resetSession() {
   
   await session.resetTerms()
   
-  session.currentTermIndex = 0
-  
   saveSession()
 }
 
@@ -45,7 +43,7 @@ export async function resetSessionIfNeeded(): Promise<boolean> {
   const session = useSessionStore()
   
   const isStale = (new Date()).getDaysFrom(session.date) >= 1
-  if (isStale || !session.terms) {
+  if (isStale || session.terms == undefined) {
     await resetSession()
     
     return true
