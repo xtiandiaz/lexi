@@ -1,5 +1,5 @@
 import GameView from "@/views/GameView.vue"
-import DailyHistoryView from "@/views/DailyHistoryView.vue"
+import DailyHistoryView from "@/views/DailySummaryView.vue"
 import SettingsView from "@/views/SettingsView.vue"
 import { createVuetyRouter } from "./vueties/router/vuety-router"
 
@@ -12,7 +12,7 @@ export default createVuetyRouter([
     },
     children: [
       {
-        path: '/daily-history',
+        path: '/daily-summary',
         components: {
           modal: DailyHistoryView
         },

@@ -6,7 +6,7 @@ import useGameStore from '@/stores/game'
 import { TermMarkKind } from '@/models/content';
 import { ToolKey, type AnyTool } from '@/models/tools';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
-import { resetSessionIfNeeded, saveSession } from '@/services/session-management';
+import { resetSession, resetSessionIfNeeded, saveSession } from '@/services/session-management';
 import ExplorationControls from '@/components/ExplorationControls.vue';
 import InputKeypad from '@/components/InputKeypad.vue';
 import TermSlideshow from '@/components/TermCarrousel.vue';
@@ -66,10 +66,11 @@ function useTool(tool: AnyTool) {
   }
 }
 
-function onPageUnfocusedOrUnmounted() {
+async function onPageUnfocusedOrUnmounted() {
   console.log("Game View unfocused or unmounted...")
   
-  if (!resetSessionIfNeeded()) {
+  const didReset = await resetSessionIfNeeded()
+  if (!didReset) {
     saveSession()
   }
 }
@@ -88,16 +89,11 @@ watch(inputState, (newInputState) => {
 }, { deep: true })
 
 watch([() => store.settings.activeLanguages, () => store.settings.dailyGoal], async () => {
-  await session.resetTerms()
-  saveSession()
+  await resetSession()
 }, { deep: true })
 
 onMounted(async () => {
-  resetSessionIfNeeded()
-  
-  await session.resetTerms()
-  
-  saveSession()
+  await resetSessionIfNeeded()
 })
 
 useEvent('blur', window, onPageUnfocusedOrUnmounted)
@@ -109,7 +105,7 @@ useEvent('pagehide', window, onPageUnfocusedOrUnmounted) // for iOS
   <VuetyNavigationalView
     :nav-bar-items="[
       navBarItem('/settings', -1, undefined, Icon.Gear),
-      navBarItem('/daily-history', 1, `${deckState.solvedCount} (${deckState.termCount})`, Icon.History),
+      navBarItem('/daily-summary', 1, `${deckState.solvedCount} (${deckState.termCount})`, Icon.History, deckState.solvedCount > 0),
     ]"
   >
     <main v-if="terms">

@@ -25,21 +25,22 @@ export function saveSession() {
   
   save<RawSession>(sessionStorageKey, {
     currentTermIndex: session.currentTermIndex,
-    latestActivityAt: (new Date()).toDateString(),
+    latestActivityAt: (new Date()).toISOString(),
     terms: session.terms,
   })
 }
 
-export function resetSession() {
+export async function resetSession() {
   const session = useSessionStore()
   
-  session.terms = []
+  await session.resetTerms()
+  
   session.currentTermIndex = 0
   
   saveSession()
 }
 
-export function resetSessionIfNeeded(): boolean {
+export async function resetSessionIfNeeded(): Promise<boolean> {
   const session = useSessionStore()
   
   const isStale = (new Date()).getDaysFrom(session.date) >= 1
@@ -47,7 +48,7 @@ export function resetSessionIfNeeded(): boolean {
     return false
   }
   
-  resetSession()
+  await resetSession()
   
   return true
 }
