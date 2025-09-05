@@ -12,12 +12,12 @@ import VuetySelectionFormSection from '@/vueties/components/form/VuetySelectionF
 import VuetyFormSection from '@/vueties/components/form/VuetyFormSection.vue';
 import VuetyStepperFormRow from '@/vueties/components/form/rows/VuetyStepperFormRow.vue';
 import VuetyNavigationalView from '@/vueties/views/VuetyNavigationalView.vue';
+import { closeNavBarItem } from '@/vueties/components/shared/view-models';
 import { languagesOrderedByName, dictionaryIcon } from '@/utils/localization.utils';
-import '@/assets/tungsten/extensions/array.extensions'
-import { version } from '@/../package.json'
 import { Icon } from '@/assets/design-tokens/iconography';
 import { cloneSettings, settingsAreEqual } from '@/utils/settings.utils';
-import { closeNavBarItem } from '@/vueties/components/shared/view-models';
+import '@/assets/tungsten/extensions/array.extensions'
+import { version } from '@/../package.json'
 
 const settings = useGameStore().settings
 
@@ -52,13 +52,11 @@ onBeforeUnmount(() => {
     <main>
       <VuetyForm>
         <VuetySelectionFormSection 
-          :choices="selectedLanguages"
+          v-model="selectedSettings.activeLanguages"
+          :choiceRange="{ min: 1, max: Object.values(Language).length }"
           :icon="Icon.Globe"
           :options="languageOptions"
-          :minimumChoiceCount="1"
           :title="localizedString(LocalizedStringKey.Title_Languages)"
-          @deselect="(lang) => selectedLanguages.remove((l) => l === lang)"
-          @select="(lang) => selectedLanguages.push(lang)"
         />
         
         <VuetyFormSection 

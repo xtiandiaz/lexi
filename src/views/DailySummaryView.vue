@@ -16,7 +16,7 @@ import { obfuscatedWordHTMLFromTerm } from '@/utils/game.utils'
 
 const session = useSessionStore()
 
-const terms = session?.terms
+const terms = session?.activeTerms
 const termCount = terms?.length ?? 0 // TODO: interpolate count in localized string
 
 const selectedIndex = ref<number>()

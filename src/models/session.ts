@@ -8,7 +8,6 @@ export interface RawSession {
 }
 
 export interface Session {
-  date: Date
   latestActivityAt: Date
   
   currentTermIndex?: number

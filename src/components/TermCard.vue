@@ -38,7 +38,7 @@ const toolKeys = computed(() => inputState.value ? [ToolKey.Clue] : researchTool
 <template>
   <div class="term-slide-wrapper">
     <div :class="['term-slide', { obfuscated: isObfuscated }]">      
-      <VuetyTag class="language-tag small" :label="term.language.toUpperCase()" />
+      <VuetyTag v-if="isObfuscated" class="language-tag small" :label="term.language.toUpperCase()" />
       
       <div class="extras"></div>
       

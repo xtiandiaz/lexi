@@ -6,10 +6,10 @@ import useGameStore from '@/stores/game'
 import { TermMarkKind } from '@/models/content';
 import { ToolKey, type AnyTool } from '@/models/tools';
 import { launchResearchToolForTerm } from '@/services/tool-handler';
-import { resetSession, resetSessionIfNeeded, saveSession } from '@/services/session-management';
+import { prepareSession, resetSessionIfNeeded, saveSession, updateSession } from '@/services/session-management';
 import ExplorationControls from '@/components/ExplorationControls.vue';
 import InputKeypad from '@/components/InputKeypad.vue';
-import TermSlideshow from '@/components/TermCarrousel.vue';
+import TermSlideshow from '@/components/TermCarousel.vue';
 import { clueAtTerm, inputStringsFromState } from '@/utils/input.utils'
 import { getDeckStateFromTerms, markTerm } from '@/utils/game.utils'
 import { clamp } from '@/assets/tungsten/math';
@@ -17,11 +17,13 @@ import { Icon } from '@/assets/design-tokens/iconography';
 import VuetyNavigationalView from '@/vueties/views/VuetyNavigationalView.vue';
 import { navBarItem } from '@/vueties/components/shared/view-models';
 import '@/assets/tungsten/extensions/array.extensions'
+import { useEvent } from '@/vueties/composables/event';
 
 const session = useSessionStore()
 const store = useGameStore()
 
-const { terms } = storeToRefs(session)
+const { settings } = storeToRefs(store)
+const { activeTerms: terms } = storeToRefs(session)
 
 const currentTermIndex = computed({
   get: () => session.currentTermIndex ?? 0,
@@ -70,10 +72,7 @@ function useTool(tool: AnyTool) {
 async function onPageUnfocusedOrUnmounted() {
   console.log("Game View unfocused or unmounted...")
   
-  const didReset = await resetSessionIfNeeded()
-  if (!didReset) {
-    saveSession()
-  }
+  await resetSessionIfNeeded()
 }
 
 watch(inputState, (newInputState) => {
@@ -89,24 +88,28 @@ watch(inputState, (newInputState) => {
   }
 }, { deep: true })
 
-watch([() => store.settings.activeLanguages, () => store.settings.dailyGoal], async () => {
-  await resetSession()
+watch(currentTermIndex, () => {
+  saveSession()
+})
+
+watch(settings, async () => {
+  await updateSession()
 }, { deep: true })
 
 onMounted(async () => {
-  await resetSessionIfNeeded()
-  
-  window.addEventListener('blur', onPageUnfocusedOrUnmounted)
-  window.addEventListener('beforeunload', onPageUnfocusedOrUnmounted)
-  window.addEventListener('pagehide', onPageUnfocusedOrUnmounted)
+  await prepareSession()
 })
+
+useEvent('blur', window, onPageUnfocusedOrUnmounted)
+useEvent('beforeunload', window, onPageUnfocusedOrUnmounted)
+useEvent('pagehide', window, onPageUnfocusedOrUnmounted)
 </script>
 
 <template>
   <VuetyNavigationalView
     :nav-bar-items="[
       navBarItem('/settings', -1, undefined, Icon.Gear),
-      navBarItem('/daily-summary', 1, undefined, Icon.History, (deckState?.solvedCount ?? 0) > 0),
+      navBarItem('/daily-summary', 1, undefined, Icon.Listing, (deckState?.solvedCount ?? 0) > 0),
     ]"
   >
     <main v-if="terms">
@@ -127,7 +130,7 @@ onMounted(async () => {
       <ExplorationControls
         v-else
         :currentStep="currentTermIndex + 1"
-        :stepCount="session.explorationExtent"
+        :stepCount="terms.length"
         @previous="goToCard(currentTermIndex - 1)"
         @next="goToCard(currentTermIndex + 1)"
       />

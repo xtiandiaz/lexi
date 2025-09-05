@@ -57,7 +57,7 @@ export const localizableToolUrlString = (tool: LocalizableTool): string | undefi
         case Language.English:
           return 'https://www.merriam-webster.com/dictionary/{query}'
         case Language.Finnish:
-          return 'https://fi.wiktionary.org/wiki/{query}'
+          return 'https://en.wiktionary.org/wiki/{query}'
         case Language.Spanish:
           return 'https://dle.rae.es/{query}'
       }

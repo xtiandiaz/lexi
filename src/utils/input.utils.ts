@@ -68,7 +68,7 @@ export function clueAtTerm(term: Term): boolean {
 }
 
 export function getFirstCharIndexAtInputState(char: string, inputState: InputState): number {
-  if (!/[a-z \-áéíóúüàèìòù]/i.test(char)) {
+  if (!/[a-z \-áéíóúäöüàèìòù]/i.test(char)) {
     return -1
   }
 

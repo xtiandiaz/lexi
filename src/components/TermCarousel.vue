@@ -61,8 +61,8 @@ watch(() => index, (newIndex, oldIndex) => {
   left: -50%;
   transform: rotate(-15deg) translate(-50%, -50%);
 }
-.next-leave-to, 
-.previous-leave-to {
-  opacity: 0;
-}
+// .next-leave-to, 
+// .previous-leave-to {
+  // opacity: 0;
+// }
 </style>

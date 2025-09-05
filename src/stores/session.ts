@@ -1,46 +1,55 @@
 import { defineStore, storeToRefs } from "pinia";
 import { computed, ref } from 'vue'
-import { retrievedSavedSession } from "@/services/session-management";
+import type { Term } from '@/models/content'
 import useGameStore from '@/stores/game'
 import useContentStore from '@/stores/content'
+import { retrievedSavedSession } from "@/services/session-management";
 import { prepareTermToGuess } from "@/utils/game.utils";
 import '@/assets/tungsten/extensions/date.extensions'
 
-export default defineStore('session', () => {  
+export default defineStore('session', () => {
   const savedSession = retrievedSavedSession()
-  const date = ref(savedSession?.date ?? new Date(0))
-  const terms = ref(savedSession?.terms)
+  const latestActivityAt = ref<Date>(new Date(savedSession?.latestActivityAt ? savedSession.latestActivityAt : 0))
+  const terms = ref<Term[]>(savedSession?.terms ?? [])
   const currentTermIndex = ref(savedSession?.currentTermIndex)
+  
+  const date = computed(() => latestActivityAt.value.removeTime())
   
   const content = useContentStore()
   const gameStore = useGameStore()
   const { settings } = storeToRefs(gameStore)
-  const dailyGoalSettings = computed(() => settings.value.dailyGoal)
   
-  const explorationExtent = computed(() => Math.max(dailyGoalSettings.value.termCount, terms.value?.length ?? 0))
+  const activeTerms = ref<Term[]>()
   
-  async function resetTerms() {
+  async function updateActiveTerms() {
+    const activeLanguages = settings.value.activeLanguages
     const goalCount = settings.value.dailyGoal.termCount
-    const missingTermCount = goalCount - (terms.value?.length ?? 0)
+    
+    const usableTerms = terms.value.filter(t => activeLanguages.includes(t.language))
+    const missingTermCount = goalCount - usableTerms.length
     
     if (missingTermCount <= 0) {
-      terms.value = terms.value!.slice(0, goalCount)
+      activeTerms.value = usableTerms.slice(0, goalCount)
+      
+      currentTermIndex.value = Math.min(currentTermIndex.value ?? 0, activeTerms.value.length - 1)
     } else {
-      const newTerms = await content.getNewTerms(missingTermCount, settings.value.activeLanguages)
+      const newTerms = await content.getNewTerms(missingTermCount, activeLanguages)
       newTerms.forEach(t => prepareTermToGuess(t))
       
-      terms.value = terms.value ? terms.value.concat(newTerms) : newTerms
+      activeTerms.value = usableTerms.concat(newTerms)
+      terms.value = terms.value.concat(newTerms)
+      
+      currentTermIndex.value = 0
     }
-    
-    currentTermIndex.value = Math.min(currentTermIndex.value ?? 0, terms.value.length - 1)
   }
   
   return {
+    activeTerms,
+    allTerms: terms,
     currentTermIndex,
     date,
-    terms,
+    latestActivityAt,
     
-    explorationExtent,
-    resetTerms
+    updateActiveTerms
   }
 })

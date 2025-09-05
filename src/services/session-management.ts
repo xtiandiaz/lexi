@@ -11,12 +11,9 @@ export function retrievedSavedSession(): Session | undefined {
     return undefined
   }
   
-  const latestActivityAt = rawSession.latestActivityAt ?? (new Date(0)).toISOString()
-  
   return {
     currentTermIndex: rawSession.currentTermIndex ?? 0,
-    date: new Date(latestActivityAt.split('T')[0]),
-    latestActivityAt: new Date(latestActivityAt),
+    latestActivityAt: new Date(rawSession.latestActivityAt ? rawSession.latestActivityAt : 0),
     terms: rawSession.terms
   }
 }
@@ -26,15 +23,18 @@ export function saveSession() {
   
   save<RawSession>(sessionStorageKey, {
     currentTermIndex: session.currentTermIndex,
-    latestActivityAt: (new Date()).toISOString(),
-    terms: session.terms,
+    latestActivityAt: session.latestActivityAt.toISOString(),
+    terms: session.allTerms,
   })
 }
 
-export async function resetSession() {
+async function resetSession() {
   const session = useSessionStore()
   
-  await session.resetTerms()
+  session.allTerms = []
+  session.latestActivityAt = new Date()
+  
+  await session.updateActiveTerms()
   
   saveSession()
 }
@@ -43,11 +43,28 @@ export async function resetSessionIfNeeded(): Promise<boolean> {
   const session = useSessionStore()
   
   const isStale = (new Date()).getDaysFrom(session.date) >= 1
-  if (isStale || session.terms == undefined) {
-    await resetSession()
-    
-    return true
+  if (!isStale) {
+    return false
   }
   
-  return false
+  await resetSession()
+  
+  return true
+}
+
+export async function prepareSession() {
+  const didReset = await resetSessionIfNeeded()
+  if (!didReset) {
+    await updateSession()
+  }
+}
+
+export async function updateSession() {
+  const session = useSessionStore()
+  
+  session.latestActivityAt = new Date()
+  
+  await session.updateActiveTerms()
+  
+  saveSession()
 }
