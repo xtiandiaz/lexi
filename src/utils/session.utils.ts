@@ -11,7 +11,7 @@ export const sessionDateLocaleString = (): string => {
 export const currentDailyHistoryTitle = (): string => {
   const session = useSessionStore()
   
-  if (session.terms?.length == 0) {
+  if (session.activeTerms?.length == 0) {
     return localizedString(LocalizedStringKey.Title_HistoryOfToday)
   }
   
