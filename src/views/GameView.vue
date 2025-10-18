@@ -17,7 +17,7 @@ import { Icon } from '@/assets/design-tokens/iconography';
 import VuetyNavigationalView from '@/vueties/views/VuetyNavigationalView.vue';
 import { navBarItem } from '@/vueties/components/shared/view-models';
 import '@/assets/tungsten/extensions/array.extensions'
-import { useEvent } from '@/vueties/composables/event';
+import { useEvents } from '@/vueties/composables/events';
 
 const session = useSessionStore()
 const store = useGameStore()
@@ -100,9 +100,7 @@ onMounted(async () => {
   await prepareSession()
 })
 
-useEvent('blur', window, onPageUnfocusedOrUnmounted)
-useEvent('beforeunload', window, onPageUnfocusedOrUnmounted)
-useEvent('pagehide', window, onPageUnfocusedOrUnmounted)
+useEvents(['blur', 'beforeunload', 'pagehide'], window, onPageUnfocusedOrUnmounted)
 </script>
 
 <template>
