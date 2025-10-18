@@ -1,0 +1,65 @@
+---[fi:en]
+uusi :: new
+vanha :: old
+iloinen :: happy
+surullinen :: sad
+kaunis :: beautiful
+ruma :: ugly
+pitkä :: long
+tall :: lyhyt :: short
+terve :: healthy
+sairas :: sick
+lihava :: fat
+laiha :: skinny
+paksu :: thick
+ohut :: thin
+nuori :: young
+vanha :: old
+auki :: open
+kiinni :: closed
+täysi :: full
+tyhjä  :: empty
+kallis :: expensive
+halpa :: cheap
+vaikea :: difficult
+helppo :: easy
+rikas :: rich
+köyhä :: poor
+kuuma :: hot
+kylmä :: cold
+kuiva :: dry
+märkä  :: wet
+valoisa :: bright
+pimeä :: dark
+vihainen :: angry
+rauhallinen :: calm
+sotkuinen :: messy
+siisti  :: tidy
+leveä :: wide
+kapea :: narrow
+pehmeä :: soft
+kova :: hard
+painava :: heavy
+kevyt :: light
+terävä :: sharp
+tylsä :: blunt
+hauska :: funny
+tylsä :: boring
+hidas :: slow
+nopea :: fast
+korkea :: high
+matala :: low
+hapan :: sour
+makea :: sweet
+fiksu :: smart
+tyhmä :: stupid
+kiltti :: kind, nice; well-behaved, good
+tuhma :: naughty, mischievous
+ahkera :: hard-working
+laiska :: lazy
+likainen :: dirty
+puhdas :: clean
+vahva :: strong
+heikko :: weak
+ilmainen :: free of charge
+maksullinen :: costs

@@ -28,7 +28,7 @@ function onTermSelected(index: number) {
 
 <template>
   <VuetyNavigationalView
-    :nav-bar-items="[closeNavBarItem('/')]"
+    :bar-items="[closeNavBarItem('/')]"
     :title="sectionTitle(Section.DailyHistory)"
   >
     <main>

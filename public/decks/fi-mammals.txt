@@ -1,0 +1,66 @@
+---[fi:en]
+nisäkäs - nisäkkäät :: mammal - mammals
+ahma :: wolverine
+apina :: monkey
+delfiini :: dolphin
+dromedaari :: dromedary
+fretti :: ferret
+gepardi :: cheetah
+gorilla :: gorilla
+haisunäätä :: skunk
+hamsteri :: hamster
+hevonen :: horse
+hiiri :: mouse
+hirvi :: moose
+hylje :: seal
+härkä :: ox
+ihminen :: human
+ilves :: lynx
+jaguaari :: jaguar
+jänis :: rabbit
+karhu :: bear
+karitsa :: lamb
+karja :: cattle
+karju :: boar
+kettu :: fox
+kirahvi :: giraffe
+kissa :: cat
+koala :: koala
+kojootti :: coyote
+kuusipeura :: fallow deer
+lammas :: sheep
+lehmä :: cow
+leijona :: lion
+leopardi :: leopard
+lepakko :: bat
+liito-orava :: flying squirrel
+majava :: beaver
+marsu :: guinea pig
+metsäkauris :: roe deer
+mursu :: walrus
+myyrä :: mole
+mäyrä :: badger
+naali :: arctic fox
+norsu :: elephant
+näätä :: marten
+orava :: squirrel
+ori :: stallion
+panda :: panda
+peura :: caribou
+poro :: reindeer
+pukki :: billy goat
+saksanhirvi :: red deer
+sarvikuono :: rhino
+saukko :: otter
+siili :: hedgehog
+sika :: pig
+sonni :: bull
+supikoira :: raccoon dog
+susi :: wolf
+tamma :: mare
+tiikeri :: tiger
+valas :: whale
+varsa :: foal
+vasikka :: calf
+visentti :: bison
+vuohi :: goat

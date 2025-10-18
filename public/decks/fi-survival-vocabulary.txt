@@ -1,0 +1,51 @@
+---[fi:en]
+varo! :: watch out!
+apua! :: help!
+tulipalo! :: fire!
+varas! :: thief!
+poliisi :: police
+ambulanssi :: ambulance
+vaara :: danger
+seis :: stop
+huomio! :: attention!
+rikki :: broken
+epäkunnossa :: out of order
+kielletty :: forbidden
+suljettu :: closed
+eksynyt :: lost
+mene pois! :: go away!
+en ymmärrä :: I don’t understand
+hei, moi :: hello
+anteeksi :: sorry
+kyllä, joo :: yes
+ei :: no
+kiitos :: thank you
+ei kiitos :: no, thank you
+hetkinen :: just a moment
+ole hyvä :: here you are
+onneksi olkoon :: congratulations
+hauska tutustua; hauska tavata :: nice to meet you
+myydään :: for sale
+vuokrataan :: for rent
+varattu :: reserved
+vapaa :: free
+ilmainen :: free of charge
+sisään :: entrance "in"
+ulos :: exit "out"
+varauloskäynti :: emergency exit
+ei isäänkäyntiä :: no entry
+ale :: sales
+hissi :: elevator (pic)
+rullaportaat :: escalator
+taksi :: taxi
+avoinna ma-pe :: open Mon-Fri
+suljettu sa-su :: closed Sat-Sun
+vedä :: pull
+työnnä :: push
+loppuunmyynti :: final sales
+loppuunmyyty :: sold out
+vuoronumero :: queue number
+WC N :: ladies bathroom
+WC M :: men’s bathroom
+tervetuloa :: welcome
+läpikulku kielletty :: no thoroughfare

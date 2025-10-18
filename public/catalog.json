@@ -1,0 +1,82 @@
+{
+  "sets": [
+    {
+      "title": "Suomi 🇫🇮",
+      "key": "suomi"
+    }
+  ],
+  "decks": [
+    {
+      "title": "Survival vocabulary 😱🇫🇮",
+      "key": "fi-survival-vocabulary",
+      "color": "red",
+      "sets": ["suomi"]
+    },
+    {
+      "title": "Survival questions 😱🇫🇮",
+      "key": "fi-survival-questions",
+      "color": "red",
+      "sets": ["suomi"]
+    },
+    {
+      "title": "Classroom vocabulary 🏫🇫🇮",
+      "key": "fi-classroom-vocabulary",
+      "color": "yellow",
+      "sets": ["suomi"]
+    },
+    {
+      "title": "Phrases you may need in the classroom 📝🇫🇮",
+      "key": "fi-classroom-phrases",
+      "color": "yellow",
+      "sets": ["suomi"]
+    },
+    {
+      "title": "Phrases your teacher might use 👩🏼‍🏫🇫🇮",
+      "key": "fi-survival-questions",
+      "color": "yellow",
+      "sets": ["suomi"]
+    },
+    {
+      "title": "Your first 100 Finnish verbs 🇫🇮",
+      "key": "fi-first-100-verbs",
+      "color": "blue",
+      "sets": ["suomi"]
+    },
+    {
+      "title": "Colors 🎨🇫🇮",
+      "key": "fi-colors",
+      "color": "gray",
+      "sets": ["suomi"]
+    },
+    {
+      "title": "Basic adjectives 🇫🇮",
+      "key": "fi-basic-adjectives",
+      "color": "gray",
+      "sets": ["suomi"]
+    },
+    {
+      "title": "Birds 🐦🇫🇮",
+      "key": "fi-birds",
+      "color": "sky-blue",
+      "sets": ["suomi"]
+    },
+    {
+      "title": "Mammals 🦊🇫🇮",
+      "key": "fi-mammals",
+      "color": "orange",
+      "sets": ["suomi"]
+    },
+    {
+      "title": "Body parts 👀🦵🇫🇮",
+      "key": "fi-body-parts",
+      "color": "yellow",
+      "sets": ["suomi"]
+    },
+    {
+      "title": "Being sick and illnesses 🤒🇫🇮",
+      "key": "fi-sickness",
+      "color": "gray",
+      "sets": ["suomi"]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+---[fi:en]
+beige :: beige
+fuksia :: fuchsia
+harmaa :: grey
+hopea :: silver
+keltainen :: yellow
+khaki :: khaki
+kulta :: gold
+liila :: lilac
+musta :: black
+oranssi :: orange
+pinkki :: pink
+punainen :: red
+ruskea :: brown
+sininen :: blue
+turkoosi :: turquoise
+valkoinen :: white
+vihreä :: green
+violetti :: purple
+vaaleansininen :: light blue
+tummansininen :: dark blue
+taivaansininen :: sky blue
+vauvansininen :: baby blue
+kirkkaansininen :: bright blue
+indigosininen :: indigo blue
+vaaleanpunainen :: light red
+tummanpunainen :: dark red
+tulenpunainen :: fiery red
+viininpunainen :: wine red
+kirsikanpunainen :: cherry red
+kirkkaanpunainen :: bright red
+rubiininpunainen :: ruby red
+tiilenpunainen :: brick red
+vaaleanvihreä :: light green
+tummanvihreä :: dark green
+harmaanvihreä :: grey-green
+limenvihreä :: lime green
+mintunvihreä :: mint green
+myrkynvihreä :: poison green
+oliivinvihreä :: olive green
+smaragdinvihreä :: emerald green
+vaaleanruskea :: light brown
+tummanruskea :: dark brown
+kastanjanruskea :: chestnut red
+aprikoosinvärinen :: apricot colored
+hiekanvärinen :: sand colored
+kullanruskea :: gold-brown
+kermanvärinen :: cream colored
+luumunvärinen :: plum colored
+mandariininvärinen :: color of mandarins

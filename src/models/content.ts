@@ -21,11 +21,11 @@ export interface TermMark {
 }
 
 export interface Term {
-  readonly id: number
-  readonly language: Language
+  // readonly id: number
   readonly word: string
-  marks: TermMark[]
   
   readonly aliases?: string[]
+  readonly language?: Language
   inputState?: InputState
+  marks?: TermMark[]
 }

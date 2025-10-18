@@ -1,0 +1,65 @@
+---[fi:en]
+Minulla on/oli ... :: I have/had ...
+ahdistushäiriö :: anxiety disorder
+aivohalvaus :: a stroke
+aivotärähdys :: a concussion
+ajos, paise :: an abcess
+allergia :: allergy
+anemia :: anemia
+auringonpistos :: sunstroke
+astma :: asthma
+bronkiitti :: bronchitis
+emätintulehdus :: vaginal infection
+epilepsia :: epilepsy
+eturauhassyöpä :: prostate cancer
+flunssa :: flu, influenza
+heinänuha :: hay-fever
+hengitysvaikeuksia :: difficulty breathing
+ihotauti :: skin disease
+ihottuma :: a rash
+inkontinenssi :: incontinence
+keskenmeno :: miscarriage
+keuhkokuume :: pneumonia
+kuume :: fever
+kitarisantulehdus :: tonsillitis
+korvatulehdus :: ear infection
+lämpö :: (mild) fever
+lavantauti :: typhoid
+leukemia :: leukemia
+malaria :: malaria
+masennus :: depression
+merisairaus :: sea-sickness
+migreeni :: migraine
+munuaiskivi :: kidney stone
+nivelreuma :: arthritis
+noidannuoli :: lumbago
+närästys :: heartburn
+pahoinvointi :: nausea
+paleltuma :: frostbite
+paniikkikohtaus :: panic attack
+polio :: polio
+rintasyöpä :: breast cancer
+sairaus :: illness
+tartunta :: infection
+tuberkuloosi :: tuberculosis
+raskausmyrkytys :: pre-eclampsia
+reumatismi :: rheumatism
+ripuli :: diarrhea
+ruokamyrkytys :: food poisoning
+sappikivi :: gall stone
+selkäsärky, selkäkipu :: back ache
+sikotauti :: mumps
+sokeritauti, diabetes :: diabetes
+sokki :: shock
+sukupuolitauti :: venereal disease
+sydänkohtaus :: heart attack
+sydänvika :: heart problem
+syöpä :: cancer
+trauma :: trauma
+traumaperäinen stressihäiriö :: PTSD
+tuhkarokko :: measles
+ummetus :: constipation
+umpisuolentulehdus :: appendicitis
+unettomuus :: insomnia
+vatsahaava :: stomach ulcer
+vesirokko :: chicken pox

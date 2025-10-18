@@ -1,0 +1,50 @@
+---[fi:en]
+lintu - linnut :: bird – birds
+fasaani :: pheasant
+haikara :: stork
+hanhi :: goose
+harakka :: magpie
+haukka :: hawk
+joutsen :: swan
+kakadu :: cockatoo
+kanahaukka :: goshawk
+kivitasku :: wheatear
+kolibri :: hummingbird
+korppi :: raven
+kotka :: eagle
+kottarainen :: starling
+kuovi :: curlew
+kurki :: crane
+kyyhky :: dove
+käki :: cuckoo
+leivonen :: lark
+lokki :: gull
+maakotka :: golden eagle
+metso :: wood grouse
+metsästyshaukka :: falcon
+mustarastas :: (European) blackbird
+naakka :: rook
+närhi :: jay
+palokärki :: black woodpecker
+peipponen :: chaffinch
+pelikaani :: pelican
+pingviini :: penguin
+pulu :: pigeon
+punatulkku :: bullfinch
+pääskynen :: swallow
+pöllö :: owl
+rastas :: thrush
+riikinkukko :: peacock
+satakieli :: nightingale
+sorsa :: wild duck
+strutsi :: ostrich
+talitiainen :: great tit
+teeri :: black grouse
+tervapääsky :: swift
+tiira :: tern
+tikka :: woodpecker
+tilhi :: waxwing
+törmäpääsky :: bank swallow
+varis :: crow
+varpunen :: sparrow
+västäräkki :: wagtail

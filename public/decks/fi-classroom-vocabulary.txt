@@ -1,0 +1,52 @@
+---[fi:en]
+avain :: key
+harjoitus :: exercise
+ikkuna :: window
+kahvitauko :: coffee break
+kansio :: folder, binder
+kello :: clock
+kielikurssi :: language course
+kirja :: book
+kotitehtävä :: homework
+kumi :: pyyhekumi 	eraser
+kurssi :: course
+kuulakärkikynä :: ballpoint pen
+kynä :: pen / pencil
+kysymys :: question
+kännykkä :: mobile phone
+kääntäjä :: translator
+lamppu :: lamp
+laukku :: bag
+liima :: glue
+lounastauko :: lunch break
+luokka :: classroom
+lyijykynä :: pencil
+läksyt :: homework
+läppäri :: laptop
+opettaja :: teacher
+opetus :: teaching
+opiskelija :: student
+opiskelu :: study, studying
+oppikirja :: textbook
+ovi :: door
+paperi :: paper
+puhelin :: telephone
+pulpetti :: desk
+pöytä :: table
+reppu :: backpack
+roskakori :: trash can
+sanakirja :: dictionary
+tauko :: break
+tehtävä :: exercise, task
+teippi :: tape
+teroitin :: pencil sharpener
+tietokone :: computer
+tuoli :: chair
+valkotaulu :: whiteboard
+valo :: light
+vastaus :: answer
+verhot :: curtains
+vihko :: notebook
+virhe :: mistake
+viivoitin :: ruler
+välitunti :: recess

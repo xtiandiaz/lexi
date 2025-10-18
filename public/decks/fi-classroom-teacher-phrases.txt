@@ -1,0 +1,46 @@
+---[fi:en]
+Anteeksi, että olen myöhässä ::	I’m sorry I’m late
+Anteeksi, voinko kysyä jotain? ::	I’m sorry, can I ask something?
+En muista :: I don’t remember
+En muistanut tehdä kotitehtävää :: I didn’t remember to do the homework
+En osaa vastata tähän kysymykseen	:: I can’t answer this question
+En tiedä vastausta tähän kysymykseen :: I don’t know the answer to this question
+En tiedä :: I don’t know
+En tiedä, mitä tähän pitää kirjoittaa :: I don’t know what to write here
+En voi tulla kouluun huomenna :: I can’t come to school tomorrow
+En ymmärrä tätä tehtävää :: I don’t understand this assignment
+En ymmärrä, mitä tämä tarkoittaa :: I don’t understand what this means
+En ymmärrä, mitä tässä pitää tehdä :: I don’t understand what I have to do here
+En ymmärrä :: I don’t understand
+Kirjani jäi kotiin :: My book was left at home
+Käyn huomenna Kelassa :: I’m going to Kela tomorrow
+Käyn huomenna lääkärillä :: I’m going to the doctor tomorrow
+Lapseni on sairas :: My child is sick
+Miksi tätä kutsutaan suomeksi? :: How do you call this in Finnish?
+Miksi tätä sanotaan suomeksi? :: How do you say this in Finnish?
+Mikä tämä on? :: What is this?
+Minulla on flunssa :: I have the common cold
+Minulla on kysymys :: I have a question
+Minulla on tapaaminen huomenna :: I have an appointment tomorrow
+Miten sanotaan suomeksi “please”? :: How do you say “please” in Finnish?
+Mitä meidän pitää nyt tehdä? :: What should we do now?
+Mitä se tarkoittaa? :: What does it mean?
+Mitä tässä harjoituksessa pitää tehdä? :: What do we have to do in this exercise?
+Myöhästyin bussista :: I was late for the bus
+Nukuin pommiin :: I overslept
+Olen sairas :: I’m sick
+Olen valmis :: I’m ready
+Onko meillä kotitehtävä? :: Do we have homework?
+Onko tämä oikein? :: Is this correct?
+Tulen huomenna vasta kello kymmenen :: I will only come at 10 am tomorrow
+Tulen vähän myöhässä :: I will be a little late
+Unohdin kotitehtäväni kotiin :: I forgot my homework at home
+Unohdin kynäni kotiin :: I forgot my pen at home
+Unohdin tehdä kotitehtävän :: I forgot to do my homework
+Voinko käydä vessassa nyt? :: Can I go to the bathroom now?
+Voinko lainata kynää? :: Can I borrow a pen?
+Voisitko antaa esimerkkejä? :: Could you give some examples?
+Voisitko auttaa minua? :: Could you help me?
+Voisitko puhua hitaammin? :: Could you talk more slowly?
+Voisitko sanoa uudelleen? :: Could you say that again?
+Voisitko tarkistaa tämän? :: Could you check this?

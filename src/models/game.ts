@@ -1,4 +1,6 @@
 import { Language } from "./localization";
+import type { Term } from "./content";
+import type { Color } from "@/assets/design-tokens/palette";
 import '@/assets/tungsten/extensions/array.extensions'
 
 export enum GameMode {
@@ -6,14 +8,29 @@ export enum GameMode {
   Test
 }
 
-// export interface TermCard {
-//   term: Term
-// }
+export interface Card {
+  // id: number
+  frontTerm: Term
+  backTerm?: Term
+}
 
-// export interface Deck {
-//   cards: TermCard[]
-//   startCardIndex: number
-// }
+export interface Deck {
+  title: string
+  color: Color
+  key: string
+  sets: string[]
+  cards?: Card[]
+}
+
+export interface DeckSet {
+  title: string
+  decks: Deck[]
+}
+
+export interface Catalog {
+  sets: DeckSet[]
+  decks: Deck[]
+}
 
 export interface TermDeckState {
   obfuscatedCount: number

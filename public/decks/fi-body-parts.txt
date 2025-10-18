@@ -1,0 +1,65 @@
+---[fi:en]
+kasvot, naama :: face
+pää :: head
+huuli, huulet :: lip, lips
+hammas :: tooth, teeth
+suu :: mouth
+kieli :: tongue
+nenä :: nose
+sierain, sieraimet :: nostril, nostrils
+poski, posket :: cheek, cheeks
+poskipää, poskipäät :: cheekbone, cheekbone
+otsa :: forehead
+silmä, silmät :: eye, eyes
+silmäripsi, ripset :: eyelash, lashes
+hiukset, tukka :: hair
+ohimo, ohimot :: temple, temples
+korva, korvat :: ear, ears
+kulmakarvat :: eyebrows
+leuka :: chin
+kaula :: neck
+niska :: back of the neck
+takaraivo :: back of head
+vatsa :: stomach
+maha :: belly
+vyötärö :: waist
+napa :: navel, belly button
+rintakehä, rinta :: chest
+rinta, rinnat :: breast, breasts
+tissit (informal) :: boobs
+selkä :: back
+alaselkä :: lower back
+yläselkä :: upper back
+selkäranka :: spine
+kylki, kyljet :: side, sides
+lonkka, lonkat :: hip, hips
+peppu, takapuoli :: butt
+kainalo, kainalot :: armpit, armpits
+käsi, kädet :: hand, or arm
+käsivarsi, käsivarret :: arm, arms
+kämmen, kämmenet :: palm of hand(s)
+kädenselkä, kädenselät :: back of hand(s)
+nyrkki, nyrkit :: fist, fists
+sormi, sormet :: finger, fingers
+etusormi, etusormet :: index finger, index fingers
+peukalo, peukalot :: thumb, thumbs
+keskisormi, keskisormet :: middle finger, middle fingers
+nimetön, nimettömät :: ring finger, ring fingers
+pikkurilli, pikkurillit :: little finger, little fingers
+kynsi, kynnet :: nail, nails
+ranne, ranteet :: wrist, wrists
+kyynärpää, kyynärpäät :: elbow, elbows
+kyynärvarsi, käsivarret :: forearm, forearms
+olkapää, olkapäät :: shoulder, shoulders
+olkavarsi, olkavarret :: upper arm, upper arms
+jalka, jalat :: leg / foot
+jalkaterä, jalkaterät :: foot, feet
+jalkapohja, jalkapohjat :: sole of foot, soles of feet
+kantapää, kantapäät :: heel, heels
+polvi, polvet :: knee, knees
+nilkka, nilkat :: ankle, ankles
+pohje, pohkeet :: calf, calves
+sääri, sääret :: shin, shins
+reisi, reidet :: thigh, thighs
+lantio :: pelvis
+varvas, varpaat :: toe, toes

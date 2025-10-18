@@ -1,0 +1,101 @@
+---[fi:en]
+olla (3) :: to be
+istua (1) :: to sit
+seisoa (1) :: to stand
+syödä (2) :: to eat
+juoda (2) :: to drink
+odottaa (1) :: to wait
+ymmärtää (1) :: to understand
+muistaa (1) :: to remember
+unohtaa (1) :: to forget
+ajatella (3) :: to think
+tietää (1) :: to know
+osata (4) :: to know how to do something
+opiskella (3) :: to study
+oppia (1) :: to learn
+kysyä (1) :: to ask
+vastata (4) :: to answer
+pyytää (1) :: to request
+sanoa (1) :: to say
+kertoa (1) :: to tell
+keskustella (3) :: to chat
+nukkua (1) :: to sleep
+herätä (4) :: to wake up
+nousta (3) :: to get up
+maata (4) :: to lie down
+pestä (3) :: to wash
+tiskata (4) :: to wash dishes
+siivota (4) :: to clean
+imuroida (2) :: to vacuum
+uida (2) :: to swim
+kävellä (3) :: to walk
+pyöräillä (3) :: to ride a bike
+ajaa (1) :: to drive
+juosta (3) :: to run
+pelata (4) :: to play (sports / games)
+leikkiä (1) :: to play (for fun, as a child)
+soittaa (1) :: to play (a musical instrument), to call (by phone)
+ottaa (1) :: to take
+antaa (1) :: to give
+lainata (4) :: to borrow / lend
+tavata (4) :: to meet
+tutustua (1) :: to get to know (people)
+tehdä (2) :: to do
+nähdä (2) :: to see
+katsoa (1) :: to watch
+tulla (3) :: to come
+mennä (3) :: to go
+lähteä (1) :: to leave
+jäädä (2) :: to stay
+saapua (1) :: to arrive
+käydä (2) :: 	to visit
+tuoda (2) :: to bring
+viedä (2) :: to take (away)
+rakastaa (1) :: to love
+vihata (4) :: to hate
+tykätä (4) :: 	to like
+pelätä (4) :: to fear
+pukea (1) :: to dress
+riisua (1) :: to undress
+maksaa (1) :: to pay
+ostaa (1) :: to buy
+myydä (2) :: to sell
+kirjoittaa (1) :: to write
+lukea (1) :: to read
+kuunnella (3) :: to listen
+kuulla (3) :: to hear
+piirtää (1) :: to draw
+maalata (4) :: to paint
+nauraa (1) :: to laugh
+itkeä (1) :: to cry
+hymyillä (3) :: to smile
+matkustaa (1) :: to travel
+muuttaa (1) :: modify, change; to move (house)
+työntää (1) :: to push
+vetää (1) :: to pull
+nostaa (1) :: to lift
+laskea (1) :: to count
+laittaa (1) :: to put
+heittää (1) :: to throw
+häiritä (5) :: to disturb
+valita (5) :: to choose
+tarvita (5) :: to need
+hoitaa (1) :: to take care of
+auttaa (1) :: to help
+varata (4) :: to reserve
+tilata (4) :: to order (a product / service)
+asua (1) :: to live (somewhere)
+syntyä (1) :: to be born
+elää (1) :: to live, be alive
+kuolla (3) :: to die
+etsiä (1) :: to search
+löytää (1) :: to find
+avata (4) :: to open
+sulkea (1) :: to close
+korjata (4) :: to fix
+riittää (1) :: to be enough
+laulaa (1) :: to sing
+tapahtua (1) :: to happen
+alkaa (1) :: to start
+aloittaa (1) :: to begin
+loppua (1) :: to end

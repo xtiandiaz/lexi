@@ -1,0 +1,23 @@
+---[fi:en]
+Missä hotelli Sokos on? :: Where is the Sokos hotel?
+Missä Itsenäisyydenkatu on? :: Where is the street Itsenäisyydenkatu?
+Missä sairaala on? :: Where is the hospital?
+Missä vessa on? :: Where is the toilet?
+Missä naisten vessa on? :: Where is the ladies toilet?
+Missä miesten vessa on? :: Where is the men’s toilet?
+Entä muuta? :: Do you want anything else?
+Kuittia? :: Do you want the receipt?
+Mitä saisi olla? :: What would you like?
+Minkämaalainen sinä olet? :: What nationality are you from?
+Puhutko englantia? :: Do you speak English?
+Voisitko puhua englantia? :: Could you speak English?
+Puhuuko kukaan täällä englantia? :: Does anyone speak English here?
+Voisitko kirjoittaa sen ylös? :: Could you write that down?
+Voisitko toistaa? :: Could you please repeat that?
+Voisitko auttaa minua? :: Could you help me?
+Mitä kuuluu? :: How are you?
+Oletko kunnossa? :: Are you okay?
+Onko tämä paikka vapaa? :: Is this spot free?
+Missä saan tupakoida? :: Where am I allowed to smoke?
+Saisinko vettä? :: Could I get some water?
+Paljonko se maksaa?; something else... :: How much does it cost?

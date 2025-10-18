@@ -1,0 +1,44 @@
+---[fi:en]
+Alleviivaa uudet sanat! :: Underline the new words!
+Avaa kirja sivulle 20 :: Open the book to page 20
+Haluaako joku kysyä jotain? :: Does someone want to ask something?
+Haluatko kysyä jotain? :: Do you want to ask something
+Huomenna opiskelet itsenäisesti :: Tomorrow you will study independently
+Huomenna pidetään testi :: Tomorrow there will be a test
+Keskustele parisi kanssa! :: Discuss with your partner!
+Keskustele pienryhmässä! :: Discuss in a small group!
+Kirjoita kuvasta! :: Write about the picture!
+Kirjoita oikea vastaus! :: Write the correct answer!
+Kirjoita sanat ylös! :: Write the words down!
+Kirjoita uudet sanat vihkoon! :: Write the new words in the notebook!
+Kirjoita vastaukset! :: Write the answers!
+Kirjoita vihkoon! :: Write in the notebook!
+Koulu alkaa huomenna kello 9.00 :: School starts at 9 am tomorrow
+Kuuntele ja kirjoita vastaus! :: Listen and write the answer!
+Kuuntele ja kirjoita! :: Listen and write!
+Kuuntele minua! :: Listen to me!
+Kuuntele, kun joku muu puhuu! :: Listen when someone else speaks!
+Kysy ja vastaa! :: Ask and answer!
+Kysy, jos et ymmärrä! :: Ask if you don’t understand!
+Kysy pariltasi! :: Ask your partner!
+Lue dialogi parin kanssa! :: Read the dialogue with your partner!
+Lue teksti! :: Read the text!
+Lue ääneen! :: Read aloud!
+Mene istumaan! :: Go sit down!
+Muista tehdä kotitehtävä! :: Remember to do your homework!
+Odota hetki :: Wait a moment
+Odota vähän! :: Wait a little!
+Onko kysymyksiä? :: Any questions?
+Opiskele uudet sanat! :: Study the new words!
+Palauta tehtävä huomenna! :: Turn in the assignment tomorrow!
+Pidetään tauko! :: Let’s take a break!
+Puhu naapurin kanssa! :: Talk to your neighbor!
+Tarvitsetko apua? :: Do you need help?
+Tee kotitehtävä! :: Do the homework!
+Tee tehtävä! :: Do the assignment!
+Tule tänne! :: Come here!
+Tänään opiskellaan verbityyppejä :: Today we are learning the verbtypes
+Täydennä aukot! :: Fill in the gaps!
+Vastaa kysymyksiin! :: Answer the questions!
+Ymmärrätkö? :: Do you understand?
+Ympyröi oikea vastaus! :: Circle the correct answer!
